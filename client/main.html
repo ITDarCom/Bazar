@@ -10,11 +10,32 @@
   <ul class="nav nav-pills">
     <li role="presentation"><a href="{{pathFor 'home'}}">All</a></li>
     <li role="presentation"><a href="{{pathFor 'shops.index'}}">Shops</a></li>
-    <li role="presentation"><a href="{{pathFor 'categories.show' category='1'}}">Cat 1</a></li>
-    <li role="presentation"><a href="{{pathFor 'categories.show' category='2'}}">Cat 2</a></li>
-    <li role="presentation"><a href="{{pathFor 'categories.show' category='3'}}">Cat 3</a></li>
+    <li role="presentation"><a href="{{pathFor 'categories.show' category='category1'}}">Cat 1</a></li>
+    <li role="presentation"><a href="{{pathFor 'categories.show' category='category2'}}">Cat 2</a></li>
+    <li role="presentation"><a href="{{pathFor 'categories.show' category='category3'}}">Cat 3</a></li>
   </ul>
   <hr style="margin-top:5px"/>
+</template>
+
+<template name="search">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search">
+  </div>
+</template>
+
+<template name="cityFilter">
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      City <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div>  
 </template>
 
 <template name="settingsNav">

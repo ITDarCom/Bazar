@@ -6,7 +6,7 @@ Router.configure({
 
 Router.route('/', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('default');
+	this.render('home');
 }, {
 	name: 'home'
 });
@@ -14,7 +14,7 @@ Router.route('/', function () {
 //category routes
 Router.route('/categories/:category', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('default');
+	this.render('categories.show');
 }, {
 	name: 'categories.show'
 });
@@ -22,7 +22,7 @@ Router.route('/categories/:category', function () {
 //shops routes
 Router.route('/shops', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('default');
+	this.render('shopsIndex');
 }, {
 	name: 'shops.index'
 });
@@ -74,7 +74,7 @@ Router.route('/settings/account', function () {
 
 Router.route('/settings/purchases', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('default');
+	this.render('settingsPurchases');
 }, {
 	name: 'settings.purchases'
 });
@@ -88,14 +88,14 @@ Router.route('/settings/store', function () {
 
 Router.route('/settings/orders', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('default');
+	this.render('settingsOrders');
 }, {
 	name: 'settings.orders'
 });
 
 Router.route('/settings/sales', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('default');
+	this.render('settingsSales');
 }, {
 	name: 'settings.sales'
 });
@@ -119,7 +119,7 @@ Router.route('/messages/:thread', function () {
 //cart
 Router.route('/cart', function () {
 	this.render('empty', {to: 'nav'});	
-	this.render('default');
+	this.render('cart');
 }, {
 	name: 'cart'
 });

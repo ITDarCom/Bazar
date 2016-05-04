@@ -5,24 +5,20 @@ import "./routes"
 
 import "./../../ui/layouts/global"
 
+import "./../../ui/pages/home"
+import "./../../ui/pages/shops-index"
+import "./../../ui/pages/categories-show"
+import "./../../ui/pages/settings-purchases"
+import "./../../ui/pages/settings-orders"
+import "./../../ui/pages/settings-sales"
+import "./../../ui/pages/cart"
+
+import "./../../ui/components/items-list"
+import "./../../ui/components/shops-list"
+import "./../../ui/components/purchases-list"
+
 Template.default.helpers({
   currentRoute() {
     return Router.current().route.getName()
   },
 });
-
-/*import './main.html';
-
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
-*/
