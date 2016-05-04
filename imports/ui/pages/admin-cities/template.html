@@ -1,0 +1,10 @@
+<template name="adminCities">
+	<h1 class="page-header">Admin - Cities</h1>	
+	{{> quickForm collection=formCollection id="insertCityForm" type="insert"}}
+	<hr />
+	<ul>
+		{{#each cities}}
+			<li>{{label}}, {{identifier}}</li>
+		{{/each}}
+	</ul>
+</template>

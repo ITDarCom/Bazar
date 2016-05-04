@@ -22,3 +22,6 @@ iron:router
 accounts-password
 useraccounts:bootstrap
 useraccounts:iron-routing
+aldeed:autoform
+aldeed:collection2
+random

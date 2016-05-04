@@ -62,18 +62,18 @@ Router.route('/shops', function () {
 	name: 'shops.index'
 });
 
+Router.route('/shops/new', function () {
+	this.render('mainNav', {to: 'nav'});
+	this.render('shopsNew');
+}, {
+	name: 'shops.new'
+});
+
 Router.route('/shops/:shop', function () {
 	this.render('mainNav', {to: 'nav'});
 	this.render('default');
 }, {
 	name: 'shops.show'
-});
-
-Router.route('/shops/new', function () {
-	this.render('mainNav', {to: 'nav'});
-	this.render('default');
-}, {
-	name: 'shops.new'
 });
 
 //items routes
@@ -171,4 +171,22 @@ Router.route('/contact', function () {
 	this.render('default');
 }, {
 	name: 'contact'
+});
+
+
+//admin routes
+
+Router.route('/admin/cities', function () {
+	this.render('adminNav', {to: 'nav'});
+	this.render('adminCities');
+}, {
+	name: 'admin.cities'
+});
+
+
+Router.route('/admin/users', function () {
+	this.render('adminNav', {to: 'nav'});
+	this.render('adminUsers');
+}, {
+	name: 'admin.users'
 });

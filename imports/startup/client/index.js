@@ -14,6 +14,11 @@ import "./../../ui/pages/settings-orders"
 import "./../../ui/pages/settings-sales"
 import "./../../ui/pages/cart"
 
+import "./../../ui/pages/shops-new"
+
+import "./../../ui/pages/admin-cities"
+import "./../../ui/pages/admin-users"
+
 import "./../../ui/components/items-list"
 import "./../../ui/components/shops-list"
 import "./../../ui/components/purchases-list"
@@ -23,3 +28,8 @@ Template.default.helpers({
     return Router.current().route.getName()
   },
 });
+
+
+Template.registerHelper('currentUser', function(){
+    return Meteor.userId();
+})

@@ -14,17 +14,6 @@
   {{> atForm state='signUp'}}
 </template>
 
-<template name="mainNav">
-  <ul class="nav nav-pills">
-    <li role="presentation"><a href="{{pathFor 'home'}}">All</a></li>
-    <li role="presentation"><a href="{{pathFor 'shops.index'}}">Shops</a></li>
-    <li role="presentation"><a href="{{pathFor 'categories.show' category='category1'}}">Cat 1</a></li>
-    <li role="presentation"><a href="{{pathFor 'categories.show' category='category2'}}">Cat 2</a></li>
-    <li role="presentation"><a href="{{pathFor 'categories.show' category='category3'}}">Cat 3</a></li>
-  </ul>
-  <hr style="margin-top:5px"/>
-</template>
-
 <template name="search">
   <div class="form-group">
     <input type="text" class="form-control" placeholder="Search">
@@ -46,6 +35,18 @@
   </div>  
 </template>
 
+<template name="mainNav">
+  <ul class="nav nav-pills">
+    <li role="presentation"><a href="{{pathFor 'home'}}">All</a></li>
+    <li role="presentation"><a href="{{pathFor 'shops.index'}}">Shops</a></li>
+    <li role="presentation"><a href="{{pathFor 'categories.show' category='category1'}}">Cat 1</a></li>
+    <li role="presentation"><a href="{{pathFor 'categories.show' category='category2'}}">Cat 2</a></li>
+    <li role="presentation"><a href="{{pathFor 'categories.show' category='category3'}}">Cat 3</a></li>
+  </ul>
+  <hr style="margin-top:5px"/>
+</template>
+
+
 <template name="settingsNav">
   <ul class="nav nav-pills">
     <li role="presentation"><a href="{{pathFor 'settings.account'}}">Account</a></li>
@@ -56,6 +57,15 @@
   </ul>
   <hr style="margin-top:5px"/>
 </template>
+
+<template name="adminNav">
+  <ul class="nav nav-pills">
+    <li role="presentation"><a href="{{pathFor 'admin.users'}}">Users</a></li>
+    <li role="presentation"><a href="{{pathFor 'admin.cities'}}">Cities</a></li>
+  </ul>
+  <hr style="margin-top:5px"/>
+</template>
+
 
 <template name="empty">
 </template>

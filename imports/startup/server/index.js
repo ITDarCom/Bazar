@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Items } from './../../api/items/collection.js'
 import { Shops } from './../../api/shops/collection.js'
 import { Purchases } from './../../api/purchases/collection.js'
+import { Cities } from './../../api/cities/collection.js'
 
 Meteor.startup(() => {
 	if (Shops.find().count() === 0) {

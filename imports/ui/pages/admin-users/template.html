@@ -1,0 +1,8 @@
+<template name="adminUsers">
+	<h1 class="page-header">Admin - Users</h1>
+	<ul>
+		{{#each users}}
+			<li>{{_id}}, {{email}}</li>
+		{{/each}}
+	</ul>
+</template>
