@@ -3,7 +3,15 @@
 </head>
 
 <template name="default">
-<h2>{{currentRoute}}</h2>
+  <h2>{{currentRoute}}</h2>
+</template>
+
+<template name="login">
+  {{> atForm state='signIn'}}
+</template>
+
+<template name="signup">
+  {{> atForm state='signUp'}}
 </template>
 
 <template name="mainNav">

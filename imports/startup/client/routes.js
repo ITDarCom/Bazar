@@ -1,7 +1,42 @@
 import {Router} from 'meteor/iron:router'
+import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 Router.configure({
   layoutTemplate: 'ApplicationLayout'
+});
+
+AccountsTemplates.configure({
+    defaultLayout: 'ApplicationLayout',
+    onLogoutHook: function () {
+	    if (Meteor.isClient) {
+	        Router.go('home');
+	    }
+	}
+});
+
+AccountsTemplates.configureRoute('signIn', {
+    name: 'signin',
+    path: '/login',
+    template: 'login',
+    layoutTemplate: 'ApplicationLayout',
+    redirect: '/'
+});
+
+AccountsTemplates.configureRoute('signUp', {
+    name: 'signup',
+    path: '/signup',
+    template: 'signup',
+    layoutTemplate: 'ApplicationLayout',
+    redirect: '/'
+});
+
+Router.route('/logout', {
+    name: 'logout',
+    onBeforeAction: function () {
+        //we only redirect to 'home' after we fully logged out using 'onLogoutHook'
+        AccountsTemplates.logout();
+        //this.render('spinner')
+    }
 });
 
 Router.route('/', function () {
