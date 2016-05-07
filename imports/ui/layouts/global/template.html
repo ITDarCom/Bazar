@@ -10,7 +10,7 @@
 
 </head>
 
-<template name="ApplicationLayout">
+<template name="applicationLayout">
   <div class="container">
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -51,7 +51,9 @@
     <li><a href="{{pathFor 'settings.purchases'}}">Purchases</a></li>
     <li><a href="{{pathFor 'messages.index'}}">Messages</a></li>
     <li><a href="{{pathFor 'settings.account'}}">Settings</a></li>
-    <li><a href="{{pathFor 'shops.new'}}">Create shop</a></li>
+    {{#unless hasShop}}
+      <li><a href="{{pathFor 'shops.new'}}">Create shop</a></li>
+    {{/unless}}
     <li><a href="{{pathFor 'logout'}}">Sign out</a></li>
     <li><a href="{{pathFor 'admin.users'}}">Admin</a></li>
   {{else}}

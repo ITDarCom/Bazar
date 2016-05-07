@@ -1,9 +1,17 @@
 <template name="shopsNew">
 	<h1 class="page-header">Create a shop</h1>
-	{{#autoForm collection=formCollection id="insertShopForm" type="insert"}}
+	
+	{{#autoForm 
+		collection=formCollection 
+		id="insertShopForm" 
+		type="method"
+		meteormethod="shops.insert"}}
+
 		{{> afQuickField name='title'}}
 		{{> afQuickField name='description' rows=3}}
 		{{> afQuickField name='city' type="select" options=cities}}
+
 		<button type="submit" class="btn btn-primary">Insert</button>
+
 	{{/autoForm}}
 </template>

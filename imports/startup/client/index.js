@@ -1,3 +1,4 @@
+
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
@@ -28,8 +29,3 @@ Template.default.helpers({
     return Router.current().route.getName()
   },
 });
-
-
-Template.registerHelper('currentUser', function(){
-    return Meteor.userId();
-})

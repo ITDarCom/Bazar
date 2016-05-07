@@ -2,13 +2,6 @@ import { Mongo } from 'meteor/mongo';
  
 export const Shops = new Mongo.Collection('shops');
 
-Shops.allow({
-	insert: function(userId, doc) {
-		// only allow posting if you are logged in
-		return !! userId;
-	}
-});
-
 Shops.attachSchema(new SimpleSchema({
     _id: {
         type: String,

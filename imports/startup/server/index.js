@@ -5,6 +5,9 @@ import { Shops } from './../../api/shops/collection.js'
 import { Purchases } from './../../api/purchases/collection.js'
 import { Cities } from './../../api/cities/collection.js'
 
+import './../../api/shops/methods.js'
+
+
 Meteor.startup(() => {
 	if (Shops.find().count() === 0) {
 
