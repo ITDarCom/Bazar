@@ -4,3 +4,10 @@
 	<hr />
 	{{> itemsList}}	
 </template>
+
+
+<template name="cityFilter">
+	{{#autoForm id="cityFilterForm" schema=schema}}
+		{{> afFormGroup name="selectedCity" options=options}}
+	{{/autoForm}}
+</template>

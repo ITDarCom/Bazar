@@ -176,11 +176,11 @@ Router.route('/contact', function () {
 
 //admin routes
 
-Router.route('/admin/cities', function () {
+Router.route('/admin/categories', function () {
 	this.render('adminNav', {to: 'nav'});
-	this.render('adminCities');
+	this.render('adminCategories');
 }, {
-	name: 'admin.cities'
+	name: 'admin.categories'
 });
 
 

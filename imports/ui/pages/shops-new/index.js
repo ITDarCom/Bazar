@@ -4,18 +4,26 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './template.html'
 
 import { Shops } from './../../../api/shops/collection'
-import { Cities } from './../../../api/cities/collection'
 
 Template.shopsNew.helpers({
 	formCollection(){
 		return Shops;
 	},
-	cities(){
-		return Cities.find({}).map(function(city){
-			return {
-				label: city.label,
-				value: city.identifier
-			}
-		})
+	cities: function () {
+	return [
+		{
+			optgroup: "East coast",
+			options: [
+				{label: "jeddah", value: "jeddah"},
+				{label: "mecca", value: "mecca"},
+			]
+		},
+		{
+			optgroup: "Middle",
+			options: [
+				{label: "riyad", value: "riyad"}
+			]
+		}
+	];
 	}
 })

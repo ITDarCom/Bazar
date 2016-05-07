@@ -17,7 +17,7 @@ import "./../../ui/pages/cart"
 
 import "./../../ui/pages/shops-new"
 
-import "./../../ui/pages/admin-cities"
+import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-users"
 
 import "./../../ui/components/items-list"

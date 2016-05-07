@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Items } from './../../api/items/collection.js'
 import { Shops } from './../../api/shops/collection.js'
 import { Purchases } from './../../api/purchases/collection.js'
-import { Cities } from './../../api/cities/collection.js'
+import { Categories } from './../../api/categories/collection.js'
 
 import './../../api/shops/methods.js'
 
