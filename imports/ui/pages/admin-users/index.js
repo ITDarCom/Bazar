@@ -3,7 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './template.html'
 
-Template.adminCities.helpers({
+Template.adminUsers.helpers({
 	users(){
 		return Meteor.users.find().fetch()
 	}

@@ -1,4 +1,4 @@
-Feature: Managing purchases
+Feature: Managing shop
 
 	As a shop owner
 	So that I can manage my shop
