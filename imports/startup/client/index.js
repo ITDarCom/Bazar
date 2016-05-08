@@ -16,9 +16,12 @@ import "./../../ui/pages/settings-sales"
 import "./../../ui/pages/cart"
 
 import "./../../ui/pages/shops-new"
+import "./../../ui/pages/shops-show"
+import "./../../ui/pages/items-show"
 
 import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-users"
+
 
 import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"

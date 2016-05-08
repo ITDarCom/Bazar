@@ -17,7 +17,7 @@ Shops.attachSchema(new SimpleSchema({
                 this.unset();
         }
     },
-    user: {
+    /*user: {
         type: String,
         autoValue: function () {
             if (this.isInsert) {
@@ -27,7 +27,7 @@ Shops.attachSchema(new SimpleSchema({
                 this.unset(); // we should unset every change to this field
             }
         }
-    },
+    },*/
     createdAt: {
         type: Date,
         autoValue: function () {

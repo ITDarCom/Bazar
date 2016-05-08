@@ -40,6 +40,10 @@ Template.endlessList.onCreated(function () {
         	instance.city.set(city)
         }
 
+        if (route.match(/shops.show/)){
+            instance.shop.set(params.shop)
+        }
+
         //default lastRequestSize and limit values
         var lastRequestSize = 0, limit = 5
         instance.state.set('lastRequestSize', lastRequestSize) //number of lastRequestSize items
@@ -76,6 +80,10 @@ Template.endlessList.onCreated(function () {
 })
 
 Template.endlessList.helpers({
+    showFilters(){
+        var route = Router.current().route.getName()
+        if (route.match(/shops.show/)) return false; else return true;
+    },
     template(){
         var channel = Template.instance().state.get('subscriptionChannel')
         var template = (channel == 'shops') ? 'shopMiniView' : 'itemMiniView'

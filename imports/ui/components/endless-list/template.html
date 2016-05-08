@@ -1,6 +1,8 @@
 <template name="endlessList">
+	{{#if showFilters }}
 	{{> cityFilter}}{{> search }}
 	<hr />
+	{{/if}}
 
 	{{#if listLoadingFirstTime}}
 		<div>Loading...</div>
@@ -14,9 +16,9 @@
 </template>
 
 <template name="shopMiniView">
-	<li>{{title}}</li>	
+	<li><a href="{{pathFor 'shops.show' shop=_id }}">{{title}}</a></li>	
 </template>
 
 <template name="itemMiniView">
-	<li>{{title}}</li>	
+	<li><a href="{{pathFor 'items.show' shop=shop itemId=_id}}">{{title}}</a></li>	
 </template>

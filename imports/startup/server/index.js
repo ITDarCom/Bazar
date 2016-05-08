@@ -15,19 +15,29 @@ Meteor.startup(() => {
 	if (Shops.find().count() === 0) {
 
 		const shops = [
-			{ title: 'PizzaHot' },
-			{ title: 'CokkiesHot' },
+			{ title: 'PizzaHot', description: 'blah blah blah', city: 'jeddah' },
+			{ title: 'CokkiesHot', description: 'blah blah blah', city: 'jeddah' },
 		]
 
-		shops.forEach(function(shop){
-			Shops.insert(shop)
+		const categories = [
+			{ identifier: 'deserts', label: 'حلويات' },
+			{ identifier: 'mashawee', label: 'مشاوي' },
+			{ identifier: 'pateseries', label: 'معجنات' }
+		]
 
-			const data = [
-				{ title: 'Pizza' },
-				{ title: 'Cokkies' },
+		categories.forEach(function(category){
+			Categories.insert(category)
+		})
+
+		shops.forEach(function(shop){
+			var shopId = Shops.insert(shop)
+
+			const items = [
+				{ title: 'Pizza', description: 'blah blah blah', shop: shopId },
+				{ title: 'Cokkies', description: 'blah blah blah', shop: shopId },
 			]
 
-			data.forEach(function(item){
+			items.forEach(function(item){
 				Items.insert(item)
 			})
 
