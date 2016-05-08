@@ -4,10 +4,11 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Session } from 'meteor/session';
 
 import { Items } from './../../../api/items/collection'
+import { Shops } from './../../../api/shops/collection'
 
 import './template.html'
 
-Template.itemsList.onCreated(function () {
+Template.endlessList.onCreated(function () {
 
     var instance = this
 
@@ -43,11 +44,15 @@ Template.itemsList.onCreated(function () {
         var lastRequestSize = 0, limit = 5
         instance.state.set('lastRequestSize', lastRequestSize) //number of lastRequestSize items
         instance.state.set('limit', limit) //number of total displayed items
+        var subscriptionChannel = route.match(/shops.index/) ? 'shops' : 'items'
+        instance.state.set('subscriptionChannel', subscriptionChannel)
 
     })
 
     //we re-subscribe, when any of our query parameters or limit change
     instance.autorun(function () {
+
+        var subscriptionChannel = instance.state.get('subscriptionChannel');
 
         var limit = instance.state.get('limit');
         
@@ -59,7 +64,7 @@ Template.itemsList.onCreated(function () {
 
         //subscribing using subscription manager
         //console.log('new query', query, limit)
-        var subscription = instance.subscribe('items', query, limit)
+        var subscription = instance.subscribe(subscriptionChannel, query, limit)
         instance.ready.set(subscription.ready())
 
         if (subscription.ready()) {
@@ -70,9 +75,16 @@ Template.itemsList.onCreated(function () {
 
 })
 
-Template.itemsList.helpers({
+Template.endlessList.helpers({
+    template(){
+        var channel = Template.instance().state.get('subscriptionChannel')
+        var template = (channel == 'shops') ? 'shopMiniView' : 'itemMiniView'
+        return template
+    },
 	items(){
-		return Items.find({})
+        var channel = Template.instance().state.get('subscriptionChannel')
+        var Collection = (channel == 'shops') ? Shops : Items
+		return Collection.find({})
 	},
 	listLoadingFirstTime(){
 		return !Template.instance().ready.get() && 

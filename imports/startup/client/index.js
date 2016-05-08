@@ -20,8 +20,7 @@ import "./../../ui/pages/shops-new"
 import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-users"
 
-import "./../../ui/components/items-list"
-import "./../../ui/components/shops-list"
+import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"
 
 Template.default.helpers({

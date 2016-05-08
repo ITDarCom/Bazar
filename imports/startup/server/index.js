@@ -9,6 +9,7 @@ import './../../api/shops/methods.js'
 
 import './../../api/categories/publications.js'
 import './../../api/items/publications.js'
+import './../../api/shops/publications.js'
 
 Meteor.startup(() => {
 	if (Shops.find().count() === 0) {

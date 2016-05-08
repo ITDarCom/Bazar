@@ -1,0 +1,22 @@
+<template name="endlessList">
+	{{> cityFilter}}{{> search }}
+	<hr />
+
+	{{#if listLoadingFirstTime}}
+		<div>Loading...</div>
+	{{else}}
+		<ul>
+		{{#each items}}
+			{{> Template.dynamic template=template data=this}}			
+		{{/each}}
+		</ul>
+	{{/if}}
+</template>
+
+<template name="shopMiniView">
+	<li>{{title}}</li>	
+</template>
+
+<template name="itemMiniView">
+	<li>{{title}}</li>	
+</template>
