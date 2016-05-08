@@ -20,6 +20,16 @@
   </div>
 </template>
 
+<template name="cityFilter">
+  {{#autoForm id="cityFilterForm" schema=schema}}
+    {{> afFormGroup name="selectedCity" options=options}}
+  {{/autoForm}}
+</template>
+
+<template name="appLoading">
+  <center>App loading...</center>
+</template>
+
 <template name="mainNav">
   <ul class="nav nav-pills">
     <li role="presentation"><a href="{{pathFor 'home'}}">All</a></li>

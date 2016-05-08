@@ -1,21 +1,22 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Session } from 'meteor/session';
 
 import './template.html'
 
 import { Categories } from './../../../api/categories/collection.js'
-
-SelectCity = new SimpleSchema({
-	selectedCity: {
-		type: String
-	}
-});
 
 Template.mainNav.helpers({
 	categories(){
 		return Categories.find({})
 	}
 })
+
+SelectCity = new SimpleSchema({
+	selectedCity: {
+		type: String
+	}
+});
 
 Template.cityFilter.helpers({
 	schema(){
@@ -40,9 +41,8 @@ Template.cityFilter.helpers({
 	}
 });
 
-
 Template.cityFilter.events({
 	'change #cityFilterForm': function(){
-		console.log('city change')
+		Session.set('selectedCity', AutoForm.getFormValues('cityFilterForm').insertDoc.selectedCity)
 	}
 })

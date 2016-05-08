@@ -1,7 +1,14 @@
 <template name="itemsList">
-	<ul>
-	{{#each items}}
-		<li>{{title}}</li>
-	{{/each}}
-	</ul>
+	{{> cityFilter}}{{> search }}
+	<hr />
+
+	{{#if listLoadingFirstTime}}
+		<div>Loading...</div>
+	{{else}}
+		<ul>
+		{{#each items}}
+			<li>{{title}}</li>
+		{{/each}}
+		</ul>
+	{{/if}}
 </template>

@@ -39,6 +39,16 @@ Router.route('/logout', {
     }
 });
 
+//top-level app subscriptions that we need to wait
+Router.onBeforeAction(function(){
+	this.wait(Meteor.subscribe('categories'))
+	if (this.ready()){
+		this.next()
+	} else {
+		this.render('appLoading')
+	}
+})
+
 Router.route('/', function () {
 	this.render('mainNav', {to: 'nav'});
 	this.render('home');

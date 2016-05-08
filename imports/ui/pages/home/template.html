@@ -1,13 +1,4 @@
 <template name="home">
 	<h1 class="page-title">Everything</h1>		
-	{{> cityFilter}}{{> search }}
-	<hr />
 	{{> itemsList}}	
-</template>
-
-
-<template name="cityFilter">
-	{{#autoForm id="cityFilterForm" schema=schema}}
-		{{> afFormGroup name="selectedCity" options=options}}
-	{{/autoForm}}
 </template>

@@ -7,6 +7,8 @@ import { Categories } from './../../api/categories/collection.js'
 
 import './../../api/shops/methods.js'
 
+import './../../api/categories/publications.js'
+import './../../api/items/publications.js'
 
 Meteor.startup(() => {
 	if (Shops.find().count() === 0) {
@@ -38,8 +40,7 @@ Meteor.startup(() => {
 			purchases.forEach(function(item){
 				Purchases.insert(item)
 			})
-		})
-		
+		})		
 
 	}
 });
