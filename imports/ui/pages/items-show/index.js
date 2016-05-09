@@ -20,7 +20,7 @@ Template.itemsShow.helpers({
 Template.itemsShow.events({
 	'click .add-to-cart-btn': function(event, instance){
 
-		Meteor.call('purchases.addToCart', instance.itemId)
+		Meteor.call('cart.addItem', instance.itemId)
 		Router.go('cart')
 
 	}

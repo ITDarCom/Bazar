@@ -7,7 +7,7 @@ import { Shops } from './../shops/collection'
 
 Meteor.methods({
 
-	'purchases.addToCart'(itemId) {
+	'cart.addItem'(itemId) {
 
 		check(itemId, String);
 
@@ -31,7 +31,20 @@ Meteor.methods({
 		}
 	},
 
-	'purchases.submitCart'(){
+	'cart.removePurchase'(purchaseId){
+
+		check(purchaseId, String);
+
+		// Make sure the user is logged in before inserting a task
+		if (! this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+
+		Purchases.remove({_id: purchaseId, status: 'cart' })
+
+	},
+
+	'cart.submit'(){
 
 		// Make sure the user is logged in before inserting a task
 		if (! this.userId) {

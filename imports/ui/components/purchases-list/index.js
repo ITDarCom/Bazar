@@ -9,25 +9,62 @@ import './template.html'
 
 Template.purchasesList.onCreated(function(){
 
+	this.channel = new ReactiveVar()
+
+	//subscribing to the appropriate channel on server
 	this.autorun(()=>{
 		var route = Router.current().route.getName()
-		var selector = {}, status
-
-		if (route.match(/cart/)){
-			status = 'cart'
-		} else {
-			status = { $ne: 'cart'}
-			//we only subscribe to purchases, cart items are brought in router
-			this.subscribe('purchases', status)
-		}
-
-		this.selector = { status : status }
+		var channel = route.match(/settings.(\w+)/)[1] //purchases, orders or sales
+		this.subscribe(channel)
+		this.channel.set(channel)
 	})
-
 })
 
 Template.purchasesList.helpers({
 	purchases(){
-		return Purchases.find(Template.instance().selector)
+		return 
+	},
+	purchaseTemplate(){
+		switch (Template.instance().channel.get()){
+			case "purchases": return "purchasesItem";
+			case "orders": return "ordersItem";
+			case "sales": return "salesItem";
+		}
+	},
+	purchases(){
+		let selector = {}
+		switch (Template.instance().channel.get()){
+			case "purchases": 
+				selector = { user: Meteor.userId(), status : { $ne : 'cart'}}
+			break;
+			case "orders": 
+				selector = { 
+					shop: Meteor.user().profile.shop, 
+					status : 'pending'
+				}
+			break;
+			case "sales": 
+				selector = { 
+					shop: Meteor.user().profile.shop, 
+					$or : [
+						{ status : 'accepted' },
+						{ status : 'rejected' },
+					]					
+				}
+			break;
+		}
+		return Purchases.find(selector)
+	}
+})
+
+Template.ordersItem.events ({
+	'click .accept-order-btn':function(event, instance){
+		var purchaseId = instance.data._id
+		Meteor.call('orders.process', purchaseId, 'accepted')
+
+	},
+	'click .reject-order-btn':function(event, instance){
+		var purchaseId = instance.data._id
+		Meteor.call('orders.process', purchaseId, 'rejected')
 	}
 })

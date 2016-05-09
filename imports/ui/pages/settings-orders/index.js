@@ -14,15 +14,3 @@ Template.settingsOrders.helpers({
 		return Purchases.find({ status: 'pending' })
 	}
 })
-
-Template.order.events ({
-	'click .accept-order-btn':function(event, instance){
-		var purchaseId = instance.data._id
-		Meteor.call('orders.process', purchaseId, 'accepted')
-
-	},
-	'click .reject-order-btn':function(event, instance){
-		var purchaseId = instance.data._id
-		Meteor.call('orders.process', purchaseId, 'rejected')
-	}
-})

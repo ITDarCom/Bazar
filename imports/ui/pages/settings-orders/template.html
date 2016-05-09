@@ -1,15 +1,5 @@
 <template name="settingsOrders">
 	<h1 class="page-title">Settings - orders</h1>
-	{{#each orders}}
-		{{> Template.dynamic template='order' data=this}}
-	{{/each}}
+	{{> purchasesList }}
 </template>
 
-
-<template name="order">
-	<li>
-		{{_id}}, {{status}}
-		<button class="btn btn-primary accept-order-btn">Accept</button>
-		<button class="btn btn-primary reject-order-btn">Reject</button>
-	</li>
-</template>

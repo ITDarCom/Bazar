@@ -1,5 +1,22 @@
 <template name="cart">
 	<h1 class="page-title">Your Cart</h1>
-	{{> purchasesList }}
-	<button class="btn btn-primary submit-cart-btn">Submit cart</button>	
+	{{#unless empty}}
+		{{#each purchases}}
+			{{> cartItem }}
+		{{/each}}
+		<button class="btn btn-primary submit-cart-btn">Submit cart</button>
+	{{else}}
+		<p>There are no items in your cart</p>
+	{{/unless}}
 </template>
+
+
+<template name="cartItem">
+	<li>
+		{{_id}}, {{status}}, 
+		<button class="btn btn-danger btn-xs remove-cart-item-btn">Remove cart item</button>
+	</li>
+</template>
+
+
+
