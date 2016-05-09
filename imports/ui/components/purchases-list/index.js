@@ -21,9 +21,6 @@ Template.purchasesList.onCreated(function(){
 })
 
 Template.purchasesList.helpers({
-	purchases(){
-		return 
-	},
 	purchaseTemplate(){
 		switch (Template.instance().channel.get()){
 			case "purchases": return "purchasesItem";
