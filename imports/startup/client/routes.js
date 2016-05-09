@@ -39,9 +39,14 @@ Router.route('/logout', {
     }
 });
 
-//top-level app subscriptions that we need to wait
 Router.onBeforeAction(function(){
+	
+	//top-level app subscriptions that we need to wait
+	this.wait(Meteor.subscribe('cart'))
 	this.wait(Meteor.subscribe('categories'))
+	this.wait(Meteor.subscribe('userData'))
+	this.wait(Meteor.subscribe('shopData'))
+
 	if (this.ready()){
 		this.next()
 	} else {
@@ -124,11 +129,11 @@ Router.route('/settings/purchases', function () {
 	name: 'settings.purchases'
 });
 
-Router.route('/settings/store', function () {
+Router.route('/settings/shop', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('default');
+	this.render('settingsShop');
 }, {
-	name: 'settings.store'
+	name: 'settings.shop'
 });
 
 Router.route('/settings/orders', function () {

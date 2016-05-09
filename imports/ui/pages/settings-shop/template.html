@@ -1,0 +1,9 @@
+<template name="settingsShop">
+	<h1 class="page-title">Settings - shop</h1>
+	{{#if hasShop}}
+		<p>Your shop is {{shop.title}}</p>
+		<button class="btn btn-primary delete-shop-btn">Delete shop</button>
+	{{else}}
+		<p>You don't have a shop, create a shop <a href="{{pathFor 'shops.new'}}">here</a></p>
+	{{/if}}
+</template>

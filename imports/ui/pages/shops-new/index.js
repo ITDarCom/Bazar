@@ -1,9 +1,18 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import {Router} from 'meteor/iron:router'
+
 import './template.html'
 
 import { Shops } from './../../../api/shops/collection'
+
+AutoForm.addHooks('insertShopForm', {
+	onSuccess: function(formType, result){
+		Router.go('shops.show', { shop: result })
+	}
+
+}, true);
 
 Template.shopsNew.helpers({
 	formCollection(){

@@ -12,11 +12,11 @@ Template.endlessList.onCreated(function () {
 
     var instance = this
 
-    //a reactive dictionary to store the state of our current list of articles
+    //a reactive dictionary to store the state of the list
     instance.state = new ReactiveDict()
     instance.ready = new ReactiveVar()
     
-    //query filters
+    //reactive variables for query filters
     instance.category = new ReactiveVar()
     instance.shop = new ReactiveVar()
     instance.city = new ReactiveVar()
@@ -31,15 +31,18 @@ Template.endlessList.onCreated(function () {
         var route = Router.current().route.getName()
         var params = Router.current().params
 
-        if (route.match(/categories/)){
+        //if we are on a category page, we'll filter by category
+        if (route.match(/categories.show/)){
         	instance.category.set(params.category)        	
         }
 
+        //if a city is selected, we'll filter by city
         var city = Session.get('selectedCity')
         if (city){
         	instance.city.set(city)
         }
 
+        //if we are on a shop page, we'll filter by shop
         if (route.match(/shops.show/)){
             instance.shop.set(params.shop)
         }
@@ -81,6 +84,7 @@ Template.endlessList.onCreated(function () {
 
 Template.endlessList.helpers({
     showFilters(){
+        //we hide filters on a shop page
         var route = Router.current().route.getName()
         if (route.match(/shops.show/)) return false; else return true;
     },

@@ -45,9 +45,11 @@
   <ul class="nav nav-pills">
     <li role="presentation"><a href="{{pathFor 'settings.account'}}">Account</a></li>
     <li role="presentation"><a href="{{pathFor 'settings.purchases'}}">Purchases</a></li>
-    <li role="presentation"><a href="{{pathFor 'settings.store'}}">Store</a></li>
-    <li role="presentation"><a href="{{pathFor 'settings.orders'}}">Orders</a></li>
+    <li role="presentation"><a href="{{pathFor 'settings.shop'}}">Shop</a></li>
+    {{#if hasShop}}
+    <li role="presentation"><a href="{{pathFor 'settings.orders'}}">Orders ({{unprocessedOrders}})</a></li>
     <li role="presentation"><a href="{{pathFor 'settings.sales'}}">Sales</a></li>
+    {{/if}}
   </ul>
   <hr style="margin-top:5px"/>
 </template>
