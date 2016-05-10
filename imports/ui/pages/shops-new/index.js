@@ -14,7 +14,7 @@ AutoForm.addHooks('insertShopForm', {
 
 }, true);
 
-Template.shopsNew.helpers({
+Template.shopsNewPage.helpers({
 	formCollection(){
 		return Shops;
 	},

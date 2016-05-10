@@ -5,7 +5,7 @@ import './template.html'
 
 import { Categories } from './../../../api/categories/collection'
 
-Template.adminCategories.helpers({
+Template.adminCategoriesPage.helpers({
 	formCollection(){
 		return Categories;
 	},

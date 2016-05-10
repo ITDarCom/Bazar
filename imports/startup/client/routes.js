@@ -56,7 +56,7 @@ Router.onBeforeAction(function(){
 
 Router.route('/', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('home');
+	this.render('homePage');
 }, {
 	name: 'home'
 });
@@ -64,7 +64,7 @@ Router.route('/', function () {
 //category routes
 Router.route('/categories/:category', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('categories.show');
+	this.render('categoriesShowPage');
 }, {
 	name: 'categories.show'
 });
@@ -72,21 +72,21 @@ Router.route('/categories/:category', function () {
 //shops routes
 Router.route('/shops', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('shopsIndex');
+	this.render('shopsIndexPage');
 }, {
 	name: 'shops.index'
 });
 
 Router.route('/shops/new', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('shopsNew');
+	this.render('shopsNewPage');
 }, {
 	name: 'shops.new'
 });
 
 Router.route('/shops/:shop', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('shopsShow');
+	this.render('shopsShowPage');
 }, {
 	name: 'shops.show'
 });
@@ -94,21 +94,21 @@ Router.route('/shops/:shop', function () {
 //items routes
 Router.route('/shops/:shop/items/new', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('default');
+	this.render('defaultPage');
 }, {
 	name: 'items.new'
 });
 
 Router.route('/shops/:shop/items/:itemId', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('itemsShow');
+	this.render('itemsShowPage');
 }, {
 	name: 'items.show'
 });
 
 Router.route('/shops/:shop/items/:itemId/edit', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('default');
+	this.render('defaultPage');
 }, {
 	name: 'items.edit'
 });
@@ -117,35 +117,35 @@ Router.route('/shops/:shop/items/:itemId/edit', function () {
 
 Router.route('/settings/account', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('default');
+	this.render('defaultPage');
 }, {
 	name: 'settings.account'
 });
 
 Router.route('/settings/purchases', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('settingsPurchases');
+	this.render('settingsPurchasesPage');
 }, {
 	name: 'settings.purchases'
 });
 
 Router.route('/settings/shop', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('settingsShop');
+	this.render('settingsShopPage');
 }, {
 	name: 'settings.shop'
 });
 
 Router.route('/settings/orders', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('settingsOrders');
+	this.render('settingsOrdersPage');
 }, {
 	name: 'settings.orders'
 });
 
 Router.route('/settings/sales', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('settingsSales');
+	this.render('settingsSalesPage');
 }, {
 	name: 'settings.sales'
 });
@@ -154,14 +154,14 @@ Router.route('/settings/sales', function () {
 //messages
 Router.route('/messages', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('default');
+	this.render('defaultPage');
 }, {
 	name: 'messages.index'
 });
 
 Router.route('/messages/:thread', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('default');
+	this.render('defaultPage');
 }, {
 	name: 'messages.thread'
 });
@@ -169,21 +169,21 @@ Router.route('/messages/:thread', function () {
 //cart
 Router.route('/cart', function () {
 	this.render('empty', {to: 'nav'});	
-	this.render('cart');
+	this.render('cartPage');
 }, {
 	name: 'cart'
 });
 
 Router.route('/about', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('default');
+	this.render('defaultPage');
 }, {
 	name: 'about'
 });
 
 Router.route('/contact', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('default');
+	this.render('defaultPage');
 }, {
 	name: 'contact'
 });
@@ -193,7 +193,7 @@ Router.route('/contact', function () {
 
 Router.route('/admin/categories', function () {
 	this.render('adminNav', {to: 'nav'});
-	this.render('adminCategories');
+	this.render('adminCategoriesPage');
 }, {
 	name: 'admin.categories'
 });
@@ -201,7 +201,7 @@ Router.route('/admin/categories', function () {
 
 Router.route('/admin/users', function () {
 	this.render('adminNav', {to: 'nav'});
-	this.render('adminUsers');
+	this.render('adminUsersPage');
 }, {
 	name: 'admin.users'
 });

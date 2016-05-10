@@ -1,8 +1,8 @@
 <head>
-  <title>simple</title>
+  <title>Bazar</title>
 </head>
 
-<template name="default">
+<template name="defaultPage">
   <h2>{{currentRoute}}</h2>
 </template>
 
@@ -18,12 +18,6 @@
   <div class="form-group">
     <input type="text" class="form-control" placeholder="Search">
   </div>
-</template>
-
-<template name="cityFilter">
-  {{#autoForm id="cityFilterForm" schema=schema}}
-    {{> afFormGroup name="selectedCity" options=options}}
-  {{/autoForm}}
 </template>
 
 <template name="appLoading">

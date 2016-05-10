@@ -6,11 +6,11 @@ import { Shops } from './../../../api/shops/collection'
 
 import './template.html'
 
-Template.shopsShow.onCreated(function(){
+Template.shopsShowPage.onCreated(function(){
 	this.subscribe('singleShop', Router.current().params.shop)
 })
 
-Template.shopsShow.helpers({
+Template.shopsShowPage.helpers({
 	data(){
 		return Shops.findOne(Router.current().params.shop)
 	}

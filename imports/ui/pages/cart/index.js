@@ -7,7 +7,7 @@ import { Purchases } from './../../../api/purchases/collection'
 
 import './template.html'
 
-Template.cart.helpers({
+Template.cartPage.helpers({
 	empty(){
 		return (Purchases.find().count() == 0)
 	},
@@ -16,7 +16,7 @@ Template.cart.helpers({
 	}	
 })
 
-Template.cart.events({
+Template.cartPage.events({
 	'click .submit-cart-btn': function (event, instance){
 		Meteor.call('cart.submit')
 		Router.go('settings.purchases')

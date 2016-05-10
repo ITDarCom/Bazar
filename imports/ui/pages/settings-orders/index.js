@@ -5,11 +5,11 @@ import { Purchases } from './../../../api/purchases/collection.js'
 
 import './template.html'
 
-Template.settingsOrders.onCreated(function(){
+Template.settingsOrdersPage.onCreated(function(){
 	this.subscribe('orders')
 })
 
-Template.settingsOrders.helpers({
+Template.settingsOrdersPage.helpers({
 	orders: function(){
 		return Purchases.find({ status: 'pending' })
 	}

@@ -23,12 +23,12 @@ import "./../../ui/pages/items-show"
 import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-users"
 
-
 import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"
+import "./../../ui/components/city-filter"
 
-Template.default.helpers({
-  currentRoute() {
-    return Router.current().route.getName()
-  },
+Template.defaultPage.helpers({
+	currentRoute() {
+		return Router.current().route.getName()
+	},
 });
