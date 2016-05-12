@@ -12,7 +12,7 @@ Feature: Tracking purchases
 	Scenario: User reviewing his past purchases
 		When I click 'my purchases' in the side menu
 		Then I should be on the purchases page
-		and I should see all my pending, accepted and rejected purchases
+		And I should see all my pending, accepted and rejected purchases
 
 	Scenario: User notified real-time about a newly processed purchase order
 		When the shop owner accepts or rejects any of my orders

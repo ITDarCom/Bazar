@@ -2,7 +2,7 @@
 	<h1 class="page-header">Admin - Categories</h1>	
 	{{> quickForm collection=formCollection id="insertCityForm" type="insert"}}
 	<hr />
-	<ul>
+	<ul id="categories-list">
 		{{#each categories}}
 			<li>{{label}}, {{identifier}}</li>
 		{{/each}}

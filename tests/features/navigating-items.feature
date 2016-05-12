@@ -38,14 +38,14 @@ Feature: Navigating items
 	Scenario: Visitor explores items of a list and filters it by specific keywords
 		Given I am on a list page
 		When I type in the search box
-		I should see a spinner
+		Then I should see a spinner
 		Then I should see items 
 
 	Scenario: Visitor explores items of a list and filters it by a specific city
 		Given I am on a list page
 		When I choose a city 
-		I should see a spinner
+		Then I should see a spinner
 		Then should see items
 
-	*** Scenario: Visitor adding an item to favourites
-	*** Scenario: Visitor sharing an item on social media
+	Scenario: Visitor adding an item to favourites
+	Scenario: Visitor sharing an item on social media

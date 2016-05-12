@@ -15,6 +15,8 @@ import './../../api/items/publications.js'
 import './../../api/shops/publications.js'
 import './../../api/purchases/publications.js'
 
+import './../../api/generate-data.js'
+
 Meteor.startup(() => {
 	if (Shops.find().count() === 0) {
 

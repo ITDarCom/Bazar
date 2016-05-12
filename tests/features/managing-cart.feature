@@ -29,13 +29,13 @@ Feature: Managing cart
 		Given I am on the cart page
 		And I have not specified any of the order info
 		When I click 'submit'
-		I should see validation error messages
+		Then I should see validation error messages
 	
 	Scenario: User submitting cart successfully
 		Given I am on the cart page
 		And I have specified all order info
 		When I click 'submit'
-		I should be redirected to my purchased page
+		Then I should be redirected to my purchased page
 
 
 

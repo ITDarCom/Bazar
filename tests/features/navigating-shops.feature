@@ -21,13 +21,13 @@ Feature: Navigating shops
 	Scenario: Visitor explores shops and filters them by specific keywords
 		Given I am on a list page
 		When I type in the search box
-		I should see a spinner
+		Then I should see a spinner
 		Then I should see items 
 
 	Scenario: Visitor explores shops and filters them by a specific city
 		Given I am on a list page
 		When I choose a city 
-		I should see a spinner
+		Then I should see a spinner
 		Then should see items
 
 	Scenario: Visitor explores a specific shop and returns back
