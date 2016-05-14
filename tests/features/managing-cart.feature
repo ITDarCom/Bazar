@@ -20,7 +20,7 @@ Feature: Managing cart
 		When I click the "remove-cart-item" button
 		Then I should see a list of "1" cart items
 
-	Scnario: User viewing an empty cart
+	Scenario: User viewing an empty cart
 		Given I have "0" items in cart		
 		And I am on "cart" page
 		Then I should see a list of "0" cart items
