@@ -13,8 +13,6 @@ meteor
 
 ## Testing
 
-You need to install `chimp` using `npm install -g chimp` before you can run tests.
-
 Running all tests using `chimp`:
 
 ```
