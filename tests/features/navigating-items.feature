@@ -1,4 +1,3 @@
-@watch
 Feature: Navigating items
 
 	As a visitor to the site,

@@ -96,7 +96,12 @@ Template.endlessList.helpers({
 	items(){
         var channel = Template.instance().state.get('subscriptionChannel')
         var Collection = (channel == 'shops') ? Shops : Items
-		return Collection.find({})
+
+        if (channel == 'shops'){
+            return Shops.find({})            
+        } else {
+            return Items.find({})
+        }
 	},
 	listLoadingFirstTime(){
 		return !Template.instance().ready.get() && 
