@@ -5,37 +5,61 @@ Feature: Managing cart
 	I want to add and delete items into the cart, specify any necessary info about my order and then finally submit my cart
 
 	Background:
-		Given I am on the "home" page
-		And I am a registered user
+		Given I am a registered user
 
 	Scenario: User adding an item into the cart
 		Given I am on an item page
-		When I click the 'add to cart' button
-		Then I should be redirected to the cart
-		And should see the item added to the cart
+		And I have "0" items in cart
+		When I click the "add-to-cart" button
+		Then I should be redirected to the "cart" page
+		Then I should see a list of "1" cart items
 
 	Scenario: User removing an item from the cart
-		Given I am on the cart page
-		When I click the 'remove' button next to an item
-		Then I should be see the item removed from the cart
+		Given I am on "cart" page
+		And I have "2" items in cart		
+		When I click the "remove-cart-item" button
+		Then I should see a list of "1" cart items
+
+	Scnario: User viewing an empty cart
+		Given I have "0" items in cart		
+		And I am on "cart" page
+		Then I should see a list of "0" cart items
 
 	Scenario: User adding notes about an item
+		Given I am on "cart" page
+		And I have "1" items in cart
+		When I enter "fresh please" in the "notes" textarea
+		And I go to "cart" page
+		Then I should see "fresh please" in the "notes" textarea
+
 	Scenario: User specifying quantity of an item
-
-	Scenario: User specifying delivery address
-	Scenario: User specifying delivery date
-
-	Scenario: User submitting cart without specifying all necessary info
-		Given I am on the cart page
-		And I have not specified any of the order info
-		When I click 'submit'
-		Then I should see validation error messages
+		Given I am on "cart" page
+		And I have "1" items in cart
+		When I choose "4" in the "quantity" select
+		And I go to "cart" page
+		Then I should see "4" in the "quantity" select
 	
-	Scenario: User submitting cart successfully
-		Given I am on the cart page
-		And I have specified all order info
-		When I click 'submit'
-		Then I should be redirected to my purchased page
+	Scenario: User deciding to submit a cart 
+		Given I am on "cart" page
+		And I have "2" items in cart		
+		When I click "submit"
+		Then I should see delivery-information form
 
+	Scenario: User submitting a cart after specifying delivery information
+		Given I am on "cart" page
+		And I have "2" items in cart		
+		And I click "submit"
+		And I entered delivery date 
+		And I entered delivery address
+		And I click "submit"
+		Then I should see "cart-submitted" success alert
+		And I should be redirected to the "settings.purchases" page
 
-
+	Scenario: User submitting a cart without specifying delivery information
+		Given I am on "cart" page
+		And I have "2" items in cart		
+		And I click "submit"
+		And I entered delivery date 
+		And I entered delivery address
+		And I click "submit"
+		Then I should see "cart-not-submitted" danger alert
