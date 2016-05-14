@@ -5,12 +5,12 @@ Feature: Navigating shops
 	I want to explore, search items on the website.
 	
 	Background:
-		Given I am on the app (not in settings area)
+		Given I am on the "home" page
 
 	Scenario: Visitor explores shops
-		When I click 'shops' in navigation
-		Then I should see a spinner
-		Then I should see a list of shops ordered alphabetically
+		Given I am on the "shops" page
+		Then I should see a list of shops 
+		And shops should be ordered alphabetically
 	
 	Scenario: Visitor explores more shops
 		Given I am on the shops list
@@ -38,11 +38,10 @@ Feature: Navigating shops
 		And I should return to the same position instantly
 
 	Scenario: Visitor explores items of a specific shop 
-		
-		Given I am on the shops list
-		When I click on a shop
-		Then I should see a spinner
-		Then I should see a list of items ordered by last added
+		Given I am on the "shops" page
+		When I click on a shop thumbnail
+		Then I should see a list of items 
+		And items should be ordered by date
 
 	Scenario: Visitor explores more items of a specific shop 
 		

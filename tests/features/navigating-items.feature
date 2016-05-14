@@ -1,25 +1,33 @@
+@watch
 Feature: Navigating items
 
 	As a visitor to the site,
 	So that I can find the item the best suits my needs
 	I want to explore, search items on the website.
+
 	
 	Background:
-		Given I am on the app (not in settings area)
+		Given I am a visitor
 
 	Scenario: Visitor views all categories
+		Given I am on the "home" page
 		Then I should see all categories in navigation bar
 
-	Scenario: Visitor navigates into a list of items
-		Scenario: Visitor navigates into the home page
-		Scenario: Visitor navigates into a category page
+	Scenario: Visitor explores home page
+		Given I am on the "home" page
+		Then I should see a list of items 
+		And items should be ordered by date
 
-		When I click "home"
-		Then I should see a spinner 
-		Then I should see items 
-		And I should see items ordered by last added
+	Scenario: Visitor explores a category page
+		Given I am on the "home" page	
+		When I click on a category from the main navbar
+		Then I should see a list of items 
+		And items should be ordered by date
 
 	Scenario: Visitor explores a specific item
+		Given I am on the "home" page	
+		When I click on an item thumbnail
+		Then I should see full item description
 
 	Scenario: Visitor explores a specific item and view its photos
 

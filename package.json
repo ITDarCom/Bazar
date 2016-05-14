@@ -2,9 +2,14 @@
   "name": "bazar",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "chimp:watch": "chimp --ddp=http://localhost:3000 --watch --path=tests",
+    "chimp": "chimp --ddp=http://localhost:3000 --path=tests"
   },
   "dependencies": {
     "meteor-node-stubs": "~0.2.0"
+  },
+  "devDependencies": {
+    "chimp": "^0.34.1"
   }
 }

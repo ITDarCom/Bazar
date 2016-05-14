@@ -16,6 +16,9 @@ import { Purchases } from './purchases/collection.js'
 import { Categories } from './categories/collection.js'
 
 Meteor.methods({
+    getCategories(){
+        return Categories.find().fetch()
+    },
     generateFixtures() {
         resetDatabase();
 
@@ -33,11 +36,11 @@ Meteor.methods({
         })
 
         const shops = [
-            { title: 'PizzaHot', description: 'blah blah blah', city: 'jeddah' },
-            { title: 'CokkiesHot', description: 'blah blah blah', city: 'jeddah' },
-            { title: 'MashaweeHot', description: 'blah blah blah', city: 'jeddah' },
-            { title: 'Nabil Nafesseh Shop', description: 'blah blah blah', city: 'jeddah' },
-            { title: 'McDonalds', description: 'blah blah blah', city: 'jeddah' },
+            { _id: Random.id(6), title: 'PizzaHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
+            { _id: Random.id(6), title: 'CokkiesHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
+            { _id: Random.id(6), title: 'MashaweeHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
+            { _id: Random.id(6), title: 'Nabil Nafesseh Shop', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
+            { _id: Random.id(6), title: 'McDonalds', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
         ]
 
         const categories = [
@@ -49,6 +52,31 @@ Meteor.methods({
         categories.forEach(function(category){
             Categories.insert(category)
         })
+
+        shops.forEach(function(shop, index){
+            shop.user = accountsIds[index]
+            var shopId = Shops.insert(shop, { getAutoValues : false })
+
+            Meteor.users.update({ _id: accountsIds[index]}, 
+                { $set: { 'profile.hasShop': true, 'profile.shop': shopId } 
+            })  
+
+            const items = [
+                { title: `An item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+                { title: `Another item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+                { title: `Wiered item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+                { title: `Popular item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+                { title: `Bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+                { title: `Excellent item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+                { title: `Not too bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+                { title: `Great item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+            ]
+
+            items.forEach(function(item){
+                Items.insert(item)
+            })
+
+        })              
 
     },
 });

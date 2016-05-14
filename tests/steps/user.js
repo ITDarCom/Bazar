@@ -1,7 +1,7 @@
 const routes = [
 	{ name: 'home', path: '/'},
 	{ name: 'categories.show', path: '/categories/:category'},
-	{ name: 'shops.index', path: '/shops'},
+	{ name: 'shops', path: '/shops'},
 	{ name: 'shops.new', path: '/shops/new'},
 	{ name: 'shops.show', path: '/shops/:shop'},
 	{ name: 'items.new', path: '/shops/:shop/items/new'},
@@ -21,14 +21,48 @@ const routes = [
 	{ name: 'admin.users', path: '/admin/users'},
 ]
 
-module.exports = function () {  
+module.exports = function(){
 	'use strict';
 
-	this.Before(function() {
-		server.execute(function(){
-			Meteor.call('generateFixtures');			
+	this.Given(/^I am a visitor$/, function () {
+		browser.url('http://localhost:3000');
+		client.execute(function(){
+			Accounts.logout()
 		})
+		browser.pause(500);
 	});	
+
+	this.Given(/^I am a registered user with no shop$/, function () {
+		var userOptions = {
+			email:'new.user@gmail.com', 
+			password:'password'
+		}
+
+		var userId = server.execute(function(userOptions){
+			return Accounts.createUser(userOptions)
+		}, userOptions)
+		this.currentUser = userOptions
+	});
+
+	this.Given(/^I am a registered user with a shop$/, function () {
+		var userOptions = {
+			email:'new.user@gmail.com', 
+			password:'password',
+			profile: { hasShop: true }
+		}
+		var userId = server.execute(function(userOptions){
+			return Accounts.createUser(userOptions)
+		}, userOptions)
+		this.currentUser = userOptions
+	});		
+
+	this.Given(/^I am logged in$/, function () {
+		browser.url('http://localhost:3000');
+		client.execute(function(currentUser){
+			Meteor.loginWithPassword(currentUser.email, currentUser.password)
+		}, this.currentUser)
+		browser.pause(500);
+	});
 
 	this.Given(/^I am logged in as "([^"]*)"$/, function (arg1) {
 		browser.url('http://localhost:3000');
@@ -41,44 +75,7 @@ module.exports = function () {
 
 	this.Given(/^I am on the "([^"]*)" page$/, function (route) {
 		var path = routes.find(x => x.name == route).path;
-		browser.url('http://localhost:3000' + path);
-		
-	});
+		browser.url('http://localhost:3000' + path);		
+	});	
 
-	this.When(/^I enter "([^"]*)" in the "([^"]*)" field$/, {timeout: 60 * 1000},function (value, key) {
-
-		var doesExist = browser.waitForExist(`input[name='${key}']`);
-		expect(doesExist).toBe(true);
-
- 		browser.setValue(`input[name='${key}']`, value);
-
-	});
-
-	this.When(/^I submit the form$/, {timeout: 60 * 1000}, function () {
-		var doesExist = browser.waitForExist(`button[type='submit']`);
-		expect(doesExist).toBe(true);
-
-		browser.click(`button[type='submit']`)
-
-	});
-
-	this.Then(/^I should see the "([^"]*)" category in the "([^"]*)" page$/, function (category, page) {
-
-		browser.waitForExist("#categories-list");
-		var actualText = browser.getText("#categories-list > li:last-child");
-		expect(actualText).toContain(category);
-
-	});
-
-
-	this.Then(/^I should see the "([^"]*)" category in the main app navbar$/, function (category) {
-		// Write the automation code here
-
-		browser.url('http://localhost:3000');
-		browser.waitForExist("#main-nav");
-
-		var actualText = browser.getText("#main-nav > li:last-child");
-		expect(actualText).toContain(category);
-	});
-
-};
+}

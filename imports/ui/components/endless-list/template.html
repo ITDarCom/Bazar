@@ -7,7 +7,7 @@
 	{{#if listLoadingFirstTime}}
 		<div>Loading...</div>
 	{{else}}
-		<ul>
+		<ul class="endless-list">
 		{{#each items}}
 			{{> Template.dynamic template=template data=this}}			
 		{{/each}}
@@ -16,9 +16,17 @@
 </template>
 
 <template name="shopMiniView">
-	<li><a href="{{pathFor 'shops.show' shop=_id }}">{{title}}</a></li>	
+	<li class="shop-thumbnail">
+		<a href="{{pathFor 'shops.show' shop=_id }}">
+			{{title}}
+		</a>
+	</li>	
 </template>
 
 <template name="itemMiniView">
-	<li><a href="{{pathFor 'items.show' shop=shop itemId=_id}}">{{title}}</a></li>	
+	<li class="item-thumbnail">
+		<a href="{{pathFor 'items.show' shop=shop itemId=_id}}">
+			{{title}}
+		</a>
+	</li>	
 </template>

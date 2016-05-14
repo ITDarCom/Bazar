@@ -4,6 +4,8 @@
 		<p>Your shop is {{shop.title}}</p>
 		<button class="btn btn-primary delete-shop-btn">Delete shop</button>
 	{{else}}
-		<p>You don't have a shop, create a shop <a href="{{pathFor 'shops.new'}}">here</a></p>
+		<p>You don't have a shop. Create a shop now!
+			<button id="create-shop-btn" href="{{pathFor 'shops.new'}}">here</button>
+		</p>
 	{{/if}}
 </template>

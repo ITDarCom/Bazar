@@ -5,7 +5,7 @@ Feature: Managing cart
 	I want to add and delete items into the cart, specify any necessary info about my order and then finally submit my cart
 
 	Background:
-		Given I am on the app
+		Given I am on the "home" page
 		And I am a registered user
 
 	Scenario: User adding an item into the cart

@@ -4,8 +4,6 @@ Feature: App administration
 	In order to manage the app,
 	I want manage users, cities and categories
 
-	@watch
-
 	Background:
 		Given I am logged in as "admin"
 

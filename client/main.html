@@ -29,7 +29,7 @@
     <li role="presentation"><a href="{{pathFor 'home'}}">All</a></li>
     <li role="presentation"><a href="{{pathFor 'shops.index'}}">Shops</a></li>
     {{#each categories}}
-      <li role="presentation"><a href="{{pathFor 'categories.show' category=identifier}}">{{label}}</a></li>
+      <li class="category" role="presentation"><a href="{{pathFor 'categories.show' category=identifier}}">{{label}}</a></li>
     {{/each}}
   </ul>
   <hr style="margin-top:5px"/>

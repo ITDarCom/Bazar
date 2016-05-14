@@ -5,7 +5,7 @@ Feature: Tracking purchases
 	I want to be notified and know about the status of my orders
 
 	Background:
-		Given I am on the app
+		Given I am on the "home" page
 		And I am a registered user
 		And I have submitted a cart
 
