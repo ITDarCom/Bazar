@@ -1,5 +1,5 @@
 <template name="purchasesList">
-	<ul>
+	<ul class="purchase-items-list">
 	{{#each purchases}}
 		{{> Template.dynamic template=purchaseTemplate data=this}}
 	{{/each}}
@@ -7,7 +7,7 @@
 </template>
 
 <template name="ordersItem">
-	<li>
+	<li class="order-item">
 		{{_id}}, {{status}}
 		<button class="btn btn-primary accept-order-btn">Accept</button>
 		<button class="btn btn-primary reject-order-btn">Reject</button>
@@ -15,13 +15,13 @@
 </template>
 
 <template name="purchasesItem">
-	<li>
-		{{_id}}, {{status}}
+	<li class="purchase-item">
+		{{_id}}, {{status}}		
 	</li>
 </template>
 
 <template name="salesItem">
-	<li>
+	<li class="sold-item">
 		{{_id}}, {{status}}
 	</li>
 </template>

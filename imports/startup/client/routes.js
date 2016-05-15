@@ -1,6 +1,8 @@
 import {Router} from 'meteor/iron:router'
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 
+SimpleSchema.debug = true
+
 Router.configure({
   layoutTemplate: 'ApplicationLayout'
 });

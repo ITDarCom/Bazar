@@ -41,6 +41,9 @@ module.exports = function(){
 		var userId = server.execute(function(userOptions){
 			return Accounts.createUser(userOptions)
 		}, userOptions)
+
+		userOptions.userId = userId
+		
 		this.currentUser = userOptions
 	});
 
@@ -77,5 +80,22 @@ module.exports = function(){
 		var path = routes.find(x => x.name == route).path;
 		browser.url('http://localhost:3000' + path);		
 	});	
+
+	this.When(/^I go to "([^"]*)" page$/, function (route) {
+		browser.pause(100);
+		var path = routes.find(x => x.name == route).path;
+		browser.url('http://localhost:3000' + path);
+	});
+
+	this.Then(/^I should be redirected to the "([^"]*)" page$/, function (page) {
+		browser.pause(100);		
+		var route = client.execute(function(){
+			return Router.current().route.getName()
+		});
+		expect(route.value).toEqual(page);
+	});	
+
+
+
 
 }

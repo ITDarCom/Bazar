@@ -19,6 +19,21 @@ Meteor.methods({
     getCategories(){
         return Categories.find().fetch()
     },
+    getCartItems(){
+        return Purchases.find({ status: 'cart', user: this.userId }).fetch()
+    },    
+    getItem(){
+        return Items.findOne()
+    }, 
+    generateCartItems(userId, count){
+
+        this.setUserId(userId)
+
+        for (var i = 0; i < count; i++) {
+            var item = Items.findOne()
+            Meteor.call('cart.addItem', item._id)
+        };
+    },   
     generateFixtures() {
         resetDatabase();
 

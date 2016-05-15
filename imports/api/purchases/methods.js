@@ -44,7 +44,20 @@ Meteor.methods({
 
 	},
 
-	'cart.submit'(){
+	'cart.updatePurchase'(modifier, documentId){
+		// Make sure the user is logged in before inserting a task
+		if (! this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+		Purchases.update({ _id: documentId }, modifier, documentId);
+	},	
+
+	'cart.submit'(deliveryInfo){
+
+		check(deliveryInfo.email, String);
+		check(deliveryInfo.phone, String);
+		check(deliveryInfo.deliveryAddress, String);
+		check(deliveryInfo.deliveryDate, Date);
 
 		// Make sure the user is logged in before inserting a task
 		if (! this.userId) {
@@ -59,7 +72,7 @@ Meteor.methods({
 		})
 
 		Purchases.update({user: this.userId, status: 'cart'}, 
-			{ $set: { status: 'pending' }},
+			{ $set: { status: 'pending', deliveryInfo: deliveryInfo }},
 			{ multi: true })
 
 	},

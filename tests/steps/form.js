@@ -41,4 +41,9 @@ module.exports = function(){
 
 	});
 
+	this.When(/^I click "([^"]*)" button$/, function (button) {
+		var doesExist = browser.waitForExist(`${button}-btn`);
+		browser.click(`${button}-btn`);
+	});	
+
 }

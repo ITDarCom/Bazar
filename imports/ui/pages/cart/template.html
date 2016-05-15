@@ -1,21 +1,65 @@
 <template name="cartPage">
 	<h1 class="page-title">Your Cart</h1>
 	{{#unless empty}}
+		<ul class="cart-items-list">
 		{{#each purchases}}
 			{{> cartItem }}
+			{{> cartItemForm }}
+			<hr />
 		{{/each}}
+		</ul>
+		{{#if showDeliveryForm}}
+			{{> deliveryInformationForm }}
+		{{else}}
 		<button class="btn btn-primary submit-cart-btn">Submit cart</button>
+		{{/if}}
 	{{else}}
-		<p>There are no items in your cart</p>
+		<p class="no-cart-items-message">There are no items in your cart</p>
 	{{/unless}}
 </template>
 
 
 <template name="cartItem">
-	<li>
-		{{_id}}, {{status}}, 
-		<button class="btn btn-danger btn-xs remove-cart-item-btn">Remove cart item</button>
+	<li class="cart-item">
+		{{_id}}, {{status}}, {{notes}}
+		<button class="btn btn-danger btn-xs remove-cart-item-btn">Remove cart item</button>		
 	</li>
+</template>
+
+<template name="cartItemForm">
+	{{#autoForm 
+		collection=formCollection 
+		id=cartItemFormId
+		type="method-update"
+		doc=this
+		autosaveOnKeyup=true
+		resetOnSuccess=false
+		trimStrings=false
+		meteormethod="cart.updatePurchase"}}
+		{{> afQuickField name='notes'}}
+		{{> afQuickField name='quantity'}}
+	{{/autoForm}}
+</template>
+
+<template name="deliveryInformationForm">
+
+	{{#autoForm 
+		schema=formCollection 
+		id="deliveryInformationForm" 
+		type="method"
+		doc=defaultValues
+		meteormethod="cart.submit"}}
+
+		{{> afQuickField name='email'}}
+		{{> afQuickField name='phone'}}
+		{{> afQuickField name='deliveryAddress'}}
+		{{> afQuickField name='deliveryDate'}}
+
+		<button class="btn btn-primary submit-cart-final-btn">Confirm Submit cart</button>
+
+	{{/autoForm}}
+
+
 </template>
 
 
