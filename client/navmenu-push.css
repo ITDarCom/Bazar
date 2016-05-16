@@ -1,0 +1,29 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  padding: 50px 0 0 0;
+}
+
+.navbar-toggle {
+  float: left;
+  margin-left: 15px;
+}
+
+@media (min-width: 0) {
+  .navbar-toggle {
+    display: block; /* force showing the toggle */
+  }
+}
+
+.unread-mark {
+    padding:0px;
+    float:left;
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    width: 8px;
+    height: 8px;
+    background: red;
+    border: 1px solid red;    
+}

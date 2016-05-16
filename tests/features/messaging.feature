@@ -8,15 +8,15 @@ Feature: Messaging
 		Given I am a registered user with no shop	
 		And I am logged in
 		And I am on "home" page
-		Then I "should" see "personal-inbox" in the side menu
-		Then I "should not" see "shop-inbox" in the side menu
+		Then I "should" see "personal-inbox" in the app menu
+		Then I "should not" see "shop-inbox" in the app menu
 
 	Scenario: Shop owner viewing his personal and shop inboxes
 		Given I am a registered user with a shop
 		And I am logged in
 		And I am on "home" page
-		Then I "should" see "personal-inbox" in the side menu
-		Then I "should" see "shop-inbox" in the side menu
+		Then I "should" see "personal-inbox" in the app menu
+		Then I "should" see "shop-inbox" in the app menu
 
 	Scenario: User initiating a thread with a shop owner
 		Given I am a user 
@@ -38,14 +38,14 @@ Feature: Messaging
 		And I have been sent a message from "Ahmad"
 		And I am on "home" page
 		Then I should see a red mark on menu toggle
-		And I should see a a notification next to "personal-inbox" in the side menu
+		And I should see a a notification next to "personal-inbox" in the app menu
 
 	Scenario: User notified about a new message as a shop owner
 		Given I am a registered user with a shop
 		And I have been sent a message from "Ahmad"
 		And I am on "home" page
 		Then I should see a red mark on menu toggle
-		And I should see a a notification next to "shop-inbox" in the side menu
+		And I should see a a notification next to "shop-inbox" in the app menu
 
 	Scenario: User replying to a new message as an ordinary user
 	Scenario: User replying to a new message as a shop owner

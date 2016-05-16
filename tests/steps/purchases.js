@@ -11,22 +11,18 @@ module.exports = function(){
 		}
 
 	});
-	
-	this.Then(/^I should see an unread mark on side menu$/, function () {		
-		pending();
-	});
-	
-	this.Then(/^I should see "([^"]*)" in the unread counter of "([^"]*)" in the side menu$/, function (count, menuItem) {		
+
+	this.Then(/^I should see "([^"]*)" in the unread counter of "([^"]*)" in the app menu$/, function (count, menuItem) {		
 		const selector = `#${menuItem} .counter`
 		var doesExist = browser.waitForExist(selector);
 		expect(doesExist).toBe(true);
-
+		browser.pause(1000);
 		var actualText = browser.getText(selector);
 		expect(actualText).toEqual(count);			
 	});
 	
 	
-	this.When(/^I click "([^"]*)" in the side menu$/, function (menuItem) {	
+	this.When(/^I click "([^"]*)" in the app menu$/, function (menuItem) {	
 		const selector = `#${menuItem}`
 		var doesExist = browser.waitForExist(selector);
 		expect(doesExist).toBe(true);

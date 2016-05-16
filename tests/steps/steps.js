@@ -7,7 +7,7 @@ module.exports = function () {
 		})
 	});	
 
-	this.Then(/^I "([^"]*)" see "([^"]*)" in the side menu$/, function (should, option) {
+	this.Then(/^I "([^"]*)" see "([^"]*)" in the app menu$/, function (should, option) {
 
 		should = (should == "should")? true : false
 

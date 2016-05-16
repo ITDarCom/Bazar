@@ -103,7 +103,18 @@ module.exports = function(){
 		expect(route.value).toEqual(page);
 	});	
 
+	this.Then(/^I should see an unread mark on app menu$/, function () {		
+		var doesExist = browser.waitForExist(`.unread-mark`);
+		expect(doesExist).toBe(true)	
+	});
 
+	this.Then(/^I should not see an unread mark on app menu$/, function () {
+		var doesNotExist = browser.waitForExist(`.unread-mark`, undefined, true)
+		expect(doesNotExist).toBe(true);		
+	});	
 
+	this.When(/^I click app menu button$/, function () {
+		browser.click(`.navbar-toggle`)		
+	});
 
 }

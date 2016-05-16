@@ -8,14 +8,14 @@ Feature: Managing shop
 		Given I am a registered user with no shop	
 		And I am logged in
 		And I am on the "home" page
-		Then I "should" see "create-shop" in the side menu
+		Then I "should" see "create-shop" in the app menu
 		And I "should" see "create-shop" button in the shop settings
 
 	Scenario: User can only create one shop
 		Given I am a registered user with a shop
 		And I am logged in
 		And I am on the "home" page
-		Then I "should not" see "create-shop" in the side menu
+		Then I "should not" see "create-shop" in the app menu
 		And I should see shop edit form in the shop settings
 
 	Scenario: User creating a shop for the first time

@@ -21,3 +21,12 @@ Template.registerHelper('unreadOrders', function(){
 	var shop = Shops.findOne({ user: Meteor.userId() })
 	return shop.unreadOrders;    
 })
+
+Template.registerHelper('unreadItems', function(){
+	if (!Meteor.user() || !Meteor.user().profile){
+		return false
+	}
+	var shop = Shops.findOne({ user: Meteor.userId() })
+	var unreadOrders = shop ? shop.unreadOrders : false
+	return unreadOrders || Meteor.user().profile.unreadPurchases
+})
