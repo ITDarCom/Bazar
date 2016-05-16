@@ -1,5 +1,6 @@
 @watch
 
+
 Feature: Managing cart
 
 	As a user of the site,
@@ -62,4 +63,5 @@ Feature: Managing cart
 		And I should see "pending" in "status"
 
 	Scenario: User submitting a cart without specifying delivery information
+	Scenario: User viewing checkout will changing quantitiy
 
