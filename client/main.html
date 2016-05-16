@@ -26,10 +26,13 @@
 
 <template name="mainNav">
   <ul id="main-nav" class="nav nav-pills">
-    <li role="presentation"><a href="{{pathFor 'home'}}">All</a></li>
-    <li role="presentation"><a href="{{pathFor 'shops.index'}}">Shops</a></li>
+    <li class={{isActiveRoute 'home'}} role="presentation">
+      <a href="{{pathFor 'home'}}">All</a></li>
+    <li class={{isActiveRoute 'shops.index'}} role="presentation">
+      <a href="{{pathFor 'shops.index'}}">Shops</a></li>
     {{#each categories}}
-      <li class="category" role="presentation"><a href="{{pathFor 'categories.show' category=identifier}}">{{label}}</a></li>
+      <li class="category {{isActivePath path}}" role="presentation">
+        <a href="{{path}}">{{label}}</a></li>
     {{/each}}
   </ul>
   <hr style="margin-top:5px"/>
@@ -37,12 +40,32 @@
 
 <template name="settingsNav">
   <ul class="nav nav-pills">
-    <li role="presentation"><a href="{{pathFor 'settings.account'}}">Account</a></li>
-    <li role="presentation"><a href="{{pathFor 'settings.purchases'}}">Purchases</a></li>
-    <li role="presentation"><a href="{{pathFor 'settings.shop'}}">Shop</a></li>
+    <li class={{isActiveRoute 'settings.account'}} role="presentation">
+      <a href="{{pathFor 'settings.account'}}">
+        Account
+      </a>
+    </li>
+    <li class={{isActiveRoute 'settings.purchases'}} role="presentation">
+      <a href="{{pathFor 'settings.purchases'}}">
+        Purchases
+      </a>
+    </li>
+    <li class={{isActiveRoute 'settings.shop'}} role="presentation">
+      <a href="{{pathFor 'settings.shop'}}">
+        Shop
+      </a>
+    </li>
     {{#if hasShop}}
-    <li role="presentation"><a href="{{pathFor 'settings.orders'}}">Orders ({{unreadOrders}})</a></li>
-    <li role="presentation"><a href="{{pathFor 'settings.sales'}}">Sales</a></li>
+    <li class={{isActiveRoute 'settings.orders'}} role="presentation">
+      <a href="{{pathFor 'settings.orders'}}">Orders ({{
+        unreadOrders
+      }})</a>
+    </li>
+    <li class={{isActiveRoute 'settings.sales'}} role="presentation">
+      <a href="{{pathFor 'settings.sales'}}">
+        Sales
+      </a>
+    </li>
     {{/if}}
   </ul>
   <hr style="margin-top:5px"/>
@@ -50,8 +73,16 @@
 
 <template name="adminNav">
   <ul class="nav nav-pills">
-    <li role="presentation"><a href="{{pathFor 'admin.users'}}">Users</a></li>
-    <li role="presentation"><a href="{{pathFor 'admin.categories'}}">Categories</a></li>
+    <li class={{isActiveRoute 'admin.users'}} role="presentation">
+      <a href="{{pathFor 'admin.users'}}">
+        Users
+      </a>
+    </li>
+    <li class={{isActiveRoute 'admin.categories'}} role="presentation">
+      <a href="{{pathFor 'admin.categories'}}">
+        Categories
+      </a>
+    </li>
   </ul>
   <hr style="margin-top:5px"/>
 </template>

@@ -8,6 +8,9 @@ import { Shops } from './../../../api/shops/collection.js'
 
 Template.mainNav.helpers({
 	categories(){
-		return Categories.find({})
+		return Categories.find({}).fetch().map(function(category){
+			return _.extend(category, { 
+				path: Router.path('categories.show', { category: category.identifier })})
+		})
 	}
 })
