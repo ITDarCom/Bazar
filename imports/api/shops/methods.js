@@ -31,6 +31,8 @@ Meteor.methods({
 					Meteor.users.update({ _id: this.userId}, 
 						{ $set: { 'profile.hasShop': true, 'profile.shop': shopId } 
 					})			
+				} else {
+					throw err
 				}
 			});
 		}

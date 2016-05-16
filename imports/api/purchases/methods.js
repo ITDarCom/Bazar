@@ -68,7 +68,7 @@ Meteor.methods({
 
 		cartItems.forEach(function(item){
 			//notify shop owner
-			var shopId = Shops.update(item.shop, { $inc: { unprocessedOrders: 1 }})			
+			var shopId = Shops.update(item.shop, { $inc: { unreadOrders: 1 }})			
 		})
 
 		Purchases.update({user: this.userId, status: 'cart'}, 
@@ -97,7 +97,7 @@ Meteor.methods({
 
 		//marking order as processed for shop owner
 		var shopId = Purchases.findOne(purchaseId).shop
-		Shops.update(shopId, { $inc: { unprocessedOrders: -1 }})	
+		Shops.update(shopId, { $inc: { unreadOrders: -1 }})	
 
 		//TODO: notify purchase owner
 

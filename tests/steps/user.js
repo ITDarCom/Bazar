@@ -50,12 +50,20 @@ module.exports = function(){
 	this.Given(/^I am a registered user with a shop$/, function () {
 		var userOptions = {
 			email:'new.user@gmail.com', 
-			password:'password',
-			profile: { hasShop: true }
+			password:'password'
 		}
-		var userId = server.execute(function(userOptions){
-			return Accounts.createUser(userOptions)
-		}, userOptions)
+
+		var shopOptions = {
+			title: 'PizzaHot', 
+			description: 'blah blah blah', 
+			city: 'jeddah'
+		}
+
+		var userId = server.execute(function(userOptions, shopOptions){
+			return Meteor.call('createUserWithShop', userOptions, shopOptions);			
+		}, userOptions, shopOptions)
+
+		userOptions.userId = userId
 		this.currentUser = userOptions
 	});		
 

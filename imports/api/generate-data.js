@@ -24,6 +24,12 @@ Meteor.methods({
     },    
     getItem(){
         return Items.findOne()
+    },
+    createUserWithShop(userOptions, shopOptions){
+        const userId = Accounts.createUser(userOptions)
+        this.setUserId(userId)
+        Meteor.call('shops.insert', shopOptions)        
+        return userId
     }, 
     generateCartItems(userId, count){
 
@@ -57,7 +63,33 @@ Meteor.methods({
         };
 
         Meteor.users.update(this.userId, { $inc: { 'profile.unreadPurchases': count }})
-    },       
+    }, 
+    generateOrderItems(userId, count){
+
+        this.setUserId(userId)
+
+        const user = Meteor.users.findOne(userId)
+
+        const deliveryInfo = {
+            email: 'deliver@gmail.com',
+            phone: '45454545',
+            deliveryAddress: 'Address',
+            deliveryDate: new Date(),
+        }
+
+        for (var i = 0; i < count; i++) {
+            var item = Items.findOne()
+            Purchases.insert({
+                item: item._id,
+                user: this.userId,
+                shop: user.profile.shop,
+                status: 'pending',
+                createdAt: new Date()
+            })
+        };
+
+        Shops.update(user.profile.shop, { $inc: { 'unreadOrders': count }})
+    },          
     generateFixtures() {
         resetDatabase();
 

@@ -11,11 +11,3 @@ Template.mainNav.helpers({
 		return Categories.find({})
 	}
 })
-
-Template.settingsNav.helpers({
-	unprocessedOrders(){
-		var shop = Shops.findOne({ user: Meteor.userId() })
-		if (shop) return shop.unprocessedOrders;
-		return false
-	}
-})

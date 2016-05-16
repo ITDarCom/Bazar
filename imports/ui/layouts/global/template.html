@@ -59,7 +59,16 @@
       </a>
     </li>
     {{#if hasShop}}
-    <li><a href="{{pathFor 'settings.orders'}}">Orders</a></li>
+    <li id="my-orders">
+      <a href="{{pathFor 'settings.orders'}}">
+        Orders
+        {{#if unreadOrders}}
+          <span class="counter label label-default">{{unreadOrders}}</span>
+        {{else}}
+          (<span class="counter">{{unreadOrders}}</span>)
+        {{/if}}
+      </a>
+    </li>
     {{/if}}
     <li><a href="{{pathFor 'messages.index'}}">Messages</a></li>
     <li><a href="{{pathFor 'settings.account'}}">Settings</a></li>
