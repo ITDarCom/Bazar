@@ -1,4 +1,3 @@
-@watch
 Feature: Managing orders
 
 	As a shop owner

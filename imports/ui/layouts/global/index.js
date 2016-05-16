@@ -6,7 +6,13 @@ import './template.html'
 import { Shops } from './../../../api/shops/collection.js'
 
 
-Template.applicationLayout.onCreated(function(){
+Template.applicationLayout.onRendered(function(){
+
+	//a small handler to hide menu when any menu link is clicked
+
+	$(document).on('click', '.navmenu li', function(){
+		$('.navmenu').offcanvas('toggle')
+	})
 })
 
 Template.registerHelper('hasShop', function(){
