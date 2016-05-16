@@ -52,7 +52,7 @@ Shops.attachSchema(new SimpleSchema({
 		type: String,
 		label: "City"
 	},
-    unprocessedOrders: {
+    unreadOrders: {
         type: Number,
         defaultValue: 0
     }    

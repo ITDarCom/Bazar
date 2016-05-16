@@ -101,5 +101,11 @@ Meteor.methods({
 
 		//TODO: notify purchase owner
 
+	},
+
+	'purchases.setReadStatus'(status){
+		if (status) {
+	        Meteor.users.update(this.userId, { $set: { 'profile.unreadPurchases': 0 }})
+		}
 	}
 });

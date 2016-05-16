@@ -48,7 +48,19 @@
   <ul class="nav navbar-nav navbar-right">
     <li><a href="{{pathFor 'home'}}">Home</a></li>
   {{#if currentUser}}
-    <li><a href="{{pathFor 'settings.purchases'}}">Purchases</a></li>
+    <li id="my-purchases">
+      <a href="{{pathFor 'settings.purchases'}}">
+        Purchases
+        {{#if unreadPurchases}}
+          <span class="counter label label-default">{{unreadPurchases}}</span>
+        {{else}}
+          (<span class="counter">{{unreadPurchases}}</span>)
+        {{/if}}
+      </a>
+    </li>
+    {{#if hasShop}}
+    <li><a href="{{pathFor 'settings.orders'}}">Orders</a></li>
+    {{/if}}
     <li><a href="{{pathFor 'messages.index'}}">Messages</a></li>
     <li><a href="{{pathFor 'settings.account'}}">Settings</a></li>
     {{#unless hasShop}}

@@ -5,5 +5,9 @@
     },
     'profile.shop' : {
         type: String
-    }
+    },
+    'profile.unreadPurchases': {
+        type: Number,
+        defaultValue: 0
+    }        
 }));

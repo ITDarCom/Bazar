@@ -33,7 +33,31 @@ Meteor.methods({
             var item = Items.findOne()
             Meteor.call('cart.addItem', item._id)
         };
-    },   
+    },
+
+    generatePurchaseItems(userId, count){
+        this.setUserId(userId)
+
+        const deliveryInfo = {
+            email: 'deliver@gmail.com',
+            phone: '45454545',
+            deliveryAddress: 'Address',
+            deliveryDate: new Date(),
+        }
+
+        for (var i = 0; i < count; i++) {
+            var item = Items.findOne()
+            Purchases.insert({
+                item: item._id,
+                user: this.userId,
+                shop: item.shop,
+                status: 'accepted',
+                createdAt: new Date()
+            })
+        };
+
+        Meteor.users.update(this.userId, { $inc: { 'profile.unreadPurchases': count }})
+    },       
     generateFixtures() {
         resetDatabase();
 
@@ -51,11 +75,11 @@ Meteor.methods({
         })
 
         const shops = [
-            { _id: Random.id(6), title: 'PizzaHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
-            { _id: Random.id(6), title: 'CokkiesHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
-            { _id: Random.id(6), title: 'MashaweeHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
-            { _id: Random.id(6), title: 'Nabil Nafesseh Shop', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
-            { _id: Random.id(6), title: 'McDonalds', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unprocessedOrders: 0 },
+            { _id: Random.id(6), title: 'PizzaHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
+            { _id: Random.id(6), title: 'CokkiesHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
+            { _id: Random.id(6), title: 'MashaweeHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
+            { _id: Random.id(6), title: 'Nabil Nafesseh Shop', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
+            { _id: Random.id(6), title: 'McDonalds', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
         ]
 
         const categories = [
