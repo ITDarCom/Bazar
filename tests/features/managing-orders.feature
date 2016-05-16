@@ -1,4 +1,3 @@
-@watch
 Feature: Managing orders
 
 	As a shop owner
@@ -9,6 +8,16 @@ Feature: Managing orders
 		Given I am a registered user with a shop
 		And I am logged in
 		And I am on the "home" page
+
+	Scenario: Shop owner with no order items yet
+		Given I have "0" new unprocessed orders	
+		Then I should see "0" in the unread counter of "my-orders" in the side menu
+		Then I should not see an unread mark on side menu
+
+	Scenario: Shop owner with no order items yet
+		Given I have "0" new unprocessed orders	
+		When I click "my-orders" in the side menu
+		Then I should see "no-items" message
 
 	Scenario: Shop owner notified about a new order
 		Given I have "2" new unprocessed orders	
@@ -43,3 +52,8 @@ Feature: Managing orders
 		And I click ".reject-order" button
 		And I click "cancel" in the confirmation box
 		And I should see "4" in the unread counter of "my-orders" in the side menu				
+
+	Scenario: Shop owner with no sold items yet
+		Given I have "4" new unprocessed orders	
+		And I am on the "settings.sales" page
+		Then I should see "no-items" message	

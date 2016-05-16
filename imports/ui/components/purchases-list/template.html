@@ -2,6 +2,10 @@
 	<ul class="purchase-items-list">
 	{{#each purchases}}
 		{{> Template.dynamic template=purchaseTemplate data=this}}
+	{{else}}
+		<div class="no-items-message">
+			There are currently no items in {{currentChannel}}
+		</div>		
 	{{/each}}
 	</ul>
 </template>

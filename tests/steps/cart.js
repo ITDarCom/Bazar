@@ -59,7 +59,8 @@ module.exports = function(){
 
 
 	this.Then(/^I should see "([^"]*)" message$/, function (message) {
-		var doesExist = browser.waitForExist('.no-cart-items-message');
+		const selector = `.${message}-message`
+		var doesExist = browser.waitForExist(selector);
 		expect(doesExist).toBe(true);
 	});
 

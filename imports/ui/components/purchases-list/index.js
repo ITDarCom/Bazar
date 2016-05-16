@@ -51,6 +51,9 @@ Template.purchasesList.helpers({
 			break;
 		}
 		return Purchases.find(selector)
+	},
+	currentChannel(){
+		return Template.instance().channel.get()
 	}
 })
 
