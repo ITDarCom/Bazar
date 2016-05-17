@@ -5,15 +5,15 @@ Feature: Navigating shops
 	I want to explore, search items on the website.
 	
 	Background:
-		Given I am on the "home" page
+		Given I am on "home" page
 
 	Scenario: Visitor explores shops
-		Given I am on the "shops" page
+		Given I am on "shops" page
 		Then I should see a list of shops 
 		And shops should be ordered alphabetically
 	
 	Scenario: Visitor explores more shops
-		Given I am on the shops list
+		Given I am on shops list
 		When I scroll to the end of the page
 		Then I should see a loading more spinner
 		And I should see new items
@@ -32,13 +32,13 @@ Feature: Navigating shops
 
 	Scenario: Visitor explores a specific shop and returns back
 		
-		Given I am on the shops list
+		Given I am on shops list
 		And I clicked on a shop
 		When I click back
 		And I should return to the same position instantly
 
 	Scenario: Visitor explores items of a specific shop 
-		Given I am on the "shops" page
+		Given I am on "shops" page
 		When I click on a shop thumbnail
 		Then I should see a list of items 
 		And items should be ordered by date

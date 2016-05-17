@@ -4,10 +4,10 @@ module.exports = function(){
 
 	this.When(/^I enter "([^"]*)" in the "([^"]*)" field$/,function (value, key) {
 
-		var doesExist = browser.waitForExist(`input[name='${key}']`);
+		var doesExist = browser.waitForExist(`[name='${key}']`);
 		expect(doesExist).toBe(true);
 
- 		browser.setValue(`input[name='${key}']`, value);
+ 		browser.setValue(`[name='${key}']`, value);
 
 	});
 
@@ -21,13 +21,13 @@ module.exports = function(){
 	});
 
 
-	this.When(/^I select an option in the "([^"]*)" field$/,function (key) {
+	this.When(/^I select "([^"]*)" in the "([^"]*)" field$/,function (value, key) {
 
 		var doesExist = browser.waitForExist(`select[name='${key}']`);
 		expect(doesExist).toBe(true);
 
 		browser.click(`select[name='${key}']`)
-		browser.click(`select[name='${key}'] option:last-child`)
+		browser.click(`select[name='${key}'] option[value="${value}"]`)
 
 		browser.pause(200);
 

@@ -7,29 +7,24 @@ module.exports = function () {
 		})
 	});	
 
-	this.Then(/^I "([^"]*)" see "([^"]*)" in the app menu$/, function (should, option) {
+	this.Then(/^I "([^"]*)" see "([^"]*)" in the app menu$/, function (should, menuItem) {
 
 		should = (should == "should")? true : false
 
 		if (should){
-			var doesExist = browser.waitForExist(`#${option}`);
+			var doesExist = browser.waitForExist(`#${menuItem}`);
 			expect(doesExist).toBe(true)			
 		} else {
-			var doesNotExist = browser.waitForExist(`#${option}`, undefined, true)
+			var doesNotExist = browser.waitForExist(`#${menuItem}`, undefined, true)
 			expect(doesNotExist).toBe(true);
 		}
 
 	});	
 
-	this.Then(/^I "([^"]*)" see "([^"]*)" button in the shop settings$/, function (should, option) {
-
-		browser.url('http://localhost:3000/settings/shop');
+	this.Then(/^I "([^"]*)" see "([^"]*)" button$/, function (should, button) {
 		should = (should == "should")? true : false
-
-		var doesExist = browser.waitForExist(`#${option}-btn`);
+		var doesExist = browser.waitForExist(`${button}-btn`);
 		expect(doesExist).toBe(should)
-
-
 	});
 
 	this.Then(/^I should see all categories in navigation bar$/, function () {

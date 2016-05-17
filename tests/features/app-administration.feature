@@ -8,7 +8,7 @@ Feature: App administration
 		Given I am logged in as "admin"
 
 	Scenario: Admin adding a category
-		Given I am on the "admin.categories" page
+		Given I am on "admin.categories" page
 		When I enter "Deserts" in the "label" field
 		And I enter "desert" in the "identifier" field
 		And I submit the form

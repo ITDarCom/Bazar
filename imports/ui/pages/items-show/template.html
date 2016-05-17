@@ -1,6 +1,11 @@
 <template name="itemsShowPage">
 	{{#if Template.subscriptionsReady}}
+	{{#if isShopOwner}}
+		<a class="btn btn-primary edit-item-btn pull-right" 
+			href="{{pathFor 'items.edit' itemId=data._id shop=currentShop}}">Edit item</a>
+	{{/if}}	
 	<h1 class="item-title">{{data.title}}</h1>
+	<p>Price: {{data.price}}</p>
 	<p>{{data.description}}</p>
 	<button class="btn btn-primary add-to-cart-btn">Add to cart</button>
 	{{else}}

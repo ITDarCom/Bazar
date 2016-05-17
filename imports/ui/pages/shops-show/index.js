@@ -11,7 +11,7 @@ Template.shopsShowPage.onCreated(function(){
 })
 
 Template.shopsShowPage.helpers({
-	data(){
+	shop(){
 		return Shops.findOne(Router.current().params.shop)
 	}
 })

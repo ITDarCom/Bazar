@@ -1,7 +1,11 @@
 <template name="shopsShowPage">
 	{{#if Template.subscriptionsReady}}
-	<h1 class="shop-title">{{data.title}}</h1>
-	<p>{{data.description}}</p>
+	<h1 class="shop-title">{{shop.title}}</h1>
+	<p>{{shop.description}}</p>
+	{{#if isShopOwner}}
+		<a class="btn btn-primary add-item-btn" 
+			href="{{pathFor 'items.new' shop=currentShop}}">Add item</a>
+	{{/if}}
 	<hr />
 	{{> endlessList }}
 	{{else}}

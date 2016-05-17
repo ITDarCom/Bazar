@@ -1,11 +1,10 @@
 <template name="settingsShopPage">
 	<h1 class="page-title">Settings - shop</h1>
 	{{#if hasShop}}
-		<p>Your shop is {{shop.title}}</p>
-		<button class="btn btn-primary delete-shop-btn">Delete shop</button>
+		{{> insertShopForm}}
+		<button class="btn btn-danger delete-shop-btn">Delete shop</button>
 	{{else}}
-		<p>You don't have a shop. Create a shop now!
-			<button id="create-shop-btn" href="{{pathFor 'shops.new'}}">here</button>
-		</p>
+		<p>You don't have a shop.</p>
+		<p><a class="btn btn-primary create-shop-btn" href="{{pathFor 'shops.new'}}">Create shop</a></p>
 	{{/if}}
 </template>

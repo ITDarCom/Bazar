@@ -7,7 +7,7 @@ Feature: Managing purchases
 	Background:
 		Given I am a registered user with no shop
 		And I am logged in
-		And I am on the "home" page
+		And I am on "home" page
 
 	Scenario: User notified about a new processed purchases
 		Given I have "1" new processed purchases	

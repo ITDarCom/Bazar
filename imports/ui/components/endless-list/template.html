@@ -10,6 +10,10 @@
 		<ul class="endless-list">
 		{{#each items}}
 			{{> Template.dynamic template=template data=this}}			
+		{{else}}
+			<div class="no-items-message">
+	  			There are currently no items
+	  		</div>
 		{{/each}}
 		</ul>
 	{{/if}}

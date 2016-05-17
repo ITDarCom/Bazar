@@ -40,7 +40,20 @@ Meteor.methods({
             Meteor.call('cart.addItem', item._id)
         };
     },
+    createItemFromMyShop(userId){
 
+        this.setUserId(userId)
+
+        var itemId = Meteor.call('items.insert', {
+            title: 'My item',
+            description: 'It is mine',
+            price: 30,
+            category: 'deserts'
+        })
+
+        return Items.findOne(itemId)
+
+    },
     generatePurchaseItems(userId, count){
         this.setUserId(userId)
 
@@ -133,18 +146,18 @@ Meteor.methods({
             })  
 
             const items = [
-                { title: `An item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
-                { title: `Another item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
-                { title: `Wiered item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
-                { title: `Popular item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
-                { title: `Bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
-                { title: `Excellent item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
-                { title: `Not too bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
-                { title: `Great item of ${shop.title}`, description: 'blah blah blah', shop: shopId },
+                { _id: Random.id(6), title: `An item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
+                { _id: Random.id(6), title: `Another item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
+                { _id: Random.id(6), title: `Wiered item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
+                { _id: Random.id(6), title: `Popular item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
+                { _id: Random.id(6), title: `Bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
+                { _id: Random.id(6), title: `Excellent item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
+                { _id: Random.id(6), title: `Not too bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
+                { _id: Random.id(6), title: `Great item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
             ]
 
             items.forEach(function(item){
-                Items.insert(item)
+                Items.insert(item, { getAutoValues : false })
             })
 
         })              

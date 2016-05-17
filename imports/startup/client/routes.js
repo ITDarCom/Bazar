@@ -86,6 +86,16 @@ Router.route('/shops/new', function () {
 	name: 'shops.new'
 });
 
+Router.route('/shops/mine', function () {
+	if (Meteor.user() && Meteor.user().profile.hasShop){
+		Router.go('shops.show', { shop: Meteor.user().profile.shop })
+	} else {
+		this.redirect('shops.index')
+	}
+}, {
+	name: 'shops.mine'
+});
+
 Router.route('/shops/:shop', function () {
 	this.render('mainNav', {to: 'nav'});
 	this.render('shopsShowPage');
@@ -96,7 +106,7 @@ Router.route('/shops/:shop', function () {
 //items routes
 Router.route('/shops/:shop/items/new', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('defaultPage');
+	this.render('itemsNewPage');
 }, {
 	name: 'items.new'
 });
@@ -110,7 +120,7 @@ Router.route('/shops/:shop/items/:itemId', function () {
 
 Router.route('/shops/:shop/items/:itemId/edit', function () {
 	this.render('mainNav', {to: 'nav'});
-	this.render('defaultPage');
+	this.render('itemsEditPage');
 }, {
 	name: 'items.edit'
 });

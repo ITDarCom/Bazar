@@ -19,6 +19,7 @@ const routes = [
 	{ name: 'contact', path: '/contact'},
 	{ name: 'admin.categories', path: '/admin/categories'},
 	{ name: 'admin.users', path: '/admin/users'},
+	{ name: 'my-shop', path: '/shops/mine'},
 ]
 
 module.exports = function(){
@@ -83,10 +84,13 @@ module.exports = function(){
 		browser.pause(500);
 	});
 
+	this.Given(/^I am on "([^"]*)" page$/, function (route) {
 
-	this.Given(/^I am on the "([^"]*)" page$/, function (route) {
-		var path = routes.find(x => x.name == route).path;
-		browser.url('http://localhost:3000' + path);		
+		var path = routes.find(x => x.name == route);
+		if (!path) throw new Error(`${route} not found!`);
+		path = path.path
+		browser.url('http://localhost:3000' + path);			
+
 	});	
 
 	this.When(/^I go to "([^"]*)" page$/, function (route) {

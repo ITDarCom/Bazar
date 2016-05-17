@@ -7,7 +7,7 @@ Feature: Managing orders
 	Background:
 		Given I am a registered user with a shop
 		And I am logged in
-		And I am on the "home" page
+		And I am on "home" page
 
 	Scenario: Shop owner with no order items yet
 		Given I have "0" new unprocessed orders	
@@ -37,7 +37,7 @@ Feature: Managing orders
 
 	Scenario: Shop owner accepting an order
 		Given I have "4" new unprocessed orders	
-		And I am on the "settings.orders" page
+		And I am on "settings.orders" page
 		When I click ".accept-order" button
 		And I click app menu button
 		Then I should see "3" in the unread counter of "my-orders" in the app menu
@@ -45,7 +45,7 @@ Feature: Managing orders
 
 	Scenario: Shop owner confirming an order reject
 		Given I have "4" new unprocessed orders	
-		And I am on the "settings.orders" page
+		And I am on "settings.orders" page
 		And I click ".reject-order" button
 		And I click "ok" in the confirmation box
 		And I click app menu button
@@ -54,7 +54,7 @@ Feature: Managing orders
 
 	Scenario: Shop owner canceling an order reject
 		Given I have "4" new unprocessed orders	
-		And I am on the "settings.orders" page
+		And I am on "settings.orders" page
 		And I click ".reject-order" button
 		And I click "cancel" in the confirmation box
 		And I click app menu button
@@ -62,5 +62,5 @@ Feature: Managing orders
 
 	Scenario: Shop owner with no sold items yet
 		Given I have "4" new unprocessed orders	
-		And I am on the "settings.sales" page
+		And I am on "settings.sales" page
 		Then I should see "no-items" message	

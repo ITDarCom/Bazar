@@ -17,17 +17,17 @@ Feature: Managing cart
 
 	Scenario: User removing an item from the cart
 		Given I have "3" items in cart		
-		And I am on the "cart" page
+		And I am on "cart" page
 		When I click ".remove-cart-item" button
 		Then I should see a list of "2" cart items
 
 	Scenario: User viewing an empty cart
 		Given I have "0" items in cart		
-		And I am on the "cart" page
+		And I am on "cart" page
 		Then I should see "no-cart-items" message
 	
 	Scenario: User adding notes and quantity about an item
-		Given I am on the "cart" page
+		Given I am on "cart" page
 		And I have "1" items in cart
 		When I enter "fresh please" in the "notes" field
 		And I enter "5" in the "quantity" field		
@@ -37,7 +37,7 @@ Feature: Managing cart
 		And I should see "5" in the "quantity" field
 	
 	Scenario: User deciding to submit a cart 
-		Given I am on the "cart" page
+		Given I am on "cart" page
 		And I have "2" items in cart		
 		And I click ".submit-cart" button
 		Then I should see "deliveryInformation" form
@@ -48,7 +48,7 @@ Feature: Managing cart
 
 	Scenario: User submitting a cart after specifying delivery information
 		Given I have "1" items in cart		
-		And I am on the "cart" page
+		And I am on "cart" page
 		And I click ".submit-cart" button
 		And I enter "email@gmail.com" in the "email" field
 		And I enter "541254785" in the "phone" field

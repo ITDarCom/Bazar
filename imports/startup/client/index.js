@@ -18,6 +18,8 @@ import "./../../ui/pages/cart"
 
 import "./../../ui/pages/shops-new"
 import "./../../ui/pages/shops-show"
+import "./../../ui/pages/items-new"
+import "./../../ui/pages/items-edit"
 import "./../../ui/pages/items-show"
 
 import "./../../ui/pages/admin-categories"

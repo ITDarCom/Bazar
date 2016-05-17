@@ -9,22 +9,22 @@ Feature: Navigating items
 		Given I am a visitor
 
 	Scenario: Visitor views all categories
-		Given I am on the "home" page
+		Given I am on "home" page
 		Then I should see all categories in navigation bar
 
 	Scenario: Visitor explores home page
-		Given I am on the "home" page
+		Given I am on "home" page
 		Then I should see a list of items 
 		And items should be ordered by date
 
 	Scenario: Visitor explores a category page
-		Given I am on the "home" page	
+		Given I am on "home" page	
 		When I click on a category from the main navbar
 		Then I should see a list of items 
 		And items should be ordered by date
 
 	Scenario: Visitor explores a specific item
-		Given I am on the "home" page	
+		Given I am on "home" page	
 		When I click on an item thumbnail
 		Then I should see full item description
 

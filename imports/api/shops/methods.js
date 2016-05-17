@@ -37,6 +37,13 @@ Meteor.methods({
 			});
 		}
 	},
+	'shops.update'(modifier, documentId){
+		// Make sure the user is logged in before inserting a task
+		if (! this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+		Shops.update({ _id: documentId }, modifier, documentId);
+	},
 	'shops.remove'(){
 
 		// Make sure the user is logged in before inserting a task

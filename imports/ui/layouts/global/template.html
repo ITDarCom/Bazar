@@ -53,6 +53,10 @@
       <li class={{isActiveRoute 'shops.new'}} id="create-shop"><a href="{{pathFor 'shops.new'}}">
         <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; Create shop
       </a></li>
+      {{else}}
+      <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">
+        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; My shop
+      </a></li>
       {{/unless}}
       <li class={{isActiveRoute 'logout'}}><a href="{{pathFor 'logout'}}">
         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; Sign out
