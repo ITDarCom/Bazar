@@ -1,13 +1,11 @@
 <template name="cartPage">
 	<h1 class="page-title">Your Cart</h1>
 	{{#unless empty}}
-		<ul class="cart-items-list">
+		<div class="cart-items-list">
 		{{#each purchases}}
 			{{> cartItem }}
-			{{> cartItemForm }}
-			<hr />
 		{{/each}}
-		</ul>
+		</div>
 		{{#if showDeliveryForm}}
 			{{> deliveryInformationForm }}
 		{{else}}
@@ -18,15 +16,15 @@
 	{{/unless}}
 </template>
 
-
 <template name="cartItem">
-	<li class="cart-item">
-		{{_id}}, {{status}}, {{notes}}
-		<button class="btn btn-danger btn-xs remove-cart-item-btn">Remove cart item</button>		
-	</li>
+	<div class="row cart-item">		
+		{{> itemThumbnail item}}
+		{{> cartItemForm this}}
+	</div>
 </template>
 
 <template name="cartItemForm">
+	<div class="item-thumbnail col-sm-6 col-md-4">
 	{{#autoForm 
 		collection=formCollection 
 		id=cartItemFormId
@@ -39,6 +37,8 @@
 		{{> afQuickField name='notes'}}
 		{{> afQuickField name='quantity'}}
 	{{/autoForm}}
+	<button class="btn btn-danger remove-cart-item-btn">Remove cart item</button>	
+	</div>
 </template>
 
 <template name="deliveryInformationForm">

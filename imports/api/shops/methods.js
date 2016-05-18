@@ -23,9 +23,7 @@ Meteor.methods({
 				title: doc.title,
 				description: doc.description,
 				city: doc.city,
-				createdAt: new Date(),
-				owner: this.userId,
-				username: Meteor.users.findOne(this.userId).username,
+				createdAt: new Date()
 			}, (err, shopId) => {
 				if (!err) {
 					Meteor.users.update({ _id: this.userId}, 

@@ -1,55 +1,76 @@
 import {Purchases} from './collection';
+import {Items} from './../items/collection'
+import {Shops} from './../shops/collection'
 
-Meteor.publish('cart', function purchasesPublication() {
-	console.log('cart')
-	return Purchases.find({user: this.userId, status: 'cart' });
-});
+var children = 
+	[
+		{
+			find(purchase){
+				return Items.find({ _id: purchase.item})
+			},
+			children : [
+				{
+					find(item){
+						return Shops.find({ _id: item.shop})
+					}
+				}
+			]		
+		},
+		{
+			find(purchase){
+				return Meteor.users.find({ _id: purchase.user})
+			}
+		},
+	]
 
-Meteor.publish('purchases', function purchasesPublication() {
-	console.log('purchases')
-	return Purchases.find({user: this.userId, status: { $ne: 'cart'} });
-});
-
-Meteor.publish('orders', function purchasesPublication() {
-	console.log('orders')
-	if (this.userId){
-
-		var shop = Meteor.users.findOne(this.userId).profile.shop
-
-		if (shop){
-			return Purchases.find({shop: shop, status: 'pending' });			
-		} else {
-			return this.ready()
-		}
-
-	} else {
-		return this.ready()
+Meteor.publishComposite('cart', function cartPublication(){
+	return {
+		find(){
+			//Meteor._sleepForMs(2000);
+			return Purchases.find({user: this.userId, status: 'cart' }, { sort: { createdAt: -1 }});
+		}, 
+		children : children
 	}
-
 });
 
-Meteor.publish('sales', function purchasesPublication() {
-	console.log('sales')
-	if (this.userId){
+Meteor.publishComposite('purchases', function purchasesPublication(){
+	return {
+		find(){
+			//Meteor._sleepForMs(2000);
+			return Purchases.find({user: this.userId, status: { $ne: 'cart'}}, { sort: { createdAt: -1 }});
+		}, 
+		children : children
+	}
+});
 
-		var shop = Meteor.users.findOne(this.userId).profile.shop
+Meteor.publishComposite('orders', function ordersPublication(){
+	return {
+		find(){
+			//Meteor._sleepForMs(2000);
+			if (!this.userId) this.ready();
+			var shop = Meteor.users.findOne(this.userId).profile.shop;
+			if (!shop) this.ready();
+			return Purchases.find({shop: shop, status: 'pending' }, { sort: { createdAt: -1 }});
+		}, 
+		children : children
+	}
+});
 
-		if (shop){
-			
+Meteor.publishComposite('sales', function salesPublication(){
+	return {
+		find(){
+			//Meteor._sleepForMs(2000);
+			if (!this.userId) this.ready();
+			var shop = Meteor.users.findOne(this.userId).profile.shop;
+			if (!shop) this.ready();
 			return Purchases.find({
 				shop: shop, 
 				$or : [
 					{ status : 'accepted' },
 					{ status : 'rejected' },
 				] 
-			});		
-
-		} else {
-			return this.ready()
-		}
-
-	} else {
-		return this.ready()
+			});				
+		}, 
+		children : children
 	}
-
 });

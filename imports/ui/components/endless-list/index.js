@@ -90,7 +90,7 @@ Template.endlessList.helpers({
     },
     template(){
         var channel = Template.instance().state.get('subscriptionChannel')
-        var template = (channel == 'shops') ? 'shopMiniView' : 'itemMiniView'
+        var template = (channel == 'shops') ? 'shopThumbnail' : 'itemThumbnail'
         return template
     },
 	items(){

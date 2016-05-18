@@ -70,5 +70,9 @@ Items.attachSchema(new SimpleSchema({
 	category: {
 		type: String,
 		label: "Category"	
-	} 
+	},
+    'thumbnails.$.url': {
+        type: String,
+        label: "Category"   
+    },
 }));

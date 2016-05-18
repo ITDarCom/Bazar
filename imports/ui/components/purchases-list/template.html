@@ -10,22 +10,71 @@
 	</ul>
 </template>
 
-<template name="ordersItem">
-	<li class="order-item">
-		{{_id}}, {{status}}
-		<button class="btn btn-primary accept-order-btn">Accept</button>
-		<button class="btn btn-primary reject-order-btn">Reject</button>
-	</li>
+<template name="orderItem">
+	<div class="order-item row">
+		{{> itemThumbnail item}}
+		<div class="item-thumbnail col-sm-6 col-md-4">
+			<ul class="list-group">
+				<li class="list-group-item">
+					user: {{user.email}} 
+					<button class="btn btn-info message-user-btn">Message</button>
+				</li>
+				<li class="list-group-item">quantity: {{quantity}}</li>
+				<li class="list-group-item">{{deliveryInfo.deliveryDate}}</li>				
+				<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
+				<li class="list-group-item">{{deliveryInfo.email}}</li>
+				<li class="list-group-item">{{deliveryInfo.phone}}</li>
+				<li class="list-group-item">notes: {{notes}}</li>
+				<li class="list-group-item">price: {{item.price}}</li>				
+				<li class="list-group-item">total: {{total}}</li>
+				<li class="list-group-item">
+					<button class="btn btn-primary accept-order-btn">Accept</button>
+					<button class="btn btn-danger reject-order-btn">Reject</button>
+				</li>
+
+				
+			</ul>
+		</div>
+	</div>
 </template>
 
-<template name="purchasesItem">
-	<li class="purchase-item">
-		{{_id}}, {{status}}		
-	</li>
+<template name="purchaseItem">
+	<div class="purchase-item row">
+		{{> itemThumbnail item}}
+		<div class="item-thumbnail col-sm-6 col-md-4">
+			<ul class="list-group">
+				<li class="list-group-item">{{deliveryInfo.deliveryDate}}</li>
+				<li class="list-group-item">quantity: {{quantity}}</li>
+				<li class="list-group-item">price: {{item.price}}</li>
+				<li class="list-group-item">total: {{total}}</li>
+				<li class="list-group-item {{statusClass}}">status: {{status}}</li>
+				<li class="list-group-item">notes: {{notes}}</li>
+				<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
+				<li class="list-group-item">{{deliveryInfo.email}}</li>
+				<li class="list-group-item">{{deliveryInfo.phone}}</li>
+			</ul>
+		</div>
+	</div>
 </template>
 
-<template name="salesItem">
-	<li class="sold-item">
-		{{_id}}, {{status}}
-	</li>
+<template name="saleItem">
+	<div class="sold-item row">
+		{{> itemThumbnail item}}
+		<div class="item-thumbnail col-sm-6 col-md-4">
+			<ul class="list-group">
+				<li class="list-group-item">
+					user: {{user.email}} 
+					<button class="btn btn-info message-user-btn">Message</button>
+				</li>
+				<li class="list-group-item">quantity: {{quantity}}</li>
+				<li class="list-group-item">{{deliveryInfo.deliveryDate}}</li>				
+				<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
+				<li class="list-group-item">{{deliveryInfo.email}}</li>
+				<li class="list-group-item">{{deliveryInfo.phone}}</li>
+				<li class="list-group-item">notes: {{notes}}</li>
+				<li class="list-group-item">price: {{item.price}}</li>				
+				<li class="list-group-item">total: {{total}}</li>
+			</ul>
+		</div>
+	</div>
 </template>

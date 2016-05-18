@@ -1,13 +1,36 @@
 import {Items} from './collection'
+import {Shops} from './../shops/collection'
 
-Meteor.publish('items', function itemsPublication(query, limit) {
-	console.log('items', query, limit)
-	//Meteor._sleepForMs(2000);
-	return Items.find(query);
+Meteor.publishComposite('items', function itemsPublication(query, limit){
+	return {
+		find(){
+			//Meteor._sleepForMs(2000);
+			return Items.find(query);
+		}, 
+		children : [
+			{
+				find(item){
+					return Shops.find({ _id: item.shop})
+				}
+			}
+
+		]
+	}
 });
 
-Meteor.publish('singleItem', function itemsPublication(itemId) {
-	console.log('item', itemId)
-	//Meteor._sleepForMs(2000);
-	return Items.find({_id: itemId});
+Meteor.publishComposite('singleItem', function singleItemPublication(itemId){
+	return {
+		find(){
+			//Meteor._sleepForMs(2000);
+			return Items.find({ _id: itemId });
+		}, 
+		children : [
+			{
+				find(item){
+					return Shops.find({ _id: item.shop})
+				}
+			}
+
+		]
+	}
 });

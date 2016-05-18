@@ -1,7 +1,8 @@
 <template name="shopsShowPage">
 	{{#if Template.subscriptionsReady}}
-	<h1 class="shop-title">{{shop.title}}</h1>
-	<p>{{shop.description}}</p>
+
+	{{>shopHeader shop}}
+
 	{{#if isShopOwner}}
 		<a class="btn btn-primary add-item-btn" 
 			href="{{pathFor 'items.new' shop=currentShop}}">Add item</a>
@@ -11,4 +12,18 @@
 	{{else}}
 		{{> appLoading }}
 	{{/if}}
+</template>
+
+
+<template name="shopHeader">
+	<div class="row">
+		<button class="btn btn-info pull-right message-shop-btn">Message</button>
+		<div class="col-xs-6 col-md-2">
+			<a href="{{pathFor 'shops.show' shop=_id}}" class="thumbnail">
+				<img src={{logo}} alt="...">
+			</a>
+		</div>
+		<h1 class="shop-title">{{title}}</h1>
+		<p>{{description}} ({{city}})</p>
+	</div>
 </template>

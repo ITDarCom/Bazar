@@ -41,7 +41,7 @@ module.exports = function(){
 		var doesExist = browser.waitForExist(".cart-items-list");
 		expect(doesExist).toBe(true);
 
-		const elements = browser.elements(".cart-items-list > li.cart-item");
+		const elements = browser.elements(".cart-items-list > .cart-item");
 		expect(elements.value.length).toEqual(count);
 	});
 
@@ -53,7 +53,7 @@ module.exports = function(){
 		var doesExist = browser.waitForExist(".purchase-items-list");
 		expect(doesExist).toBe(true);
 
-		const elements = browser.elements(".purchase-items-list > li.purchase-item");
+		const elements = browser.elements(".purchase-items-list > .purchase-item");
 		expect(elements.value.length).toEqual(count);
 	});	
 

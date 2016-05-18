@@ -19,7 +19,7 @@ module.exports = function(){
 		var doesExist = browser.waitForExist(".purchase-items-list");
 		expect(doesExist).toBe(true);
 
-		const elements = browser.elements(".purchase-items-list > li.order-item");
+		const elements = browser.elements(".purchase-items-list > .order-item");
 		expect(elements.value.length).toEqual(count);	
 	});
 

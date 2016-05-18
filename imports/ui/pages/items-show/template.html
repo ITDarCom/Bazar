@@ -2,13 +2,55 @@
 	{{#if Template.subscriptionsReady}}
 	{{#if isShopOwner}}
 		<a class="btn btn-primary edit-item-btn pull-right" 
-			href="{{pathFor 'items.edit' itemId=data._id shop=currentShop}}">Edit item</a>
-	{{/if}}	
-	<h1 class="item-title">{{data.title}}</h1>
-	<p>Price: {{data.price}}</p>
-	<p>{{data.description}}</p>
+			href="{{pathFor 'items.edit' itemId=item._id shop=currentShop}}">Edit item</a>
+	{{/if}}
+
+	{{>shopHeader shop}}
+	<hr />	
+	<h2 class="item-title">{{item.title}}</h2>
+	{{> itemCarousel item}}
+	<p>Price: {{item.price}}</p>
+	<p>{{item.description}}</p>
 	<button class="btn btn-primary add-to-cart-btn">Add to cart</button>
 	{{else}}
 		{{> appLoading }}
 	{{/if}}
+</template>
+
+
+<template name="itemCarousel">
+	<div class="row">
+ 		<div class="col-sm-6 col-md-4">
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			  <!-- Indicators -->
+			  <ol class="carousel-indicators">
+			  	{{#each thumbnails}}
+				    <li data-target="#carousel-example-generic" 
+				    	class="{{#unless @index}}active{{/unless}}"
+				    	data-slide-to="0" ></li>
+				{{/each}}
+			  </ol>
+			  <!-- Wrapper for slides -->
+			  <div class="carousel-inner" role="listbox">
+			  	{{#each thumbnails}}  	
+			    <div class="item {{#unless @index}}active{{/unless}}">
+			      <img src="/cookie.jpg" alt="...">
+			    </div>
+			    {{/each}}
+			  </div>
+
+			  <!-- Controls -->
+			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			  </a>
+			</div>
+
+		</div>
+	</div>	
+
 </template>

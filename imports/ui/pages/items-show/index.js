@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import { Router } from 'meteor/iron:router'
 import { Items } from './../../../api/items/collection'
+import { Shops } from './../../../api/shops/collection'
 
 import './template.html'
 
@@ -12,8 +13,12 @@ Template.itemsShowPage.onCreated(function(){
 })
 
 Template.itemsShowPage.helpers({
-	data(){
+	item(){
 		return Items.findOne(Template.instance().itemId)
+	},
+	shop(){
+		const item = Items.findOne(Template.instance().itemId)
+		return Shops.findOne(item.shop)
 	}
 })
 

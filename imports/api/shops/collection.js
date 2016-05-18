@@ -52,6 +52,11 @@ Shops.attachSchema(new SimpleSchema({
 		type: String,
 		label: "City"
 	},
+    logo: {
+        type: String,
+        label: "Logo",
+        defaultValue: '/kfc.jpg'
+    },    
     unreadOrders: {
         type: Number,
         defaultValue: 0

@@ -67,11 +67,12 @@ Meteor.methods({
         for (var i = 0; i < count; i++) {
             var item = Items.findOne()
             Purchases.insert({
+                deliveryInfo,
                 item: item._id,
                 user: this.userId,
                 shop: item.shop,
                 status: 'accepted',
-                createdAt: new Date()
+                createdAt: new Date(),
             })
         };
 
@@ -93,6 +94,7 @@ Meteor.methods({
         for (var i = 0; i < count; i++) {
             var item = Items.findOne()
             Purchases.insert({
+                deliveryInfo,
                 item: item._id,
                 user: this.userId,
                 shop: user.profile.shop,
@@ -107,11 +109,11 @@ Meteor.methods({
         resetDatabase();
 
         const accounts = [
-            { email: 'user@gmail.com', password: 'password' },
-            { email: 'user1@gmail.com', password: 'password' },
-            { email: 'user2@gmail.com', password: 'password' },
-            { email: 'user3@gmail.com', password: 'password' },
-            { email: 'user4@gmail.com', password: 'password' },
+            { email: 'user@gmail.com', password: 'password', profile: {}},
+            { email: 'user1@gmail.com', password: 'password', profile: {} },
+            { email: 'user2@gmail.com', password: 'password', profile: {} },
+            { email: 'user3@gmail.com', password: 'password', profile: {} },
+            { email: 'user4@gmail.com', password: 'password', profile: {} },
         ]
 
         var accountsIds = accounts.map(function(account){
@@ -120,11 +122,11 @@ Meteor.methods({
         })
 
         const shops = [
-            { _id: Random.id(6), title: 'PizzaHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
-            { _id: Random.id(6), title: 'CokkiesHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
-            { _id: Random.id(6), title: 'MashaweeHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
-            { _id: Random.id(6), title: 'Nabil Nafesseh Shop', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
-            { _id: Random.id(6), title: 'McDonalds', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0 },
+            { _id: Random.id(6), title: 'PizzaHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/kfc.jpg' },
+            { _id: Random.id(6), title: 'CokkiesHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/kfc.jpg' },
+            { _id: Random.id(6), title: 'MashaweeHot', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/kfc.jpg' },
+            { _id: Random.id(6), title: 'Nabil Nafesseh Shop', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/kfc.jpg' },
+            { _id: Random.id(6), title: 'McDonalds', description: 'blah blah blah', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/kfc.jpg' },
         ]
 
         const categories = [
@@ -146,14 +148,14 @@ Meteor.methods({
             })  
 
             const items = [
-                { _id: Random.id(6), title: `An item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
-                { _id: Random.id(6), title: `Another item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
-                { _id: Random.id(6), title: `Wiered item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
-                { _id: Random.id(6), title: `Popular item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
-                { _id: Random.id(6), title: `Bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
-                { _id: Random.id(6), title: `Excellent item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
-                { _id: Random.id(6), title: `Not too bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
-                { _id: Random.id(6), title: `Great item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50 },
+                { _id: Random.id(6), title: `An item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
+                { _id: Random.id(6), title: `Another item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
+                { _id: Random.id(6), title: `Wiered item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
+                { _id: Random.id(6), title: `Popular item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
+                { _id: Random.id(6), title: `Bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
+                { _id: Random.id(6), title: `Excellent item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
+                { _id: Random.id(6), title: `Not too bad item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
+                { _id: Random.id(6), title: `Great item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
             ]
 
             items.forEach(function(item){

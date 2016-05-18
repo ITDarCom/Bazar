@@ -4,6 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import {Router} from 'meteor/iron:router'
 
 import { Purchases } from './../../../api/purchases/collection'
+import { Items } from './../../../api/items/collection'
 
 import './template.html'
 
@@ -23,9 +24,9 @@ Template.purchasesList.onCreated(function(){
 Template.purchasesList.helpers({
 	purchaseTemplate(){
 		switch (Template.instance().channel.get()){
-			case "purchases": return "purchasesItem";
-			case "orders": return "ordersItem";
-			case "sales": return "salesItem";
+			case "purchases": return "purchaseItem";
+			case "orders": return "orderItem";
+			case "sales": return "saleItem";
 		}
 	},
 	purchases(){
@@ -57,7 +58,7 @@ Template.purchasesList.helpers({
 	}
 })
 
-Template.ordersItem.events ({
+Template.orderItem.events ({
 	'click .accept-order-btn':function(event, instance){
 		var purchaseId = instance.data._id
 		Meteor.call('orders.process', purchaseId, 'accepted')
@@ -69,4 +70,54 @@ Template.ordersItem.events ({
 			Meteor.call('orders.process', purchaseId, 'rejected')			
 		}
 	}
+})
+
+function getItem(itemId){
+	return Items.findOne(itemId)
+}
+
+Template.orderItem.helpers({
+	item(){
+		return getItem(Template.instance().data.item)
+	},
+	user(){
+		return Meteor.users.findOne(Template.instance().data.user)	
+	},
+	total(){
+		const data = Template.instance().data
+		const item = getItem(data.item)
+		if (item) return (item.price * data.quantity)
+	}	
+})
+
+Template.purchaseItem.helpers({
+	item(){
+		return getItem(Template.instance().data.item)
+	},
+	statusClass(){
+		switch (Template.instance().data.status){
+			case "pending": return "list-group-item-warning";
+			case "accepted": return "list-group-item-info";
+			case "rejected": return "list-group-item-danger";
+		}		
+	},
+	total(){
+		const data = Template.instance().data
+		const item = getItem(data.item)
+		if (item) return (item.price * data.quantity)
+	}
+})
+
+Template.saleItem.helpers({
+	item(){
+		return getItem(Template.instance().data.item)
+	},
+	user(){
+		return Meteor.users.findOne(Template.instance().data.user)	
+	},
+	total(){
+		const data = Template.instance().data
+		const item = getItem(data.item)
+		if (item) return (item.price * data.quantity)
+	}	
 })
