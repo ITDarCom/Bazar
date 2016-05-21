@@ -1,10 +1,10 @@
+@watch
 Feature: Navigating items
 
 	As a visitor to the site,
 	So that I can find the item the best suits my needs
 	I want to explore, search items on the website.
 
-	
 	Background:
 		Given I am a visitor
 
@@ -14,33 +14,31 @@ Feature: Navigating items
 
 	Scenario: Visitor explores home page
 		Given I am on "home" page
-		Then I should see a list of items 
+		And there are "3" items
+		Then I should see a list of "3" items 
 		And items should be ordered by date
 
 	Scenario: Visitor explores a category page
-		Given I am on "home" page	
-		When I click on a category from the main navbar
-		Then I should see a list of items 
+		Given there are "3" items under "desserts" category
+		And I am on "desserts" category page
+		Then I should see a list of "3" items 
 		And items should be ordered by date
 
 	Scenario: Visitor explores a specific item
 		Given I am on "home" page	
+		And there are "3" items		
 		When I click on an item thumbnail
-		Then I should see full item description
+		Then I should be redirected to the "items.show" page
 
 	Scenario: Visitor explores a specific item and view its photos
-
 	Scenario: Visitor explores a specific item and then returns back 
-		Given I am on a list page
-		And I clicked on an item
-		When I click back
-		And I should return to the same position instantly
-		
+
 	Scenario: Visitor explores more items of a list 
-		Given I am on a list of items page
-		When I scroll to the end of the page
-		Then I should see a loading more spinner
-		And I should see new items
+		Given I am on "home" page
+		And there are "12" items
+		Then I should see a list of "6" items 
+		When I scroll to the end of the page and wait a bit
+		Then I should see a list of "12" items 
 
 	Scenario: Visitor explores items of a list and filters it by specific keywords
 		Given I am on a list page
@@ -49,10 +47,12 @@ Feature: Navigating items
 		Then I should see items 
 
 	Scenario: Visitor explores items of a list and filters it by a specific city
-		Given I am on a list page
-		When I choose a city 
-		Then I should see a spinner
-		Then should see items
+		Given there are "3" items in "jeddah" city
+		And there are "3" items in "mecca" city
+		And I am on "home" page
+		Then I should see a list of "6" items		
+		When I select "jeddah" in the "selectedCity" field
+		Then I should see a list of "3" items
 
 	Scenario: Visitor adding an item to favourites
 	Scenario: Visitor sharing an item on social media

@@ -69,7 +69,7 @@ module.exports = function () {
 	this.When(/^I click on an item thumbnail$/, function () {
 
 		var doesExist = browser.waitForExist(".endless-list");
-		browser.click(".endless-list > li.item-thumbnail a");
+		browser.click(".endless-list > .item-thumbnail a");
 
 	});
 

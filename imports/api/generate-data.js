@@ -31,6 +31,29 @@ Meteor.methods({
         Meteor.call('shops.insert', shopOptions)        
         return userId
     }, 
+    generateItems(count, options){
+
+        const opts = options || {}
+
+        const shop = Shops.findOne()
+        const category = opts.category? opts.category : Categories.findOne().identifier
+        const city = opts.city? opts.city : shop.city
+
+        for (var i = 0; i < count; i++) {
+            
+            var item = { 
+                _id: Random.id(6), 
+                title: `item of ${shop.title}`, 
+                description: 'blah blah blah', 
+                shop: shop._id, 
+                city: city, createdAt: new Date(), 
+                category: category, 
+                price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] }
+
+            Items.insert(item, { getAutoValues : false })
+        }
+
+    },
     generateCartItems(userId, count){
 
         this.setUserId(userId)
@@ -158,9 +181,9 @@ Meteor.methods({
                 { _id: Random.id(6), title: `Great item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
             ]
 
-            items.forEach(function(item){
+            /*items.forEach(function(item){
                 Items.insert(item, { getAutoValues : false })
-            })
+            })*/
 
         })              
 
