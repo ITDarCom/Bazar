@@ -1,4 +1,3 @@
-@watch
 Feature: Navigating items
 
 	As a visitor to the site,
@@ -37,13 +36,16 @@ Feature: Navigating items
 		Given I am on "home" page
 		And there are "12" items
 		Then I should see a list of "6" items 
+		And I should see "#loading-more-items" div
 		When I scroll to the end of the page and wait a bit
 		Then I should see a list of "12" items 
+		When I scroll to the end of the page and wait a bit		
+		Then I should not see "#loading-more-items" div		
 
+@watch
 	Scenario: Visitor explores items of a list and filters it by specific keywords
-		Given I am on a list page
-		When I type in the search box
-		Then I should see a spinner
+		Given I am on "home" page
+		When I enter "cookie" in the "keyword" field
 		Then I should see items 
 
 	Scenario: Visitor explores items of a list and filters it by a specific city

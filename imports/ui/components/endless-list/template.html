@@ -8,13 +8,20 @@
 		<div>Loading...</div>
 	{{else}}
 		<div class="endless-list row">
-		{{#each items}}
-			{{> Template.dynamic template=template data=this}}			
-		{{else}}
+		{{#if noItems}}
 			<div class="no-items-message">
 	  			There are currently no items
 	  		</div>
-		{{/each}}
+		{{else}}
+			{{#each items}}
+			{{> Template.dynamic template=template data=this}}	            					
+			{{/each}}
+	  		{{#if hasMore}}
+                <div id="loading-more-items" style="margin-left: 25px;">
+                    <center><span class="loading">Loading...</span></center>
+                </div>
+            {{/if}}
+		{{/if}}
 		</div>
 	{{/if}}
 </template>

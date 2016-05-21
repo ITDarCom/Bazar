@@ -8,6 +8,25 @@ import { Shops } from './../../../api/shops/collection'
 
 import './template.html'
 
+const endlessScrollInc = 6;
+
+//we wrap this listener so we can use its reference un-register when templates are destroyed
+function ScrollListener(instance) {
+
+    return function (e) {
+        var threshold, target = $("#loading-more-items");
+        if (!target.length) return;
+
+        threshold = $(window).scrollTop() + $(window).height() - target.height();
+
+
+        if (target.offset().top <= threshold) {
+            // increase limit by 6 and update it
+            instance.state.set('limit', Items.find().count() + endlessScrollInc)
+        }
+    }
+}
+
 Template.endlessList.onCreated(function () {
 
     var instance = this
@@ -22,8 +41,8 @@ Template.endlessList.onCreated(function () {
     instance.city = new ReactiveVar()
 
     //scroll listener to detect when we reach the end of page
-    /*instance.listener = new ScrollListener(instance)
-    window.addEventListener('scroll', instance.listener)*/
+    instance.listener = new ScrollListener(instance)
+    window.addEventListener('scroll', instance.listener)
 
     //we reset our stored state whenever the route changes
     instance.autorun(function () {
@@ -48,7 +67,7 @@ Template.endlessList.onCreated(function () {
         }
 
         //default lastRequestSize and limit values
-        var lastRequestSize = 0, limit = 5
+        var lastRequestSize = 0, limit = endlessScrollInc
         instance.state.set('lastRequestSize', lastRequestSize) //number of lastRequestSize items
         instance.state.set('limit', limit) //number of total displayed items
         var subscriptionChannel = route.match(/shops.index/) ? 'shops' : 'items'
@@ -106,5 +125,14 @@ Template.endlessList.helpers({
 	listLoadingFirstTime(){
 		return !Template.instance().ready.get() && 
 			(Template.instance().state.get('lastRequestSize') == 0) //it is not a 'load more'
-	}
+	},
+    hasMore: function () {
+        var count = Items.find().count()
+        var lastRequestSize = Template.instance().state.get('lastRequestSize')
+        console.log(count, lastRequestSize)
+        return ((count >= lastRequestSize) && (count != 0));
+    },
+    noItems: function(){
+        return Template.instance().ready.get() && (Items.find().count()==0)
+    }
 })

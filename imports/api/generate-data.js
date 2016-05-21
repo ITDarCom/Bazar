@@ -35,11 +35,12 @@ Meteor.methods({
 
         const opts = options || {}
 
-        const shop = Shops.findOne()
-        const category = opts.category? opts.category : Categories.findOne().identifier
-        const city = opts.city? opts.city : shop.city
 
         for (var i = 0; i < count; i++) {
+            
+            const shop = Shops.findOne()
+            const category = opts.category? opts.category : Categories.findOne().identifier
+            const city = opts.city? opts.city : shop.city
             
             var item = { 
                 _id: Random.id(6), 

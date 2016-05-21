@@ -6,6 +6,16 @@ module.exports = function(){
 		expect(actualText[0].indexOf(text)).not.toEqual(-1);
 	});
 
+	this.Then(/^I should see "([^"]*)" div$/, function (div) {
+		var doesExist = browser.waitForExist(div);
+		expect(doesExist).toBe(true);
+	});	
+
+	this.Then(/^I should not see "([^"]*)" div$/, function (div) {
+		var doesNotExist = browser.waitForExist(div, undefined, true);
+		expect(doesNotExist).toBe(true);
+	});		
+
 	this.Given(/^I on an item page I have created$/, function () {
 		this.currentItem = server.execute(function(userId){
 			return Meteor.call('createItemFromMyShop', userId);			

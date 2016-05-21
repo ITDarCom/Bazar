@@ -47,10 +47,6 @@ module.exports = function(){
         expect(elements.value.length).toEqual(count);
     });
 
-    this.Then(/^items should be ordered by date$/, function () {    
-        pending();
-    });
-
     this.Given(/^I am on "([^"]*)" category page$/, function (category) {    
         var route = client.execute(function(category){
             return Router.go('categories.show', {category:category})
@@ -62,18 +58,12 @@ module.exports = function(){
         pending();
     });
 
-
-
     this.When(/^I scroll to the end of the page and wait a bit$/, function () {    
-        pending();
+        client.execute(function(){
+            window.scrollBy(0,10000)            
+        });
+        browser.pause(500);        
     });
-
-
-
-    this.Given(/^I am on a list page$/, function () {    
-        pending();
-    });
-
 
 
     this.When(/^I type in the search box$/, function () {    
@@ -81,15 +71,8 @@ module.exports = function(){
     });
 
 
-
-    this.Then(/^I should see a spinner$/, function () {    
+    this.Then(/^items should be ordered by date$/, function () {    
         pending();
-    });
-
-
-
-    this.Then(/^I should see items$/, function () {    
-        pending();
-    });
+    });    
 
 }
