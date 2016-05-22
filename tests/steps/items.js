@@ -12,6 +12,25 @@ module.exports = function(){
 
     });
 
+    this.Given(/^I scroll to position "([^"]*)"$/, function (position) {
+        client.execute(function(position){
+            window.scrollTo(0,position)            
+        }, parseInt(position));
+    });
+
+    this.When(/^I go back$/, function () {
+        client.execute(function(){
+            window.history.back()          
+        });
+    });
+
+    this.Then(/^I should be on scroll position "([^"]*)"$/, function (position) {
+        var scrollY = client.execute(function(){
+            return window.scrollY
+        });
+        expect(scrollY.value).toEqual(parseInt(position, 10))
+    });
+
     this.Given(/^there are "([^"]*)" items under "([^"]*)" category$/, function (count, category) {    
         count = parseInt(count)
 

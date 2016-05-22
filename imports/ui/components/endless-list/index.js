@@ -7,6 +7,7 @@ import { Items } from './../../../api/items/collection'
 import { Shops } from './../../../api/shops/collection'
 
 import './template.html'
+import {itemsCache} from './cache.js'
 
 const endlessScrollInc = 6;
 
@@ -18,7 +19,6 @@ function ScrollListener(instance) {
         if (!target.length) return;
 
         threshold = $(window).scrollTop() + $(window).height() - target.height();
-
 
         if (target.offset().top <= threshold) {
             // increase limit by 6 and update it
@@ -34,6 +34,7 @@ Template.endlessList.onCreated(function () {
     //a reactive dictionary to store the state of the list
     instance.state = new ReactiveDict()
     instance.ready = new ReactiveVar()
+    instance.query = new ReactiveVar()
     
     //reactive variables for query filters
     instance.category = new ReactiveVar()
@@ -43,6 +44,14 @@ Template.endlessList.onCreated(function () {
     //scroll listener to detect when we reach the end of page
     instance.listener = new ScrollListener(instance)
     window.addEventListener('scroll', instance.listener)
+
+    instance.cursor = ()=>{ 
+        const route = Router.current().route.getName()
+        const query = this.query.get()
+        if (route.match(/shops.index/)){
+            return Shops.find(query) 
+        } else { return Items.find(query) }
+    }
 
     //we reset our stored state whenever the route changes
     instance.autorun(function () {
@@ -87,17 +96,11 @@ Template.endlessList.onCreated(function () {
         }
         //cleaning up 'undefined' keys
         for(var key in query){if (!query[key]) delete query[key]; }
-
-        const route = Router.current().route.getName()
-        if (route.match(/shops.index/)){
-            instance.cursor = ()=>{ return Shops.find(query) }
-        } else {
-            instance.cursor = ()=>{ return Items.find(query) }
-        }
+        instance.query.set(query)
 
         //subscribing using subscription manager
         //console.log('new query', query, limit)
-        var subscription = instance.subscribe(subscriptionChannel, query, limit)
+        var subscription = itemsCache.subscribe(subscriptionChannel, query, limit)
         instance.ready.set(subscription.ready())
 
         if (subscription.ready()) {
@@ -137,6 +140,38 @@ Template.endlessList.onCreated(function () {
         })       
     }
 
+})
+
+Template.endlessList.onRendered(function () {
+    //if we stored the lastScroll position, we'll scroll down to it
+    if (Session.get('lastScrollPosition')) {
+        if (Session.get('lastRoute') == Router.current().route.getName()){
+            window.scrollTo(0, Session.get('lastScrollPosition'))
+            Tracker.nonreactive(function () {
+                Session.set('lastScrollPosition', null)
+            })            
+        }
+    }
+});
+
+Template.endlessList.onDestroyed(function () {
+    window.removeEventListener('scroll', Template.instance().listener)
+})
+
+//tracking what scroll position was the user at
+Template.endlessList.events({
+    'click .endless-list > .item-thumbnail a': function(event, instance){
+        Tracker.nonreactive(function () {
+            Session.set('lastRoute', Router.current().route.getName())
+        })
+        Session.set('lastScrollPosition', window.scrollY)
+    },
+    'click .endless-list > .shop-thumbnail a': function(event, instance){
+        Tracker.nonreactive(function () {
+            Session.set('lastRoute', Router.current().route.getName())
+        })
+        Session.set('lastScrollPosition', window.scrollY)
+    },    
 })
 
 Template.endlessList.helpers({

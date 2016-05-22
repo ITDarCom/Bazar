@@ -31,3 +31,4 @@ promise
 zimme:active-route
 reywood:publish-composite
 meteorhacks:search-source
+meteorhacks:subs-manager

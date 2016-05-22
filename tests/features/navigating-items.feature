@@ -19,6 +19,7 @@ Feature: Navigating items
 
 	Scenario: Visitor explores a category page
 		Given there are "3" items under "desserts" category
+		Given there are "3" items under "mashawee" category
 		And I am on "desserts" category page
 		Then I should see a list of "3" items 
 		And items should be ordered by date
@@ -30,7 +31,14 @@ Feature: Navigating items
 		Then I should be redirected to the "items.show" page
 
 	Scenario: Visitor explores a specific item and view its photos
+
 	Scenario: Visitor explores a specific item and then returns back 
+		Given I am on "home" page
+		And there are "12" items
+		And I scroll to position "1000"
+		When I click on an item thumbnail
+		And I go back
+		Then I should be on scroll position "1000"
 
 	Scenario: Visitor explores more items of a list 
 		Given I am on "home" page
@@ -63,7 +71,6 @@ Feature: Navigating items
 		When I enter "too strange item" in the "search" field	
 		Then I should see "no-results" message
 
-@watch
 	Scenario: Visitor explores items of a list and filters it by a specific city
 		Given there are "3" items in "jeddah" city
 		And there are "3" items in "mecca" city
