@@ -1,5 +1,7 @@
 import {Shops} from './collection'
 
+import './search'
+
 Meteor.publish('shops', function shopsPublication(query, limit) {
 	//Meteor._sleepForMs(2000);
 	return Shops.find();

@@ -22,7 +22,7 @@ function ScrollListener(instance) {
 
         if (target.offset().top <= threshold) {
             // increase limit by 6 and update it
-            instance.state.set('limit', Items.find().count() + endlessScrollInc)
+            instance.state.set('limit', instance.cursor().count() + endlessScrollInc)
         }
     }
 }
@@ -52,7 +52,7 @@ Template.endlessList.onCreated(function () {
 
         //if we are on a category page, we'll filter by category
         if (route.match(/categories.show/)){
-        	instance.category.set(params.category)        	
+        	instance.category.set(params.category)   
         }
 
         //if a city is selected, we'll filter by city
@@ -73,7 +73,7 @@ Template.endlessList.onCreated(function () {
         var subscriptionChannel = route.match(/shops.index/) ? 'shops' : 'items'
         instance.state.set('subscriptionChannel', subscriptionChannel)
 
-    })
+    });
 
     //we re-subscribe, when any of our query parameters or limit change
     instance.autorun(function () {
@@ -87,6 +87,15 @@ Template.endlessList.onCreated(function () {
         	shop: instance.shop.get(),
         	city: instance.city.get()
         }
+        //cleaning up 'undefined' keys
+        for(var key in query){if (!query[key]) delete query[key]; }
+
+        const route = Router.current().route.getName()
+        if (route.match(/shops.index/)){
+            instance.cursor = ()=>{ return Shops.find(query) }
+        } else {
+            instance.cursor = ()=>{ return Items.find(query) }
+        }
 
         //subscribing using subscription manager
         //console.log('new query', query, limit)
@@ -97,7 +106,38 @@ Template.endlessList.onCreated(function () {
             //increasing the actual number of displayed items
             instance.state.set('lastRequestSize', limit);
         }
+    });
+
+    this.autorun(()=>{
+        //search initialization
+        var options = {
+          keepHistory: 1000 * 60 * 5,
+          localSearch: true
+        };
+        var fields = ['title', 'description'];
+        
+        const route = Router.current().route.getName();
+        if (route.match(/shops.index/)){        
+            this.itemsSearch = new SearchSource('shops', fields, options);
+        } else {
+            this.itemsSearch = new SearchSource('items', fields, options);
+        }        
     })
+
+    //here we initiate a search request
+    this.autorun(()=>{
+        const searchText = Session.get('searchText')
+        this.itemsSearch.search(searchText);
+    })
+
+    this.getSearchResults = ()=>{
+        return this.itemsSearch.getData({
+            transform: function(matchText, regExp) {
+            return matchText.replace(regExp, "<b>$&</b>")
+            },
+            sort: {isoScore: -1}
+        })       
+    }
 
 })
 
@@ -113,26 +153,34 @@ Template.endlessList.helpers({
         return template
     },
 	items(){
-        var channel = Template.instance().state.get('subscriptionChannel')
-        var Collection = (channel == 'shops') ? Shops : Items
-
-        if (channel == 'shops'){
-            return Shops.find({})            
-        } else {
-            return Items.find({})
-        }
+        return Template.instance().cursor()
 	},
 	listLoadingFirstTime(){
 		return !Template.instance().ready.get() && 
 			(Template.instance().state.get('lastRequestSize') == 0) //it is not a 'load more'
 	},
     hasMore: function () {
-        var count = Items.find().count()
+        var count = Template.instance().cursor().count()
         var lastRequestSize = Template.instance().state.get('lastRequestSize')
-        console.log(count, lastRequestSize)
         return ((count >= lastRequestSize) && (count != 0));
     },
     noItems: function(){
-        return Template.instance().ready.get() && (Items.find().count()==0)
+        console.log(Template.instance().cursor().count())
+        console.log(Template.instance().cursor().fetch())
+        console.log(Items.find().fetch())
+        return Template.instance().ready.get() && (Template.instance().cursor().count()==0)
+    },
+    searchMode: function(){
+        var searchText = Session.get('searchText')
+        return searchText && (searchText.length > 0)
+    },
+    searchItems: function(){
+        return Template.instance().getSearchResults()
+    },
+    noResults: function(){
+        const status = Template.instance().itemsSearch.getStatus()
+        const results = Template.instance().getSearchResults()
+        return (status.loaded) && (results.length == 0)
     }
+
 })

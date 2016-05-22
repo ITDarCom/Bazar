@@ -41,10 +41,11 @@ Meteor.methods({
             const shop = Shops.findOne()
             const category = opts.category? opts.category : Categories.findOne().identifier
             const city = opts.city? opts.city : shop.city
+            const title = opts.title? opts.title: `item ${i} of ${shop.title}`
             
             var item = { 
                 _id: Random.id(6), 
-                title: `item of ${shop.title}`, 
+                title: title, 
                 description: 'blah blah blah', 
                 shop: shop._id, 
                 city: city, createdAt: new Date(), 
@@ -52,6 +53,26 @@ Meteor.methods({
                 price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] }
 
             Items.insert(item, { getAutoValues : false })
+        }
+
+    },
+    generateShops(count, options){
+
+        const opts = options || {}
+
+        for (var i = 0; i < count; i++) {
+            const accountId = Accounts.createUser({
+                email: `${Random.id(6)}@gmail.com`, password: `password`
+            })
+
+            this.setUserId(accountId)
+
+            const title = opts.title? opts.title : `KakoHot${i}`
+
+            Meteor.call('shops.insert', {
+                title: title , description: 'blah blah blah', city:'jeddah'
+            });
+            
         }
 
     },

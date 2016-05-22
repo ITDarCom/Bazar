@@ -1,3 +1,4 @@
+@watch 
 Feature: Navigating items
 
 	As a visitor to the site,
@@ -42,11 +43,26 @@ Feature: Navigating items
 		When I scroll to the end of the page and wait a bit		
 		Then I should not see "#loading-more-items" div		
 
-@watch
-	Scenario: Visitor explores items of a list and filters it by specific keywords
+	Scenario: Visitor filtering items by search
 		Given I am on "home" page
-		When I enter "cookie" in the "keyword" field
-		Then I should see items 
+		And there are "4" items
+		And there are "2" items titled "purple cookie"
+		Then I should see a list of "6" items 
+		When I enter "purple" in the "search" field	
+		Then I should see a list of "2" items
+
+	Scenario: Visitor filtering shops by search
+		Given I am on "shops.index" page
+		And there are "4" shops
+		And there are "2" shops titled "purple shop"
+		When I enter "purple" in the "search" field	
+		Then I should see a list of "2" shops
+
+	Scenario: Visitor looking for an item that does not exist
+		Given I am on "home" page
+		And there are "12" items		
+		When I enter "too strange item" in the "search" field	
+		Then I should see "no-results" message
 
 	Scenario: Visitor explores items of a list and filters it by a specific city
 		Given there are "3" items in "jeddah" city

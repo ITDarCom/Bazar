@@ -1,0 +1,24 @@
+import {SearchSource} from 'meteor/meteorhacks:search-source'
+
+import {Shops} from './collection'
+
+SearchSource.defineSource('shops', function(searchText, options) {
+	var options = {sort: {isoScore: -1}, limit: 20};
+
+	if(searchText) {
+		var regExp = buildRegExp(searchText);
+		var selector = { $or: [{title: regExp}, {description: regExp}]};
+		return Shops.find(selector, options).fetch();
+	} else {
+		return Shops.find({}, options).fetch();
+	}
+});
+
+function buildRegExp(searchText) {
+	var words = searchText.trim().split(/[ \-\:]+/);
+	var exps = _.map(words, function(word) {
+		return "(?=.*" + word + ")";
+	});
+	var fullExp = exps.join('') + ".+";
+	return new RegExp(fullExp, "i");
+}

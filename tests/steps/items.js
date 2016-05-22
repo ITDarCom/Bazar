@@ -36,6 +36,18 @@ module.exports = function(){
         }
     });
 
+    this.Given(/^there are "([^"]*)" items titled "([^"]*)"$/, function (count, title) {    
+        count = parseInt(count)
+
+        var options = { title: title }
+
+        if (count > 0){
+            server.execute(function(count, options){
+                return Meteor.call('generateItems', count, options);         
+            }, count, options)
+        }
+    });    
+
 
     this.Then(/^I should see a list of "([^"]*)" items$/, function (count) {    
         count = parseInt(count)     
@@ -46,6 +58,17 @@ module.exports = function(){
         const elements = browser.elements(".endless-list > .item-thumbnail");
         expect(elements.value.length).toEqual(count);
     });
+
+
+    this.Then(/^I should see a list of "([^"]*)" shops$/, function (count) {    
+        count = parseInt(count)     
+        
+        var doesExist = browser.waitForExist(".endless-list");
+        expect(doesExist).toBe(true);
+
+        const elements = browser.elements(".endless-list > .shop-thumbnail");
+        expect(elements.value.length).toEqual(count);
+    });     
 
     this.Given(/^I am on "([^"]*)" category page$/, function (category) {    
         var route = client.execute(function(category){

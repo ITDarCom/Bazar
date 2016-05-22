@@ -2,6 +2,7 @@ const routes = [
 	{ name: 'home', path: '/'},
 	{ name: 'categories.show', path: '/categories/:category'},
 	{ name: 'shops', path: '/shops'},
+	{ name: 'shops.index', path: '/shops'},	
 	{ name: 'shops.new', path: '/shops/new'},
 	{ name: 'shops.show', path: '/shops/:shop'},
 	{ name: 'items.new', path: '/shops/:shop/items/new'},

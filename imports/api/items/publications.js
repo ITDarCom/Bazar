@@ -1,6 +1,8 @@
 import {Items} from './collection'
 import {Shops} from './../shops/collection'
 
+import './search'
+
 Meteor.publishComposite('items', function itemsPublication(query, limit){
 	return {
 		find(){

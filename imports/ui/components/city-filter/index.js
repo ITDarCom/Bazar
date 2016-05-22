@@ -37,3 +37,10 @@ Template.cityFilter.events({
 		Session.set('selectedCity', AutoForm.getFormValues('cityFilterForm').insertDoc.selectedCity)
 	}
 })
+
+Template.search.events({
+	"input input[name='search']": function(target){
+		const searchText = target.target.value
+	    Session.set('searchText', searchText)
+	}
+})

@@ -1,5 +1,24 @@
 module.exports = function(){
 
+    this.Given(/^there are "([^"]*)" shops$/, function (count) {
+        count = parseInt(count)
+        if (count > 0){
+            server.execute(function(count){
+                return Meteor.call('generateShops', count);         
+            }, count)
+        }
+    });
+
+    this.Given(/^there are "([^"]*)" shops titled "([^"]*)"$/, function (count, title) {    
+        count = parseInt(count)
+        var options = { title: title }
+        if (count > 0){
+            server.execute(function(count, options){
+                return Meteor.call('generateShops', count, options);         
+            }, count, options)
+        }
+    });        
+
 	this.Then(/^I should see "([^"]*)"$/, function (text) {
 		var doesExist = browser.waitForExist(".container");
 		var actualText = browser.getText(".container");
@@ -25,4 +44,5 @@ module.exports = function(){
   			Router.go('items.show', { itemId: item._id, shop: item.shop })
   		}, this.currentItem)
 	});
+
 }
