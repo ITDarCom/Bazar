@@ -57,9 +57,7 @@ Template.endlessList.onCreated(function () {
 
         //if a city is selected, we'll filter by city
         var city = Session.get('selectedCity')
-        if (city){
-        	instance.city.set(city)
-        }
+    	instance.city.set(city)
 
         //if we are on a shop page, we'll filter by shop
         if (route.match(/shops.show/)){
@@ -165,9 +163,6 @@ Template.endlessList.helpers({
         return ((count >= lastRequestSize) && (count != 0));
     },
     noItems: function(){
-        console.log(Template.instance().cursor().count())
-        console.log(Template.instance().cursor().fetch())
-        console.log(Items.find().fetch())
         return Template.instance().ready.get() && (Template.instance().cursor().count()==0)
     },
     searchMode: function(){
