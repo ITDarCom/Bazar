@@ -1,0 +1,8 @@
+.item-thumbnail .caption p{
+	font-size: 10pt;
+    line-height: 50%;
+}
+
+.item-thumbnail .caption .price{
+	color: blue;
+}

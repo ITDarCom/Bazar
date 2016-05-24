@@ -9,9 +9,9 @@ Items.attachSchema(new SimpleSchema({
         type: String,
         autoValue: function () {
             if (this.isInsert) {
-                var id = Random.id(6);
+                var id = Math.floor((Math.random() * 10000) + 1);
                 while (Items.findOne(id)) {
-                    id = Random.id(6);
+                    id = Math.floor((Math.random() * 10000) + 1);
                 }
                 return id;
             }

@@ -44,7 +44,7 @@ Meteor.methods({
             const title = opts.title? opts.title: `item ${i} of ${shop.title}`
             
             var item = { 
-                _id: Random.id(6), 
+                _id: Math.floor((Math.random() * 10000) + 1000), 
                 title: title, 
                 description: 'blah blah blah', 
                 shop: shop._id, 

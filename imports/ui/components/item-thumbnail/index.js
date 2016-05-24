@@ -5,6 +5,7 @@ import { Items } from './../../../api/items/collection'
 import { Shops } from './../../../api/shops/collection'
 
 import './template.html'
+import './style.css'
 
 Template.itemThumbnail.helpers({
     shop(){    	

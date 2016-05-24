@@ -27,7 +27,7 @@ body {
 }
 .brand {
     position: absolute;
-    right: 45%;
+    right: 50%;
     margin-top: 7px;
     margin-left: -50px !important;  /* 50% of your logo width */
     display: block;
