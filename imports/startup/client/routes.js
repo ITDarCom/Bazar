@@ -97,7 +97,7 @@ Router.route('/shops/mine', function () {
 });
 
 Router.route('/shops/:shop', function () {
-	this.render('mainNav', {to: 'nav'});
+	this.render('mainNav', {to: 'empty'});
 	this.render('shopsShowPage');
 }, {
 	name: 'shops.show'
@@ -112,7 +112,7 @@ Router.route('/shops/:shop/items/new', function () {
 });
 
 Router.route('/shops/:shop/items/:itemId', function () {
-	this.render('mainNav', {to: 'nav'});
+	this.render('mainNav', {to: 'empty'});
 	this.render('itemsShowPage');
 }, {
 	name: 'items.show'

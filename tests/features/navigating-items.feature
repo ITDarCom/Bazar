@@ -11,7 +11,6 @@ Feature: Navigating items
 		Given I am on "home" page
 		Then I should see all categories in navigation bar
 
-@watch
 	Scenario: Visitor explores home page
 		Given I am on "home" page
 		And there are "12" items

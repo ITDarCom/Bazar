@@ -1,5 +1,5 @@
 <template name="cartPage">
-	<h1 class="page-title">Your Cart</h1>
+	<center><h1>Your Cart</h1></center>
 	{{#unless empty}}
 		<div class="cart-items-list">
 		{{#each purchases}}
@@ -9,8 +9,9 @@
 		{{#if showDeliveryForm}}
 			{{> deliveryInformationForm }}
 		{{else}}
-		<button class="btn btn-primary submit-cart-btn">Submit cart</button>
+		<center><button class="btn btn-primary submit-cart-btn">Submit cart</button></center>
 		{{/if}}
+		<div style="margin-top:20px;" ></div>		
 	{{else}}
 		<p class="no-cart-items-message">There are no items in your cart</p>
 	{{/unless}}
@@ -18,13 +19,14 @@
 
 <template name="cartItem">
 	<div class="row cart-item">		
-		{{> itemThumbnail item}}
 		{{> cartItemForm this}}
+		{{> itemThumbnail item}}
+		<hr class="col-xs-12" style="margin-top:0px;"/>
 	</div>
 </template>
 
 <template name="cartItemForm">
-	<div class="item-thumbnail col-sm-6 col-md-4">
+	<div class="col-xs-6">
 	{{#autoForm 
 		collection=formCollection 
 		id=cartItemFormId
@@ -34,10 +36,10 @@
 		resetOnSuccess=false
 		trimStrings=false
 		meteormethod="cart.updatePurchase"}}
-		{{> afQuickField name='notes'}}
-		{{> afQuickField name='quantity'}}
+		{{> afQuickField name='notes' label=false rows=8 placeholder="Write any notes to shop"}}
+		<button class="btn btn-danger remove-cart-item-btn" style="float:left;">Remove</button>
+		{{> afQuickField name='quantity' label=false style="width:50%; display:inline-block;" type="number"}}
 	{{/autoForm}}
-	<button class="btn btn-danger remove-cart-item-btn">Remove cart item</button>	
 	</div>
 </template>
 
@@ -55,7 +57,7 @@
 		{{> afQuickField name='deliveryAddress'}}
 		{{> afQuickField name='deliveryDate'}}
 
-		<button class="btn btn-primary submit-cart-final-btn">Confirm Submit cart</button>
+		<center><button class="btn btn-primary submit-cart-final-btn">Confirm Submit cart</button></center>
 
 	{{/autoForm}}
 

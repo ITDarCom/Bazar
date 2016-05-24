@@ -9,7 +9,8 @@ Purchases.attachSchema(new SimpleSchema({
     },	
     'quantity' : {
         type: Number,
-        defaultValue : 1
+        defaultValue : 1,
+        min:1,
     },
     'notes' : {
         type: String,

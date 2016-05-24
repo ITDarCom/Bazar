@@ -6,3 +6,8 @@
 .item-thumbnail .caption .price{
 	color: blue;
 }
+
+.list-group li {
+	font-size: 10pt;
+    line-height: 50%;	
+}

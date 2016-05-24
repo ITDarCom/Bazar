@@ -1,29 +1,27 @@
 <template name="shopsShowPage">
 	{{#if Template.subscriptionsReady}}
-
 	{{>shopHeader shop}}
-
 	{{#if isShopOwner}}
 		<a class="btn btn-primary add-item-btn" 
 			href="{{pathFor 'items.new' shop=currentShop}}">Add item</a>
 	{{/if}}
-	<hr />
 	{{> endlessList }}
 	{{else}}
 		{{> appLoading }}
 	{{/if}}
 </template>
 
-
 <template name="shopHeader">
 	<div class="row">
-		<div class="item-thumbnail col-xs-4 col-md-3 pull-left">
+		<div class="item-thumbnail col-xs-3 pull-left">
 			<a href="{{pathFor 'shops.show' shop=_id}}" class="thumbnail">
 				<img src={{logo}} class="shop-logo" alt="...">
 			</a>
-		<button class="btn btn-info pull-left message-shop-btn">Message</button>
 		</div>
-		<h1 class="shop-title">{{title}}</h1>
-		<p>{{description}} ({{city}})</p>
+		<h3>{{title}} ({{city}})</h3>
+		<p>{{description}}</p>
+		<div>
+			<hr class="col-xs-12" style="margin-top:0px;"/>			
+		</div>
 	</div>
 </template>
