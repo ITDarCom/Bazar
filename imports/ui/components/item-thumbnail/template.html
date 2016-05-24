@@ -1,11 +1,13 @@
 <template name="itemThumbnail">
-  <div class="item-thumbnail col-sm-6 col-md-4">
+  <div class="item-thumbnail col-xs-6 col-md-3">
     <div class="thumbnail">
-      <img src="{{defaultThumbnail}}" alt="...">
+      <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
+        <img src="{{defaultThumbnail}}" alt="...">
+      </a>
       <div class="caption">
-		<a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
-			{{title}}
-		</a>, from {{shop.title}}
+    		<a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
+    			{{title}}
+    		</a>, from {{shop.title}}
       </div>
     </div>
   </div>

@@ -17,11 +17,11 @@
 
 <template name="shopHeader">
 	<div class="row">
-		<button class="btn btn-info pull-right message-shop-btn">Message</button>
-		<div class="col-xs-6 col-md-2">
+		<div class="item-thumbnail col-xs-4 col-md-3 pull-left">
 			<a href="{{pathFor 'shops.show' shop=_id}}" class="thumbnail">
-				<img src={{logo}} alt="...">
+				<img src={{logo}} class="shop-logo" alt="...">
 			</a>
+		<button class="btn btn-info pull-left message-shop-btn">Message</button>
 		</div>
 		<h1 class="shop-title">{{title}}</h1>
 		<p>{{description}} ({{city}})</p>

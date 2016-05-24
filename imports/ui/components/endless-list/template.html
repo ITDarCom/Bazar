@@ -39,9 +39,11 @@
 </template>
 
 <template name="shopThumbnail">
-  <div class="shop-thumbnail col-sm-6 col-md-4">
+  <div class="shop-thumbnail col-xs-6 col-md-3">
     <div class="thumbnail">
-      <img src="{{logo}}" alt="...">
+		<a href="{{pathFor 'shops.show' shop=_id }}">
+			<img src="{{logo}}" alt="...">
+		</a>
       <div class="caption">
 		<a href="{{pathFor 'shops.show' shop=_id }}">
 			{{title}}

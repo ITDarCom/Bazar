@@ -14,3 +14,13 @@ Template.mainNav.helpers({
 		})
 	}
 })
+
+Template.mainNav.onRendered(function(){
+	/*$("#main-nav").affix({
+	    offset: { 
+	        top: 200 //data-offset-top="400"
+	    }
+	});
+	//Scrollspy initialisation  
+	$('body').scrollspy({ target: '#main-nav' });*/	
+})

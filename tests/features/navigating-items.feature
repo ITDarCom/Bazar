@@ -40,6 +40,7 @@ Feature: Navigating items
 		And I go back
 		Then I should be on scroll position "1000"
 
+@watch
 	Scenario: Visitor explores more items of a list 
 		Given I am on "home" page
 		And there are "12" items

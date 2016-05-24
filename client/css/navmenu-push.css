@@ -6,11 +6,6 @@ body {
   padding: 50px 0 0 0;
 }
 
-.navbar-toggle {
-  float: left;
-  margin-left: 15px;
-}
-
 @media (min-width: 0) {
   .navbar-toggle {
     display: block; /* force showing the toggle */
@@ -26,4 +21,9 @@ body {
     height: 8px;
     background: red;
     border: 1px solid red;    
+}
+
+/* https://github.com/jasny/bootstrap/issues/253 */
+.navmenu-fixed-right {
+   left: auto !important;
 }

@@ -1,84 +1,12 @@
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="../../favicon.ico">
-  <title>Starter Template for Bootstrap</title>
-
-</head>
-
 <template name="applicationLayout">
-
-  <div class="bazar-navmenu navmenu navmenu-default navmenu-fixed-left offcanvas">
-    <a class="navmenu-brand" href="#">Project name</a>
-    <ul class="nav navmenu-nav">
-      <li class={{isActiveRoute 'home'}}>
-        <a href="{{pathFor 'home'}}">
-          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; Home
-        </a>
-      </li>
-      {{#if currentUser}}
-      <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
-        <a href="{{pathFor 'settings.purchases'}}">
-          <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; Purchases
-          {{#if unreadPurchases}}
-            <span class="counter label label-default">{{unreadPurchases}}</span>
-          {{else}}
-            (<span class="counter">0</span>)
-          {{/if}}
-        </a>
-      </li>
-      {{#if hasShop}}
-      <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
-        <a href="{{pathFor 'settings.orders'}}">
-          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; Orders              
-          {{#if unreadOrders}}
-            <span class="counter label label-default">{{unreadOrders}}</span>
-          {{else}}
-            (<span class="counter">0</span>)
-          {{/if}}
-        </a>
-      </li>
-      {{/if}}
-      <li class={{isActiveRoute 'messages.index'}}><a href="{{pathFor 'messages.index'}}">
-        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; Messages
-      </a></li>
-      <li class={{isActiveRoute regex='settings.(account|shop|sales)'}}><a href="{{pathFor 'settings.account'}}">
-        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; Settings
-      </a></li>
-      {{#unless hasShop}}
-      <li class={{isActiveRoute 'shops.new'}} id="create-shop"><a href="{{pathFor 'shops.new'}}">
-        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; Create shop
-      </a></li>
-      {{else}}
-      <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">
-        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; My shop
-      </a></li>
-      {{/unless}}
-      <li class={{isActiveRoute 'logout'}}><a href="{{pathFor 'logout'}}">
-        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; Sign out
-      </a></li>
-      <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
-        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; Admin
-      </a></li>
-    {{else}}
-      <li class={{isActiveRoute 'signin'}}><a href="{{pathFor 'signin'}}">
-        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; Sign in
-      </a></li>
-      <li class={{isActiveRoute 'signup'}}><a href="{{pathFor 'signup'}}">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Sign up
-      </a></li>
-      {{/if}}
-    </ul>
-  </div>
 
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
+      <div class="navbar-header navbar-right">
+        <button type="button" 
+          class="navbar-toggle" 
+          data-toggle="offcanvas" 
+          data-target=".navmenu" data-canvas="body">
           {{#if unreadItems}}
             <span class="unread-mark"></span>
           {{/if}}
@@ -86,16 +14,82 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
+        <a class="brand" href="#">
+          <img alt="Brand" src="/brand.png">
+        </a>
+        <ul class="nav navbar-nav pull-left">
+          <li>          
+            <a href="{{pathFor 'cart'}}">
+              <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp; Cart
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li>          
-          <a href="{{pathFor 'cart'}}">
-            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp; Cart
+    </div>
+  </nav>
+
+  <nav id="offcanvas" class="navmenu navmenu-inverse navmenu-fixed-left navmenu-site offcanvas" role="navigation">
+      <a class="navmenu-brand">Bazar</a>
+      <ul class="nav navmenu-nav">
+        <li class={{isActiveRoute 'home'}}>
+          <a href="{{pathFor 'home'}}">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; Home
           </a>
         </li>
-      </ul>
-    </div>
-  </nav>  
+        {{#if currentUser}}
+        <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
+          <a href="{{pathFor 'settings.purchases'}}">
+            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; Purchases
+            {{#if unreadPurchases}}
+              <span class="counter label label-default">{{unreadPurchases}}</span>
+            {{else}}
+              (<span class="counter">0</span>)
+            {{/if}}
+          </a>
+        </li>
+        {{#if hasShop}}
+        <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
+          <a href="{{pathFor 'settings.orders'}}">
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; Orders              
+            {{#if unreadOrders}}
+              <span class="counter label label-default">{{unreadOrders}}</span>
+            {{else}}
+              (<span class="counter">0</span>)
+            {{/if}}
+          </a>
+        </li>
+        {{/if}}
+        <li class={{isActiveRoute 'messages.index'}}><a href="{{pathFor 'messages.index'}}">
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; Messages
+        </a></li>
+        <li class={{isActiveRoute regex='settings.(account|shop|sales)'}}><a href="{{pathFor 'settings.account'}}">
+          <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; Settings
+        </a></li>
+        {{#unless hasShop}}
+        <li class={{isActiveRoute 'shops.new'}} id="create-shop"><a href="{{pathFor 'shops.new'}}">
+          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; Create shop
+        </a></li>
+        {{else}}
+        <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">
+          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; My shop
+        </a></li>
+        {{/unless}}
+        <li class={{isActiveRoute 'logout'}}><a href="{{pathFor 'logout'}}">
+          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; Sign out
+        </a></li>
+        <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
+          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; Admin
+        </a></li>
+      {{else}}
+        <li class={{isActiveRoute 'signin'}}><a href="{{pathFor 'signin'}}">
+          <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; Sign in
+        </a></li>
+        <li class={{isActiveRoute 'signup'}}><a href="{{pathFor 'signup'}}">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Sign up
+        </a></li>
+        {{/if}}
+      </ul>  
+  </nav>    
 
   <div class="container">
     <div>

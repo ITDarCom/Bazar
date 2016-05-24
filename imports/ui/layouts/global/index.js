@@ -13,6 +13,7 @@ Template.applicationLayout.onRendered(function(){
 	$(document).on('click', '.navmenu li', function(){
 		$('.navmenu').offcanvas('toggle')
 	})
+
 })
 
 Template.registerHelper('hasShop', function(){
