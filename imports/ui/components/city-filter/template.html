@@ -1,11 +1,16 @@
-<template name="cityFilter">
-  {{#autoForm id="cityFilterForm" schema=schema}}
-    {{> afFormGroup name="selectedCity" options=options firstOption="(All)"}}
-  {{/autoForm}}
-</template>
-
-<template name="search">
-  <div class="form-group">
-    <input name='search' type="text" class="form-control" placeholder="Search">
-  </div>
+<template name="itemsFilter">
+	<div class="row">
+	  {{#autoForm class="form-inline" id="itemsFilterForm" schema=schema template="bootstrap3-inline"}}
+	    {{> afFormGroup name="selectedCity" 
+	    	label=false options=options  
+	    	style="width:90px;" 
+	    	firstOption="(All)"}}
+		<div class="form-group">
+			<input name='search' type="text" 				
+				class="form-control" placeholder="Search">
+			<span class="help-block"></span>
+		</div>
+	  {{/autoForm}}
+	  <hr style="margin-top:5px"/>
+	</div>
 </template>

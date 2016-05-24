@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 
 import "./template.html";
+import "./non-responsive-inline.css";
 
 SelectCity = new SimpleSchema({
 	selectedCity: {
@@ -9,7 +10,7 @@ SelectCity = new SimpleSchema({
 	}
 });
 
-Template.cityFilter.helpers({
+Template.itemsFilter.helpers({
 	schema(){
 		return SelectCity
 	},
@@ -32,23 +33,20 @@ Template.cityFilter.helpers({
 	}
 });
 
-Template.cityFilter.events({
-	'change #cityFilterForm': function(){
-		Session.set('selectedCity', AutoForm.getFormValues('cityFilterForm').insertDoc.selectedCity)
+Template.itemsFilter.events({
+	'change #itemsFilterForm': function(){
+		Session.set('selectedCity', AutoForm.getFormValues('itemsFilterForm').insertDoc.selectedCity)
 	}
 })
 
-Template.cityFilter.onDestroyed(function(){
+Template.itemsFilter.onDestroyed(function(){
 	Session.set('selectedCity',null)
+    Session.set('searchText', null)
 })
 
-Template.search.events({
+Template.itemsFilter.events({
 	"input input[name='search']": function(target){
 		const searchText = target.target.value
 	    Session.set('searchText', searchText)
 	}
-})
-
-Template.search.onDestroyed(function(){
-    Session.set('searchText', null)
 })

@@ -11,10 +11,11 @@ Feature: Navigating items
 		Given I am on "home" page
 		Then I should see all categories in navigation bar
 
+@watch
 	Scenario: Visitor explores home page
 		Given I am on "home" page
-		And there are "3" items
-		Then I should see a list of "3" items 
+		And there are "12" items
+		Then I should see a list of "6" items 
 		And items should be ordered by date
 
 	Scenario: Visitor explores a category page
@@ -40,7 +41,6 @@ Feature: Navigating items
 		And I go back
 		Then I should be on scroll position "1000"
 
-@watch
 	Scenario: Visitor explores more items of a list 
 		Given I am on "home" page
 		And there are "12" items
