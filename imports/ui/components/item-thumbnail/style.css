@@ -1,13 +1,30 @@
 .item-thumbnail .caption p{
 	font-size: 10pt;
-    line-height: 50%;
+	margin-bottom: 0px;
+}
+
+.item-thumbnail .caption {
+	padding:0px;
+}
+
+li.list-group-item  {
+	font-size: 10pt;
+	padding: 0px !important;
 }
 
 .item-thumbnail .caption .price{
 	color: blue;
 }
 
-.list-group li {
-	font-size: 10pt;
-    line-height: 50%;	
+.item-thumbnail{
+	padding:1px;
 }
+
+.item-thumbnail .thumbnail{
+	padding:2px;
+}
+
+.shop-thumbnail{
+  padding:1px;
+}
+

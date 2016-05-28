@@ -1,6 +1,6 @@
 <template name="applicationLayout">
 
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar navbar-fixed-top navbar-warning">
     <div class="container-fluid">
       <div class="navbar-header navbar-right">
         <button type="button" 
@@ -17,16 +17,16 @@
         <a class="brand" href="#">
           <img alt="Brand" src="/brand.png">
         </a>
-        <ul class="nav navbar-nav pull-left">
+        <ul class="nav navbar-nav pull-left" style="margin-top:0px; margin-bottom:0px;">
           <li>          
             <a href="{{pathFor 'cart'}}">
               <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             </a>
           </li>
-        </ul>
+        </ul>        
       </div>
     </div>
-  </nav>
+  </div>  
 
   <nav id="offcanvas" class="navmenu navmenu-inverse navmenu-fixed-left navmenu-site offcanvas" role="navigation">
       <a class="navmenu-brand">Bazar</a>
@@ -41,7 +41,7 @@
           <a href="{{pathFor 'settings.purchases'}}">
             <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; Purchases
             {{#if unreadPurchases}}
-              <span class="counter label label-default">{{unreadPurchases}}</span>
+              <span class="counter label label-danger">{{unreadPurchases}}</span>
             {{else}}
               (<span class="counter">0</span>)
             {{/if}}
@@ -52,7 +52,7 @@
           <a href="{{pathFor 'settings.orders'}}">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; Orders              
             {{#if unreadOrders}}
-              <span class="counter label label-default">{{unreadOrders}}</span>
+              <span class="counter label label-danger">{{unreadOrders}}</span>
             {{else}}
               (<span class="counter">0</span>)
             {{/if}}

@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import {moment} from 'meteor/momentjs:moment'
+
 import './template.html'
 
 import { Shops } from './../../../api/shops/collection.js'
@@ -13,6 +15,8 @@ Template.applicationLayout.onRendered(function(){
 	$(document).on('click', '.navmenu li', function(){
 		$('.navmenu').offcanvas('toggle')
 	})
+
+	$.material.init()
 
 })
 
@@ -55,4 +59,9 @@ Template.registerHelper('unreadItems', function(){
 	var shop = Shops.findOne({ user: Meteor.userId() })
 	var unreadOrders = shop ? shop.unreadOrders : false
 	return unreadOrders || Meteor.user().profile.unreadPurchases
+})
+
+
+Template.registerHelper('moment', function(string, format){
+	return moment((new Date(string)).getTime()).format("dddd, MMMM Do YYYY, h:mm a");
 })

@@ -17,10 +17,12 @@ body {
     float:left;
     border-radius: 50%;
     behavior: url(PIE.htc); /* remove if you don't care about IE8 */
-    width: 8px;
-    height: 8px;
-    background: red;
-    border: 1px solid red;    
+    width: 10px;
+    height: 10px;
+    background: green;
+    border: 1px solid red;  
+    position:absolute;  
+    right:5px; top:5px;
 }
 
 /* https://github.com/jasny/bootstrap/issues/253 */

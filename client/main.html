@@ -43,28 +43,26 @@
   <ul class="nav nav-pills">
     <li class={{isActiveRoute 'settings.account'}} role="presentation">
       <a href="{{pathFor 'settings.account'}}">
-        Account
+        حسابك
       </a>
     </li>
     <li class={{isActiveRoute 'settings.purchases'}} role="presentation">
       <a href="{{pathFor 'settings.purchases'}}">
-        Purchases
+        مشتريات
       </a>
     </li>
     <li class={{isActiveRoute 'settings.shop'}} role="presentation">
       <a href="{{pathFor 'settings.shop'}}">
-        Shop
+        متجرك
       </a>
     </li>
     {{#if hasShop}}
     <li class={{isActiveRoute 'settings.orders'}} role="presentation">
-      <a href="{{pathFor 'settings.orders'}}">Orders ({{
-        unreadOrders
-      }})</a>
+      <a href="{{pathFor 'settings.orders'}}">طلبات</a>
     </li>
     <li class={{isActiveRoute 'settings.sales'}} role="presentation">
       <a href="{{pathFor 'settings.sales'}}">
-        Sales
+        مبيعات
       </a>
     </li>
     {{/if}}

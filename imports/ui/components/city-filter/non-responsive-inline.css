@@ -1,6 +1,7 @@
 .form-inline .form-group {
   display: inline-block;
   margin-bottom: 0;
+  margin-top:0;
   vertical-align: middle;
 }
 

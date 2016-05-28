@@ -8,17 +8,18 @@
         <img src="{{defaultThumbnail}}" alt="...">
       </a>
       <div class="caption">
-        <div style="float:left;font-size:20pt;">
-          <p><i class="fa fa-star-o"></i></p>
-          <p><i class="fa fa-share-alt"></i></p>
-        </div>
-        <p>
+        <p class="title">
           <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
             {{title}}
           </a>
         </p>
         <p>{{shop.title}}, {{city}}</p>
+        <div>
+        <div style="float:left;margin-right:5px;margin-left:5px;">
+          <p><i style="font-size:20px" class="material-icons">share</i> <i style="font-size:20px" class="material-icons">grade</i></p>
+        </div>
         <p class="price">{{price}} Riyals</p>
+        </div>
       </div>
 
     </div>

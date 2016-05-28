@@ -14,21 +14,33 @@ body {
 }
 
 .nav.nav-pills a{
-  padding-right: 7px;
-  padding-left: 7px;
-}
-
-.item-thumbnail{
-	padding:1px;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .navbar-header {
     width: 100%;
 }
+
 .brand {
     position: absolute;
     right: 50%;
     margin-top: 7px;
     margin-left: -50px !important;  /* 50% of your logo width */
     display: block;
+}
+
+.btn-float{
+  z-index: 1000; 
+  position:fixed !important; 
+  bottom:20px; 
+  left:20px;  
+}
+
+.form-group{
+  margin-top:0px;
+}
+
+.container{
+  padding:12px;
 }

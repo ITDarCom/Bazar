@@ -9,12 +9,13 @@
 	<p>Price: {{item.price}}</p>
 	<center>
 		{{#if isShopOwner}}
-			<a class="btn btn-primary edit-item-btn"
-				href="{{pathFor 'items.edit' itemId=item._id shop=currentShop}}">Edit item</a>
+			<a class="btn btn-warning btn-fab edit-item-btn btn-float"
+				href="{{pathFor 'items.edit' itemId=item._id shop=currentShop}}">
+				<i class="material-icons">create</i>
+		</a>				
 		{{else}}
-			<button class="btn btn-primary add-to-cart-btn">Add to cart</button>
+			<button class="btn btn-warning btn-block btn-raised add-to-cart-btn">Add to cart</button><br />
 		{{/if}}		
-		<div style="margin-top:20px;" ></div>
 	</center>
 
 	{{else}}

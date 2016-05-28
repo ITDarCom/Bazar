@@ -12,32 +12,32 @@
 
 <template name="orderItem">
 	<div class="order-item row">
-		<ul class="list-group col-xs-6">
+		<div class="btn-group btn-btn-group-justified btn-group-raised">
+			<a class="btn btn-primary accept-order-btn"><i class="material-icons">done</i> Accept</a>
+			<a class="btn btn-danger reject-order-btn"><i class="material-icons">clear</i> Reject</a>
+			<a class="btn btn-info message-user-btn"><i class="material-icons">mail</i></a>
+		</div>				
+		<div class="col-xs-6" style="padding:0px;">
 			<li class="list-group-item">
 				user: {{user.emails[0]}} 				
 			</li>
 			<li class="list-group-item">quantity: {{quantity}}</li>
-			<li class="list-group-item">{{deliveryInfo.deliveryDate}}</li>				
+			<li class="list-group-item">{{moment deliveryInfo.deliveryDate}}</li>
 			<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
 			<li class="list-group-item">{{deliveryInfo.email}}</li>
 			<li class="list-group-item">{{deliveryInfo.phone}}</li>
 			<li class="list-group-item">notes: {{notes}}</li>
 			<li class="list-group-item">price: {{item.price}}</li>				
 			<li class="list-group-item">total: {{total}}</li>
-			<li class="list-group-item">
-				<button class="btn btn-primary accept-order-btn btn-xs">Accept</button>
-				<button class="btn btn-danger reject-order-btn btn-xs">Reject</button>
-				<button class="btn btn-info message-user-btn btn-xs">Message</button>
-			</li>				
-		</ul>
+		</div>
 		{{> itemThumbnail item}}
 	</div>
 </template>
 
 <template name="purchaseItem">
 	<div class="purchase-item row">
-		<ul class="list-group col-xs-6">
-			<li class="list-group-item">{{deliveryInfo.deliveryDate}}</li>
+		<div class="col-xs-6" style="padding:0px;">
+			<li class="list-group-item">{{moment deliveryInfo.deliveryDate "MM-DD-YYYY" }}</li>
 			<li class="list-group-item">quantity: {{quantity}}</li>
 			<li class="list-group-item">price: {{item.price}}</li>
 			<li class="list-group-item">total: {{total}}</li>
@@ -46,29 +46,35 @@
 			<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
 			<li class="list-group-item">{{deliveryInfo.email}}</li>
 			<li class="list-group-item">{{deliveryInfo.phone}}</li>
-		</ul>
+		</div>
+
 		{{> itemThumbnail item}}
 	</div>
 </template>
 
 <template name="saleItem">
 	<div class="sold-item row">
-		{{> itemThumbnail item}}
-		<div class="item-thumbnail col-sm-6 col-md-4">
-			<ul class="list-group">
-				<li class="list-group-item">
-					user: {{user.email}} 
-					<button class="btn btn-info message-user-btn">Message</button>
-				</li>
-				<li class="list-group-item">quantity: {{quantity}}</li>
-				<li class="list-group-item">{{deliveryInfo.deliveryDate}}</li>				
-				<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
-				<li class="list-group-item">{{deliveryInfo.email}}</li>
-				<li class="list-group-item">{{deliveryInfo.phone}}</li>
-				<li class="list-group-item">notes: {{notes}}</li>
-				<li class="list-group-item">price: {{item.price}}</li>				
-				<li class="list-group-item">total: {{total}}</li>
-			</ul>
+		<div class="btn-group btn-btn-group-justified btn-group-raised">
+			{{#if accepted}}
+			<a class="btn btn-primary accept-order-btn disabled"><i class="material-icons">done</i> Accepted</a>
+			{{else}}
+			<a class="btn btn-danger reject-order-btn disabled"><i class="material-icons">clear</i> Rejected</a>
+			{{/if}}
+			<a class="btn btn-info message-user-btn"><i class="material-icons">mail</i></a>
+		</div><br />				
+		<div class="col-xs-6" style="padding:0px;">
+			<li class="list-group-item">
+				user: {{user.emails[0]}} 				
+			</li>
+			<li class="list-group-item">quantity: {{quantity}}</li>
+			<li class="list-group-item">{{moment deliveryInfo.deliveryDate}}</li>
+			<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
+			<li class="list-group-item">{{deliveryInfo.email}}</li>
+			<li class="list-group-item">{{deliveryInfo.phone}}</li>
+			<li class="list-group-item">notes: {{notes}}</li>
+			<li class="list-group-item">price: {{item.price}}</li>				
+			<li class="list-group-item">total: {{total}}</li>
 		</div>
+		{{> itemThumbnail item}}
 	</div>
 </template>

@@ -2,8 +2,10 @@
 	{{#if Template.subscriptionsReady}}
 	{{>shopHeader shop}}
 	{{#if isShopOwner}}
-		<a class="btn btn-primary add-item-btn" 
-			href="{{pathFor 'items.new' shop=currentShop}}">Add item</a>
+		<a class="btn btn-warning btn-fab add-item-btn btn-float"
+			href="{{pathFor 'items.new' shop=currentShop}}">
+			<i class="material-icons">add</i>
+		</a>
 	{{/if}}
 	{{> endlessList }}
 	{{else}}

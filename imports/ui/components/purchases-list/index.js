@@ -70,7 +70,7 @@ Template.orderItem.events ({
 			Meteor.call('orders.process', purchaseId, 'rejected')			
 		}
 	}
-})
+});
 
 function getItem(itemId){
 	return Items.findOne(itemId)
@@ -80,9 +80,9 @@ Template.orderItem.helpers({
 	item(){
 		return getItem(Template.instance().data.item)
 	},
-	user(){
+	/*user(){
 		return Meteor.users.findOne(Template.instance().data.user)	
-	},
+	},*/
 	total(){
 		const data = Template.instance().data
 		const item = getItem(data.item)
@@ -112,9 +112,12 @@ Template.saleItem.helpers({
 	item(){
 		return getItem(Template.instance().data.item)
 	},
-	user(){
-		return Meteor.users.findOne(Template.instance().data.user)	
+	accepted(){
+		return (Template.instance().data.status == 'accepted')
 	},
+/*	user(){
+		return Meteor.users.findOne(Template.instance().data.user)	
+	},*/
 	total(){
 		const data = Template.instance().data
 		const item = getItem(data.item)

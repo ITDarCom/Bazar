@@ -80,7 +80,7 @@ Router.route('/shops', function () {
 });
 
 Router.route('/shops/new', function () {
-	this.render('mainNav', {to: 'nav'});
+	this.render('empty', {to: 'nav'});
 	this.render('shopsNewPage');
 }, {
 	name: 'shops.new'
@@ -97,7 +97,7 @@ Router.route('/shops/mine', function () {
 });
 
 Router.route('/shops/:shop', function () {
-	this.render('mainNav', {to: 'empty'});
+	this.render('empty', {to: 'nav'});
 	this.render('shopsShowPage');
 }, {
 	name: 'shops.show'
@@ -105,21 +105,21 @@ Router.route('/shops/:shop', function () {
 
 //items routes
 Router.route('/shops/:shop/items/new', function () {
-	this.render('mainNav', {to: 'nav'});
+	this.render('empty', {to: 'nav'});
 	this.render('itemsNewPage');
 }, {
 	name: 'items.new'
 });
 
 Router.route('/shops/:shop/items/:itemId', function () {
-	this.render('mainNav', {to: 'empty'});
+	this.render('empty', {to: 'nav'});
 	this.render('itemsShowPage');
 }, {
 	name: 'items.show'
 });
 
 Router.route('/shops/:shop/items/:itemId/edit', function () {
-	this.render('mainNav', {to: 'nav'});
+	this.render('empty', {to: 'nav'});
 	this.render('itemsEditPage');
 }, {
 	name: 'items.edit'
