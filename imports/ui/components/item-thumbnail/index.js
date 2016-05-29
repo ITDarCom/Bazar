@@ -3,7 +3,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import { Items } from './../../../api/items/collection'
 import { Shops } from './../../../api/shops/collection'
-
 import './template.html'
 import './style.css'
 
@@ -15,5 +14,18 @@ Template.itemThumbnail.helpers({
     defaultThumbnail(){
     	if (Template.instance().data)
     		return Template.instance().data.thumbnails[0].url
+    },
+    favorite(){
+        if (Meteor.userId()) {
+            return Meteor.users.findOne({_id: Meteor.userId(), favorites: {$in: [this._id]}});
+        }
     }
 })
+
+Template.itemThumbnail.events({
+    "click .js-favorite": function (){
+        if (Meteor.userId()) {
+            Meteor.call("makeFavorite",this._id);
+        }
+    }
+});

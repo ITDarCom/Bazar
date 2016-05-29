@@ -15,6 +15,7 @@ import './../../api/items/methods.js'
 import './../../api/purchases/methods.js'
 
 import './../../api/users/publications.js'
+import './../../api/users/methods.js'
 import './../../api/categories/publications.js'
 import './../../api/items/publications.js'
 import './../../api/shops/publications.js'
@@ -23,5 +24,5 @@ import './../../api/purchases/publications.js'
 import './../../api/generate-data.js'
 
 Meteor.startup(() => {
-	Meteor.call('generateFixtures')
+	//Meteor.call('generateFixtures')
 });

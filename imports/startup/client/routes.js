@@ -42,7 +42,6 @@ Router.route('/logout', {
 });
 
 Router.onBeforeAction(function(){
-	
 	//top-level app subscriptions that we need to wait
 	this.wait(Meteor.subscribe('cart'))
 	this.wait(Meteor.subscribe('categories'))

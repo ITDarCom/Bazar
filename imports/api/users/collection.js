@@ -9,5 +9,9 @@
     'profile.unreadPurchases': {
         type: Number,
         defaultValue: 0
-    }        
+    },
+     'favorites' : {
+       type :[String],
+
+     }
 }));

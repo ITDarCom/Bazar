@@ -203,9 +203,9 @@ Meteor.methods({
                 { _id: Random.id(6), title: `Great item of ${shop.title}`, description: 'blah blah blah', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] },
             ]
 
-            /*items.forEach(function(item){
+            items.forEach(function(item){
                 Items.insert(item, { getAutoValues : false })
-            })*/
+            })
 
         })              
 
