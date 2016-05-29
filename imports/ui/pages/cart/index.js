@@ -56,6 +56,9 @@ Template.cartItemForm.helpers({
 	//check this github issue: https://github.com/aldeed/meteor-autoform/issues/298
 	cartItemFormId(){
 		return Template.instance().formId
+	},
+	notesPlaceholder(){
+		return TAPi18n.__('writeNotestoShop')
 	}
 })
 
@@ -73,24 +76,32 @@ Template.cartItemForm.events({
 
 Template.deliveryInformationForm.onCreated(function(){
 	this.schema = new SimpleSchema({
-	    phone: {
-	        type: String,
-	        label: "Your phone",
-	    },
-	    email: {
-	        type: String,
-	        regEx: SimpleSchema.RegEx.Email,
-	        label: "E-mail address"
-	    },
-	    deliveryAddress: {
-	        type: String,
-	        label: "Address",
-	        max: 1000
-	    },
-	    deliveryDate: {
-	        type: Date,
-	        label: "Delivery Date"
-	    }
+		'email': { 
+		    type: String,
+			regEx: SimpleSchema.RegEx.Email,
+		    label: function(){
+		        return TAPi18n.__('email')
+		    }, 
+		},
+		'phone': { 
+		    type: String,
+		    regEx: SimpleSchema.RegEx.SaudiMobile,
+		    label: function(){
+		        return TAPi18n.__('mobile')
+		    }, 
+		},
+		'deliveryAddress': { 
+		    type: String,
+		    label: function(){
+		        return TAPi18n.__('address')
+		    }, 
+		},
+		'deliveryDate': { 
+		    type: Date,
+		    label: function(){
+		        return TAPi18n.__('delivery')
+		    }
+		}
 	});
 });
 

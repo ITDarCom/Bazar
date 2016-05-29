@@ -28,6 +28,7 @@ Feature: Managing orders
 		Then I should see "2" in the unread counter of "my-orders" in the app menu
 
 @watch
+
 	Scenario: Shop owner reviewing his unprocessed orders
 		Given I have "4" new unprocessed orders	
 		When I click app menu button			

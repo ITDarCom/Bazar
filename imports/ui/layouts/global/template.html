@@ -29,17 +29,17 @@
   </div>  
 
   <nav id="offcanvas" class="navmenu navmenu-inverse navmenu-fixed-left navmenu-site offcanvas" role="navigation">
-      <a class="navmenu-brand">Bazar</a>
+      <a class="navmenu-brand">{{_ "bazar"}}</a>
       <ul class="nav navmenu-nav">
         <li class={{isActiveRoute 'home'}}>
           <a href="{{pathFor 'home'}}">
-            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; Home
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; {{_ "home"}}
           </a>
         </li>
         {{#if currentUser}}
         <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
           <a href="{{pathFor 'settings.purchases'}}">
-            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; Purchases
+            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; {{_ "myPurchases"}}
             {{#if unreadPurchases}}
               <span class="counter label label-danger">{{unreadPurchases}}</span>
             {{else}}
@@ -50,7 +50,7 @@
         {{#if hasShop}}
         <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
           <a href="{{pathFor 'settings.orders'}}">
-            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; Orders              
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
             {{#if unreadOrders}}
               <span class="counter label label-danger">{{unreadOrders}}</span>
             {{else}}
@@ -60,32 +60,32 @@
         </li>
         {{/if}}
         <li class={{isActiveRoute 'messages.index'}}><a href="{{pathFor 'messages.index'}}">
-          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; Messages
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myMessages"}}
         </a></li>
         <li class={{isActiveRoute regex='settings.(account|shop|sales)'}}><a href="{{pathFor 'settings.account'}}">
-          <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; Settings
+          <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; {{_ "settings"}}
         </a></li>
         {{#unless hasShop}}
         <li class={{isActiveRoute 'shops.new'}} id="create-shop"><a href="{{pathFor 'shops.new'}}">
-          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; Create shop
+          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{_ "createShop"}}
         </a></li>
         {{else}}
         <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">
-          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; My shop
+          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{_ "myShop"}}
         </a></li>
         {{/unless}}
         <li class={{isActiveRoute 'logout'}}><a href="{{pathFor 'logout'}}">
-          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; Sign out
+          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; {{_ "signOut"}}
         </a></li>
         <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
-          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; Admin
+          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; {{_ "admin"}}
         </a></li>
       {{else}}
         <li class={{isActiveRoute 'signin'}}><a href="{{pathFor 'signin'}}">
-          <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; Sign in
+          <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; {{_ "signIn"}}
         </a></li>
         <li class={{isActiveRoute 'signup'}}><a href="{{pathFor 'signup'}}">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Sign up
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; {{_ "signUp"}}
         </a></li>
         {{/if}}
       </ul>  

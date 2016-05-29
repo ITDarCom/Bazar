@@ -6,7 +6,14 @@ import {Router} from 'meteor/iron:router'
 import './template.html'
 
 import { Items } from './../../../api/items/collection'
+import { Shops } from './../../../api/shops/collection'
 import { Categories } from './../../../api/categories/collection'
+
+Template.itemsNewPage.helpers({
+	shop(){
+		return Shops.findOne(Meteor.user().profile.shop)
+	}	
+})
 
 AutoForm.addHooks('insertItemForm', {
 	onSuccess: function(formType, result){

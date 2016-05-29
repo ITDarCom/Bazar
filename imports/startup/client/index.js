@@ -2,7 +2,12 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import {TAPi18n} from "meteor/tap:i18n";
+import {moment} from 'meteor/momentjs:moment';
+
 import "./routes"
+import "./simple-schema-messages"
+import "./accounts-config"
 
 import "./../../ui/layouts/global"
 
@@ -35,3 +40,24 @@ Template.defaultPage.helpers({
 		return Router.current().route.getName()
 	},
 });
+
+
+Meteor.startup(function () {
+
+    TAPi18n.setLanguage("ar")
+		.done(function () {
+			Session.set("showLoadingIndicator", false);
+		})
+		.fail(function (error_message) {
+			// Handle the situation
+			console.log(error_message);
+		});
+
+	T9n.setLanguage("ar")
+
+	moment.locale("ar")
+
+	T9n.map('ar', {
+  		email: 'بريد إلكتروني'		
+	})
+})

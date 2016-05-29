@@ -13,7 +13,7 @@ Items.attachSchema(new SimpleSchema({
                 while (Items.findOne(id)) {
                     id = Math.floor((Math.random() * 10000) + 1);
                 }
-                return id;
+                return id.toString();
             }
             else
                 this.unset();
@@ -43,16 +43,22 @@ Items.attachSchema(new SimpleSchema({
     },        	
 	title: {
 		type: String,
-		label: "Title",
+        label: function(){
+            return TAPi18n.__('title')
+        },   
 		max: 200
 	},
 	description: {
 		type: String,
-		label: "Description"
+		label: function(){
+            return TAPi18n.__('description')
+        },
 	},
 	city: {
 		type: String,
-		label: "City",
+		label: function(){
+            return TAPi18n.__('city')
+        },
 		autoValue: function () {
 		    if (this.isInsert) {
 		        var shop = Shops.findOne(Meteor.user().profile.shop)
@@ -65,14 +71,17 @@ Items.attachSchema(new SimpleSchema({
 	},
 	price: {
 		type: Number,
-		label: "Price"
+		label: function(){
+            return TAPi18n.__('price')
+        },
 	},
 	category: {
 		type: String,
-		label: "Category"	
+		label: function(){
+            return TAPi18n.__('category')
+        },	
 	},
     'thumbnails.$.url': {
-        type: String,
-        label: "Category"   
+        type: String 
     },
 }));

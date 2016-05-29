@@ -1,5 +1,5 @@
 <template name="itemsNewPage">
-	<h1 class="page-header">Add a new item to your shop</h1>	
+	{{>shopHeader shop}}	
 	{{> insertItemForm}}
 </template>
 
@@ -16,7 +16,7 @@
 		{{> afQuickField name='price'}}
 		{{> afQuickField name='category' type="select" options=categories}}
 
-		<button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">Insert</button><br />
+		<button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">{{_ "submit"}}</button><br />
 
 	{{/autoForm}}
 </template>

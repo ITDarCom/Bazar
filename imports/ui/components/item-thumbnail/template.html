@@ -10,15 +10,15 @@
       <div class="caption">
         <p class="title">
           <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
-            {{title}}
+            {{{title}}}
           </a>
         </p>
-        <p>{{shop.title}}, {{city}}</p>
+        <p>{{shop.title}}، {{cityLabel city}}</p>
         <div>
         <div style="float:left;margin-right:5px;margin-left:5px;">
           <p><i style="font-size:20px" class="material-icons">share</i> <i style="font-size:20px" class="material-icons">grade</i></p>
         </div>
-        <p class="price">{{price}} Riyals</p>
+        <p class="price">{{_ "riyals" price}}</p>
         </div>
       </div>
 

@@ -4,7 +4,7 @@
 		{{> Template.dynamic template=purchaseTemplate data=this}}
 	{{else}}
 		<div class="no-items-message">
-			There are currently no items in {{currentChannel}}
+			{{_ "noItemsMessage"}}
 		</div>		
 	{{/each}}
 	</ul>
@@ -13,22 +13,22 @@
 <template name="orderItem">
 	<div class="order-item row">
 		<div class="btn-group btn-btn-group-justified btn-group-raised">
-			<a class="btn btn-primary accept-order-btn"><i class="material-icons">done</i> Accept</a>
-			<a class="btn btn-danger reject-order-btn"><i class="material-icons">clear</i> Reject</a>
+			<a class="btn btn-primary accept-order-btn"><i class="material-icons">done</i> {{_ "accept"}}</a>
+			<a class="btn btn-danger reject-order-btn"><i class="material-icons">clear</i> {{_ "reject"}}</a>
 			<a class="btn btn-info message-user-btn"><i class="material-icons">mail</i></a>
 		</div>				
 		<div class="col-xs-6" style="padding:0px;">
 			<li class="list-group-item">
-				user: {{user.emails[0]}} 				
+				{{_ "member"}}: {{user.emails[0]}} 				
 			</li>
-			<li class="list-group-item">quantity: {{quantity}}</li>
-			<li class="list-group-item">{{moment deliveryInfo.deliveryDate}}</li>
-			<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
-			<li class="list-group-item">{{deliveryInfo.email}}</li>
-			<li class="list-group-item">{{deliveryInfo.phone}}</li>
-			<li class="list-group-item">notes: {{notes}}</li>
-			<li class="list-group-item">price: {{item.price}}</li>				
-			<li class="list-group-item">total: {{total}}</li>
+			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
+			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate}}</li>
+			<li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
+			<li class="list-group-item">{{_ "email"}}: {{deliveryInfo.email}}</li>
+			<li class="list-group-item">{{_ "mobile"}}: {{deliveryInfo.phone}}</li>
+			<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
+			<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>				
+			<li class="list-group-item">{{_ "total"}}: {{total}}</li>
 		</div>
 		{{> itemThumbnail item}}
 	</div>
@@ -37,15 +37,12 @@
 <template name="purchaseItem">
 	<div class="purchase-item row">
 		<div class="col-xs-6" style="padding:0px;">
-			<li class="list-group-item">{{moment deliveryInfo.deliveryDate "MM-DD-YYYY" }}</li>
-			<li class="list-group-item">quantity: {{quantity}}</li>
-			<li class="list-group-item">price: {{item.price}}</li>
-			<li class="list-group-item">total: {{total}}</li>
-			<li class="list-group-item {{statusClass}}">status: {{status}}</li>
-			<li class="list-group-item">notes: {{notes}}</li>
-			<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
-			<li class="list-group-item">{{deliveryInfo.email}}</li>
-			<li class="list-group-item">{{deliveryInfo.phone}}</li>
+			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY" }}</li>
+			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
+			<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>
+			<li class="list-group-item">{{_ "total"}}: {{total}}</li>
+			<li class="list-group-item {{statusClass}}">{{_ "status"}}: {{{_ status}}}</li>
+			<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
 		</div>
 
 		{{> itemThumbnail item}}
@@ -56,24 +53,26 @@
 	<div class="sold-item row">
 		<div class="btn-group btn-btn-group-justified btn-group-raised">
 			{{#if accepted}}
-			<a class="btn btn-primary accept-order-btn disabled"><i class="material-icons">done</i> Accepted</a>
+			<a class="btn btn-primary accept-order-btn disabled">
+				<i class="material-icons">done</i> {{_ "accepted"}}</a>
 			{{else}}
-			<a class="btn btn-danger reject-order-btn disabled"><i class="material-icons">clear</i> Rejected</a>
+			<a class="btn btn-danger reject-order-btn disabled">
+				<i class="material-icons">clear</i> {{_ "rejected"}}</a>
 			{{/if}}
 			<a class="btn btn-info message-user-btn"><i class="material-icons">mail</i></a>
 		</div><br />				
 		<div class="col-xs-6" style="padding:0px;">
 			<li class="list-group-item">
-				user: {{user.emails[0]}} 				
+				{{_ "member"}}: {{user.emails[0]}} 				
 			</li>
-			<li class="list-group-item">quantity: {{quantity}}</li>
-			<li class="list-group-item">{{moment deliveryInfo.deliveryDate}}</li>
-			<li class="list-group-item">{{deliveryInfo.deliveryAddress}}</li>
-			<li class="list-group-item">{{deliveryInfo.email}}</li>
-			<li class="list-group-item">{{deliveryInfo.phone}}</li>
-			<li class="list-group-item">notes: {{notes}}</li>
-			<li class="list-group-item">price: {{item.price}}</li>				
-			<li class="list-group-item">total: {{total}}</li>
+			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
+			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate}}</li>
+			<li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
+			<li class="list-group-item">{{_ "email"}} {{deliveryInfo.email}}</li>
+			<li class="list-group-item">{{_ "mobile"}} {{deliveryInfo.phone}}</li>
+			<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
+			<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>				
+			<li class="list-group-item">{{_ "total"}}: {{total}}</li>
 		</div>
 		{{> itemThumbnail item}}
 	</div>

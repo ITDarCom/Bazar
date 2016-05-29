@@ -14,22 +14,14 @@ Template.itemsFilter.helpers({
 	schema(){
 		return SelectCity
 	},
+	cityi18n(){
+		return TAPi18n.__('city')
+	},
 	options: function () {
-	return [
-		{
-			optgroup: "East coast",
-			options: [
-				{label: "jeddah", value: "jeddah"},
-				{label: "mecca", value: "mecca"},
-			]
-		},
-		{
-			optgroup: "Middle",
-			options: [
-				{label: "riyad", value: "riyad"}
-			]
-		}
-	];
+		return [
+			{label: "جدة", value: "jeddah"},
+			{label: "مكة", value: "mecca"},
+		]
 	}
 });
 

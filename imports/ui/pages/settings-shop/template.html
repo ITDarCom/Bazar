@@ -1,9 +1,9 @@
 <template name="settingsShopPage">
-	<h1 class="page-title">Settings - shop</h1>
+	<h1 class="page-title">{{_ "myShop"}}</h1>
 	{{#if hasShop}}
 		{{> insertShopForm}}
 	{{else}}
-		<p>You don't have a shop.</p>
-		<p><a class="btn btn-warning btn-block btn-raised create-shop-btn" href="{{pathFor 'shops.new'}}">Create shop</a></p>
+		<p>{{_ "youDontHaveShopMessage"}}</p>
+		<p><a class="btn btn-warning btn-block btn-raised create-shop-btn" href="{{pathFor 'shops.new'}}">{{_ "createShop"}}</a></p>
 	{{/if}}
 </template>

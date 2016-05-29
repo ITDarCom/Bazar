@@ -28,26 +28,15 @@ Template.insertShopForm.helpers({
 	method(){
 		var route = Router.current().route.getName()
 		if (route.match(/settings/)) return 'shops.update'
-		return 'shops.insert'
+		return 'shops.insert';
 	},
 	doc(){
 		return Shops.findOne(Meteor.user().profile.shop)
 	},
 	cities: function () {
-	return [
-		{
-			optgroup: "East coast",
-			options: [
-				{label: "jeddah", value: "jeddah"},
-				{label: "mecca", value: "mecca"},
-			]
-		},
-		{
-			optgroup: "Middle",
-			options: [
-				{label: "riyad", value: "riyad"}
-			]
-		}
-	];
+		return [
+			{label: "جدة", value: "jeddah"},
+			{label: "مكة", value: "mecca"},
+		]
 	}
 })

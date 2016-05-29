@@ -66,7 +66,7 @@ Template.orderItem.events ({
 	},
 	'click .reject-order-btn':function(event, instance){
 		var purchaseId = instance.data._id
-		if (confirm("Are you sure you want to reject this order?")){
+		if (confirm(TAPi18n.__('rejectOrderConfirmation'))){
 			Meteor.call('orders.process', purchaseId, 'rejected')			
 		}
 	}

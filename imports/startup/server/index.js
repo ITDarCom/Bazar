@@ -7,6 +7,8 @@ import { Purchases } from './../../api/purchases/collection.js'
 import { Categories } from './../../api/categories/collection.js'
 
 import { resetDatabase } from 'meteor/xolvio:cleaner';
+import {TAPi18n} from "meteor/tap:i18n";
+
 
 SimpleSchema.debug = true
 

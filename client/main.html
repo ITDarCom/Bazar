@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="icon" href="../../favicon.ico">
-  <title>Bazar</title>
+  <title>بازار</title>
 </head>
 
 <template name="defaultPage">
@@ -22,15 +22,21 @@
 </template>
 
 <template name="appLoading">
-  <center>App loading...</center>
+  <div class="showbox">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
+    </div>
+  </div>  
 </template>
 
 <template name="mainNav">
   <ul id="main-nav" class="nav nav-pills" data-spy="affix" data-offset-top="50"> 
     <li class={{isActiveRoute 'home'}} role="presentation">
-      <a href="{{pathFor 'home'}}">All</a></li>
+      <a href="{{pathFor 'home'}}">{{_ "all"}}</a></li>
     <li class={{isActiveRoute 'shops.index'}} role="presentation">
-      <a href="{{pathFor 'shops.index'}}">Shops</a></li>
+      <a href="{{pathFor 'shops.index'}}">{{_ "shops"}}</a></li>
     {{#each categories}}
       <li class="category {{isActivePath path}}" role="presentation">
         <a href="{{path}}">{{label}}</a></li>
@@ -43,26 +49,26 @@
   <ul class="nav nav-pills">
     <li class={{isActiveRoute 'settings.account'}} role="presentation">
       <a href="{{pathFor 'settings.account'}}">
-        حسابك
+        {{_ "myAccount"}}
       </a>
     </li>
     <li class={{isActiveRoute 'settings.purchases'}} role="presentation">
       <a href="{{pathFor 'settings.purchases'}}">
-        مشتريات
+        {{_ "myPurchases"}}
       </a>
     </li>
     <li class={{isActiveRoute 'settings.shop'}} role="presentation">
       <a href="{{pathFor 'settings.shop'}}">
-        متجرك
+        {{_ "myShop"}}
       </a>
     </li>
     {{#if hasShop}}
     <li class={{isActiveRoute 'settings.orders'}} role="presentation">
-      <a href="{{pathFor 'settings.orders'}}">طلبات</a>
+      <a href="{{pathFor 'settings.orders'}}">{{_ "orders"}}</a>
     </li>
     <li class={{isActiveRoute 'settings.sales'}} role="presentation">
       <a href="{{pathFor 'settings.sales'}}">
-        مبيعات
+        {{_ "sales"}}
       </a>
     </li>
     {{/if}}

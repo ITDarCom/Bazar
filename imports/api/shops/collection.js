@@ -41,16 +41,22 @@ Shops.attachSchema(new SimpleSchema({
     },        	
 	title: {
 		type: String,
-		label: "Title",
+        label: function(){
+            return TAPi18n.__('title')
+        },		
 		max: 200
 	},
 	description: {
 		type: String,
-		label: "Description"
+        label: function(){
+            return TAPi18n.__('description')
+        }		
 	},
 	city: {
 		type: String,
-		label: "City"
+		label: function(){
+            return TAPi18n.__('city')
+        }
 	},
     logo: {
         type: String,

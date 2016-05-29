@@ -13,7 +13,7 @@ Template.settingsShopPage.helpers({
 
 Template.settingsShopPage.events({
 	'click .delete-shop-btn': function(){
-		if (confirm('WARNING: Are you sure you want to delete your shop?')){
+		if (confirm(TAPi18n.__('deleteShopConfirmation'))){
 			Meteor.call('shops.remove')
 		}
 	}
