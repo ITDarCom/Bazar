@@ -1,4 +1,13 @@
 <template name="itemThumbnail">
+  {{#if searchResult}}
+  <div class="col-xs-6 col-md-3">  
+    <div class="thumbnail" style="position:relative;">
+      <div class="caption">
+        {{{description}}}
+      </div>
+    </div>
+  </div>
+  {{/if}}   
   <div class="item-thumbnail col-xs-6 col-md-3">
     <div class="thumbnail" style="position:relative;">
       <div style="position:absolute;right:8px;top:5px;font-size:8pt;color:blue;">
@@ -21,8 +30,7 @@
         <p class="price">{{_ "riyals" price}}</p>
         </div>
       </div>
-
     </div>
-  </div>
+  </div> 
 </template>
 

@@ -5,6 +5,8 @@ import {Items} from './collection'
 SearchSource.defineSource('items', function(searchText, options) {
 	var options = {sort: {isoScore: -1}, limit: 20};
 
+	Meteor._sleepForMs(200);	
+
 	if(searchText) {
 		var regExp = buildRegExp(searchText);
 		var selector = { $or: [{title: regExp}, {description: regExp}]};

@@ -15,5 +15,9 @@ Template.itemThumbnail.helpers({
     defaultThumbnail(){
     	if (Template.instance().data)
     		return Template.instance().data.thumbnails[0].url
+    },
+    isSearch(){
+    	return Template.instance().search
     }
 })
+

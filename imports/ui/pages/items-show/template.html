@@ -1,25 +1,26 @@
 <template name="itemsShowPage">
-	{{#if Template.subscriptionsReady}}	
-	{{>shopHeader shop}}	
-	{{> itemCarousel item}}
-	<center>
-		<h2 class="item-title">{{item.title}}</h2>
-	</center>
-	<p>{{item.description}}	</p>
-	<p>{{_ "price"}}: {{_ "riyals" item.price}}</p>
-	<center>
-		{{#if isShopOwner}}
-			<a class="btn btn-warning btn-fab edit-item-btn btn-float"
-				href="{{pathFor 'items.edit' itemId=item._id shop=currentShop}}">
-				<i class="material-icons">create</i>
-		</a>				
-		{{else}}
-			<button class="btn btn-warning btn-block btn-raised add-to-cart-btn">{{_ "addToCart"}}</button><br />
-		{{/if}}		
-	</center>
+	{{#if ready }}
+
+		{{>shopHeader shop}}	
+		{{> itemCarousel item}}
+		<center>
+			<h2 class="item-title">{{item.title}}</h2>
+		</center>
+		<p>{{item.description}}	</p>
+		<p>{{_ "price"}}: {{_ "riyals" item.price}}</p>
+		<center>
+			{{#if isShopOwner}}
+				<a class="btn btn-warning btn-fab edit-item-btn btn-float"
+					href="{{pathFor 'items.edit' itemId=item._id shop=currentShop}}">
+					<i class="material-icons">create</i>
+			</a>				
+			{{else}}
+				<button class="btn btn-warning btn-block btn-raised add-to-cart-btn">{{_ "addToCart"}}</button><br />
+			{{/if}}		
+		</center>
 
 	{{else}}
-		{{> appLoading }}
+		{{> spinner }}
 	{{/if}}
 </template>
 

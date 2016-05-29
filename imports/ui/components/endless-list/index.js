@@ -9,7 +9,7 @@ import { Shops } from './../../../api/shops/collection'
 import './template.html'
 import {itemsCache} from './cache.js'
 
-const endlessScrollInc = 6;
+const endlessScrollInc = 8;
 
 //we wrap this listener so we can use its reference un-register when templates are destroyed
 function ScrollListener(instance) {
@@ -136,6 +136,9 @@ Template.endlessList.onCreated(function () {
             transform: function(matchText, regExp) {
             return matchText.replace(regExp, "<b>$&</b>")
             },
+            docTransform: function(doc){
+                return _.extend(doc, {searchResult:true})
+            },
             sort: {isoScore: -1}
         })       
     }
@@ -211,6 +214,12 @@ Template.endlessList.helpers({
         const status = Template.instance().itemsSearch.getStatus()
         const results = Template.instance().getSearchResults()
         return (status.loaded) && (results.length == 0)
+    },
+    isSearching(){
+        const status = Template.instance().itemsSearch.getStatus()
+        if (status.loading) return true; else return false;
+    },
+    isEven(index){
+        return !(index % 2)
     }
-
 })

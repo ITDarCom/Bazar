@@ -1,13 +1,17 @@
 <template name="purchasesList">
-	<ul class="purchase-items-list" style="padding-right:0px;">
-	{{#each purchases}}
-		{{> Template.dynamic template=purchaseTemplate data=this}}
+	{{#if Template.subscriptionsReady}}	
+		<ul class="purchase-items-list" style="padding-right:0px;">
+		{{#each purchases}}
+			{{> Template.dynamic template=purchaseTemplate data=this}}
+		{{else}}
+			<div class="no-items-message">
+				{{_ "noItemsMessage"}}
+			</div>		
+		{{/each}}
+		</ul>
 	{{else}}
-		<div class="no-items-message">
-			{{_ "noItemsMessage"}}
-		</div>		
-	{{/each}}
-	</ul>
+		{{> spinner}}
+	{{/if}}
 </template>
 
 <template name="orderItem">
