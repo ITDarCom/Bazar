@@ -28,14 +28,12 @@ AccountsTemplates.configure({
     termsUrl: 'terms-of-use',
 
     // Redirects
-    homeRoutePath: '/home',
+    //homeRoutePath: '/home',
     redirectTimeout: 4000,
 
     // Hooks
-    onLogoutHook: function(){
-      window.location = "/"
-    },
     /*
+    onLogoutHook: function(){
     onSubmitHook: mySubmitFunc,
     preSignUpHook: myPreSubmitFunc,
     postSignUpHook: myPostSubmitFunc,*/

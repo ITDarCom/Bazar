@@ -8,12 +8,7 @@ Router.configure({
 });
 
 AccountsTemplates.configure({
-    defaultLayout: 'ApplicationLayout',
-    onLogoutHook: function () {
-	    if (Meteor.isClient) {
-	        Router.go('home');
-	    }
-	}
+    defaultLayout: 'ApplicationLayout'
 });
 
 AccountsTemplates.configureRoute('signIn', {
@@ -36,8 +31,10 @@ Router.route('/logout', {
     name: 'logout',
     onBeforeAction: function () {
         //we only redirect to 'home' after we fully logged out using 'onLogoutHook'
-        AccountsTemplates.logout();
-        //this.render('spinner')
+        AccountsTemplates.logout(function(){
+        	Router.go('home');
+        });
+        this.render('appLoading')
     }
 });
 
@@ -55,6 +52,40 @@ Router.onBeforeAction(function(){
 		this.render('appLoading')
 	}
 })
+
+
+Router.ensureLoggedIn = function () {
+    if (Meteor.loggingIn()){
+        //console.log('logging in..')
+        this.render('appLoading')
+    } else {
+        //console.log('finished logging in process.')
+        if (!Meteor.user()) {
+            this.redirect('signin');
+        } else {
+            this.next();
+        }        
+    }
+};
+
+const privateRoutes = [
+	'shops.new',
+	'shops.mine',
+	'items.new',
+	'items.edit',
+	'settings.account',
+	'settings.purchases',
+	'settings.shop',
+	'settings.orders',
+	'settings.sales',
+	'messages.index',
+	'messages.thread',
+	'cart',
+	'admin.categories',
+	'admin.users'
+]
+
+Router.onBeforeAction(Router.ensureLoggedIn, {only: privateRoutes});
 
 Router.route('/', function () {
 	this.render('mainNav', {to: 'nav'});
