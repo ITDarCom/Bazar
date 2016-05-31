@@ -5,7 +5,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import {TAPi18n} from "meteor/tap:i18n";
 import {moment} from 'meteor/momentjs:moment';
 
-import "./routes"
 import "./simple-schema-messages"
 import "./accounts-config"
 
@@ -15,6 +14,7 @@ import "./../../ui/pages/home"
 import "./../../ui/pages/shops-index"
 import "./../../ui/pages/categories-show"
 
+import "./../../ui/pages/settings-account"
 import "./../../ui/pages/settings-shop"
 import "./../../ui/pages/settings-purchases"
 import "./../../ui/pages/settings-orders"
@@ -34,6 +34,8 @@ import "./../../ui/components/item-thumbnail"
 import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"
 import "./../../ui/components/city-filter"
+
+import "./routes"
 
 Template.defaultPage.helpers({
 	currentRoute() {

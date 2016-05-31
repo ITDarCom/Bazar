@@ -7,16 +7,16 @@ Feature: Managing shop
 	Background:
 	Scenario: New user being able to create a shop 
 		Given I am a registered user with no shop	
-		And I am logged in
 		And I am on "home" page
+		And I am logged in
 		Then I "should" see "create-shop" in the app menu
 		Given I am on "settings.shop" page
 		Then I "should" see ".create-shop" button
 
 	Scenario: User can only create one shop
 		Given I am a registered user with a shop
-		And I am logged in
 		And I am on "home" page
+		And I am logged in
 		When I click app menu button
 		Then I "should not" see "create-shop" in the app menu
 
@@ -89,11 +89,13 @@ Feature: Managing shop
 		And I am on "my-shop" page
 		And I click ".add-item" button
 		Then I should be redirected to the "items.new" page
-
+	
 	Scenario: Shop owner adding a new item
 		Given I am a registered user with a shop
 		And I am logged in
-		And I am on "items.new" page
+		And I am on "my-shop" page
+		And I click ".add-item" button
+		Then I should be redirected to the "items.new" page
 		When I enter "Delicious item" in the "title" field
 		And I enter "The best thing to eat" in the "description" textarea
 		And I enter "60" in the "price" field
@@ -132,3 +134,8 @@ Feature: Managing shop
 		When I click '.hide-item' button
 		And I click '.show-item' button
 		Then I "should" see ".hide-item" button 
+
+	Scenario: User trying to edit an item he does not own
+	Scenario: User trying to access new shop page while he already has a shop
+	Scenario: User trying to access new item page for another shop
+	Scenario: User trying to edit an item in his shop that does not exist		

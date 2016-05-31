@@ -6,15 +6,14 @@ Feature: Managing orders
 
 	Background:
 		Given I am a registered user with a shop
-		And I am logged in
 		And I am on "home" page
+		And I am logged in
 
 	Scenario: Shop owner with no order items yet
 		Given I have "0" new unprocessed orders	
 		When I click app menu button			
 		Then I should see "0" in the unread counter of "my-orders" in the app menu
 		Then I should not see an unread mark on app menu
-
 	Scenario: Shop owner with no order items yet
 		Given I have "0" new unprocessed orders	
 		When I click app menu button			
@@ -26,8 +25,6 @@ Feature: Managing orders
 		Then I should see an unread mark on app menu 
 		Then I click app menu button
 		Then I should see "2" in the unread counter of "my-orders" in the app menu
-
-@watch
 
 	Scenario: Shop owner reviewing his unprocessed orders
 		Given I have "4" new unprocessed orders	

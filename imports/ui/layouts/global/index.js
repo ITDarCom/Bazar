@@ -42,8 +42,6 @@ Template.registerHelper('isShopOwner', function(){
 	}
 })
 
-
-
 Template.registerHelper('unreadPurchases', function(){
     return Meteor.user() && Meteor.user().profile && Meteor.user().profile.unreadPurchases;
 })

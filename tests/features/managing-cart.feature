@@ -41,8 +41,8 @@ Feature: Managing cart
 		And I have "2" items in cart		
 		And I click ".submit-cart" button
 		Then I should see "deliveryInformation" form
-		And I should see "defaultEmail@gmail.com" in the "email" field
-		And I should see "4545484686" in the "phone" field
+		And I should see "new.user@gmail.com" in the "email" field
+		And I should see "phone" input field
 		And I should see "deliveryAddress" input field
 		And I should see "deliveryDate" input field
 
@@ -62,3 +62,6 @@ Feature: Managing cart
 	Scenario: User submitting a cart without specifying delivery information
 	Scenario: User viewing checkout will changing quantitiy
 
+
+	User adding submitting a shopping cart for the first time (only email is filled)
+	User submitting a shopping cart for the second time (email and phone filled)

@@ -120,8 +120,8 @@ Template.deliveryInformationForm.helpers({
 	},
 	defaultValues(){
 		return {
-			phone:'defaultPhone',
-			email:'defaultEmail',
+			phone: Meteor.user().phone || "",
+			email: Meteor.user().emails[0].address,
 			deliveryDate: new Date((new Date()).getTime() + 7 * 24 * 60 * 60 * 1000)
 		}
 	}

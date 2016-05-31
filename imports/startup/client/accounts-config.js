@@ -10,7 +10,7 @@ AccountsTemplates.configure({
 
     // Appearance
     showAddRemoveServices: false,
-    showForgotPasswordLink: false,
+    showForgotPasswordLink: true,
     showLabels: true,
     showPlaceholders: false,
     showResendVerificationEmailLink: false,

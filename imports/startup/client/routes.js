@@ -27,6 +27,14 @@ AccountsTemplates.configureRoute('signUp', {
     redirect: '/'
 });
 
+AccountsTemplates.configureRoute('changePwd', {
+    name: 'changePwd',
+    path: '/settings/change-password',
+    template: 'changePwd',
+    layoutTemplate: 'ApplicationLayout',
+    redirect: 'settings.account'
+});
+
 Router.route('/logout', {
     name: 'logout',
     onBeforeAction: function () {
@@ -94,6 +102,15 @@ Router.route('/', function () {
 	name: 'home'
 });
 
+//this is not the best solution for SEO
+//https://github.com/iron-meteor/iron-router/issues/1055
+Router.route('/not-found', function () {
+	this.render('mainNav', {to: 'empty'});
+	this.render('defaultPage');
+}, {
+	name: 'NotFound'
+});
+
 //category routes
 Router.route('/categories/:category', function () {
 	this.render('mainNav', {to: 'nav'});
@@ -111,8 +128,14 @@ Router.route('/shops', function () {
 });
 
 Router.route('/shops/new', function () {
-	this.render('empty', {to: 'nav'});
-	this.render('shopsNewPage');
+
+	if (Meteor.user() && !Meteor.user().profile.hasShop){
+		this.render('empty', {to: 'nav'});
+		this.render('shopsNewPage');		
+	} else {
+		this.redirect('shops.index');
+	}
+
 }, {
 	name: 'shops.new'
 });
@@ -128,16 +151,26 @@ Router.route('/shops/mine', function () {
 });
 
 Router.route('/shops/:shop', function () {
+
 	this.render('empty', {to: 'nav'});
 	this.render('shopsShowPage');
 }, {
-	name: 'shops.show'
+	name: 'shops.show',
 });
 
 //items routes
 Router.route('/shops/:shop/items/new', function () {
-	this.render('empty', {to: 'nav'});
-	this.render('itemsNewPage');
+
+	if (Meteor.user() && 
+		Meteor.user().profile.hasShop &&
+		Meteor.user().profile.shop == this.params.shop){
+
+		this.render('empty', {to: 'nav'});
+		this.render('itemsNewPage');
+
+	} else {
+		this.redirect('shops.index');
+	}
 }, {
 	name: 'items.new'
 });
@@ -150,8 +183,17 @@ Router.route('/shops/:shop/items/:itemId', function () {
 });
 
 Router.route('/shops/:shop/items/:itemId/edit', function () {
-	this.render('empty', {to: 'nav'});
-	this.render('itemsEditPage');
+
+	if (Meteor.user() && 
+		Meteor.user().profile.hasShop &&
+		Meteor.user().profile.shop == this.params.shop){
+
+		this.render('empty', {to: 'nav'});
+		this.render('itemsEditPage');
+
+	} else {
+		this.redirect('shops.index');
+	}	
 }, {
 	name: 'items.edit'
 });
@@ -160,7 +202,7 @@ Router.route('/shops/:shop/items/:itemId/edit', function () {
 
 Router.route('/settings/account', function () {
 	this.render('settingsNav', {to: 'nav'});
-	this.render('defaultPage');
+	this.render('settingsAccountPage');
 }, {
 	name: 'settings.account'
 });

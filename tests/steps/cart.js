@@ -75,10 +75,10 @@ module.exports = function(){
 	});
 
 	this.Then(/^I should see "([^"]*)" in the "([^"]*)" field$/, function (value, key) {
-		var doesExist = browser.waitForExist(`[name='${key}']`);
+		var doesExist = browser.waitForExist(`body [name='${key}']`);
 		expect(doesExist).toBe(true);
 
-		var actualText = browser.getValue(`[name='${key}']`);
+		var actualText = browser.getValue(`body [name='${key}']`);
 		expect(actualText).toEqual(value);	
 
 	});

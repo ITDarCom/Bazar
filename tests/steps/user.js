@@ -70,8 +70,7 @@ module.exports = function(){
 	});		
 
 	this.Given(/^I am logged in$/, function () {
-		browser.url('http://localhost:3000');
-		client.execute(function(currentUser){
+		client.execute(function(currentUser){			
 			Meteor.loginWithPassword(currentUser.email, currentUser.password)
 		}, this.currentUser)
 		browser.pause(500);

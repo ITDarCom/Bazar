@@ -49,3 +49,5 @@ Feature: Navigating shops
 		When I scroll to the end of the page
 		Then I should see a loading more spinner
 		And I should see new items
+
+	Scenario: User trying to access a shop that does not exist

@@ -13,20 +13,20 @@ Feature: Navigating items
 
 	Scenario: Visitor explores home page
 		Given I am on "home" page
-		And there are "12" items
-		Then I should see a list of "6" items 
+		And there are "16" items
+		Then I should see a list of "8" items 
 		And items should be ordered by date
 
 	Scenario: Visitor explores a category page
-		Given there are "3" items under "desserts" category
-		Given there are "3" items under "mashawee" category
+		Given there are "4" items under "desserts" category
+		Given there are "4" items under "mashawee" category
 		And I am on "desserts" category page
-		Then I should see a list of "3" items 
+		Then I should see a list of "4" items 
 		And items should be ordered by date
-
+	
 	Scenario: Visitor explores a specific item
 		Given I am on "home" page	
-		And there are "3" items		
+		And there are "4" items		
 		When I click on an item thumbnail
 		Then I should be redirected to the "items.show" page
 
@@ -40,21 +40,22 @@ Feature: Navigating items
 		And I go back
 		Then I should be on scroll position "1000"
 
+
 	Scenario: Visitor explores more items of a list 
 		Given I am on "home" page
-		And there are "12" items
-		Then I should see a list of "6" items 
+		And there are "16" items
+		Then I should see a list of "8" items 
 		And I should see "#loading-more-items" div
 		When I scroll to the end of the page and wait a bit
-		Then I should see a list of "12" items 
+		Then I should see a list of "16" items 
 		When I scroll to the end of the page and wait a bit		
 		Then I should not see "#loading-more-items" div		
 
 	Scenario: Visitor filtering items by search
 		Given I am on "home" page
-		And there are "4" items
+		And there are "6" items
 		And there are "2" items titled "purple cookie"
-		Then I should see a list of "6" items 
+		Then I should see a list of "8" items 
 		When I enter "purple" in the "search" field	
 		Then I should see a list of "2" items
 
@@ -71,6 +72,7 @@ Feature: Navigating items
 		When I enter "too strange item" in the "search" field	
 		Then I should see "no-results" message
 
+@watch
 	Scenario: Visitor explores items of a list and filters it by a specific city
 		Given there are "3" items in "jeddah" city
 		And there are "3" items in "mecca" city
@@ -83,3 +85,7 @@ Feature: Navigating items
 
 	Scenario: Visitor adding an item to favourites
 	Scenario: Visitor sharing an item on social media
+
+	Scenario: User trying to access an item that does not exist
+
+

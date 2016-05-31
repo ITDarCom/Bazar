@@ -16,7 +16,6 @@ module.exports = function(){
 		const selector = `#${menuItem} .counter`
 		var doesExist = browser.waitForExist(selector);
 		expect(doesExist).toBe(true);
-		browser.pause(1000);
 		var actualText = browser.getText(selector);
 		expect(actualText).toEqual(count);			
 	});

@@ -80,9 +80,9 @@ Template.orderItem.helpers({
 	item(){
 		return getItem(Template.instance().data.item)
 	},
-	/*user(){
-		return Meteor.users.findOne(Template.instance().data.user)	
-	},*/
+	member(){
+		return Meteor.users.findOne(Template.instance().data.user).username
+	},
 	total(){
 		const data = Template.instance().data
 		const item = getItem(data.item)

@@ -65,6 +65,7 @@ Meteor.methods({
 		}
 
 		var cartItems = Purchases.find({user: this.userId, status: 'cart'})
+		var currentUser = Meteor.users.findOne(this.userId)
 
 		cartItems.forEach(function(item){
 			//notify shop owner
@@ -74,6 +75,10 @@ Meteor.methods({
 		Purchases.update({user: this.userId, status: 'cart'}, 
 			{ $set: { status: 'pending', deliveryInfo: deliveryInfo }},
 			{ multi: true })
+
+		if (!currentUser.phone){
+			Meteor.users.update(this.userId, { $set: { 'phone': deliveryInfo.phone }})
+		}
 
 	},
 

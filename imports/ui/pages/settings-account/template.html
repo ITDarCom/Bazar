@@ -1,0 +1,28 @@
+<template name="settingsAccountPage">
+	{{> accountInfoForm }}
+</template>
+
+<template name="accountInfoForm">
+	{{#autoForm 
+		id="accountInfoForm"
+		type="method-update" 
+		meteormethod="accounts.update"
+		schema=schema
+		doc=defaultValues
+	}}
+
+		{{> afQuickField name='username'}}
+		{{> afQuickField name='email'}}
+		{{> afQuickField name='phone'}}
+
+		<a href="{{pathFor 'changePwd'}}" class="btn btn-warning btn-raised">
+			{{_ "changePwd"}}</a>
+
+		<button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
+			{{_ "submit"}}</button>
+
+
+
+	{{/autoForm}}
+</template>
+

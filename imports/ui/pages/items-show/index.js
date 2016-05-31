@@ -30,11 +30,16 @@ Template.itemsShowPage.helpers({
 		return Template.instance().ready.get()
 	},
 	item(){
+		if (!Items.findOne(Template.instance().itemId)){
+			Router.go('NotFound'); return;			
+		}
 		return Items.findOne(Template.instance().itemId)
 	},
 	shop(){
 		const item = Items.findOne(Template.instance().itemId)
-		return Shops.findOne(item.shop)
+		if (item){
+			return Shops.findOne(item.shop)			
+		}
 	}
 })
 

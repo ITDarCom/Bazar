@@ -1,3 +1,4 @@
+
 import { Meteor } from 'meteor/meteor';
 //import { Factory } from 'meteor/factory';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
@@ -104,7 +105,7 @@ Meteor.methods({
 
         const deliveryInfo = {
             email: 'deliver@gmail.com',
-            phone: '45454545',
+            phone: '0505330609',
             deliveryAddress: 'Address',
             deliveryDate: new Date(),
         }
@@ -131,7 +132,7 @@ Meteor.methods({
 
         const deliveryInfo = {
             email: 'deliver@gmail.com',
-            phone: '45454545',
+            phone: '0505330609',
             deliveryAddress: 'Address',
             deliveryDate: new Date(),
         }
@@ -154,11 +155,11 @@ Meteor.methods({
         resetDatabase();
 
         const accounts = [
-            { email: 'user@gmail.com', password: 'password', profile: {}},
-            { email: 'user1@gmail.com', password: 'password', profile: {} },
-            { email: 'user2@gmail.com', password: 'password', profile: {} },
-            { email: 'user3@gmail.com', password: 'password', profile: {} },
-            { email: 'user4@gmail.com', password: 'password', profile: {} },
+            { username: 'username', email: 'user@gmail.com', password: 'password', profile: {}},
+            { username: 'username1', email: 'user1@gmail.com', password: 'password', profile: {} },
+            { username: 'username2', email: 'user2@gmail.com', password: 'password', profile: {} },
+            { username: 'username3', email: 'user3@gmail.com', password: 'password', profile: {} },
+            { username: 'username4', email: 'user4@gmail.com', password: 'password', profile: {} },
         ]
 
         var accountsIds = accounts.map(function(account){

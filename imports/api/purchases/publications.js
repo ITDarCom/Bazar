@@ -26,7 +26,7 @@ var children =
 Meteor.publishComposite('cart', function cartPublication(){
 	return {
 		find(){
-			Meteor._sleepForMs(200);
+			//Meteor._sleepForMs(200);
 			return Purchases.find({user: this.userId, status: 'cart' }, { sort: { createdAt: -1 }});
 		}, 
 		children : children
@@ -36,7 +36,7 @@ Meteor.publishComposite('cart', function cartPublication(){
 Meteor.publishComposite('purchases', function purchasesPublication(){
 	return {
 		find(){
-			Meteor._sleepForMs(200);
+			//Meteor._sleepForMs(200);
 			return Purchases.find({user: this.userId, status: { $ne: 'cart'}}, { sort: { createdAt: -1 }});
 		}, 
 		children : children
@@ -46,7 +46,7 @@ Meteor.publishComposite('purchases', function purchasesPublication(){
 Meteor.publishComposite('orders', function ordersPublication(){
 	return {
 		find(){
-			Meteor._sleepForMs(200);
+			//Meteor._sleepForMs(200);
 			if (!this.userId) this.ready();
 			var shop = Meteor.users.findOne(this.userId).profile.shop;
 			if (!shop) this.ready();
@@ -59,7 +59,7 @@ Meteor.publishComposite('orders', function ordersPublication(){
 Meteor.publishComposite('sales', function salesPublication(){
 	return {
 		find(){
-			Meteor._sleepForMs(200);
+			//Meteor._sleepForMs(200);
 			if (!this.userId) this.ready();
 			var shop = Meteor.users.findOne(this.userId).profile.shop;
 			if (!shop) this.ready();
