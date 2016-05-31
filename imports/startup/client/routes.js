@@ -63,7 +63,7 @@ Router.route('/', function () {
 
 // favorite route
 Router.route('/favorites', function () {
-	this.render('endlessList');
+	this.render('favoritesShowPage');
 }, {
 	name: 'favorites.index'
 });
