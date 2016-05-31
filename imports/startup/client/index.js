@@ -21,6 +21,7 @@ import "./../../ui/pages/shops-show"
 import "./../../ui/pages/items-new"
 import "./../../ui/pages/items-edit"
 import "./../../ui/pages/items-show"
+import "./../../ui/pages/favorites-show"
 
 import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-users"
@@ -29,6 +30,7 @@ import "./../../ui/components/item-thumbnail"
 import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"
 import "./../../ui/components/city-filter"
+
 
 Template.defaultPage.helpers({
 	currentRoute() {

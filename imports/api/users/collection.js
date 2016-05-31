@@ -12,6 +12,7 @@
     },
      'favorites' : {
        type :[String],
-
+        defaultValue: [],
+         minCount: 0
      }
 }));

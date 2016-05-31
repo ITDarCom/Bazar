@@ -13,7 +13,7 @@ Template.mainNav.helpers({
 				path: Router.path('categories.show', { category: category.identifier })})
 		})
 	}
-})
+});
 
 Template.mainNav.onRendered(function(){
 	/*$("#main-nav").affix({

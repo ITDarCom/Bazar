@@ -59,11 +59,9 @@
                         </a>
                     </li>
                 {{/if}}
-            {{#if hasfavorite}}
-                <li ><a href="#">
+                <li class={{isActiveRoute 'favorites.index'}}><a href="{{pathFor 'favorites.index'}}">
                     <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>&nbsp; Favorites
                 </a></li>
-                {{/if}}
                 <li class={{isActiveRoute 'messages.index'}}><a href="{{pathFor 'messages.index'}}">
                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; Messages
                 </a></li>

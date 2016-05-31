@@ -1,0 +1,44 @@
+[1mdiff --git a/imports/startup/client/routes.js b/imports/startup/client/routes.js[m
+[1mindex 493a1de..9a2895d 100644[m
+[1m--- a/imports/startup/client/routes.js[m
+[1m+++ b/imports/startup/client/routes.js[m
+[36m@@ -2,7 +2,6 @@[m [mimport {Router} from 'meteor/iron:router'[m
+ import { AccountsTemplates } from 'meteor/useraccounts:core';[m
+ [m
+ SimpleSchema.debug = true[m
+[31m-[m
+ Router.configure({[m
+   layoutTemplate: 'ApplicationLayout'[m
+ });[m
+[1mdiff --git a/imports/ui/layouts/global/index.js b/imports/ui/layouts/global/index.js[m
+[1mindex b7750ad..69f7c13 100644[m
+[1m--- a/imports/ui/layouts/global/index.js[m
+[1m+++ b/imports/ui/layouts/global/index.js[m
+[36m@@ -20,11 +20,6 @@[m [mTemplate.registerHelper('hasShop', function(){[m
+     return Meteor.user() && Meteor.user().profile && Meteor.user().profile.hasShop;[m
+ })[m
+ [m
+[31m-Template.registerHelper('hasfavorite', function(){[m
+[31m-	return Meteor.user() && Meteor.user().favorites;[m
+[31m-})[m
+[31m-[m
+[31m-[m
+ Template.registerHelper('currentShop', function(){[m
+     return Meteor.user().profile.shop;[m
+ })[m
+[1mdiff --git a/imports/ui/layouts/global/template.html b/imports/ui/layouts/global/template.html[m
+[1mindex 5122b5d..1790543 100644[m
+[1m--- a/imports/ui/layouts/global/template.html[m
+[1m+++ b/imports/ui/layouts/global/template.html[m
+[36m@@ -59,11 +59,9 @@[m
+                         </a>[m
+                     </li>[m
+                 {{/if}}[m
+[31m-            {{#if hasfavorite}}[m
+                 <li ><a href="#">[m
+                     <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>&nbsp; Favorites[m
+                 </a></li>[m
+[31m-                {{/if}}[m
+                 <li class={{isActiveRoute 'messages.index'}}><a href="{{pathFor 'messages.index'}}">[m
+                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; Messages[m
+                 </a></li>[m

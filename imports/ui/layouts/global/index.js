@@ -20,11 +20,6 @@ Template.registerHelper('hasShop', function(){
     return Meteor.user() && Meteor.user().profile && Meteor.user().profile.hasShop;
 })
 
-Template.registerHelper('hasfavorite', function(){
-	return Meteor.user() && Meteor.user().favorites;
-})
-
-
 Template.registerHelper('currentShop', function(){
     return Meteor.user().profile.shop;
 })
