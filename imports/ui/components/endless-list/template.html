@@ -14,6 +14,9 @@
 		{{else}}
 			{{#unless searchMode}}
 				{{#each items}}
+					{{#if isEven @index}}
+						<div class="clearfix visible-xs"></div>
+					{{/if}}
 					{{> Template.dynamic template=template data=this }}	
 				{{/each}}
 		  		{{#if hasMore}}

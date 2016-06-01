@@ -1,5 +1,20 @@
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+* {
+    font-family: 'Droid Arabic Kufi', serif !important;
+    font-size: 11pt;
+}
+
+.fa {
+    font-family: FontAwesome, serif !important;
+}
+
+.glyphicon {
+    font-family: 'Glyphicons Halflings', serif !important;
+}
+
 body {
-  padding-top: 70px;
+  padding-top: 50px;
   position: relative; 
 }
 

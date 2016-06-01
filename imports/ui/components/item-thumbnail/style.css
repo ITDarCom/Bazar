@@ -1,15 +1,10 @@
-.item-thumbnail .caption p{
-	font-size: 10pt;
+.item-thumbnail .caption p, p a {
+	font-size: 9pt;
 	margin-bottom: 0px;
 }
 
 .item-thumbnail .caption {
 	padding:0px;
-}
-
-li.list-group-item  {
-	font-size: 10pt;
-	padding: 0px !important;
 }
 
 .item-thumbnail .caption .price{
