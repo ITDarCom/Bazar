@@ -7,7 +7,7 @@ Meteor.publishComposite('items', function itemsPublication(query, limit){
 	return {
 		find(){
 			//Meteor._sleepForMs(200);
-			return Items.find(query, { limit: limit });
+			return Items.find(query, { limit: limit, sort: { createdAt: -1 } });
 		}, 
 		children : [
 			{

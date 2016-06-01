@@ -70,7 +70,7 @@ Template.endlessList.onCreated(function () {
 
         }
         else {
-            return Items.find(query)
+            return Items.find(query, { sort: { createdAt: -1 }})
         }
     }
 
