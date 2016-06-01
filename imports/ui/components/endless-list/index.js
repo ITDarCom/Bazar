@@ -214,7 +214,7 @@ Template.endlessList.helpers({
     showFilters(){
         //we hide filters on a shop page
         var route = Router.current().route.getName()
-        if (route.match(/shops.show/)) return false; else return true;
+        if (route.match(/shops.show|favorites.index/)) return false; else return true;
     },
     template(){
         var channel = Template.instance().state.get('subscriptionChannel')

@@ -23,7 +23,7 @@ Template.itemThumbnail.helpers({
 })
 
 Template.itemThumbnail.events({
-    "click .js-favorite": function (){
+    "click .favorite-btn": function (){
         if (Meteor.userId()) {
             Meteor.call("makeFavorite",this._id);
         }
