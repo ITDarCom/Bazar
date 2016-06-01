@@ -5,6 +5,11 @@ module.exports = function(){
 		count = parseInt(count)
 
 		if (count > 0){
+
+			var items = server.execute(function(count, options){
+	            return Meteor.call('generateItems', count, options);         
+	        }, count, {})
+
 			server.execute(function(userId, count){
 				return Meteor.call('generatePurchaseItems', userId, count);			
 			}, this.currentUser.userId, count)

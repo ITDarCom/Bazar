@@ -4,13 +4,13 @@ module.exports = function(){
 
 	this.Given(/^I am on an item page$/, function () {
 
-		var item = this.currentItem = server.execute(function(){
-			return Meteor.call('getItem');			
-		})
+		var items = server.execute(function(count, options){
+            return Meteor.call('generateItems', count, options);         
+        }, 1, {})
 
 		client.execute(function(item){
 			Router.go('items.show', { itemId: item._id, shop: item.shop })
-		}, item)
+		}, items[0])
 
 		var doesExist = browser.waitForExist(".item-title");
 		expect(doesExist).toBe(true);
@@ -22,6 +22,11 @@ module.exports = function(){
 		count = parseInt(count)
 
 		if (count > 0){
+
+			var items = server.execute(function(count, options){
+	            return Meteor.call('generateItems', count, options);         
+	        }, count, {})
+
 			server.execute(function(userId, count){
 				return Meteor.call('generateCartItems', userId, count);			
 			}, this.currentUser.userId, count)

@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import { Shops } from './collection'
+import { Items } from './../items/collection'
 
 Meteor.methods({
 	'shops.insert'(doc) {
@@ -53,9 +54,9 @@ Meteor.methods({
 
 		if (profile && profile.hasShop){
 
+			Items.remove({ shop: profile.shop})
 			Shops.remove({ _id: profile.shop })
-
-			//TODO: remove all items!
+			//Purchases.remove({ _id: profile.shop })
 
 			Meteor.users.update({ _id: this.userId}, 
 				{ $set: { 'profile.hasShop': false, 'profile.shop': null } 

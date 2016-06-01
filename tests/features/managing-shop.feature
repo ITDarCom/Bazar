@@ -4,7 +4,9 @@ Feature: Managing shop
 	So that I can manage my shop
 	I want create and manage my shop info, in addition to creating and managing new items
 
+
 	Background:
+
 	Scenario: New user being able to create a shop 
 		Given I am a registered user with no shop	
 		And I am on "home" page

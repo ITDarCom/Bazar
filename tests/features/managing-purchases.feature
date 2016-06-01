@@ -1,3 +1,4 @@
+@watch
 Feature: Managing purchases
 
 	As a user of the site,

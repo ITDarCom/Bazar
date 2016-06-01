@@ -10,6 +10,7 @@ import { Shops } from './../../../api/shops/collection'
 AutoForm.addHooks('insertShopForm', {
 	onSuccess: function(formType, result){
 		if (formType == 'method'){
+			console.log(result)
 			Router.go('shops.show', { shop: result })			
 		}
 	}
@@ -31,7 +32,10 @@ Template.insertShopForm.helpers({
 		return 'shops.insert';
 	},
 	doc(){
-		return Shops.findOne(Meteor.user().profile.shop)
+		var route = Router.current().route.getName()
+		if (route.match(/settings/)){
+			return Shops.findOne(Meteor.user().profile.shop)			
+		}
 	},
 	cities: function () {
 		return [

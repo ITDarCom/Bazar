@@ -72,16 +72,15 @@ Feature: Navigating items
 		When I enter "too strange item" in the "search" field	
 		Then I should see "no-results" message
 
-@watch
 	Scenario: Visitor explores items of a list and filters it by a specific city
-		Given there are "3" items in "jeddah" city
-		And there are "3" items in "mecca" city
+		Given there are "4" items in "jeddah" city
+		And there are "4" items in "mecca" city
 		And I am on "home" page
-		Then I should see a list of "6" items		
+		Then I should see a list of "8" items		
 		When I select "jeddah" in the "selectedCity" field
-		Then I should see a list of "3" items
+		Then I should see a list of "4" items
 		When I select "" in the "selectedCity" field
-		Then I should see a list of "6" items
+		Then I should see a list of "8" items
 
 	Scenario: Visitor adding an item to favourites
 	Scenario: Visitor sharing an item on social media

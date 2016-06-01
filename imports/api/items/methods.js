@@ -19,7 +19,8 @@ Meteor.methods({
 				title: doc.title,
 				description: doc.description,
 				price: doc.price,
-				category: doc.category
+				category: doc.category,
+				thumbnails: [{ url: '/cookie.jpg'}]
 			}, (err, shopId) => {
 				if (err) {
 					throw err

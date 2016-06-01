@@ -129,7 +129,7 @@ Router.route('/shops', function () {
 
 Router.route('/shops/new', function () {
 
-	if (Meteor.user() && !Meteor.user().profile.hasShop){
+	if (Meteor.user() && (!Meteor.user().profile || !Meteor.user().profile.hasShop)){
 		this.render('empty', {to: 'nav'});
 		this.render('shopsNewPage');		
 	} else {
