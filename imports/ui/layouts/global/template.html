@@ -56,7 +56,9 @@
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
             {{#if unreadOrders}}
               <span class="counter label label-danger">{{unreadOrders}}</span>
-            {{/if}}
+            {{else}}
+              (<span class="counter">0</span>)
+            {{/if}}              
           </a>
         </li>
         {{/if}}
