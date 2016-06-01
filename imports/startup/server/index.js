@@ -27,5 +27,5 @@ import './../../api/purchases/publications.js'
 import './../../api/generate-data.js'
 
 Meteor.startup(() => {
-	//Meteor.call('generateFixtures')
+	Meteor.call('generateFixtures')
 });
