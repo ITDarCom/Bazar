@@ -21,6 +21,7 @@ const routes = [
 	{ name: 'admin.categories', path: '/admin/categories'},
 	{ name: 'admin.users', path: '/admin/users'},
 	{ name: 'my-shop', path: '/shops/mine'},
+	{ name: 'favorites', path: '/favorites'}
 ]
 
 module.exports = function(){

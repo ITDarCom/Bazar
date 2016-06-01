@@ -13,5 +13,10 @@
     phone:{
         type: String,
         optional:true
-    }       
+    },     
+    'favorites' : {
+        type :[String],
+        defaultValue: [],
+        minCount: 0
+    }
 }));

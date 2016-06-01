@@ -26,6 +26,7 @@ import "./../../ui/pages/shops-show"
 import "./../../ui/pages/items-new"
 import "./../../ui/pages/items-edit"
 import "./../../ui/pages/items-show"
+import "./../../ui/pages/favorites-show"
 
 import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-users"

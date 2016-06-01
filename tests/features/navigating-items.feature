@@ -82,7 +82,20 @@ Feature: Navigating items
 		When I select "" in the "selectedCity" field
 		Then I should see a list of "8" items
 
-	Scenario: Visitor adding an item to favourites
+@watch
+	Scenario: User playing with favorites feature
+		Given I am a registered user with no shop	
+		And I am logged in
+		And I am on "favorites" page
+		Then I should see "no-items" message
+		Given I am on "home" page
+		And there are "3" items
+		When I click ".favorite" button
+		Then I go to "favorites" page
+		Then I should see a list of "1" items
+		When I click ".favorite" button	
+		Then I should see "no-items" message				
+		
 	Scenario: Visitor sharing an item on social media
 
 	Scenario: User trying to access an item that does not exist

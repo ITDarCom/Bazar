@@ -36,3 +36,29 @@ Meteor.publishComposite('singleItem', function singleItemPublication(itemId){
 		]
 	}
 });
+
+
+Meteor.publishComposite('favoriteItems', function itemsPublication(query, limit) {
+    return {
+        find(){
+            var user = Meteor.users.findOne({_id: this.userId});
+            if (user) {
+
+                var favorites = user.favorites;
+                if (!favorites){
+                    favorites = [];
+                }
+
+                return Items.find({_id: {$in: favorites}},{limit: limit});
+            }
+        },
+        children: [
+            {
+                find(item){
+                    return Shops.find({_id: item.shop})
+                }
+            }
+
+        ]
+    }
+});

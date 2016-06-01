@@ -47,14 +47,15 @@
             {{/if}}
           </a>
         </li>
+        <li class={{isActiveRoute 'favorites.index'}}><a href="{{pathFor 'favorites.index'}}">
+            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>&nbsp; {{_ "myFavorites"}}
+        </a></li>          
         {{#if hasShop}}
         <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
           <a href="{{pathFor 'settings.orders'}}">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
             {{#if unreadOrders}}
               <span class="counter label label-danger">{{unreadOrders}}</span>
-            {{else}}
-              (<span class="counter">0</span>)
             {{/if}}
           </a>
         </li>
@@ -91,13 +92,13 @@
       </ul>  
   </nav>    
 
-  <div class="container">
-    <div>
-      {{> yield "nav"}}
-    </div>  
-    <div class="container app-container">
-      {{> yield}}
-    </div><!-- /.container -->
-  </div>
+    <div class="container">
+        <div>
+            {{> yield "nav"}}
+        </div>
+        <div class="container app-container">
+            {{> yield}}
+        </div><!-- /.container -->
+    </div>
 
 </template>

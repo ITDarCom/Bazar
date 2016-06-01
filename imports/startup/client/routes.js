@@ -2,7 +2,6 @@ import {Router} from 'meteor/iron:router'
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 SimpleSchema.debug = true
-
 Router.configure({
   layoutTemplate: 'ApplicationLayout'
 });
@@ -47,7 +46,6 @@ Router.route('/logout', {
 });
 
 Router.onBeforeAction(function(){
-	
 	//top-level app subscriptions that we need to wait
 	this.wait(Meteor.subscribe('cart'))
 	this.wait(Meteor.subscribe('categories'))
@@ -81,6 +79,7 @@ const privateRoutes = [
 	'shops.mine',
 	'items.new',
 	'items.edit',
+	'favorites.index',
 	'settings.account',
 	'settings.purchases',
 	'settings.shop',
@@ -109,6 +108,13 @@ Router.route('/not-found', function () {
 	this.render('defaultPage');
 }, {
 	name: 'NotFound'
+});
+
+// favorite route
+Router.route('/favorites', function () {
+	this.render('favoritesShowPage');
+}, {
+	name: 'favorites.index'
 });
 
 //category routes

@@ -17,20 +17,23 @@
         <img src="{{defaultThumbnail}}" alt="...">
       </a>
       <div class="caption">
-        <p class="title">
+        <!-- <div style="float:left;margin-right:5px;margin-left:5px;">
+          <p><i style="font-size:20px" class="material-icons">share</i> <i style="font-size:20px" class="material-icons">grade</i></p> -->
+        <div style="float:left;font-size:20pt;margin-right:5px;margin-left:5px;">
+          <p><a href="#" class="favorite-btn"><i class="fa {{#if favorite}}fa-star{{else}}fa-star-o{{/if}} "></i></a></p>
+          <p><i class="fa fa-share-alt"></i></p>
+        </div>          
+        <p>
           <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
             {{{title}}}
           </a>
         </p>
         <p>{{shop.title}}، {{cityLabel city}}</p>
         <div>
-        <div style="float:left;margin-right:5px;margin-left:5px;">
-          <p><i style="font-size:20px" class="material-icons">share</i> <i style="font-size:20px" class="material-icons">grade</i></p>
         </div>
         <p class="price">{{_ "riyals" price}}</p>
         </div>
       </div>
     </div>
-  </div> 
 </template>
 
