@@ -243,18 +243,25 @@ Router.route('/settings/sales', function () {
 
 
 //messages
-Router.route('/messages', function () {
+Router.route('/inbox/personal', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('defaultPage');
+	this.render('personalInboxPage');
 }, {
-	name: 'messages.index'
+	name: 'inbox.personal'
 });
 
-Router.route('/messages/:thread', function () {
+Router.route('/inbox/shop', function () {
+	this.render('empty', {to: 'nav'});
+	this.render('shopInboxPage');
+}, {
+	name: 'inbox.shop'
+});
+
+Router.route('/inbox/:inbox/:thread', function () {
 	this.render('empty', {to: 'nav'});
 	this.render('defaultPage');
 }, {
-	name: 'messages.thread'
+	name: 'inbox.thread'
 });
 
 //cart

@@ -21,7 +21,9 @@ const routes = [
 	{ name: 'admin.categories', path: '/admin/categories'},
 	{ name: 'admin.users', path: '/admin/users'},
 	{ name: 'my-shop', path: '/shops/mine'},
-	{ name: 'favorites', path: '/favorites'}
+	{ name: 'favorites', path: '/favorites'},
+	{ name: 'inbox.personal', path: '/inbox/personal'},
+	{ name: 'inbox.shop', path: '/inbox/shop'}
 ]
 
 module.exports = function(){
@@ -71,6 +73,7 @@ module.exports = function(){
 	});		
 
 	this.Given(/^I am logged in$/, function () {
+		browser.url('http://localhost:3000');
 		client.execute(function(currentUser){			
 			Meteor.loginWithPassword(currentUser.email, currentUser.password)
 		}, this.currentUser)

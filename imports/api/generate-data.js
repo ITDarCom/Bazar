@@ -15,6 +15,8 @@ import { Items } from './items/collection.js'
 import { Shops } from './shops/collection.js'
 import { Purchases } from './purchases/collection.js'
 import { Categories } from './categories/collection.js'
+import { Threads } from './threads/collection.js'
+
 
 Meteor.methods({
     getCategories(){
@@ -151,7 +153,63 @@ Meteor.methods({
         };
 
         Shops.update(user.profile.shop, { $inc: { 'unreadOrders': count }})
-    },          
+    },
+    generateThreads(currentUser, count, options){
+
+        const opts = options || {}
+        
+        var userId = Accounts.findUserByEmail(currentUser.email)._id
+
+        var currentUser = Meteor.users.findOne(userId)
+
+        var shopId = null
+        if (opts.inbox.match(/shop/)){
+            shopId = currentUser.profile.shop
+        }
+
+        for (var i = 0; i < count; i++) {
+
+            var account = Meteor.users.findOne({ _id: { $ne: userId }})
+
+            var messageFromAnotherUser = {
+                author : {
+                    type: 'user', id: account._id
+                },
+                body: 'Hello', createdAt: new Date()
+            }
+
+            var messageFromMyAccount = {
+                author : {
+                    type: 'user', id: userId
+                },
+                body: 'Hi', createdAt: new Date()
+            }
+
+            var messageFromMyShop = {
+                author : {
+                    type: 'shop', id: shopId
+                },
+                body: 'Hi', createdAt: new Date()
+            }
+
+            var messages, participants = []
+
+            if (opts.inbox.match(/personal/)){
+                messages = [messageFromAnotherUser, messageFromMyAccount]
+            } else {
+                messages = [messageFromAnotherUser, messageFromMyShop]
+            }
+            
+            var thread = { 
+                messages: messages, 
+                participants: [messages[0].author, messages[1].author,],
+                updatedAt: new Date()
+            }
+
+            Threads.insert(thread)
+        }
+
+    },             
     generateFixtures() {
         resetDatabase();
 

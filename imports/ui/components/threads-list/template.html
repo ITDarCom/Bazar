@@ -1,0 +1,21 @@
+<template name="threadsList">
+	{{#if Template.subscriptionsReady}}	
+		<ul class="threads-list" style="padding-right:0px;">
+		{{#each threads}}
+			{{> threadListItem }}
+		{{else}}
+			<div class="no-items-message">
+				{{_ "noItemsMessage"}}
+			</div>		
+		{{/each}}
+		</ul>
+	{{else}}
+		{{> spinner}}
+	{{/if}}
+</template>
+
+<template name="threadListItem">
+	<div class="thread-preview row">
+		{{_ "createdAt"}}: {{moment createdAt "MM-DD-YYYY" }}
+	</div>
+</template>

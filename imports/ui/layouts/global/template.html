@@ -62,9 +62,16 @@
           </a>
         </li>
         {{/if}}
-        <li class={{isActiveRoute 'messages.index'}}><a href="{{pathFor 'messages.index'}}">
+        <li class={{isActiveRoute 'inbox.personal'}} id="personal-inbox">
+          <a href="{{pathFor 'inbox.personal'}}">
           <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myMessages"}}
         </a></li>
+        {{#if hasShop}}
+        <li class={{isActiveRoute 'inbox.shop'}} id="shop-inbox">
+          <a href="{{pathFor 'inbox.shop'}}">
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myShopMessages"}}
+        </a></li>
+        {{/if}}
         <li class={{isActiveRoute regex='settings.(account|shop|sales)'}}><a href="{{pathFor 'settings.account'}}">
           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; {{_ "settings"}}
         </a></li>
