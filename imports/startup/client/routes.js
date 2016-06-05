@@ -259,7 +259,7 @@ Router.route('/inbox/shop', function () {
 
 Router.route('/inbox/:inbox/:thread', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('defaultPage');
+	this.render('threadPage');
 }, {
 	name: 'inbox.thread'
 });

@@ -1,0 +1,42 @@
+<template name="threadPage">
+	{{#if Template.subscriptionsReady}}	
+	<h1 class="page-title">a thread</h1>
+	<div class="messages-list">		
+		{{#each thread.messages}}
+			{{> message }}
+		{{/each}}
+	</div>
+	<textarea class="form-control" name="message"></textarea>
+	{{else}}
+		{{> appLoading }}
+	{{/if}}
+</template>
+
+<template name="message">
+
+	<div class="media message-container">
+	
+	{{#if isFromMe}}
+	  <div class="media-left">
+	    <a href="#">
+	      <img class="media-object" src="/kfc.jpg" width="50px" alt="...">
+	    </a>
+	  </div>
+	{{/if}}
+
+	<div class="media-body">
+		<div class="message-body well well-sm">
+	  		{{body}}
+		</div>
+	</div>
+
+	{{#unless isFromMe}}
+	  <div class="media-right">
+	    <a href="#">
+	      <img class="media-object" src="/kfc.jpg" width="50px" alt="...">
+	    </a>
+	  </div>
+	{{/unless}}
+
+	</div>
+</template>

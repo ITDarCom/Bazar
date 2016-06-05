@@ -15,7 +15,9 @@
 </template>
 
 <template name="threadListItem">
-	<div class="thread-preview row">
-		{{_ "createdAt"}}: {{moment createdAt "MM-DD-YYYY" }}
+	<div class="thread-preview {{#if unread}}unread-thread{{/if}} row">
+		<a href="{{pathFor 'inbox.thread' inbox=inbox thread=_id}}">
+		{{_ "createdAt"}}: {{moment createdAt "MM-DD-YYYY" }}, {{unread}}, {{inbox}}, {{_id}}
+		</a>
 	</div>
 </template>

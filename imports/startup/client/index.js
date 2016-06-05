@@ -30,6 +30,7 @@ import "./../../ui/pages/favorites-show"
 
 import "./../../ui/pages/inbox-personal"
 import "./../../ui/pages/inbox-shop"
+import "./../../ui/pages/inbox-thread"
 
 import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-users"

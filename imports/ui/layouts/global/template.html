@@ -65,11 +65,21 @@
         <li class={{isActiveRoute 'inbox.personal'}} id="personal-inbox">
           <a href="{{pathFor 'inbox.personal'}}">
           <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myMessages"}}
+          {{#if currentUser.unreadPersonalInbox}}
+            <span class="counter label label-danger">{{currentUser.unreadPersonalInbox}}</span>
+          {{else}}
+            (<span class="counter">0</span>)
+          {{/if}}          
         </a></li>
         {{#if hasShop}}
         <li class={{isActiveRoute 'inbox.shop'}} id="shop-inbox">
           <a href="{{pathFor 'inbox.shop'}}">
           <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myShopMessages"}}
+          {{#if currentUser.unreadShopInbox}}
+            <span class="counter label label-danger">{{currentUser.unreadShopInbox}}</span>
+          {{else}}
+            (<span class="counter">0</span>)
+          {{/if}}          
         </a></li>
         {{/if}}
         <li class={{isActiveRoute regex='settings.(account|shop|sales)'}}><a href="{{pathFor 'settings.account'}}">

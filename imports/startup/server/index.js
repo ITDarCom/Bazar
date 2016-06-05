@@ -17,6 +17,7 @@ import './../../api/shops/methods.js'
 import './../../api/items/methods.js'
 import './../../api/purchases/methods.js'
 import './../../api/users/methods.js'
+import './../../api/threads/methods.js'
 
 import './../../api/users/publications.js'
 import './../../api/users/methods.js'

@@ -14,12 +14,7 @@ const MessageSchema = new SimpleSchema({
     createdAt: {
         type: Date,
         autoValue: function () {
-            if (this.isInsert) {
-                return new Date();
-            }
-            if (this.isUpdate) {
-                this.unset(); // we should unset every change to this field
-            }
+            return new Date();
         }
     }   
 })
@@ -29,7 +24,8 @@ Threads.attachSchema(new SimpleSchema({
         type: [MessageSchema]
     },
     "participants.$.type" : { type: String },
-    "participants.$.id" : { type: String },    
+    "participants.$.id" : { type: String },
+    "participants.$.unread" : { type: Boolean },
     createdAt: {
         type: Date,
         autoValue: function () {

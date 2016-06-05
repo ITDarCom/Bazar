@@ -110,7 +110,7 @@ Meteor.methods({
 
 	'purchases.setReadStatus'(status){
 		if (status) {
-	        Meteor.users.update(this.userId, { $set: { 'profile.unreadPurchases': 0 }})
+	        Meteor.users.update(this.userId, { $set: { 'unreadPurchases': 0 }})
 		}
 	}
 });

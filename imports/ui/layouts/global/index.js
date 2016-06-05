@@ -43,7 +43,7 @@ Template.registerHelper('isShopOwner', function(){
 })
 
 Template.registerHelper('unreadPurchases', function(){
-    return Meteor.user() && Meteor.user().profile && Meteor.user().profile.unreadPurchases;
+    return Meteor.user() && Meteor.user().profile && Meteor.user().unreadPurchases;
 })
 
 Template.registerHelper('unreadOrders', function(){
@@ -52,12 +52,16 @@ Template.registerHelper('unreadOrders', function(){
 })
 
 Template.registerHelper('unreadItems', function(){
-	if (!Meteor.user() || !Meteor.user().profile){
+	if (!Meteor.user()){
 		return false
 	}
 	var shop = Shops.findOne({ user: Meteor.userId() })
 	var unreadOrders = shop ? shop.unreadOrders : false
-	return unreadOrders || Meteor.user().profile.unreadPurchases
+
+	var unreadPersonalInbox = Meteor.user().unreadPersonalInbox
+	var unreadShopInbox = Meteor.user().unreadShopInbox
+
+	return unreadOrders || Meteor.user().unreadPurchases || unreadPersonalInbox || unreadShopInbox
 })
 
 

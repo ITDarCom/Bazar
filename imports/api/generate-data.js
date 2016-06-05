@@ -125,7 +125,7 @@ Meteor.methods({
             })
         };
 
-        Meteor.users.update(this.userId, { $inc: { 'profile.unreadPurchases': count }})
+        Meteor.users.update(this.userId, { $inc: { 'unreadPurchases': count }})
     }, 
     generateOrderItems(userId, count){
 
@@ -167,6 +167,8 @@ Meteor.methods({
             shopId = currentUser.profile.shop
         }
 
+        const unread = opts.unread || false
+
         for (var i = 0; i < count; i++) {
 
             var account = Meteor.users.findOne({ _id: { $ne: userId }})
@@ -199,14 +201,27 @@ Meteor.methods({
             } else {
                 messages = [messageFromAnotherUser, messageFromMyShop]
             }
+
+            //console.log(Object.assign(messages[0].author, { unread: false }))
             
             var thread = { 
                 messages: messages, 
-                participants: [messages[0].author, messages[1].author,],
-                updatedAt: new Date()
+                participants: [
+                    _.extend(_.clone(messages[0].author), { unread: false }), 
+                    _.extend(_.clone(messages[1].author), { unread: unread })
+                ],
+                updatedAt: new Date(),
             }
 
             Threads.insert(thread)
+        }
+
+        if (unread){
+            if (opts.inbox.match(/personal/)){
+                Meteor.users.update(userId, { $inc: { 'unreadPersonalInbox': count }})
+            } else {
+                Meteor.users.update(userId, { $inc: { 'unreadShopInbox': count }})
+            }
         }
 
     },             
