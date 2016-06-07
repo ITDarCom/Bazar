@@ -7,4 +7,4 @@ Template.adminUsersPage.helpers({
 	users(){
 		return Meteor.users.find().fetch()
 	}
-})
+});

@@ -10,6 +10,18 @@ Template.adminCategoriesPage.helpers({
 		return Categories;
 	},
 	categories(){
-		return Categories.find({})
+		return Categories.find({},{$sort: {createdAt: -1}})
 	}
-})
+
+});
+
+Template.adminCategoriesPage.events({
+	"click .btn-delete": function (){
+
+var identifier = this.identifier;
+		$("#" + identifier).remove();
+		Meteor.call("deleteCity",this._id);
+
+
+	}
+});

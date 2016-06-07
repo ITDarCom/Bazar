@@ -12,10 +12,27 @@ Categories.allow({
 Categories.attachSchema(new SimpleSchema({
 	identifier: {
 		type: String,
-		label: "Identifier"
+		label: function(){
+
+			return TAPi18n.__('EnglishName')
+		}
 	},
 	label: {
 		type: String,
-		label: "Label"
+		label:function(){
+
+			return TAPi18n.__('ArabicName')
+		}
+	},
+	createdAt: {
+		type: Date,
+		autoValue: function () {
+			if (this.isInsert) {
+				return new Date();
+			}
+			if (this.isUpdate) {
+				this.unset(); // we should unset every change to this field
+			}
+		}
 	}
-}))
+}));
