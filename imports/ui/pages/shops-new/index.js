@@ -6,6 +6,7 @@ import {Router} from 'meteor/iron:router'
 import './template.html'
 
 import { Shops } from './../../../api/shops/collection'
+import { Cities } from './../../../api/cities/collection.js'
 
 AutoForm.addHooks('insertShopForm', {
 	onSuccess: function(formType, result){
@@ -38,9 +39,8 @@ Template.insertShopForm.helpers({
 		}
 	},
 	cities: function () {
-		return [
-			{label: "جدة", value: "jeddah"},
-			{label: "مكة", value: "mecca"},
-		]
+		return Cities.find().fetch().map(function(city){
+			return {label:city.label, value:city.identifier}
+		})
 	}
 })

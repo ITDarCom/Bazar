@@ -8,6 +8,7 @@ import {TAPi18n} from "meteor/tap:i18n";
 import './template.html'
 
 import { Shops } from './../../../api/shops/collection.js'
+import { Cities } from './../../../api/cities/collection.js'
 
 Template.applicationLayout.onRendered(function(){
 
@@ -70,10 +71,9 @@ Template.registerHelper('i18n', function(key){
 })
 
 Template.registerHelper('cityLabel', function(identifier){
-	const cities = [
-		{label: "جدة", value: "jeddah"},
-		{label: "مكة", value: "mecca"},
-	]
+	const cities = Cities.find().fetch().map(function(city){
+		return {label:city.label, value:city.identifier}
+	})
 
 	const city = cities.find(x => x.value == identifier)
 

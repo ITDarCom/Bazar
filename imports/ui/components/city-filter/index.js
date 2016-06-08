@@ -3,6 +3,7 @@ import { Session } from 'meteor/session';
 
 import "./template.html";
 import "./non-responsive-inline.css";
+import { Cities } from './../../../api/cities/collection.js'
 
 SelectCity = new SimpleSchema({
 	selectedCity: {
@@ -13,15 +14,15 @@ SelectCity = new SimpleSchema({
 Template.itemsFilter.helpers({
 	schema(){
 		return SelectCity
-	},
+	}
+	,
 	cityi18n(){
 		return TAPi18n.__('city')
 	},
 	options: function () {
-		return [
-			{label: "جدة", value: "jeddah"},
-			{label: "مكة", value: "mecca"},
-		]
+		return Cities.find().fetch().map(function(city){
+			return {label:city.label, value:city.identifier}
+		})
 	}
 });
 
