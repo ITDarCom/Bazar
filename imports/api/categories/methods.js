@@ -4,12 +4,16 @@
 import { Categories } from './collection'
 Meteor.methods({
 
-    "category.insert" : function (doc) {
-     if (this.userId){
-         Categories.insert(doc);
-     }
+    "category.insert" : function (categ) {
+        var isCategoryExist = Categories.findOne({label:categ.label , identifier:categ.identifier});
+        if (this.userId){
+            if(! isCategoryExist){
+                Categories.insert(categ);
+            }
+        }
+
     },
-    "deleteCity" : function (cityId) {
+    "deleteCategory" : function (cityId) {
         Categories.remove({_id : cityId});
     }
 });

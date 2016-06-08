@@ -1,38 +1,3 @@
 <template name="adminCategoriesPage">
-    <h1 class="page-header admin-header">{{_ "Admin-Categories"}}</h1>
-    <!--{{> quickForm collection=formCollection id="insertCategoryForm" type="insert"}}-->
-    {{#autoForm
-    collection=formCollection
-    id="insertCategoryForm"
-    type="method"
-    meteormethod="category.insert"}}
-
-        {{> afQuickField name='label'}}
-        {{> afQuickField name='identifier'}}
-
-        <button type="submit" class="btn btn-warning btn-lg btn-raised">{{_ "enter"}}</button>
-        <br/>
-
-    {{/autoForm}}
-    <table class="table table-bordered table-categories">
-        <thead>
-        <tr>
-            <th>{{_ "ArabicName"}}</th>
-            <th>{{_ "EnglishName"}}</th>
-            <th>#</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each categories}}
-            <tr id = {{identifier}}>
-                <td>{{label}}</td>
-                <td>{{identifier}}</td>
-                <td>
-                    <button class="btn btn-warning btn-xs btn-raised btn-delete">{{_ "delete"}}</button>
-                </td>
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
-
+{{> adminMod}}
 </template>

@@ -54,9 +54,17 @@
 	"deleteShopConfirmation":"تحذير: هل أنت متأكد أنك تريد حذف متجرك وجميع متعلقاته من منتجات ومبيعات وطلبات؟",
 	"rejectOrderConfirmation":"هل أنت متأكد أنك تريد رفض هذا الطلب؟ (لا يمكنك التراجع)",
 	"enter":"ادخل",
-	"EnglishName" :"اسم الصنف في اللغة الانكليزية",
-	"ArabicName" : "اسم الصنف",
+	"EnglishCategoryName" :"اسم الصنف في اللغة الانكليزية",
+	"ArabicCategoryName" : "اسم الصنف",
 	"delete" : "حذف",
-	"Admin-Categories":"إدارة الأصناف"
+	"Admin-Categories":"إدارة الأصناف",
+	"Admin-Cities":"إدارة المدن",
+	"EnglishCityName":"اسم المدينة في اللغة الانكليزية",
+	"ArabicCityName":"اسم المدينة",
+	"users": "المستخدمين",
+	"categories":"الأصناف",
+	"cities":"المدن"
+
+
 
 }

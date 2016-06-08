@@ -49,6 +49,7 @@ Router.onBeforeAction(function(){
 	//top-level app subscriptions that we need to wait
 	this.wait(Meteor.subscribe('cart'))
 	this.wait(Meteor.subscribe('categories'))
+	this.wait(Meteor.subscribe('cities'))
 	this.wait(Meteor.subscribe('userData'))
 	this.wait(Meteor.subscribe('shopData'))
 
@@ -287,6 +288,14 @@ Router.route('/admin/categories', function () {
 	this.render('adminCategoriesPage');
 }, {
 	name: 'admin.categories'
+});
+
+
+Router.route('/admin/cities', function () {
+	this.render('adminNav', {to: 'nav'});
+	this.render('adminCitiesPage');
+}, {
+	name: 'admin.cities'
 });
 
 

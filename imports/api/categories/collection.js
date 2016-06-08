@@ -14,14 +14,14 @@ Categories.attachSchema(new SimpleSchema({
 		type: String,
 		label: function(){
 
-			return TAPi18n.__('EnglishName')
+			return TAPi18n.__('EnglishCategoryName')
 		}
 	},
 	label: {
 		type: String,
 		label:function(){
 
-			return TAPi18n.__('ArabicName')
+			return TAPi18n.__('ArabicCategoryName')
 		}
 	},
 	createdAt: {

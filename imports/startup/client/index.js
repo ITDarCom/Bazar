@@ -29,12 +29,14 @@ import "./../../ui/pages/items-show"
 import "./../../ui/pages/favorites-show"
 
 import "./../../ui/pages/admin-categories"
+import "./../../ui/pages/admin-cities"
 import "./../../ui/pages/admin-users"
 
 import "./../../ui/components/item-thumbnail"
 import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"
 import "./../../ui/components/city-filter"
+import "./../../ui/components/admin-mod"
 
 import "./routes"
 
