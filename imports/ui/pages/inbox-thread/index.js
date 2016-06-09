@@ -59,6 +59,12 @@ Template.threadPage.helpers({
 	}	
 })
 
+Template.threadPage.onRendered(function(){
+	//scroll to the bottom of the page
+	setTimeout(function(){
+    	window.scrollTo(0,document.body.scrollHeight);		
+	},100)
+})
 
 Template.threadPage.events({
 	"keypress textarea[name='message']"(event, instance){
@@ -67,15 +73,21 @@ Template.threadPage.events({
 			const body = event.target.value.trim()
 		    Meteor.call('threads.addMessage', Template.instance().threadId, Template.instance().inboxType, body)
 		    event.target.value = ""
+	    	//scroll to the bottom of the page
+		    window.scrollTo(0,document.body.scrollHeight);
 		}
 	},
 	"click .send-message-btn"(event, instance){
 		const body = $("textarea[name='message']")[0].value
 	    Meteor.call('threads.addMessage', Template.instance().threadId, Template.instance().inboxType, body)
 	    $("textarea[name='message']")[0].value = ""
+    	//scroll to the bottom of the page
+	    window.scrollTo(0,document.body.scrollHeight);
 	},
 	"click .back-btn"(event, instance){
-		window.history.back()
+		event.preventDefault()
+		const route = `inbox.${Template.instance().inboxType}`
+		Router.go(route)
 	}
 })
 

@@ -1,37 +1,47 @@
 <template name="threadPage">
-	{{#if Template.subscriptionsReady}}	
+	{{#if Template.subscriptionsReady}}
 
-	<div class="thread-nav panel panel-default">
-	  	<div class="panel-body">
-	  		<a href="#" class="back-btn" style="float:right;">
-	  		<i  class="material-icons">redo</i>
-	  		</a>
-			<center>
-				{{#unless recipientIsShopOwner}}
-					{{_"member"}} <span class="recipient">{{recipient.username}}</span>
-				{{else}}
-					{{_"shop"}} <span class="recipient">{{recipient.title}}</span>
-			{{/unless}}	
-			</center>		  
+	<div class="thread-container">
+
+		<div class="thread-content">
+
+			<div class="thread-nav">
+				<p>
+		  		<a href="#" class="back-btn" style="float:right;">
+		  		<i  class="material-icons">redo</i>
+		  		</a>
+				<center>
+					{{#unless recipientIsShopOwner}}
+						{{_"member"}} <span class="recipient">{{recipient.username}}</span>
+					{{else}}
+						{{_"shop"}} <span class="recipient">{{recipient.title}}</span>
+				{{/unless}}	
+				</center>	
+				</p>	  
+			</div>		
+
+			<div class="messages-list">		
+				{{#each thread.messages}}
+					{{> message }}
+				{{/each}}
+			</div>
+
 		</div>
-	</div>		
 
-	<div class="messages-list">		
-		{{#each thread.messages}}
-			{{> message }}
-		{{/each}}
-	</div>
-
-<div class="form-group">
-  <div class="input-group">    
-      <span class="input-group-btn input-group-sm">
-				<button class="btn btn-fab btn-fab-mini btn-primary send-message-btn" >
+		<div class="thread-form">
+		<div class="form-group" style="margin-bottom:0px;">
+			<div class="input-group">    
+				<span class="input-group-btn input-group-sm">
+					<button class="btn btn-fab btn-fab-mini btn-primary send-message-btn" >
 					<i class="material-icons">send</i>
-				</button>
-      </span>
-			<textarea class="form-control" style="width:100%;" name="message"></textarea>  	
-  </div>
-</div>
+					</button>
+				</span>
+				<textarea class="form-control" style="width:100%;" name="message"></textarea>  	
+			</div>
+		</div>
+		</div>	
+
+	</div>
 
 	{{else}}
 		{{> appLoading }}
