@@ -4,6 +4,11 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import {Router} from 'meteor/iron:router'
 
 import { Threads } from './../../../api/threads/collection'
+import { Shops } from './../../../api/shops/collection'
+
+import {recipientHelper} from './../../pages/inbox-thread/helpers'
+import {recipientIsShopOwner} from './../../pages/inbox-thread/helpers'
+import {getRecipient} from './../../pages/inbox-thread/helpers'
 
 import './template.html'
 
@@ -45,5 +50,34 @@ Template.threadListItem.helpers({
 	},
 	inbox(){
 		return Router.current().route.getName().match(/inbox.(\w+)/)[1]
-	}
+	},
+	lastMessage(){
+		return Template.instance().data.messages[0]
+	},
+	recipient(){
+		const route = Router.current().route.getName()
+		const inboxType = route.match(/inbox.(\w+)/)[1]
+		const thread = Template.instance().data
+		return recipientHelper(thread, inboxType)
+	},
+	recipientIsShopOwner(){
+		const route = Router.current().route.getName()
+		const inboxType = route.match(/inbox.(\w+)/)[1]
+		const thread = Template.instance().data		
+		return recipientIsShopOwner(thread, inboxType)
+	},
+	avatar(){
+
+		const route = Router.current().route.getName()
+		const inboxType = route.match(/inbox.(\w+)/)[1]
+		const thread = Template.instance().data		
+
+		const recipient = getRecipient(thread, inboxType)
+
+		if (recipient.type == 'user'){
+			return Meteor.users.findOne(recipient.id).avatar
+		} else {
+			return Shops.findOne(recipient.id).logo
+		}
+	}			
 })

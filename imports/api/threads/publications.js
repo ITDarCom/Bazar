@@ -1,4 +1,24 @@
 import {Threads} from './collection'
+import {Shops} from './../shops/collection'
+
+const children = [
+	{
+		find(thread){
+			const user = thread.participants.find(p => p.type == 'user')
+			if (user){
+				return Meteor.users.find({ _id: user.id })
+			}
+		}
+	},
+	{
+		find(thread){
+			const shop = thread.participants.find(p => p.type == 'shop')
+			if (shop){
+				return Shops.find({_id: shop.id})
+			}
+		}
+	}
+]
 
 Meteor.publishComposite('inbox', function inboxPublication(opts, limit){
 	return {
@@ -9,7 +29,7 @@ Meteor.publishComposite('inbox', function inboxPublication(opts, limit){
 					'participants.type': "user",
 					'participants.id': this.userId
 				}, { limit: limit, sort: { createdAt: -1 } });
-			} else {
+			} else if (opts.inboxType.match(/shop/)){
 				const shopId = Meteor.users.findOne(this.userId).profile.shop
 				return Threads.find({
 					'participants.type': "shop",
@@ -17,14 +37,7 @@ Meteor.publishComposite('inbox', function inboxPublication(opts, limit){
 				}, { limit: limit, sort: { createdAt: -1 } });
 			}
 		}, 
-		/*children : [
-			{
-				find(item){
-					//return Shops.find({ _id: item.shop})
-				}
-			}
-
-		]*/
+		children : children
 	}
 });
 
@@ -37,13 +50,6 @@ Meteor.publishComposite('singleThread', function singleThreadPublication(threadI
 			return Threads.find({_id: threadId})
 
 		}, 
-		/*children : [
-			{
-				find(item){
-					//return Shops.find({ _id: item.shop})
-				}
-			}
-
-		]*/
+		children : children
 	}
 });

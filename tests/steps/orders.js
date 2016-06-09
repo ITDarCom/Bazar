@@ -18,6 +18,28 @@ module.exports = function(){
 
 	});
 
+
+	this.Given(/^I have "([^"]*)" new unprocessed orders from "([^"]*)"$/, function (count, username) {
+		count = parseInt(count)
+
+		if (count > 0){
+			
+			var items = server.execute(function(count, options){
+	            return Meteor.call('generateItems', count, options);         
+	        }, count, {})
+
+			var userId = server.execute(function(userOptions){
+	            return Meteor.call('generateUser', userOptions);         
+	        }, { username: username, email: 'random@email.com', password: 'password'})	        
+
+			server.execute(function(userId, count, fromUser){
+				return Meteor.call('generateOrderItems', userId, count, fromUser);			
+			}, this.currentUser.userId, count, userId)
+		}
+
+	});
+
+
 	this.Then(/^I should see a list of "([^"]*)" order items$/, function (count) {
 		count = parseInt(count)		
 		

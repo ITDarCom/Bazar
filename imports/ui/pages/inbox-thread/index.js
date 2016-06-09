@@ -4,6 +4,10 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Router } from 'meteor/iron:router'
 
 import { Threads } from './../../../api/threads/collection'
+import { Shops } from './../../../api/shops/collection'
+
+import {recipientHelper} from './helpers'
+import {recipientIsShopOwner} from './helpers'
 
 import './template.html'
 
@@ -17,6 +21,7 @@ Template.threadPage.onCreated(function(){
 		var sub = this.subscribe('singleThread', this.threadId)
 		this.ready.set(sub.ready())
 	    if (sub.ready()){
+	    	this.thread = Threads.findOne(this.threadId)
 	    	this.ready.set(sub.ready())
 	    }
 	})
@@ -46,16 +51,31 @@ Template.threadPage.helpers({
 	thread(){
 		return Threads.findOne(Template.instance().threadId)
 	},
+	recipient(){
+		return recipientHelper(Template.instance().thread, Template.instance().inboxType)
+	},
+	recipientIsShopOwner(){
+		return recipientIsShopOwner(Template.instance().thread, Template.instance().inboxType)
+	}	
 })
 
+
 Template.threadPage.events({
-	"keypress textarea[name='message']": function(e, instance){
-		if (e.keyCode == 13 && !e.shiftKey) {
-			e.preventDefault()
-			const body = e.target.value.trim()
+	"keypress textarea[name='message']"(event, instance){
+		if (event.keyCode == 13 && !event.shiftKey) {
+			event.preventDefault()
+			const body = event.target.value.trim()
 		    Meteor.call('threads.addMessage', Template.instance().threadId, Template.instance().inboxType, body)
-		    e.target.value = ""
+		    event.target.value = ""
 		}
+	},
+	"click .send-message-btn"(event, instance){
+		const body = $("textarea[name='message']")[0].value
+	    Meteor.call('threads.addMessage', Template.instance().threadId, Template.instance().inboxType, body)
+	    $("textarea[name='message']")[0].value = ""
+	},
+	"click .back-btn"(event, instance){
+		window.history.back()
 	}
 })
 
@@ -70,5 +90,42 @@ Template.message.helpers({
 		} else {
 			return (author.type == 'shop') && (author.id == Meteor.user().profile.shop)
 		}
+	},
+	avatar(){
+		const author = Template.instance().data.author
+		if (author.type == 'user'){
+			return Meteor.users.findOne(author.id).avatar
+		} else {
+			return Shops.findOne(author.id).logo
+		}
 	}
+
+})
+
+
+Template.messageModal.helpers({
+	modalId(){
+		return Template.instance().data.modalId
+	},
+})
+
+Template.messageModal.events({
+	"keypress textarea[name='message']": function(e, instance){
+		if (e.keyCode == 13 && !e.shiftKey) {
+			e.preventDefault()
+			const body = e.target.value.trim()
+			const data = Template.instance().data
+		    Meteor.call('threads.sendMessage', data.recpientType, data.recpientId, data.inboxType, body)
+		    e.target.value = ""
+		    $(`#${data.modalId}`).modal('toggle')
+		}
+	},
+	"click .send-message-btn"(event, instance){
+		const body = $("textarea[name='message']")[0].value
+		const data = Template.instance().data
+	    Meteor.call('threads.sendMessage', data.recpientType, data.recpientId, data.inboxType, body)
+	    $("textarea[name='message']")[0].value = ""
+	    console.log(`#${data.modalId}`)
+		$(`#${data.modalId}`).modal('toggle')
+	},		
 })

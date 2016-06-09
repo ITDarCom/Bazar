@@ -31,4 +31,11 @@ import './../../api/generate-data.js'
 
 Meteor.startup(() => {
 	//Meteor.call('generateFixtures')
+
+	Accounts.onCreateUser(function(options, user) {
+		user.avatar = '/default-avatar.png'
+		if (options.profile)
+			user.profile = options.profile;
+		return user;
+	});	
 });

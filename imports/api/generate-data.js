@@ -28,12 +28,19 @@ Meteor.methods({
     getItem(){
         return Items.findOne()
     },
+    generateUser(userOptions){
+        const userId = Accounts.createUser(userOptions)
+        return userId
+    },
     createUserWithShop(userOptions, shopOptions){
         const userId = Accounts.createUser(userOptions)
         this.setUserId(userId)
         Meteor.call('shops.insert', shopOptions)        
         return userId
     }, 
+    getShop(shopTitle){
+        return Shops.findOne({title: shopTitle})
+    },
     generateItems(count, options){
 
         const opts = options || {}
@@ -127,7 +134,7 @@ Meteor.methods({
 
         Meteor.users.update(this.userId, { $inc: { 'unreadPurchases': count }})
     }, 
-    generateOrderItems(userId, count){
+    generateOrderItems(userId, count, fromUser){
 
         this.setUserId(userId)
 
@@ -145,7 +152,7 @@ Meteor.methods({
             Purchases.insert({
                 deliveryInfo,
                 item: item._id,
-                user: this.userId,
+                user: fromUser || this.userId,
                 shop: user.profile.shop,
                 status: 'pending',
                 createdAt: new Date()
@@ -229,11 +236,11 @@ Meteor.methods({
         resetDatabase();
 
         const accounts = [
-            { username: 'username', email: 'user@gmail.com', password: 'password', profile: {}},
-            { username: 'username1', email: 'user1@gmail.com', password: 'password', profile: {} },
-            { username: 'username2', email: 'user2@gmail.com', password: 'password', profile: {} },
-            { username: 'username3', email: 'user3@gmail.com', password: 'password', profile: {} },
-            { username: 'username4', email: 'user4@gmail.com', password: 'password', profile: {} },
+            { username: 'username', email: 'user@gmail.com', password: 'password'},
+            { username: 'username1', email: 'user1@gmail.com', password: 'password' },
+            { username: 'username2', email: 'user2@gmail.com', password: 'password' },
+            { username: 'username3', email: 'user3@gmail.com', password: 'password' },
+            { username: 'username4', email: 'user4@gmail.com', password: 'password' },
         ]
 
         var accountsIds = accounts.map(function(account){

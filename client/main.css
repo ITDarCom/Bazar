@@ -1,6 +1,7 @@
 body {
   padding-top: 70px;
   position: relative; 
+  background-color: #EEE;
 }
 
 #main-nav{
@@ -41,10 +42,10 @@ body {
   margin-top:0px;
 }
 
-.container{
-  padding:12px;
-}
-
 .page-title{
   margin-top: 0px;
+}
+
+.unread-thread{
+  background-color: #D9EDF7;
 }

@@ -17,7 +17,18 @@ module.exports = function(){
                 return Meteor.call('generateShops', count, options);         
             }, count, options)
         }
-    });        
+    });
+
+	this.Given(/^I am on "([^"]*)" shop page$/, function (shopTitle) {
+		const shop = server.execute(function(shopTitle){
+			return Meteor.call('getShop', shopTitle);
+		}, shopTitle)
+
+        const route = client.execute(function(shopId){
+            return Router.go('shops.show', {shop:shopId})
+        }, shop._id);
+
+	});            
 
 	this.Then(/^I should see "([^"]*)"$/, function (text) {
 		var doesExist = browser.waitForExist(".container");

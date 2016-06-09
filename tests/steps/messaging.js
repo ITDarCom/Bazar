@@ -67,6 +67,13 @@ module.exports = function(){
 		expect(actualText).toEqual(text);		
 	});
 
+	this.Then(/^I should see "([^"]*)" as a recipient$/, function (recipient) {
+		browser.waitForExist(".thread-nav");
+		var actualText = browser.getText(".recipient");
+		expect(actualText).toEqual(recipient);
+	});
+
+
 
 
 }

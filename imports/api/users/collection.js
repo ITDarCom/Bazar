@@ -6,6 +6,9 @@
     'profile.shop' : {
         type: String
     },
+    'avatar':{
+        type: String,
+    },
     'unreadPurchases': {
         type: Number,
         defaultValue: 0

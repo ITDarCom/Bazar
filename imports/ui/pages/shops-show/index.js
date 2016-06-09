@@ -12,9 +12,9 @@ Template.shopsShowPage.onCreated(function(){
 
 Template.shopsShowPage.helpers({
 	shop(){
-		if (!Shops.findOne(Router.current().params.shop)){
+		/*if (!Shops.findOne(Router.current().params.shop)){
 			Router.go('NotFound'); return;
-		}
+		}*/
 		return Shops.findOne(Router.current().params.shop)
 	}
 })

@@ -14,10 +14,34 @@
 	{{/if}}
 </template>
 
+
+
 <template name="threadListItem">
-	<div class="thread-preview {{#if unread}}unread-thread{{/if}} row">
-		<a href="{{pathFor 'inbox.thread' inbox=inbox thread=_id}}">
-		{{_ "createdAt"}}: {{moment createdAt "MM-DD-YYYY" }}, {{unread}}, {{inbox}}, {{_id}}
-		</a>
-	</div>
+	<div 
+		style="padding:5px; margin-bottom:5px;"
+		class="panel panel-default thread-preview {{#if unread}}unread-thread{{/if}}" >
+	  	<div class="panel-body" style="padding:5px;">
+			<div class="media ">
+			<div class="media-right" style="padding-right:0px;">
+				<a href="{{pathFor 'inbox.thread' inbox=inbox thread=_id}}">
+				  <img class="media-object" src="{{avatar}}" width="50px" alt="...">
+				</a>
+			</div>			
+			<div class="media-body">
+				<span style="float:left;"><small>{{fromNow createdAt}}</small></span>
+				<a href="{{pathFor 'inbox.thread' inbox=inbox thread=_id}}">
+				<b>
+				{{#unless recipientIsShopOwner}}
+					{{_"member"}} {{recipient.username}}
+				{{else}}
+					{{_"shop"}} {{recipient.title}}	
+				{{/unless}}
+				</b><br />
+  				</a>
+		  		<small>{{lastMessage.body}}</small>
+			</div>
+
+			</div>
+		</div>
+	</div>		
 </template>

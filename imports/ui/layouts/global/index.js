@@ -66,7 +66,12 @@ Template.registerHelper('unreadItems', function(){
 
 
 Template.registerHelper('moment', function(string, format){
-	return moment((new Date(string)).getTime()).format("dddd, DD-MM-YYYY");
+	if(!format) format = "dddd, DD-MM-YYYY"
+	return moment((new Date(string)).getTime()).format(format);
+})
+
+Template.registerHelper('fromNow', function(string){
+	return moment((new Date(string)).getTime()).fromNow();
 })
 
 Template.registerHelper('i18n', function(key){

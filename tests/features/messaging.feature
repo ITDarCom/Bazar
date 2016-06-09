@@ -35,7 +35,6 @@ Feature: Messaging
 		And I am on "inbox.shop" page
 		Then I should see a list of "4" threads
 
-
 	Scenario: User notified about a new message as an ordinary user
 		Given I am a registered user with no shop
 		And I have "3" messages in my "personal" inbox				
@@ -81,7 +80,6 @@ Feature: Messaging
 		Then I should see "" in the "message" field
 		And the last message in the thread should be "hi there you!"
 
-@watch
 	Scenario: User replying to an existing thread (shop inbox)
 		Given I am a registered user with a shop
 		And I have "3" messages in my "shop" inbox				
@@ -96,28 +94,30 @@ Feature: Messaging
 	Scenario: User initiating a thread with a shop owner
 		Given I am a registered user with no shop	
 		And I am logged in
-		And there is a shop titled "McDoos"
+		And there are "1" shops titled "McDoos"
 		And I am on "McDoos" shop page
 		When I click ".message" button
-		Then I should be redirected to the "threads.new" page
-		And I should see "McDoos" as a recipient
-		When I enter "hello" in the "message" textarea
+		When I enter "hello I liked your shop page" in the "message" textarea
 		And I press enter
-		Then I should see "" in the "message" field
-		And I should see "hello"
-		Then I should see a list of "1" messages
+		When I am on "inbox.personal" page
+		Then I should see a list of "1" threads
+		And I should see a list of "0" unread threads
+		When I click on a thread 
+		Then the last message in the thread should be "hello I liked your shop page"
+		And I should see "McDoos" as a recipient
 
 	Scenario: Shop owner initiating a thread with a user
-		Given I am a registered user with a shop
-		And I have "1" new unprocessed orders from "Ahmad"
+		Given I am a registered user with a shop	
 		And I am logged in
+		And I have "4" messages in my "shop" inbox
+		And I have "1" new unprocessed orders from "Ahmad"
 		And I am on "settings.orders" page
-		Then I should be redirected to the "threads.new" page
-		And I should see "Ahmad" as a recipient
-		When I enter "hello" in the "message" textarea
+		When I click ".message" button
+		When I enter "thank you for purchasing from our shop" in the "message" textarea
 		And I press enter
-		Then I should see "" in the "message" field
-		And I should see "hello"
-
-	Scenario: User replying to a new message as an ordinary user
-	Scenario: User replying to a new message as a shop owner
+		When I am on "inbox.shop" page
+		Then I should see a list of "5" threads
+		And I should see a list of "0" unread threads
+		When I click on a thread 
+		Then the last message in the thread should be "thank you for purchasing from our shop"
+		And I should see "Ahmad" as a recipient

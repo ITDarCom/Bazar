@@ -112,12 +112,10 @@
   </nav>    
 
     <div class="container">
-        <div>
+        <div class="row">
             {{> yield "nav"}}
         </div>
-        <div class="container app-container">
-            {{> yield}}
-        </div><!-- /.container -->
+        {{> yield}}
     </div>
 
 </template>
