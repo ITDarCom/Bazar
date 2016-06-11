@@ -1,5 +1,3 @@
-
-
 Feature: Managing cart
 
 	As a user of the site,

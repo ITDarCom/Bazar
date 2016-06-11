@@ -21,9 +21,31 @@ li.list-group-item  {
 }
 
 .item-thumbnail .thumbnail{
-	padding:2px;
+	margin-bottom: 1px;
 }
 
 .shop-thumbnail{
   padding:1px;
+}
+
+/* the below classes are row classes, we are adding right and left page margins */
+.endless-list{
+	margin-right:1px; margin-left:1px;
+}
+.cart-item {
+	margin-right:1px; margin-left:1px;	
+}
+
+.order-item {
+	margin-right: 1px; margin-left: 1px;
+}
+.purchase-item {
+	margin-right: 1px; margin-left: 1px;
+}
+.sold-item {
+	margin-right: 1px; margin-left: 1px;
+}
+
+.shop-header {
+	margin-right: 1px; margin-left: 1px;
 }

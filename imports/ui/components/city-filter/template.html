@@ -1,16 +1,16 @@
 <template name="itemsFilter">
 	<div class="row">
+	<div class="col-xs-12">
 	  {{#autoForm class="form-inline" id="itemsFilterForm" schema=schema template="bootstrap3-inline"}}
-	    {{> afFormGroup name="selectedCity" 
-	    	label=false options=options  
-	    	style="width:90px;" 
-	    	firstOption= cityi18n }}
-		<div class="form-group">
-			<input name='search' type="text" 				
+		<span>{{> afQuickField name="selectedCity" 
+			    	label=false options=options  
+			    	firstOption= cityi18n }}</span>				
+		<span class="form-group" style="width:75%">
+			<input name='search' type="text" style="width:100%"
 				class="form-control" placeholder="{{_ 'search'}}">
-			<span class="help-block"></span>
-		</div>
+		</span>
 	  {{/autoForm}}
 	  <hr style="margin-top:5px"/>
+	</div>
 	</div>
 </template>

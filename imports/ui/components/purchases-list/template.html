@@ -16,24 +16,28 @@
 
 <template name="orderItem">
 	<div class="order-item row">
-		<div class="btn-group btn-btn-group-justified btn-group-raised">
-			<a class="btn btn-primary accept-order-btn"><i class="material-icons">done</i> {{_ "accept"}}</a>
-			<a class="btn btn-danger reject-order-btn"><i class="material-icons">clear</i> {{_ "reject"}}</a>
-			<button 
-				data-toggle="modal" data-target="#{{modalId}}"
-				class="btn btn-info message-btn">
-				<i class="material-icons">mail</i></button>
-		</div>				
+		<div class="col-xs-12">
+		<div class="btn-group btn-group-justified btn-group-raised pull-right">
+			<a class="btn btn-primary accept-order-btn">
+				<i class="material-icons">done</i> {{_ "accept"}}</a>
+			<a class="btn btn-danger reject-order-btn">
+				<i class="material-icons">clear</i> {{_ "reject"}}</a>
+			<a class="btn btn-info message-btn"
+				data-toggle="modal" data-target="#{{modalId}}">				
+				<i class="material-icons">mail</i>
+			</a>
+		</div>
+		</div>
 		<div class="col-xs-6" style="padding:0px;">
-			<li class="list-group-item">{{_ "member"}}: {{member}}</li>
-			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
-			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate}}</li>
-			<li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
-			<li class="list-group-item">{{_ "email"}}: {{deliveryInfo.email}}</li>
-			<li class="list-group-item">{{_ "mobile"}}: {{deliveryInfo.phone}}</li>
-			<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
-			<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>				
-			<li class="list-group-item">{{_ "total"}}: {{total}}</li>
+				<li class="list-group-item">{{_ "member"}}: {{member}}</li>
+				<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
+				<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate}}</li>
+				<li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
+				<li class="list-group-item">{{_ "email"}}: {{deliveryInfo.email}}</li>
+				<li class="list-group-item">{{_ "mobile"}}: {{deliveryInfo.phone}}</li>
+				<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
+				<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>				
+				<li class="list-group-item">{{_ "total"}}: {{total}}</li>
 		</div>
 		{{> itemThumbnail item}}
 	</div>
@@ -59,16 +63,18 @@
 
 <template name="saleItem">
 	<div class="sold-item row">
-		<div class="btn-group btn-btn-group-justified btn-group-raised">
-			{{#if accepted}}
-			<a class="btn btn-primary accept-order-btn disabled">
-				<i class="material-icons">done</i> {{_ "accepted"}}</a>
-			{{else}}
-			<a class="btn btn-danger reject-order-btn disabled">
-				<i class="material-icons">clear</i> {{_ "rejected"}}</a>
-			{{/if}}
-			<a class="btn btn-info message-user-btn"><i class="material-icons">mail</i></a>
-		</div><br />				
+		<div class="col-xs-12">		
+			<div class="btn-group btn-group-justified btn-group-raised">
+				{{#if accepted}}
+				<a class="btn btn-primary accept-order-btn disabled">
+					<i class="material-icons">done</i> {{_ "accepted"}}</a>
+				{{else}}
+				<a class="btn btn-danger reject-order-btn disabled">
+					<i class="material-icons">clear</i> {{_ "rejected"}}</a>
+				{{/if}}
+				<a class="btn btn-info message-user-btn"><i class="material-icons">mail</i></a>
+			</div>
+		</div>				
 		<div class="col-xs-6" style="padding:0px;">
 			<li class="list-group-item">{{_ "member"}}: {{member}}</li>
 			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
