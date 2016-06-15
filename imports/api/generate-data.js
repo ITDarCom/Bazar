@@ -15,6 +15,8 @@ import { Items } from './items/collection.js'
 import { Shops } from './shops/collection.js'
 import { Purchases } from './purchases/collection.js'
 import { Categories } from './categories/collection.js'
+import { Cities } from './cities/collection.js'
+
 
 Meteor.methods({
     getCategories(){
@@ -184,6 +186,16 @@ Meteor.methods({
 
         categories.forEach(function(category){
             Categories.insert(category)
+        })
+
+        const cities = [
+            { identifier: 'jeddah', label:'جدة' },
+            { identifier: 'mecca', label: 'مكة' },
+            { identifier: 'Al-riyad', label: 'الرياض' }
+        ]
+
+        cities.forEach(function(city){
+            Cities.insert(city)
         })
 
         shops.forEach(function(shop, index){

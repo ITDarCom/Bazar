@@ -27,8 +27,9 @@ Template.itemThumbnail.helpers({
 
 Template.itemThumbnail.events({
     "click .favorite-btn": function (){
+        console.log(this);
         if (Meteor.userId()) {
-            Meteor.call("makeFavorite",this._id);
+            Meteor.call("item.favoriteIt",this._id);
         }
     }
 });

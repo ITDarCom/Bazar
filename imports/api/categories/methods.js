@@ -5,7 +5,7 @@ import { Categories } from './collection'
 Meteor.methods({
 
     "category.insert" : function (categ) {
-        var isCategoryExist = Categories.findOne({label:categ.label , identifier:categ.identifier});
+        var isCategoryExist = Categories.findOne({$or:[{label:categ.label} , {identifier:categ.identifier}]});
         if (this.userId){
             if(! isCategoryExist){
                 Categories.insert(categ);
@@ -13,7 +13,7 @@ Meteor.methods({
         }
 
     },
-    "deleteCategory" : function (cityId) {
+    "category.delete" : function (cityId) {
         Categories.remove({_id : cityId});
     }
 });

@@ -1,6 +1,11 @@
 //https://gist.github.com/homaily/8672499
 SimpleSchema.RegEx.SaudiMobile = /^(009665|9665|\+9665|05|\d)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/i
 
+SimpleSchema.RegEx.EnglishName = /(^[A-Za-z-]*$)/i
+SimpleSchema.RegEx.ArabicName = /^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FF\s]*$/i
+
+
+
 SimpleSchema.messages({
   required: "حقل [label] إلزامي",
   minString: "حقل [label] يجب أن يكون [min] محارف على الأقل",
@@ -31,7 +36,9 @@ SimpleSchema.messages({
     {exp: SimpleSchema.RegEx.IPv4, msg: "[label] must be a valid IPv4 address"},
     {exp: SimpleSchema.RegEx.IPv6, msg: "[label] must be a valid IPv6 address"},
     {exp: SimpleSchema.RegEx.Url, msg: "[label] must be a valid URL"},
-    {exp: SimpleSchema.RegEx.Id, msg: "[label] must be a valid alphanumeric ID"}
+    {exp: SimpleSchema.RegEx.Id, msg: "[label] must be a valid alphanumeric ID"},
+    {exp: SimpleSchema.RegEx.EnglishName, msg:"يجب ان يكون [label]"},
+    {exp: SimpleSchema.RegEx.ArabicName, msg:"يجب ان يكون [label] باللغة العربية"},
   ],
   keyNotInSchema: "[key] is not allowed by the schema"
 });

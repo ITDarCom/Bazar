@@ -1,8 +1,36 @@
 <template name="adminUsersPage">
-	<h1 class="page-header">Admin - Users</h1>
-	<ul>
-		{{#each users}}
-			<li>{{_id}}</li>
-		{{/each}}
-	</ul>
+	<h1 class="page-header">{{_ 'Admin-Users'}} </h1>
+    {{> tabular table=TabularTables.users class="table table-striped table-bordered table-condensed"}}
+
+</template>
+
+<template name="lastSignInTemplate">
+    {{getlastSignIn}}
+    <span id='lastSignIn{{_id}}'></span>
+</template>
+
+<template name="registerdAtTemplate">
+    {{getRegisterdAt}}
+    <span id='registerdAt{{_id}}'></span>
+</template>
+
+<template name="userAdministrativeActions">
+    <button  class="userIdLogIn btn btn-primary btn-sm" userId = {{this._id}} >
+        <i class="fa fa-sign-in userIdLogIn" userId = {{this._id}}></i>
+    </button> &nbsp;
+    <button
+            class="blockUser btn {{#unless blocked}}btn-warning{{/unless}} btn-sm" userId = {{this._id}} >
+        <i class="fa fa-{{#unless blocked}}ban{{else}}refresh{{/unless}}" userId = {{this._id}} ></i>
+    </button> &nbsp;
+    <button
+            class="resetPasswd btn btn-default btn-sm" userId = {{this._id}} >
+        <i class="fa fa-refresh" userId = {{this._id}} ></i>
+    </button>
+
+    {{#if blocked}}
+        <button  class="deleteUser btn btn-danger btn-sm" userId = {{this._id}} >
+            <i class="fa fa-trash" userId = {{this._id}} ></i>
+        </button> &nbsp;
+    {{/if}}
+
 </template>

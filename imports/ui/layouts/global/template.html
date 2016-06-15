@@ -81,9 +81,12 @@
                 <li class={{isActiveRoute 'logout'}}><a href="{{pathFor 'logout'}}">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; {{_ "signOut"}}
                 </a></li>
-                <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
-                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; {{_ "admin"}}
-                </a></li>
+                {{#if isAdmin}}
+                    <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
+                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; {{_ "admin"}}
+                    </a></li>
+                {{/if}}
+
             {{else}}
                 <li class={{isActiveRoute 'signin'}}><a href="{{pathFor 'signin'}}">
                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; {{_ "signIn"}}
@@ -91,6 +94,7 @@
                 <li class={{isActiveRoute 'signup'}}><a href="{{pathFor 'signup'}}">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; {{_ "signUp"}}
                 </a></li>
+
             {{/if}}
         </ul>
     </nav>

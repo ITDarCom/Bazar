@@ -6,7 +6,7 @@ import './template.html'
 import { Categories } from './../../../api/categories/collection'
 import { Cities } from './../../../api/cities/collection'
 
-Template.adminMod.helpers({
+Template.adminTables.helpers({
     formCollection(){
         var route = Router.current().route.getName();
         if (route.match(/admin.categories/)){
@@ -41,18 +41,22 @@ Template.adminMod.helpers({
 
 });
 
-Template.adminMod.events({
+Template.adminTables.events({
     "click .btn-delete": function (){
 
-        var identifier = this.identifier;
-        $("#" + identifier).remove();
+        //var identifier = this.identifier;
+        //$("#" + identifier).remove();
         var route = Router.current().route.getName();
         if (route.match(/admin.categories/)){
-
-            Meteor.call("deleteCategory",this._id);
+            if (confirm(TAPi18n.__('deleteCategory')) == true) {
+                Meteor.call("category.delete",this._id);
+            }
         }
         else {
-            Meteor.call("deleteCity",this._id);
+            if (confirm(TAPi18n.__('deleteCity')) == true) {
+                Meteor.call("city.delete",this._id);
+            }
+
         }
 
 

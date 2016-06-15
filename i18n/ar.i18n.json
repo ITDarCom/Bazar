@@ -63,7 +63,15 @@
 	"ArabicCityName":"اسم المدينة",
 	"users": "المستخدمين",
 	"categories":"الأصناف",
-	"cities":"المدن"
+	"cities":"المدن",
+	"deleteCity":"هل انت متأكد من حذف هذه المدينة",
+	"deleteCategory": "هل انت متأكد من حذف هذا الصنف ",
+	"Admin-Users":"إدارةالمستخدمين",
+	"lastSignIn":"آخر ظهور",
+	"registerdAt":"سجل بتاريخ",
+	"Sorry": "عفوا",
+	"blockedMsg": "للأسف تم حجب عضويتك, يرجى التواصل مع الإدارة"
+
 
 
 

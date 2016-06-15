@@ -2,10 +2,23 @@ import { Mongo } from 'meteor/mongo';
 
 export const Cities = new Mongo.Collection('cities');
 
+SimpleSchema.RegEx.EnglishCityName = /(^[A-Za-z-]*$)/i
+SimpleSchema.RegEx.ArabicCityName = /^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FF\s]*$/i
+
+
+Cities.allow({
+    insert: function(userId, doc) {
+        // only allow posting if you are logged in
+        return !! userId;
+    }
+});
+
+
 
 Cities.attachSchema(new SimpleSchema({
     identifier: {
         type: String,
+        regEx:/(^[A-Za-z-]*$)/i,
         label: function(){
 
             return TAPi18n.__('EnglishCityName')
@@ -13,6 +26,7 @@ Cities.attachSchema(new SimpleSchema({
     },
     label: {
         type: String,
+        regEx:SimpleSchema.RegEx.ArabicCityName,
         label:function(){
 
             return TAPi18n.__('ArabicCityName')

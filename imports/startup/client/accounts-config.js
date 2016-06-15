@@ -1,3 +1,4 @@
+
 AccountsTemplates.configure({
     // Behavior
     confirmPassword: true,
@@ -73,3 +74,5 @@ AccountsTemplates.addFields([
   },
   pwd
 ]);
+
+

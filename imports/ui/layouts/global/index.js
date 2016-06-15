@@ -71,11 +71,11 @@ Template.registerHelper('i18n', function(key){
 })
 
 Template.registerHelper('cityLabel', function(identifier){
-	const cities = Cities.find().fetch().map(function(city){
-		return {label:city.label, value:city.identifier}
-	})
+	var city = Cities.findOne({identifier:identifier});
+	return city.label;
+})
+Template.registerHelper('isAdmin', function(){
 
-	const city = cities.find(x => x.value == identifier)
+	return(Meteor.user().isAdmin);
 
-	if (city) return city.label; else return false;
 })

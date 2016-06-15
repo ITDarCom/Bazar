@@ -30,7 +30,8 @@ import './../../api/purchases/publications.js'
 
 import './../../api/generate-data.js'
 
-import './../../api/admins/collection.js'
+import './../../ui/pages/admin-users/users-table.js'
+import './../../api/accounts-base/accounts-server.js'
 
 Meteor.startup(() => {
 	//Meteor.call('generateFixtures')
