@@ -12,7 +12,7 @@ module.exports = function(){
 
 			server.execute(function(userId, count){
 				return Meteor.call('generatePurchaseItems', userId, count);			
-			}, this.currentUser.userId, count)
+			}, this.currentUser._id, count)
 		}
 
 	});

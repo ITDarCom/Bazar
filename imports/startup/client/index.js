@@ -28,12 +28,17 @@ import "./../../ui/pages/items-edit"
 import "./../../ui/pages/items-show"
 import "./../../ui/pages/favorites-show"
 
+import "./../../ui/pages/inbox-personal"
+import "./../../ui/pages/inbox-shop"
+import "./../../ui/pages/inbox-thread"
+
 import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-users"
 
 import "./../../ui/components/item-thumbnail"
 import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"
+import "./../../ui/components/threads-list"
 import "./../../ui/components/city-filter"
 
 import "./routes"

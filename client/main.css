@@ -13,9 +13,17 @@
     font-family: 'Glyphicons Halflings', serif !important;
 }
 
+
+@media (min-width: 0) {
+  .navbar-toggle {
+    display: block; /* force showing the toggle */
+  }
+}
+
 body {
-  padding-top: 50px;
+  padding-top: 60px;
   position: relative; 
+  background-color: white;
 }
 
 #main-nav{
@@ -39,7 +47,7 @@ body {
 
 .brand {
     position: absolute;
-    right: 50%;
+    left: 57%;
     margin-top: 7px;
     margin-left: -50px !important;  /* 50% of your logo width */
     display: block;
@@ -56,10 +64,44 @@ body {
   margin-top:0px;
 }
 
-.container{
-  padding:12px;
-}
-
 .page-title{
   margin-top: 0px;
+}
+
+.unread-thread{
+  background-color: #D9EDF7;
+}
+
+.message-container .media-body .well{
+  background-color: #EEE;
+}
+
+
+.thread-content{
+  margin-bottom: 70px;
+  margin-top:50px;
+}
+
+.thread-form {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   background:#EEE;
+}
+
+.thread-nav {
+   position:fixed;
+   left:0px;
+   top:50px;
+   height: 50px;
+   width:100%;
+   background:#FAF2CC;
+   padding: 15px;
+}
+
+/* IE 6 */
+* html .thread-form {
+   position:absolute;
+   top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
 }

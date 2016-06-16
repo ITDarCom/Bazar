@@ -101,16 +101,20 @@ Meteor.methods({
 
 
 		//marking order as processed for shop owner
-		var shopId = Purchases.findOne(purchaseId).shop
+		const purchase = Purchases.findOne(purchaseId)
+		const shopId = purchase.shop
+		const userId = purchase.user
+
 		Shops.update(shopId, { $inc: { unreadOrders: -1 }})	
 
-		//TODO: notify purchase owner
+		//notifying purchase owner
+        Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
 
 	},
 
 	'purchases.setReadStatus'(status){
 		if (status) {
-	        Meteor.users.update(this.userId, { $set: { 'profile.unreadPurchases': 0 }})
+	        Meteor.users.update(this.userId, { $set: { 'unreadPurchases': 0 }})
 		}
 	}
 });

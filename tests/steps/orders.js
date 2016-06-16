@@ -13,10 +13,31 @@ module.exports = function(){
 
 			server.execute(function(userId, count){
 				return Meteor.call('generateOrderItems', userId, count);			
-			}, this.currentUser.userId, count)
+			}, this.currentUser._id, count)
 		}
 
 	});
+
+
+	this.Given(/^I have "([^"]*)" new unprocessed orders from "([^"]*)"$/, function (count, username) {
+		count = parseInt(count)
+
+		if (count > 0){
+			
+			var items = server.execute(function(count, options){
+	            return Meteor.call('generateItems', count, options);         
+	        }, count, {})
+
+			var randomUser = server.execute(function(userOptions){
+	            return Meteor.call('generateUser', userOptions);         
+	        }, { username: username, email: 'random@email.com', password: 'password'})	        
+
+			server.execute(function(userId, count, fromUser){
+				return Meteor.call('generateOrderItems', userId, count, fromUser);			
+			}, this.currentUser._id, count, randomUser._id)
+		}
+	});
+
 
 	this.Then(/^I should see a list of "([^"]*)" order items$/, function (count) {
 		count = parseInt(count)		

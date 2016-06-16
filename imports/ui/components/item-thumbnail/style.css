@@ -16,9 +16,37 @@
 }
 
 .item-thumbnail .thumbnail{
-	padding:2px;
+	margin-bottom: 1px;
 }
 
 .shop-thumbnail{
   padding:1px;
+}
+
+.purchase-items-list .list-group-item {
+	font-size: 9pt;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+/* the below classes are row classes, we are adding right and left page margins */
+.endless-list{
+	margin-right:1px; margin-left:1px;
+}
+.cart-item {
+	margin-right:1px; margin-left:1px;	
+}
+
+.order-item {
+	margin-right: 1px; margin-left: 1px;
+}
+.purchase-item {
+	margin-right: 1px; margin-left: 1px;
+}
+.sold-item {
+	margin-right: 1px; margin-left: 1px;
+}
+
+.shop-header {
+	margin-right: 1px; margin-left: 1px;
 }

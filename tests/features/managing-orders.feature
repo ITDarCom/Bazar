@@ -14,6 +14,7 @@ Feature: Managing orders
 		When I click app menu button			
 		Then I should see "0" in the unread counter of "my-orders" in the app menu
 		Then I should not see an unread mark on app menu
+		
 	Scenario: Shop owner with no order items yet
 		Given I have "0" new unprocessed orders	
 		When I click app menu button			

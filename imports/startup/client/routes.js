@@ -85,8 +85,9 @@ const privateRoutes = [
 	'settings.shop',
 	'settings.orders',
 	'settings.sales',
-	'messages.index',
-	'messages.thread',
+	'inbox.personal',
+	'inbox.shop',
+	'inbox.thread',
 	'cart',
 	'admin.categories',
 	'admin.users'
@@ -139,7 +140,7 @@ Router.route('/shops/new', function () {
 		this.render('empty', {to: 'nav'});
 		this.render('shopsNewPage');		
 	} else {
-		this.redirect('shops.index');
+		//this.redirect('shops.index');
 	}
 
 }, {
@@ -243,18 +244,25 @@ Router.route('/settings/sales', function () {
 
 
 //messages
-Router.route('/messages', function () {
+Router.route('/inbox/personal', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('defaultPage');
+	this.render('personalInboxPage');
 }, {
-	name: 'messages.index'
+	name: 'inbox.personal'
 });
 
-Router.route('/messages/:thread', function () {
+Router.route('/inbox/shop', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('defaultPage');
+	this.render('shopInboxPage');
 }, {
-	name: 'messages.thread'
+	name: 'inbox.shop'
+});
+
+Router.route('/inbox/:inbox/:thread', function () {
+	this.render('empty', {to: 'nav'});
+	this.render('threadPage');
+}, {
+	name: 'inbox.thread'
 });
 
 //cart

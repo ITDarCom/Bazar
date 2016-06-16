@@ -2,8 +2,11 @@
 	"bazar": "بازار",
 	"all": "الكل",
 	"shops": "متاجر",
+	"myShop": "متجري",
+	"shop": "المتجر",
 	"home":"الرئيسية",
 	"myMessages":"رسائلي",
+	"myShopMessages":"رسائل متجري",
 	"settings":"إعدادات",
 	"createShop":"أنشئ متجرا",
 	"removeShop":"حذف المتجر",
@@ -22,7 +25,6 @@
 	"riyals": "%s ريالا",
 	"myAccount": "حسابي",
 	"myPurchases": "مشترياتي",
-	"myShop": "متجري",
 	"orders": "طلبات",
 	"sales": "مبيعات",
 	"cart": "سلة المشتريات",
@@ -52,5 +54,8 @@
 	"submitCart": "شراء",
 	"changePwd":"غير كلمة السر",
 	"deleteShopConfirmation":"تحذير: هل أنت متأكد أنك تريد حذف متجرك وجميع متعلقاته من منتجات ومبيعات وطلبات؟",
-	"rejectOrderConfirmation":"هل أنت متأكد أنك تريد رفض هذا الطلب؟ (لا يمكنك التراجع)"
+	"rejectOrderConfirmation":"هل أنت متأكد أنك تريد رفض هذا الطلب؟ (لا يمكنك التراجع)",
+	"personalInbox":"البريد الشخصي",
+	"shopInbox":"بريد المتجر",
+	"sendMessage": "إرسال رسالة"
 }

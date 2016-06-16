@@ -115,7 +115,7 @@ Feature: Managing shop
 		When I click ".edit-item" button
 		Then I should be redirected to the "items.edit" page
 		When I enter "New title" in the "title" field
-		And I enter "New description" in the "description" field
+		And I enter "New description" in the "description" textarea
 		And I select "mashawee" in the "category" field
 		And I submit the form
 		Then I should be redirected to the "items.show" page

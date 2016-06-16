@@ -14,12 +14,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="brand" href="#">
+        <a class="brand" href="{{pathFor 'home'}}">
           <img alt="Brand" src="/brand.png">
         </a>
         <ul class="nav navbar-nav pull-left" style="margin-top:0px; margin-bottom:0px;">
           <li>          
-            <a href="{{pathFor 'cart'}}">
+            <a href="{{pathFor 'cart'}}" style="padding-bottom:15px;">
               <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             </a>
           </li>
@@ -40,8 +40,8 @@
         <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
           <a href="{{pathFor 'settings.purchases'}}">
             <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; {{_ "myPurchases"}}
-            {{#if unreadPurchases}}
-              <span class="counter label label-danger">{{unreadPurchases}}</span>
+            {{#if currentUser.unreadPurchases}}
+              <span class="counter label label-danger">{{currentUser.unreadPurchases}}</span>
             {{else}}
               (<span class="counter">0</span>)
             {{/if}}
@@ -62,9 +62,26 @@
           </a>
         </li>
         {{/if}}
-        <li class={{isActiveRoute 'messages.index'}}><a href="{{pathFor 'messages.index'}}">
+        <li class={{isActiveRoute 'inbox.personal'}} id="personal-inbox">
+          <a href="{{pathFor 'inbox.personal'}}">
           <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myMessages"}}
+          {{#if currentUser.unreadPersonalInbox}}
+            <span class="counter label label-danger">{{currentUser.unreadPersonalInbox}}</span>
+          {{else}}
+            (<span class="counter">0</span>)
+          {{/if}}          
         </a></li>
+        {{#if hasShop}}
+        <li class={{isActiveRoute 'inbox.shop'}} id="shop-inbox">
+          <a href="{{pathFor 'inbox.shop'}}">
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myShopMessages"}}
+          {{#if currentUser.unreadShopInbox}}
+            <span class="counter label label-danger">{{currentUser.unreadShopInbox}}</span>
+          {{else}}
+            (<span class="counter">0</span>)
+          {{/if}}          
+        </a></li>
+        {{/if}}
         <li class={{isActiveRoute regex='settings.(account|shop|sales)'}}><a href="{{pathFor 'settings.account'}}">
           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; {{_ "settings"}}
         </a></li>
@@ -95,12 +112,12 @@
   </nav>    
 
     <div class="container">
-        <div>
+        <div class="row">
+          <div class="col-xs-12">
             {{> yield "nav"}}
+          </div>
         </div>
-        <div class="container app-container">
-            {{> yield}}
-        </div><!-- /.container -->
+        {{> yield}}
     </div>
 
 </template>

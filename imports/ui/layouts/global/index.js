@@ -42,27 +42,32 @@ Template.registerHelper('isShopOwner', function(){
 	}
 })
 
-Template.registerHelper('unreadPurchases', function(){
-    return Meteor.user() && Meteor.user().profile && Meteor.user().profile.unreadPurchases;
-})
-
 Template.registerHelper('unreadOrders', function(){
 	var shop = Shops.findOne({ user: Meteor.userId() })
 	return shop ? shop.unreadOrders : false ;    
 })
 
 Template.registerHelper('unreadItems', function(){
-	if (!Meteor.user() || !Meteor.user().profile){
+	if (!Meteor.user()){
 		return false
 	}
 	var shop = Shops.findOne({ user: Meteor.userId() })
 	var unreadOrders = shop ? shop.unreadOrders : false
-	return unreadOrders || Meteor.user().profile.unreadPurchases
+
+	var unreadPersonalInbox = Meteor.user().unreadPersonalInbox
+	var unreadShopInbox = Meteor.user().unreadShopInbox
+
+	return unreadOrders || Meteor.user().unreadPurchases || unreadPersonalInbox || unreadShopInbox
 })
 
 
 Template.registerHelper('moment', function(string, format){
-	return moment((new Date(string)).getTime()).format("dddd, DD-MM-YYYY");
+	if(!format) format = "dddd, DD-MM-YYYY"
+	return moment((new Date(string)).getTime()).format(format);
+})
+
+Template.registerHelper('fromNow', function(string){
+	return moment((new Date(string)).getTime()).fromNow();
 })
 
 Template.registerHelper('i18n', function(key){

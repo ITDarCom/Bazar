@@ -15,6 +15,8 @@ import { Items } from './items/collection.js'
 import { Shops } from './shops/collection.js'
 import { Purchases } from './purchases/collection.js'
 import { Categories } from './categories/collection.js'
+import { Threads } from './threads/collection.js'
+
 
 Meteor.methods({
     getCategories(){
@@ -26,12 +28,19 @@ Meteor.methods({
     getItem(){
         return Items.findOne()
     },
+    generateUser(userOptions){
+        const userId = Accounts.createUser(userOptions)
+        return Meteor.users.findOne(userId)
+    },
     createUserWithShop(userOptions, shopOptions){
         const userId = Accounts.createUser(userOptions)
         this.setUserId(userId)
         Meteor.call('shops.insert', shopOptions)        
-        return userId
+        return Meteor.users.findOne(userId)
     }, 
+    getShop(shopTitle){
+        return Shops.findOne({title: shopTitle})
+    },
     generateItems(count, options){
 
         const opts = options || {}
@@ -123,9 +132,9 @@ Meteor.methods({
             })
         };
 
-        Meteor.users.update(this.userId, { $inc: { 'profile.unreadPurchases': count }})
+        Meteor.users.update(this.userId, { $inc: { 'unreadPurchases': count }})
     }, 
-    generateOrderItems(userId, count){
+    generateOrderItems(userId, count, fromUser){
 
         this.setUserId(userId)
 
@@ -143,7 +152,7 @@ Meteor.methods({
             Purchases.insert({
                 deliveryInfo,
                 item: item._id,
-                user: this.userId,
+                user: fromUser || this.userId,
                 shop: user.profile.shop,
                 status: 'pending',
                 createdAt: new Date()
@@ -151,18 +160,112 @@ Meteor.methods({
         };
 
         Shops.update(user.profile.shop, { $inc: { 'unreadOrders': count }})
-    },          
+    },
+    getThread(threadId){
+        return Threads.findOne(threadId)
+    },
+    getOriginalUser(participant){
+        if (participant.type == 'user'){
+            return Meteor.users.findOne(participant.id)
+        } else if (participant.type == 'shop') {
+            return Meteor.users.findOne({'profile.shop':participant.id})
+        }
+    },
+    generateThreads(userId, count, options){
+
+        const opts = options || {}
+
+        var currentUser = Meteor.users.findOne(userId)
+
+        var shopId = null
+        if (opts.inbox.match(/shop/)){
+            shopId = currentUser.profile.shop
+        }
+
+        const unread = opts.unread || false
+
+        for (var i = 0; i < count; i++) {
+
+            var otherAccount = Meteor.users.findOne({ _id: { $ne: userId }})
+            var otherShop = Shops.findOne({ _id: { $ne: shopId }})
+
+            if (!otherShop || !otherAccount){
+                 throw new Error('generateData: there should be existing shops or accounts');
+            }
+
+            var messageFromAnotherUser = {
+                author : {
+                    type: 'user', id: otherAccount._id
+                },
+                body: 'Hello', createdAt: new Date()
+            }
+
+            var messageFromAnotherShop = {
+                author : {
+                    type: 'shop', id: otherShop._id
+                },
+                body: 'Hello', createdAt: new Date()
+            }            
+
+            var messageFromMyAccount = {
+                author : {
+                    type: 'user', id: userId
+                },
+                body: 'Hi', createdAt: new Date()
+            }
+
+            var messageFromMyShop = {
+                author : {
+                    type: 'shop', id: shopId
+                },
+                body: 'Hi', createdAt: new Date()
+            }
+
+            var messages, participants = []
+
+            if (opts.inbox.match(/personal/)){
+                messages = [messageFromAnotherShop, messageFromMyAccount]
+            } else {
+                messages = [messageFromAnotherUser, messageFromMyShop]
+            }
+
+            //console.log(Object.assign(messages[0].author, { unread: false }))
+            
+            var thread = { 
+                messages: messages, 
+                participants: [
+                    _.extend(_.clone(messages[0].author), { unread: false }), 
+                    _.extend(_.clone(messages[1].author), { unread: unread })
+                ],
+                updatedAt: new Date(),
+            }
+
+            Threads.insert(thread)
+        }
+
+        if (unread){
+            if (opts.inbox.match(/personal/)){
+                Meteor.users.update(userId, { $inc: { 'unreadPersonalInbox': count }})
+            } else {
+                Meteor.users.update(userId, { $inc: { 'unreadShopInbox': count }})
+            }
+        }
+
+    },             
     generateFixtures() {
         resetDatabase();
 
         const accounts = [
-            { username: 'username', email: 'user@gmail.com', password: 'password', profile: {}},
-            { username: 'username1', email: 'user1@gmail.com', password: 'password', profile: {} },
-            { username: 'username2', email: 'user2@gmail.com', password: 'password', profile: {} },
-            { username: 'username3', email: 'user3@gmail.com', password: 'password', profile: {} },
-            { username: 'username4', email: 'user4@gmail.com', password: 'password', profile: {} },
+            { username: 'username', email: 'user@gmail.com', password: 'password'},
+            { username: 'username1', email: 'user1@gmail.com', password: 'password' },
+            { username: 'username2', email: 'user2@gmail.com', password: 'password' },
+            { username: 'username3', email: 'user3@gmail.com', password: 'password' },
+            { username: 'username4', email: 'user4@gmail.com', password: 'password' },
+            { username: 'username5', email: 'user5@gmail.com', password: 'password' },
+            { username: 'username6', email: 'user6@gmail.com', password: 'password' },
+            { username: 'username7', email: 'user7@gmail.com', password: 'password' }
         ]
-
+        
         var accountsIds = accounts.map(function(account){
             var accountId = Accounts.createUser(account)
             return accountId
@@ -170,10 +273,13 @@ Meteor.methods({
 
         const shops = [
             { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
-            { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
-            { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
-            { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
-            { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر أم أحمد', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر أم تحسين', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر أم طلال', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر أم باسم', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر أم ياسر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر أم ياسر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر أم محمد', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
         ]
 
         const categories = [

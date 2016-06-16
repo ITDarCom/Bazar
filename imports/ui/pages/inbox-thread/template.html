@@ -1,0 +1,100 @@
+<template name="threadPage">
+	{{#if Template.subscriptionsReady}}
+
+	<div class="thread-container">
+
+		<div class="thread-content">
+
+			<div class="thread-nav">
+				<p>
+		  		<a href="#" class="back-btn" style="float:right;">
+		  		<i  class="material-icons">redo</i>
+		  		</a>
+				<center>
+					{{#unless recipientIsShopOwner}}
+						{{_"member"}} <span class="recipient">{{recipient.username}}</span>
+					{{else}}
+						{{_"shop"}} <span class="recipient">{{recipient.title}}</span>
+				{{/unless}}	
+				</center>	
+				</p>	  
+			</div>		
+
+			<div class="messages-list">		
+				{{#each thread.messages}}
+					{{> message }}
+				{{/each}}
+			</div>
+
+		</div>
+
+		<div class="thread-form">
+		<div class="form-group" style="margin-bottom:0px;">
+			<div class="input-group">    
+				<span class="input-group-btn input-group-sm">
+					<button class="btn btn-fab btn-fab-mini btn-primary send-message-btn" >
+					<i class="material-icons">send</i>
+					</button>
+				</span>
+				<textarea class="form-control" style="width:100%;" name="message"></textarea>  	
+			</div>
+		</div>
+		</div>	
+
+	</div>
+
+	{{else}}
+		{{> appLoading }}
+	{{/if}}
+</template>
+
+<template name="message">
+
+	<div class="media message-container">
+	
+	{{#if isFromMe}}
+	  <div class="media-left">
+	    <a href="#">
+	      <img class="media-object" src="{{avatar}}" width="50px" alt="...">
+	    </a>
+	  </div>
+	{{/if}}
+
+	<div class="media-body">
+		<div class="well well-sm" style="margin-bottom:10px;">
+	  		<p class="message-body">{{body}}</p>
+			<p><small>{{fromNow createdAt}}</small></p>
+		</div>
+	</div>
+
+	{{#unless isFromMe}}
+	  <div class="media-right">
+	    <a href="#">
+	      <img class="media-object" src="{{avatar}}" width="50px" alt="...">
+	    </a>
+	  </div>
+	{{/unless}}
+
+	</div>
+</template>
+
+<template name="messageModal">
+	<div class="modal message-modal" id={{modalId}} tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content well" style="padding:10px;">
+	      <div class="modal-header">
+	        <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true">×</button>
+	        <h4 class="modal-title">{{_ "sendMessage"}}</h4>
+	      </div>
+	      <div class="modal-body" style="padding:10px;">
+					<textarea class="form-control" rows="5" style="display: inline-block; width:100%;" name="message"></textarea>	      
+					<center>
+					<button class="btn btn-raised btn-primary send-message-btn" >
+						<i class="material-icons">send</i>
+					</button>
+					</center>
+				</div>
+	    </div>
+	  </div>
+	</div>	
+</template>
