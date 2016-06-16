@@ -13,7 +13,7 @@ module.exports = function(){
 
 			server.execute(function(userId, count){
 				return Meteor.call('generateOrderItems', userId, count);			
-			}, this.currentUser.userId, count)
+			}, this.currentUser._id, count)
 		}
 
 	});
@@ -28,15 +28,14 @@ module.exports = function(){
 	            return Meteor.call('generateItems', count, options);         
 	        }, count, {})
 
-			var userId = server.execute(function(userOptions){
+			var randomUser = server.execute(function(userOptions){
 	            return Meteor.call('generateUser', userOptions);         
 	        }, { username: username, email: 'random@email.com', password: 'password'})	        
 
 			server.execute(function(userId, count, fromUser){
 				return Meteor.call('generateOrderItems', userId, count, fromUser);			
-			}, this.currentUser.userId, count, userId)
+			}, this.currentUser._id, count, randomUser._id)
 		}
-
 	});
 
 

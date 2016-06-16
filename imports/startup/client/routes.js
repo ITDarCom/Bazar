@@ -139,7 +139,7 @@ Router.route('/shops/new', function () {
 		this.render('empty', {to: 'nav'});
 		this.render('shopsNewPage');		
 	} else {
-		this.redirect('shops.index');
+		//this.redirect('shops.index');
 	}
 
 }, {

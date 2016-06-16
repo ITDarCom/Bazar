@@ -31,7 +31,7 @@ Feature: Managing cart
 		And I have "1" items in cart
 		When I enter "fresh please" in the "notes" field
 		And I enter "5" in the "quantity" field		
-		And I wait for "1" second
+		And I wait for "1" seconds
 		And I go to "cart" page
 		Then I should see "fresh please" in the "notes" field
 		And I should see "5" in the "quantity" field

@@ -14,7 +14,6 @@ AutoForm.addHooks('insertShopForm', {
 			Router.go('shops.show', { shop: result })			
 		}
 	}
-
 }, true);
 
 Template.insertShopForm.helpers({

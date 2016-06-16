@@ -29,7 +29,7 @@ module.exports = function(){
 
 			server.execute(function(userId, count){
 				return Meteor.call('generateCartItems', userId, count);			
-			}, this.currentUser.userId, count)
+			}, this.currentUser._id, count)
 		}
 
 		var cartItems = server.execute(function(){
@@ -88,7 +88,7 @@ module.exports = function(){
 
 	});
 
-	this.When(/^I wait for "([^"]*)" second$/, function (seconds) {
+	this.When(/^I wait for "([^"]*)" seconds$/, function (seconds) {
 		seconds = parseInt(seconds)
 		browser.pause(seconds * 1000);
 	});

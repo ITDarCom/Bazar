@@ -42,14 +42,12 @@ module.exports = function(){
 			email:'new.user@gmail.com', 
 			password:'password'
 		}
-
-		var userId = server.execute(function(userOptions){
-			return Accounts.createUser(userOptions)
+		var currentUser = server.execute(function(userOptions){
+			const userId = Accounts.createUser(userOptions)
+			return Meteor.users.findOne(userId)
 		}, userOptions)
-
-		userOptions.userId = userId
 		
-		this.currentUser = userOptions
+		this.currentUser = currentUser
 	});
 
 	this.Given(/^I am a registered user with a shop$/, function () {
@@ -64,18 +62,18 @@ module.exports = function(){
 			city: 'jeddah'
 		}
 
-		var userId = server.execute(function(userOptions, shopOptions){
+		var currentUser = server.execute(function(userOptions, shopOptions){
 			return Meteor.call('createUserWithShop', userOptions, shopOptions);			
 		}, userOptions, shopOptions)
 
-		userOptions.userId = userId
-		this.currentUser = userOptions
+		this.currentUser = currentUser
 	});		
 
 	this.Given(/^I am logged in$/, function () {
 		browser.url('http://localhost:3000');
-		client.execute(function(currentUser){			
-			Meteor.loginWithPassword(currentUser.email, currentUser.password)
+
+		client.execute(function(currentUser){		
+			Meteor.loginWithPassword(currentUser.emails[0].address, 'password')
 		}, this.currentUser)
 		browser.pause(500);
 	});

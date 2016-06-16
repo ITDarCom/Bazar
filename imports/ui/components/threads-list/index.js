@@ -52,7 +52,8 @@ Template.threadListItem.helpers({
 		return Router.current().route.getName().match(/inbox.(\w+)/)[1]
 	},
 	lastMessage(){
-		return Template.instance().data.messages[0]
+		const length = Template.instance().data.messages.length
+		return Template.instance().data.messages[length-1]
 	},
 	recipient(){
 		const route = Router.current().route.getName()

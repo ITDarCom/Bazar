@@ -42,10 +42,6 @@ Template.registerHelper('isShopOwner', function(){
 	}
 })
 
-Template.registerHelper('unreadPurchases', function(){
-    return Meteor.user() && Meteor.user().profile && Meteor.user().unreadPurchases;
-})
-
 Template.registerHelper('unreadOrders', function(){
 	var shop = Shops.findOne({ user: Meteor.userId() })
 	return shop ? shop.unreadOrders : false ;    

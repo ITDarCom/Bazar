@@ -6,7 +6,7 @@ module.exports = function(){
 
 		server.execute(function(currentUser, count, options){
 			return Meteor.call('generateThreads', currentUser, count, options);         
-		}, this.currentUser, count, {inbox: inbox});		
+		}, this.currentUser._id, count, {inbox: inbox});		
 
 	});		
 
@@ -15,7 +15,7 @@ module.exports = function(){
 
 		server.execute(function(currentUser, count, options){
 			return Meteor.call('generateThreads', currentUser, count, options);         
-		}, this.currentUser, count, {inbox: inbox, unread: true });
+		}, this.currentUser._id, count, {inbox: inbox, unread: true });
 
 	});
 	
@@ -74,6 +74,43 @@ module.exports = function(){
 	});
 
 
+	this.Then(/^the recipient of the current thread should be notified$/, function(){
+		const threadId = client.execute(function(){
+            return Router.current().params.thread
+        }).value;
 
+		const inboxType = client.execute(function(){
+            return Router.current().params.inbox
+        }).value;
+
+        var thread = server.execute(function(threadId){
+        	return Meteor.call('getThread', threadId)
+        }, threadId);
+
+        if (inboxType.match(/personal/)){
+        	const other = thread.participants.find(p => p.id != this.currentUser._id) 
+	        const otherUser = server.execute(function(other){
+	        	return Meteor.call('getOriginalUser', other)
+	        }, other);
+
+        	expect(other.unread).toBe(true);
+	        expect(otherUser.unreadShopInbox).toEqual(1)
+
+        } else {
+
+			const shopId = client.execute(function(){
+	            return Meteor.user().profile.shop
+	        }).value;
+
+        	const other = thread.participants.find(p => p.id != shopId)
+	        const otherUser = server.execute(function(other){
+	        	return Meteor.call('getOriginalUser', other)
+	        }, other);
+
+        	expect(other.unread).toBe(true);
+	        expect(otherUser.unreadPersonalInbox).toEqual(1)
+        }
+
+	});
 
 }

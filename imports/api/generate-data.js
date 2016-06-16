@@ -30,13 +30,13 @@ Meteor.methods({
     },
     generateUser(userOptions){
         const userId = Accounts.createUser(userOptions)
-        return userId
+        return Meteor.users.findOne(userId)
     },
     createUserWithShop(userOptions, shopOptions){
         const userId = Accounts.createUser(userOptions)
         this.setUserId(userId)
         Meteor.call('shops.insert', shopOptions)        
-        return userId
+        return Meteor.users.findOne(userId)
     }, 
     getShop(shopTitle){
         return Shops.findOne({title: shopTitle})
@@ -161,11 +161,19 @@ Meteor.methods({
 
         Shops.update(user.profile.shop, { $inc: { 'unreadOrders': count }})
     },
-    generateThreads(currentUser, count, options){
+    getThread(threadId){
+        return Threads.findOne(threadId)
+    },
+    getOriginalUser(participant){
+        if (participant.type == 'user'){
+            return Meteor.users.findOne(participant.id)
+        } else if (participant.type == 'shop') {
+            return Meteor.users.findOne({'profile.shop':participant.id})
+        }
+    },
+    generateThreads(userId, count, options){
 
         const opts = options || {}
-        
-        var userId = Accounts.findUserByEmail(currentUser.email)._id
 
         var currentUser = Meteor.users.findOne(userId)
 
@@ -178,14 +186,26 @@ Meteor.methods({
 
         for (var i = 0; i < count; i++) {
 
-            var account = Meteor.users.findOne({ _id: { $ne: userId }})
+            var otherAccount = Meteor.users.findOne({ _id: { $ne: userId }})
+            var otherShop = Shops.findOne({ _id: { $ne: shopId }})
+
+            if (!otherShop || !otherAccount){
+                 throw new Error('generateData: there should be existing shops or accounts');
+            }
 
             var messageFromAnotherUser = {
                 author : {
-                    type: 'user', id: account._id
+                    type: 'user', id: otherAccount._id
                 },
                 body: 'Hello', createdAt: new Date()
             }
+
+            var messageFromAnotherShop = {
+                author : {
+                    type: 'shop', id: otherShop._id
+                },
+                body: 'Hello', createdAt: new Date()
+            }            
 
             var messageFromMyAccount = {
                 author : {
@@ -204,7 +224,7 @@ Meteor.methods({
             var messages, participants = []
 
             if (opts.inbox.match(/personal/)){
-                messages = [messageFromAnotherUser, messageFromMyAccount]
+                messages = [messageFromAnotherShop, messageFromMyAccount]
             } else {
                 messages = [messageFromAnotherUser, messageFromMyShop]
             }

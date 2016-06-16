@@ -40,8 +40,8 @@
         <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
           <a href="{{pathFor 'settings.purchases'}}">
             <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; {{_ "myPurchases"}}
-            {{#if unreadPurchases}}
-              <span class="counter label label-danger">{{unreadPurchases}}</span>
+            {{#if currentUser.unreadPurchases}}
+              <span class="counter label label-danger">{{currentUser.unreadPurchases}}</span>
             {{else}}
               (<span class="counter">0</span>)
             {{/if}}

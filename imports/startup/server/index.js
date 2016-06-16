@@ -38,4 +38,8 @@ Meteor.startup(() => {
 			user.profile = options.profile;
 		return user;
 	});	
+
+	MyApp = {}
+
+	MyApp.activeThreads = []
 });
