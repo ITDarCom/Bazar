@@ -159,10 +159,8 @@ Template.threadPage.onRendered(function(){
 
 	//scroll to the bottom when keyboard closed on mobile
 	$(document).on('blur', "textarea[name='message']", function () {
-		console.log('blurred...')
     	scrollToTheEnd();
-	})
-
+	});
 
 	setupInactiveTimer()
 })
