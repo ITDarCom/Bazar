@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb://root:rootpassword@ds023373.mlab.com:23373/bazar"
+    }
+  }
+}

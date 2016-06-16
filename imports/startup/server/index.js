@@ -10,8 +10,7 @@ import { Threads } from './../../api/threads/collection.js'
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 import {TAPi18n} from "meteor/tap:i18n";
 
-
-SimpleSchema.debug = true
+//SimpleSchema.debug = true
 
 import './../../api/shops/methods.js'
 import './../../api/items/methods.js'
@@ -30,7 +29,6 @@ import './../../api/threads/publications.js'
 import './../../api/generate-data.js'
 
 Meteor.startup(() => {
-	Meteor.call('generateFixtures')
 
 	Accounts.onCreateUser(function(options, user) {
 		user.avatar = '/default-avatar.png'
@@ -38,4 +36,9 @@ Meteor.startup(() => {
 			user.profile = options.profile;
 		return user;
 	});	
+
+	if (Meteor.users.find().count() == 0){
+		Meteor.call('generateFixtures')		
+	}
+
 });
