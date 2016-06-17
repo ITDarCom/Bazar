@@ -15,7 +15,7 @@ TabularTables.users = new Tabular.Table({
     responsive: true,
     autoWidth: false,
     "info": false,
-    extraFields: ['blocked','isAdmin'],
+    extraFields: ['blocked','isAdmin','lastSignIn','registerdAt'],
     allow: function (userId) {
 
         return (Meteor.users.findOne({_id:userId}) && Meteor.users.findOne({_id:userId}).isAdmin);
@@ -27,7 +27,7 @@ TabularTables.users = new Tabular.Table({
         {
             tmpl: Meteor.isClient && Template.userAdministrativeActions,
             "searchable": false, title: '',
-            class: "col-md-2"
+            class: "col-md-1"
 
         },
         {
@@ -43,3 +43,4 @@ TabularTables.users = new Tabular.Table({
     ]
 
 });
+

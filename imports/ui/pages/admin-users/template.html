@@ -5,30 +5,30 @@
 </template>
 
 <template name="lastSignInTemplate">
-    {{getlastSignIn}}
-    <span id='lastSignIn{{_id}}'></span>
+    <span id='lastSignIn{{_id}}'> {{getlastSignIn}}</span>
+
 </template>
 
 <template name="registerdAtTemplate">
-    {{getRegisterdAt}}
-    <span id='registerdAt{{_id}}'></span>
+    <span id='registerdAt{{_id}}'>{{getRegisterdAt}}</span>
+
 </template>
 
 <template name="userAdministrativeActions">
-    <button  class="userIdLogIn btn btn-primary btn-sm" userId = {{this._id}} >
+    <button  class="userIdLogIn btn btn-raised btn-primary btn-sm" userId = {{this._id}} >
         <i class="fa fa-sign-in userIdLogIn" userId = {{this._id}}></i>
     </button> &nbsp;
     <button
-            class="blockUser btn {{#unless blocked}}btn-warning{{/unless}} btn-sm" userId = {{this._id}} >
+            class="blockUser btn btn-raised {{#unless blocked}}btn-warning{{/unless}} btn-sm" userId = {{this._id}} >
         <i class="fa fa-{{#unless blocked}}ban{{else}}refresh{{/unless}}" userId = {{this._id}} ></i>
     </button> &nbsp;
     <button
-            class="resetPasswd btn btn-default btn-sm" userId = {{this._id}} >
+            class="resetPasswd btn btn-raised btn-default btn-sm" userId = {{this._id}} >
         <i class="fa fa-refresh" userId = {{this._id}} ></i>
     </button>
 
     {{#if blocked}}
-        <button  class="deleteUser btn btn-danger btn-sm" userId = {{this._id}} >
+        <button  class="deleteUser btn btn-raised btn-danger btn-sm" userId = {{this._id}} >
             <i class="fa fa-trash" userId = {{this._id}} ></i>
         </button> &nbsp;
     {{/if}}

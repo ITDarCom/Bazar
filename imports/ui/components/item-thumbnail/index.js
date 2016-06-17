@@ -5,18 +5,18 @@ import { Items } from './../../../api/items/collection'
 import { Shops } from './../../../api/shops/collection'
 import './template.html'
 import './style.css'
-
+Session.set("favoriteStatus", false);
 Template.itemThumbnail.helpers({
-    shop(){    	
-    	if (Template.instance().data)
-        	return Shops.findOne(Template.instance().data.shop)   
+    shop(){
+        if (Template.instance().data)
+            return Shops.findOne(Template.instance().data.shop)
     },
     defaultThumbnail(){
-    	if (Template.instance().data)
-    		return Template.instance().data.thumbnails[0].url
+        if (Template.instance().data)
+            return Template.instance().data.thumbnails[0].url
     },
     isSearch(){
-    	return Template.instance().search
+        return Template.instance().search
     },
     favorite(){
         if (Meteor.userId()) {
@@ -26,10 +26,18 @@ Template.itemThumbnail.helpers({
 })
 
 Template.itemThumbnail.events({
-    "click .favorite-btn": function (){
-        console.log(this);
+    "click .favorite-btn": function (event) {
+        var star = event.target;
+        var favoriteStatus;
+        if (($(star).attr("class") == "fa fa-star-o")) {
+            favoriteStatus = true;
+        } else {
+            favoriteStatus = false;
+        }
+
         if (Meteor.userId()) {
-            Meteor.call("item.favoriteIt",this._id);
+            Meteor.call("item.favoriteIt", this._id, favoriteStatus);
         }
     }
+
 });

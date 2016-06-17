@@ -79,6 +79,22 @@ Router.ensureLoggedIn = function () {
         }
     }
 };
+Router.ensureNotBlocked =function () {
+    if(Meteor.user()&&Meteor.user().blocked){
+        this.render('blockWarningPage');
+    } else {
+        this.next()
+    }
+
+};
+Router.ensureIsAdmin =function () {
+    if(Meteor.user()&&(!Meteor.user().isAdmin)){
+        this.redirect('home');
+    } else {
+        this.next()
+    }
+
+}
 
 const privateRoutes = [
     'shops.new',
@@ -97,28 +113,22 @@ const privateRoutes = [
     'admin.categories',
     'admin.users'
 ]
+const adminRoute = [
+    'admin.categories',
+    'admin.cities',
+    'admin.users'
+]
 
 Router.onBeforeAction(Router.ensureLoggedIn, {only: privateRoutes});
 
-Router.ensureNotBlocked =function () {
-    if(Meteor.user().blocked){
-        this.render('blockWarningPage');
-    } else {
-        this.next()
-    }
+Router.onBeforeAction(Router.ensureNotBlocked,{only: privateRoutes});
 
-}
-Router.onBeforeAction(Router.ensureNotBlocked,{only: privateRoutes})
+Router.onBeforeAction(Router.ensureIsAdmin,{only: adminRoute});
 
 
 Router.route('/', function () {
-    if(Meteor.user()&&Meteor.user().blocked){
-        this.render('blockWarningPage');
-    }else{
-
         this.render('mainNav', {to: 'nav'});
         this.render('homePage');
-    }
 
 }, {
     name: 'home'

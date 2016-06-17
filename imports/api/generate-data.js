@@ -163,10 +163,12 @@ Meteor.methods({
             { username: 'username2', email: 'user2@gmail.com', password: 'password', profile: {} },
             { username: 'username3', email: 'user3@gmail.com', password: 'password', profile: {} },
             { username: 'username4', email: 'user4@gmail.com', password: 'password', profile: {} },
+            { username: 'bazar', email: 'bazar@gmail.com', password: '123456', profile: {},isAdmin: true },
+            { username: 'Kasem', email: 'kasem@gmail.com', password: '123456', profile: {},isAdmin: true },
         ]
 
         var accountsIds = accounts.map(function(account){
-            var accountId = Accounts.createUser(account)
+            var accountId = Meteor.users.insert(account)
             return accountId
         })
 

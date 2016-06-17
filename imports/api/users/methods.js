@@ -10,10 +10,11 @@ Meteor.methods({
 		modifier.$set.emails = [ {address: modifier.$set.email} ]
 		Meteor.users.update({ _id: documentId }, modifier, documentId);
 	},
-    "item.favoriteIt" : function (itemId){
+    "item.favoriteIt" : function (itemId,favoriteStatus){
         check(itemId, String);
+        check(favoriteStatus, Boolean);
         if (this.userId){
-            if(!Meteor.users.findOne({_id: this.userId, favorites: {$in: [itemId]}})) {
+            if(favoriteStatus) {
 
                 Meteor.users.upsert({_id: this.userId}, {$addToSet: {favorites: itemId}});
 
@@ -36,10 +37,28 @@ Meteor.methods({
         this.setUserId(userId);
     },
     'user.delete': function (userId) {
-
+        this.unblock();
         check(userId, String);
             if (Meteor.user().isAdmin) {
-                    Meteor.users.remove({_id: userId});
+                //Fiber = Npm.require('fibers');
+                //Fiber(function(){
+                //    console.log("I am in fiber")
+                //    //Meteor.users.remove({_id: userId});
+                //}).run();
+                //console.log("I am out bindEnvironment")
+                //Meteor.bindEnvironment(function (error, result) {
+                //    console.log("I am in bindEnvironment")
+                //    Meteor.users.remove({_id: userId});
+                //});
+
+                setTimeout(function () {
+                    Fiber = Npm.require('fibers');
+                    Fiber(function(){
+                        console.log("I am in fiber")
+                        Meteor.users.remove({_id: userId});
+                    }).run();
+                },1000)
+
             }
     },
     'user.setBlocked' : function(userId, blocked){
@@ -57,22 +76,6 @@ Meteor.methods({
             Accounts.setPassword(userId, pwd)
         }
 
-    },
-    'user.getRegisterdAt': function (id) {
-        var user = Meteor.users.findOne(id);
-        if (user.registerdAt) {
-            return moment(user.registerdAt).format('dddd DD-MM hh:mm');
-        }
-
-    },
-    'user.getlastSignIn': function (id) {
-        var user = Meteor.users.findOne(id);
-        if (user.lastSignIn) {
-            return moment(user.lastSignIn).format('dddd DD-MM hh:mm')
-        }
-    },
-    'user.setLastSingnin' : function (userId){
-        Meteor.users.upsert({_id: this.userId}, {$set: {lastSignIn: new Date()}});
     }
 
 })

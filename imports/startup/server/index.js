@@ -34,5 +34,5 @@ import './../../ui/pages/admin-users/users-table.js'
 import './../../api/accounts-base/accounts-server.js'
 
 Meteor.startup(() => {
-	//Meteor.call('generateFixtures')
+	Meteor.call('generateFixtures')
 });
