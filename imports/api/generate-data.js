@@ -163,15 +163,15 @@ Meteor.methods({
             { username: 'username2', email: 'user2@gmail.com', password: 'password', profile: {} },
             { username: 'username3', email: 'user3@gmail.com', password: 'password', profile: {} },
             { username: 'username4', email: 'user4@gmail.com', password: 'password', profile: {} },
-            { username: 'bazar', email: 'bazar@gmail.com', password: '123456', profile: {} },
-            { username: 'Kasem', email: 'kasem@gmail.com', password: '123456', profile: {} },
+            { username: 'bazar', email: 'bazar@gmail.com', password: '123456', profile: {} }
         ]
 
         var accountsIds = accounts.map(function(account){
             var accountId = Accounts.createUser(account)
-            Meteor.users.update({_id: accountId},{$set: {isAdmin: true}});
             return accountId
-        })
+        });
+
+        Meteor.users.update({username: 'bazar'},{$set: {isAdmin: true}});
 
         const shops = [
             { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
