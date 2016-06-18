@@ -22,17 +22,17 @@ Template.applicationLayout.onRendered(function(){
 })
 
 Template.registerHelper('hasShop', function(){
-    return Meteor.user() && Meteor.user().profile && Meteor.user().profile.hasShop;
+    return Meteor.user() && Meteor.user().hasShop;
 })
 
 Template.registerHelper('currentShop', function(){
-    return Meteor.user().profile.shop;
+    return Meteor.user().shop;
 })
 
 Template.registerHelper('isShopOwner', function(){
 	//returns if currentUser is shop owner of this shop
-	if (Meteor.user() && Meteor.user().profile.hasShop){
-		if (Router.current().params.shop == Meteor.user().profile.shop){
+	if (Meteor.user() && Meteor.user().hasShop){
+		if (Router.current().params.shop == Meteor.user().shop){
 			return true
 		} else {
 			return false

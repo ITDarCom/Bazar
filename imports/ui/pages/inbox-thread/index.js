@@ -118,7 +118,7 @@ Template.threadPage.onCreated(function(){
 			}).unread			
 		} else {
 			unread = thread.participants.find(p => {
-				return (p.id == Meteor.user().profile.shop) && (p.type == 'shop')
+				return (p.id == Meteor.user().shop) && (p.type == 'shop')
 			}).unread
 		}
 		if (unread){
@@ -204,7 +204,7 @@ Template.message.helpers({
 		if (inboxType.match(/personal/)){
 			return (author.type == 'user') && (author.id == Meteor.userId())
 		} else {
-			return (author.type == 'shop') && (author.id == Meteor.user().profile.shop)
+			return (author.type == 'shop') && (author.id == Meteor.user().shop)
 		}
 	},
 	avatar(){

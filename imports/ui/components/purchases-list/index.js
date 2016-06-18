@@ -37,13 +37,13 @@ Template.purchasesList.helpers({
 			break;
 			case "orders": 
 				selector = { 
-					shop: Meteor.user().profile.shop, 
+					shop: Meteor.user().shop, 
 					status : 'pending'
 				}
 			break;
 			case "sales": 
 				selector = { 
-					shop: Meteor.user().profile.shop, 
+					shop: Meteor.user().shop, 
 					$or : [
 						{ status : 'accepted' },
 						{ status : 'rejected' },

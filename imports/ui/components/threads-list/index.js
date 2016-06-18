@@ -43,7 +43,7 @@ Template.threadListItem.helpers({
 			}).unread			
 		} else {
 			return Template.instance().data.participants.find(p => {
-				return (p.id == Meteor.user().profile.shop) && (p.type == 'shop')
+				return (p.id == Meteor.user().shop) && (p.type == 'shop')
 			}).unread
 		}
 

@@ -33,7 +33,7 @@ Template.insertShopForm.helpers({
 	doc(){
 		var route = Router.current().route.getName()
 		if (route.match(/settings/)){
-			return Shops.findOne(Meteor.user().profile.shop)			
+			return Shops.findOne(Meteor.user().shop)			
 		}
 	},
 	cities: function () {

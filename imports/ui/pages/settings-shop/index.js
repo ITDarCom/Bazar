@@ -7,7 +7,7 @@ import { Shops } from './../../../api/shops/collection'
 
 Template.settingsShopPage.helpers({
 	shop(){
-		return Shops.findOne(Meteor.user().profile.shop)
+		return Shops.findOne(Meteor.user().shop)
 	}
 })
 

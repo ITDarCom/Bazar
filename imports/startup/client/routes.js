@@ -136,7 +136,7 @@ Router.route('/shops', function () {
 
 Router.route('/shops/new', function () {
 
-	if (Meteor.user() && (!Meteor.user().profile || !Meteor.user().profile.hasShop)){
+	if (Meteor.user() && !Meteor.user().hasShop){
 		this.render('empty', {to: 'nav'});
 		this.render('shopsNewPage');		
 	} else {
@@ -148,8 +148,8 @@ Router.route('/shops/new', function () {
 });
 
 Router.route('/shops/mine', function () {
-	if (Meteor.user() && Meteor.user().profile.hasShop){
-		Router.go('shops.show', { shop: Meteor.user().profile.shop })
+	if (Meteor.user() && Meteor.user().hasShop){
+		Router.go('shops.show', { shop: Meteor.user().shop })
 	} else {
 		this.redirect('shops.index')
 	}
@@ -169,8 +169,8 @@ Router.route('/shops/:shop', function () {
 Router.route('/shops/:shop/items/new', function () {
 
 	if (Meteor.user() && 
-		Meteor.user().profile.hasShop &&
-		Meteor.user().profile.shop == this.params.shop){
+		Meteor.user().hasShop &&
+		Meteor.user().shop == this.params.shop){
 
 		this.render('empty', {to: 'nav'});
 		this.render('itemsNewPage');
@@ -192,8 +192,8 @@ Router.route('/shops/:shop/items/:itemId', function () {
 Router.route('/shops/:shop/items/:itemId/edit', function () {
 
 	if (Meteor.user() && 
-		Meteor.user().profile.hasShop &&
-		Meteor.user().profile.shop == this.params.shop){
+		Meteor.user().hasShop &&
+		Meteor.user().shop == this.params.shop){
 
 		this.render('empty', {to: 'nav'});
 		this.render('itemsEditPage');

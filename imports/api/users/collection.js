@@ -1,9 +1,9 @@
  Meteor.users.attachSchema(new SimpleSchema({
-    'profile.hasShop' : {
+    'hasShop' : {
         type: Boolean,
         defaultValue : false
     },
-    'profile.shop' : {
+    'shop' : {
         type: String
     },
     'avatar':{

@@ -11,9 +11,9 @@ Meteor.methods({
 			throw new Meteor.Error('not-authorized');
 		}
 
-		var profile = Meteor.users.findOne(this.userId).profile
+		const hasShop = Meteor.users.findOne(this.userId).hasShop
 
-		if (profile && profile.hasShop){
+		if (hasShop){
 
 			return Items.insert({
 				title: doc.title,

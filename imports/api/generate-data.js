@@ -153,13 +153,13 @@ Meteor.methods({
                 deliveryInfo,
                 item: item._id,
                 user: fromUser || this.userId,
-                shop: user.profile.shop,
+                shop: user.shop,
                 status: 'pending',
                 createdAt: new Date()
             })
         };
 
-        Shops.update(user.profile.shop, { $inc: { 'unreadOrders': count }})
+        Shops.update(user.shop, { $inc: { 'unreadOrders': count }})
     },
     getThread(threadId){
         return Threads.findOne(threadId)
@@ -168,7 +168,7 @@ Meteor.methods({
         if (participant.type == 'user'){
             return Meteor.users.findOne(participant.id)
         } else if (participant.type == 'shop') {
-            return Meteor.users.findOne({'profile.shop':participant.id})
+            return Meteor.users.findOne({'shop':participant.id})
         }
     },
     generateThreads(userId, count, options){
@@ -179,7 +179,7 @@ Meteor.methods({
 
         var shopId = null
         if (opts.inbox.match(/shop/)){
-            shopId = currentUser.profile.shop
+            shopId = currentUser.shop
         }
 
         const unread = opts.unread || false
@@ -294,10 +294,13 @@ Meteor.methods({
 
         shops.forEach(function(shop, index){
             shop.user = accountsIds[index]
+            while (Shops.findOne(shop._id)){
+                shop._id = Random.id(6).toString()
+            }
             var shopId = Shops.insert(shop, { getAutoValues : false })
 
             Meteor.users.update({ _id: accountsIds[index]}, 
-                { $set: { 'profile.hasShop': true, 'profile.shop': shopId } 
+                { $set: { 'hasShop': true, 'shop': shopId } 
             })  
 
             const items = [
@@ -312,6 +315,9 @@ Meteor.methods({
             ]
 
             items.forEach(function(item){
+                while (Items.findOne(item._id)){
+                    item._id = Math.floor((Math.random() * 10000) + 1000).toString()
+                }
                 Items.insert(item, { getAutoValues : false })
             })
 

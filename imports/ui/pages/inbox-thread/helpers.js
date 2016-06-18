@@ -5,7 +5,7 @@ function getRecipient(thread, inboxType){
 	if (inboxType.match(/personal/)){
 		author = _.findWhere(thread.participants, { type:'user', id: Meteor.userId() })
 	} else {
-		author = _.findWhere(thread.participants, { type:'shop', id: Meteor.user().profile.shop })
+		author = _.findWhere(thread.participants, { type:'shop', id: Meteor.user().shop })
 	}
 	const index = thread.participants.indexOf(author)
 	const recipientIndex = index ? 0:1;

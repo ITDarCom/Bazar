@@ -30,7 +30,7 @@ Meteor.publishComposite('inbox', function inboxPublication(opts, limit){
 					'participants.id': this.userId
 				}, { limit: limit, sort: { createdAt: -1 } });
 			} else if (opts.inboxType.match(/shop/)){
-				const shopId = Meteor.users.findOne(this.userId).profile.shop
+				const shopId = Meteor.users.findOne(this.userId).shop
 				return Threads.find({
 					'participants.type': "shop",
 					'participants.id': shopId

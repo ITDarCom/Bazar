@@ -40,7 +40,7 @@ Meteor.methods({
 
 					//finding the user who owns this shop inbox
 					const shopId = recipient.id
-					const userId = Meteor.users.findOne({ 'profile.shop': shopId })
+					const userId = Meteor.users.findOne({ 'shop': shopId })
 
 					Threads.update({ 
 						_id: threadId, 
@@ -77,7 +77,7 @@ Meteor.methods({
 				} else if (inboxType.match(/shop/)){
 
 					const userId = this.userId
-					const shopId = Meteor.users.findOne(this.userId).profile.shop
+					const shopId = Meteor.users.findOne(this.userId).shop
 
 					Threads.update({ 
 						_id: threadId, 
@@ -107,7 +107,7 @@ Meteor.methods({
             }
 		} else {
 			author = {
-                type: 'shop', id: Meteor.users.findOne(this.userId).profile.shop
+                type: 'shop', id: Meteor.users.findOne(this.userId).shop
             }
 		}
 
@@ -145,7 +145,7 @@ Meteor.methods({
 		if (inboxType.match(/personal/)){
 			selector = { $elemMatch: { type:"user", id: this.userId } }
 		} else {
-			const shopId = Meteor.users.findOne(this.userId).profile.shop
+			const shopId = Meteor.users.findOne(this.userId).shop
 			selector = { $elemMatch: { type:"shop", id: shopId} }
 		}
 
@@ -169,7 +169,7 @@ Meteor.methods({
 	            }
 			} else {
 				author = {
-	                type: 'shop', id: Meteor.users.findOne(this.userId).profile.shop
+	                type: 'shop', id: Meteor.users.findOne(this.userId).shop
 	            }
 			}
 

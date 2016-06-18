@@ -48,7 +48,7 @@ Meteor.publishComposite('orders', function ordersPublication(){
 		find(){
 			//Meteor._sleepForMs(200);
 			if (!this.userId) this.ready();
-			var shop = Meteor.users.findOne(this.userId).profile.shop;
+			var shop = Meteor.users.findOne(this.userId).shop;
 			if (!shop) this.ready();
 			return Purchases.find({shop: shop, status: 'pending' }, { sort: { createdAt: -1 }});
 		}, 
@@ -61,7 +61,7 @@ Meteor.publishComposite('sales', function salesPublication(){
 		find(){
 			//Meteor._sleepForMs(200);
 			if (!this.userId) this.ready();
-			var shop = Meteor.users.findOne(this.userId).profile.shop;
+			var shop = Meteor.users.findOne(this.userId).shop;
 			if (!shop) this.ready();
 			return Purchases.find({
 				shop: shop, 

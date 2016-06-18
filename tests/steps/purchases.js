@@ -18,11 +18,11 @@ module.exports = function(){
 	});
 
 	this.Then(/^I should see "([^"]*)" in the unread counter of "([^"]*)" in the app menu$/, function (count, menuItem) {		
-		const selector = `#${menuItem} .counter`
+		const selector = `#${menuItem} .counter`;
 		var doesExist = browser.waitForExist(selector);
 		expect(doesExist).toBe(true);
-		var actualText = browser.getText(selector);
-		expect(actualText).toEqual(count);			
+		var actualText = browser.getHTML(selector);
+		expect(actualText.match(/\<span .*\>(\w+)\<\/span\>/)[1]).toEqual(count);			
 	});
 	
 	

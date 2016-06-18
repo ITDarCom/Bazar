@@ -16,9 +16,9 @@ Meteor.methods({
 			throw new Meteor.Error('not-authorized');
 		}
 
-		var profile = Meteor.users.findOne(this.userId).profile
+		const hasShop = Meteor.users.findOne(this.userId).hasShop
 
-		if (!profile || !profile.hasShop){
+		if (!hasShop){
 
 			return Shops.insert({
 				title: doc.title,
@@ -28,7 +28,7 @@ Meteor.methods({
 			}, (err, shopId) => {
 				if (!err) {
 					Meteor.users.update({ _id: this.userId}, 
-						{ $set: { 'profile.hasShop': true, 'profile.shop': shopId } 
+						{ $set: { 'hasShop': true, 'shop': shopId } 
 					})			
 				} else {
 					throw err
@@ -36,6 +36,7 @@ Meteor.methods({
 			});
 		}
 	},
+
 	'shops.update'(modifier, documentId){
 		// Make sure the user is logged in before inserting a task
 		if (! this.userId) {
@@ -43,6 +44,7 @@ Meteor.methods({
 		}
 		Shops.update({ _id: documentId }, modifier, documentId);
 	},
+
 	'shops.remove'(){
 
 		// Make sure the user is logged in before inserting a task
@@ -50,21 +52,19 @@ Meteor.methods({
 			throw new Meteor.Error('not-authorized');
 		}
 
-		var profile = Meteor.users.findOne(this.userId).profile
+		const hasShop = Meteor.users.findOne(this.userId).hasShop
+		const shop = Meteor.users.findOne(this.userId).shop
 
-		if (profile && profile.hasShop){
+		if (hasShop){
 
-			Items.remove({ shop: profile.shop})
-			Shops.remove({ _id: profile.shop })
-			//Purchases.remove({ _id: profile.shop })
+			Items.remove({ shop: shop})
+			Shops.remove({ _id: shop })
+			//Purchases.remove({ _id: shop })
 
 			Meteor.users.update({ _id: this.userId}, 
-				{ $set: { 'profile.hasShop': false, 'profile.shop': null } 
+				{ $set: { 'hasShop': false, 'shop': null } 
 			})	
 
 		}
-
-
-
 	}
 });

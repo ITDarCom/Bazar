@@ -14,7 +14,7 @@ Template.itemsEditPage.onCreated(function(){
 
 Template.itemsEditPage.helpers({
 	shop(){
-		return Shops.findOne(Meteor.user().profile.shop)
+		return Shops.findOne(Meteor.user().shop)
 	},
 	item(){
 		if (!Items.findOne(Router.current().params.itemId)){

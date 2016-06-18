@@ -23,7 +23,7 @@ Items.attachSchema(new SimpleSchema({
         type: String,
         autoValue: function () {
             if (this.isInsert) {
-                return Meteor.user().profile.shop;
+                return Meteor.user().shop;
             }
             if (this.isUpdate) {
                 this.unset(); // we should unset every change to this field
@@ -61,7 +61,7 @@ Items.attachSchema(new SimpleSchema({
         },
 		autoValue: function () {
 		    if (this.isInsert) {
-		        var shop = Shops.findOne(Meteor.user().profile.shop)
+		        var shop = Shops.findOne(Meteor.user().shop)
 		        return shop.city
 		    }
 		    if (this.isUpdate) {

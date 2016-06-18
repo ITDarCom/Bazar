@@ -99,7 +99,7 @@ module.exports = function(){
         } else {
 
 			const shopId = client.execute(function(){
-	            return Meteor.user().profile.shop
+	            return Meteor.user().shop
 	        }).value;
 
         	const other = thread.participants.find(p => p.id != shopId)

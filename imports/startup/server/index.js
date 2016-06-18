@@ -6,8 +6,6 @@ import { Shops } from './../../api/shops/collection.js'
 import { Purchases } from './../../api/purchases/collection.js'
 import { Categories } from './../../api/categories/collection.js'
 import { Threads } from './../../api/threads/collection.js'
-
-import { resetDatabase } from 'meteor/xolvio:cleaner';
 import {TAPi18n} from "meteor/tap:i18n";
 
 //SimpleSchema.debug = true
@@ -31,9 +29,12 @@ import './../../api/generate-data.js'
 Meteor.startup(() => {
 
 	Accounts.onCreateUser(function(options, user) {
-		user.avatar = '/default-avatar.png'
+		user.avatar = '/default-avatar.png';
+		user.hasShop = false;
+
 		if (options.profile)
 			user.profile = options.profile;
+
 		return user;
 	});	
 
