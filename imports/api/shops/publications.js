@@ -4,7 +4,7 @@ import './search'
 
 Meteor.publish('shops', function shopsPublication(query, limit) {
 	//Meteor._sleepForMs(200);
-	return Shops.find();
+	return Shops.find({isHidden :{$ne: true}});
 });
 
 Meteor.publish('singleShop', function singleShopPublication(shopId) {

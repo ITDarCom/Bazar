@@ -66,5 +66,9 @@ Shops.attachSchema(new SimpleSchema({
     unreadOrders: {
         type: Number,
         defaultValue: 0
-    }    
+    },
+    isHidden : {
+        type: Boolean,
+        defaultValue:false
+    }
 }));
