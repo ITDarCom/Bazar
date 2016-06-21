@@ -31,7 +31,7 @@
 		<div class="col-xs-6" style="padding:0px;">
 				<li class="list-group-item">{{_ "member"}}: {{member}}</li>
 				<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
-				<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate}}</li>
+				<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a"}}</li>
 				<li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
 				<li class="list-group-item">{{_ "email"}}: {{deliveryInfo.email}}</li>
 				<li class="list-group-item">{{_ "mobile"}}: {{deliveryInfo.phone}}</li>
@@ -49,7 +49,7 @@
 <template name="purchaseItem">
 	<div class="purchase-item row">
 		<div class="col-xs-6" style="padding:0px;">
-			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY" }}</li>
+			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a" }}</li>
 			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
 			<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>
 			<li class="list-group-item">{{_ "total"}}: {{total}}</li>
@@ -78,7 +78,7 @@
 		<div class="col-xs-6" style="padding:0px;">
 			<li class="list-group-item">{{_ "member"}}: {{member}}</li>
 			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
-			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate}}</li>
+			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a"}}</li>
 			<li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
 			<li class="list-group-item">{{_ "email"}} {{deliveryInfo.email}}</li>
 			<li class="list-group-item">{{_ "mobile"}} {{deliveryInfo.phone}}</li>

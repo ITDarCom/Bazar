@@ -14,7 +14,7 @@ Feature: Managing cart
 		When I click ".add-to-cart" button
 		Then I should be redirected to the "cart" page
 		Then I should see a list of "1" cart items
-
+		
 	Scenario: User removing an item from the cart
 		Given I have "3" items in cart		
 		And I am on "cart" page
@@ -29,8 +29,8 @@ Feature: Managing cart
 	Scenario: User adding notes and quantity about an item
 		Given I am on "cart" page
 		And I have "1" items in cart
-		When I enter "fresh please" in the "notes" field
 		And I enter "5" in the "quantity" field		
+		When I enter "fresh please" in the "notes" field
 		And I wait for "1" seconds
 		And I go to "cart" page
 		Then I should see "fresh please" in the "notes" field
@@ -46,6 +46,7 @@ Feature: Managing cart
 		And I should see "deliveryAddress" input field
 		And I should see "deliveryDate" input field
 
+@watch
 	Scenario: User submitting a cart after specifying delivery information
 		Given I have "1" items in cart		
 		And I am on "cart" page
@@ -61,7 +62,6 @@ Feature: Managing cart
 
 	Scenario: User submitting a cart without specifying delivery information
 	Scenario: User viewing checkout will changing quantitiy
-
 
 	User adding submitting a shopping cart for the first time (only email is filled)
 	User submitting a shopping cart for the second time (email and phone filled)

@@ -20,6 +20,7 @@ Purchases.attachSchema(new SimpleSchema({
     'notes' : {
         type: String,
         optional:true,
+        trim: false,
         label: function(){
             return TAPi18n.__('notes')
         }, 

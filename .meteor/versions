@@ -1,6 +1,7 @@
 accounts-base@1.2.7
 accounts-password@1.1.8
 aldeed:autoform@5.8.1
+aldeed:autoform-bs-datetimepicker@1.0.6
 aldeed:collection2@2.3.1
 aldeed:simple-schema@1.1.0
 allow-deny@1.0.4
@@ -95,6 +96,8 @@ tap:i18n@1.2.1
 templating@1.1.9
 templating-tools@1.0.4
 tracker@1.0.13
+tsega:bootstrap3-datetimepicker@3.1.3_3
+twbs:bootstrap@3.3.6
 ui@1.0.11
 underscore@1.0.8
 url@1.0.9

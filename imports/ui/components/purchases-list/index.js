@@ -119,9 +119,9 @@ Template.saleItem.helpers({
 	accepted(){
 		return (Template.instance().data.status == 'accepted')
 	},
-/*	user(){
-		return Meteor.users.findOne(Template.instance().data.user)	
-	},*/
+	member(){
+		return Meteor.users.findOne(Template.instance().data.user).username
+	},
 	total(){
 		const data = Template.instance().data
 		const item = getItem(data.item)

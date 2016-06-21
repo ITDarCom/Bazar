@@ -71,7 +71,7 @@ Template.cartItem.helpers({
 Template.cartItemForm.events({
 	'click .remove-cart-item-btn': function (event, instance){
 		Meteor.call('cart.removePurchase', instance.data._id)
-	}	
+	}
 });
 
 Template.deliveryInformationForm.onCreated(function(){
@@ -100,6 +100,12 @@ Template.deliveryInformationForm.onCreated(function(){
 		    type: Date,
 		    label: function(){
 		        return TAPi18n.__('delivery')
+		    },
+			autoform: {
+		      afFieldInput: {
+		        type: Modernizr.inputtypes['datetime-local'] ?
+		        	"datetime-local": "bootstrap-datetimepicker"
+		      }
 		    }
 		}
 	});
@@ -119,10 +125,11 @@ Template.deliveryInformationForm.helpers({
 		return Template.instance().schema
 	},
 	defaultValues(){
+		const nextWeek = new Date((new Date()).getTime() + 7 * 24 * 60 * 60 * 1000)
 		return {
 			phone: Meteor.user().phone || "",
 			email: Meteor.user().emails[0].address,
-			deliveryDate: new Date((new Date()).getTime() + 7 * 24 * 60 * 60 * 1000)
+			deliveryDate: nextWeek
 		}
 	}
 })

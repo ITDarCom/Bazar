@@ -67,5 +67,5 @@ Meteor.startup(function () {
 
 	T9n.map('ar', {
   		email: 'بريد إلكتروني'		
-	})
+	});
 })

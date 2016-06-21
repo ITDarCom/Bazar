@@ -34,15 +34,21 @@
 		type="method-update"
 		doc=this
 		autosaveOnKeyup=true
-		resetOnSuccess=false
 		trimStrings=false
+		resetOnSuccess=false
 		meteormethod="cart.updatePurchase"}}
 		{{> afQuickField name='notes' label=false rows=5 placeholder=notesPlaceholder}}
-		<button 
-			class="btn btn-danger btn-fab btn-fab-mini remove-cart-item-btn" 
-			style="float:left; top:25px;">
-			<i class="material-icons">clear</i></button>		
-		{{> afQuickField name='quantity' style="width:50%; display:inline-block;" type="number"}}
+		<div class="form-group" style="margin-bottom:0px;">
+			<div class="input-group">    
+				{{> afQuickField name='quantity' style="width:100%;" type="number"}}
+				<span class="input-group-btn input-group-sm">
+					<button 
+						class="btn btn-danger btn-fab btn-fab-mini remove-cart-item-btn" 
+						style="float:left; top:25px;">
+						<i class="material-icons">clear</i></button>
+				</span>
+			</div>
+		</div>
 	{{/autoForm}}
 	</div>
 </template>
@@ -58,7 +64,7 @@
 		meteormethod="cart.submit"}}
 
 		{{> afQuickField name='email'}}
-		{{> afQuickField name='phone'}}
+		{{> afQuickField name='phone' type="tel"}}
 		{{> afQuickField name='deliveryAddress'}}
 		{{> afQuickField name='deliveryDate'}}
 

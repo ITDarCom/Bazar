@@ -38,3 +38,6 @@ tap:i18n
 softwarerero:accounts-t9n
 matb33:collection-hooks
 rzymek:moment-locale-ar
+aldeed:autoform-bs-datetimepicker
+twbs:bootstrap
+tsega:bootstrap3-datetimepicker@=3.1.3_3
