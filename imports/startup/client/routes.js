@@ -153,6 +153,7 @@ Router.route('/shops/mine', function () {
 	} else {
 		this.redirect('shops.index')
 	}
+
 }, {
 	name: 'shops.mine'
 });

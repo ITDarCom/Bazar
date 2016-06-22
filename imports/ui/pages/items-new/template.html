@@ -1,22 +1,28 @@
 <template name="itemsNewPage">
-	{{>shopHeader shop}}	
-	{{> insertItemForm}}
+    {{>shopHeader shop}}
+    {{> insertItemForm}}
 </template>
 
 <template name="insertItemForm">
-	{{#autoForm 
-		collection=formCollection 
-		id="insertItemForm" 
-		type=formType
-		doc=doc
-		meteormethod=method}}
+    {{#autoForm
+    collection=formCollection
+    id="insertItemForm"
+    type=formType
+    doc=doc
+    meteormethod=method}}
 
-		{{> afQuickField name='title'}}
-		{{> afQuickField name='description' rows=3}}
-		{{> afQuickField name='price'}}
-		{{> afQuickField name='category' type="select" options=categories}}
+        {{> afQuickField name='title'}}
+        {{> afQuickField name='description' rows=3}}
+        {{> afQuickField name='price'}}
+        {{> afQuickField name='category' type="select" options=categories}}
 
-		<button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">{{_ "submit"}}</button><br />
+        <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">{{_ "submit"}}</button>
+        <br/>
+        {{#if isActiveRoute 'items.edit'}}
+            <button class="btn btn-warning btn-block btn-raised hide-item-btn">
+                {{#if isHidden}} {{_ "unhideItem"}}{{else}}{{_ "hideItem"}} {{/if}} </button>
+        {{/if}}
+    {{/autoForm}}
 
-	{{/autoForm}}
+
 </template>

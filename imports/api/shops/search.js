@@ -8,7 +8,7 @@ SearchSource.defineSource('shops', function(searchText, options) {
 
 	if(searchText) {
 		var regExp = buildRegExp(searchText);
-		var selector = { $or: [{title: regExp}, {description: regExp}]};
+		var selector = { $or: [{title: regExp}, {description: regExp}],isHidden: false};
 		return Shops.find(selector, options).fetch();
 	} else {
 		return Shops.find({}, options).fetch();

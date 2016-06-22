@@ -84,4 +84,15 @@ Items.attachSchema(new SimpleSchema({
     'thumbnails.$.url': {
         type: String 
     },
+    isHidden: {
+        type:Boolean,
+        autoValue: function () {
+            if (this.isInsert){
+                return false;
+            }
+            if (this.isUpdate){
+                return this.value;
+            }
+        }
+    }
 }));

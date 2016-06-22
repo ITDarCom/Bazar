@@ -7,12 +7,23 @@ Meteor.publishComposite('items', function itemsPublication(query, limit){
 	return {
 		find(){
 			//Meteor._sleepForMs(200);
+			var user = Meteor.users.findOne(this.userId);
+             if(user && user.profile && user.profile.hasShop){
+				 if(query.shop  && (user.profile.shop == query.shop)){
+					 query = query;
+				 }
+				 else {
+					 query.isHidden = false;
+				 }
+			 }else {
+				 query.isHidden = false
+			 }
 			return Items.find(query, { limit: limit, sort: { createdAt: -1 } });
 		}, 
 		children : [
 			{
 				find(item){
-					return Shops.find({ _id: item.shop})
+					return Shops.find({ _id: item.shop,isHidden:false})
 				}
 			}
 
@@ -48,14 +59,13 @@ Meteor.publishComposite('favoriteItems', function itemsPublication(query, limit)
                 if (!favorites){
                     favorites = [];
                 }
-
-                return Items.find({_id: {$in: favorites}},{limit: limit});
+                return Items.find({_id: {$in: favorites},isHidden: false},{limit: limit});
             }
         },
         children: [
             {
                 find(item){
-                    return Shops.find({_id: item.shop})
+                    return Shops.find({_id: item.shop,isHidden: false})
                 }
             }
 

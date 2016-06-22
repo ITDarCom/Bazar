@@ -8,7 +8,7 @@
     </div>
   </div>
   {{/if}}   
-  <div class="item-thumbnail col-xs-6 col-md-3">
+  <div class="item-thumbnail {{#if isHidden}} thumbnail-dark {{/if}} col-xs-6 col-md-3">
     <div class="thumbnail" style="position:relative;">
       <div style="position:absolute;right:8px;top:5px;font-size:8pt;color:blue;">
         <p>{{_id}}</p>
@@ -23,6 +23,7 @@
             </a>
           </p>
           <p>{{shop.title}}، {{cityLabel city}}</p>
+
         <div style="float:left;margin-right:5px;margin-left:5px;">
           <p>
             <i style="font-size:20px" class="material-icons">share</i> 

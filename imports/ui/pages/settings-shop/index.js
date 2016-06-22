@@ -23,7 +23,7 @@ Template.settingsShopPage.events({
             var shop = Shops.findOne({_id: profile.shop})
             if (shop) {
                 var status = !shop.isHidden;
-                Meteor.call('shops.hide', status);
+                Meteor.call('shop.hide', status);
             }
         }
     }

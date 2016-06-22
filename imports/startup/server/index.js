@@ -35,10 +35,10 @@ Meteor.startup(() => {
 		if (options.profile)
 			user.profile = options.profile;
 		return user;
-	});	
+	});
 
 	if (Meteor.users.find().count() == 0){
-		Meteor.call('generateFixtures')		
+		Meteor.call('generateFixtures')
 	}
 
 });

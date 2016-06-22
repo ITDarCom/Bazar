@@ -22,6 +22,9 @@ Template.itemThumbnail.helpers({
         if (Meteor.userId()) {
             return Meteor.users.findOne({_id: Meteor.userId(), favorites: {$in: [this._id]}});
         }
+    },
+    isHidden(){
+        return Template.instance().data.isHidden
     }
 })
 

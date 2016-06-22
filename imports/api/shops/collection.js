@@ -67,8 +67,15 @@ Shops.attachSchema(new SimpleSchema({
         type: Number,
         defaultValue: 0
     },
-    isHidden : {
-        type: Boolean,
-        defaultValue:false
+    isHidden: {
+        type:Boolean,
+        autoValue: function () {
+            if (this.isInsert){
+                return false;
+            }
+            if (this.isUpdate){
+                return this.value;
+            }
+        }
     }
 }));

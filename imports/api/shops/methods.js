@@ -67,7 +67,7 @@ Meteor.methods({
 
 
 	},
-	'shops.hide'(status){
+	'shop.hide'(status){
 
 		// Make sure the user is logged in before inserting a task
 		if (! this.userId) {
@@ -77,8 +77,14 @@ Meteor.methods({
 		var profile = Meteor.users.findOne(this.userId).profile
 
 		if (profile && profile.hasShop) {
-
-			Shops.update({_id: profile.shop},{$set: {isHidden: status}})
+			Shops.update({_id: profile.shop},{$set: {isHidden: status}});
+			Items.update({shop: profile.shop},{$set: {isHidden: status}},{multi: true},function(err,res){
+				if(!err){
+					//console.log(res)
+				}else{
+					console.log("error is happened")
+				}
+			});
 
 		}
 
