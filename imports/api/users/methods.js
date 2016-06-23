@@ -40,25 +40,7 @@ Meteor.methods({
         this.unblock();
         check(userId, String);
             if (Meteor.user().isAdmin) {
-                //Fiber = Npm.require('fibers');
-                //Fiber(function(){
-                //    console.log("I am in fiber")
-                //    //Meteor.users.remove({_id: userId});
-                //}).run();
-                //console.log("I am out bindEnvironment")
-                //Meteor.bindEnvironment(function (error, result) {
-                //    console.log("I am in bindEnvironment")
-                //    Meteor.users.remove({_id: userId});
-                //});
-
-                setTimeout(function () {
-                    Fiber = Npm.require('fibers');
-                    Fiber(function(){
-                        console.log("I am in fiber")
-                        Meteor.users.remove({_id: userId});
-                    }).run();
-                },1000)
-
+                    Meteor.users.remove({_id: userId});
             }
     },
     'user.setBlocked' : function(userId, blocked){

@@ -8,7 +8,6 @@ TabularTables = {};
 TabularTables.users = new Tabular.Table({
     name: "users",
     collection: Meteor.users,
-    throttleRefresh: 5000,
     "ordering": false,
     "lengthChange": false,
     bLengthChange: false,
