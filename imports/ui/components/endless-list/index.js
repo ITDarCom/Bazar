@@ -70,6 +70,13 @@ Template.endlessList.onCreated(function () {
 
         }
         else {
+            if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.hasShop){
+                if (!(route.match(/shops.show/) && (Meteor.user().profile.shop == query.shop))){
+                    query.isHidden = false;
+                }
+            }else {
+                query.isHidden = false;
+            }
             return Items.find(query, { sort: { createdAt: -1 }})
         }
     }

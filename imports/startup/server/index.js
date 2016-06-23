@@ -37,7 +37,7 @@ Meteor.startup(() => {
 		return user;
 	});
 
-	if (Meteor.users.find().count() == 0){
+	 if (Meteor.users.find().count() == 0){
 		Meteor.call('generateFixtures')
 	}
 

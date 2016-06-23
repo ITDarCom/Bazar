@@ -9,12 +9,11 @@ Meteor.publishComposite('items', function itemsPublication(query, limit){
 			//Meteor._sleepForMs(200);
 			var user = Meteor.users.findOne(this.userId);
              if(user && user.profile && user.profile.hasShop){
-				 if(query.shop  && (user.profile.shop == query.shop)){
-					 query = query;
-				 }
-				 else {
+				 //query.shop will take value when the user visit shops.show page else query.shop is undefined
+				 if(!(query.shop  && (user.profile.shop == query.shop))){
 					 query.isHidden = false;
 				 }
+
 			 }else {
 				 query.isHidden = false
 			 }
