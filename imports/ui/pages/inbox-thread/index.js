@@ -166,7 +166,8 @@ Template.threadPage.onRendered(function(){
 })
 
 Template.threadPage.events({
-	"keypress textarea[name='message']"(event, instance){
+	//sending message by ENTER key
+	/*"keypress textarea[name='message']"(event, instance){
 		if (event.keyCode == 13 && !event.shiftKey) {
 			event.preventDefault()
 			const body = event.target.value.trim()
@@ -177,7 +178,7 @@ Template.threadPage.events({
 			    keepFocus(event.target)		
 			}
 		}
-	},
+	},*/
 	"click .send-message-btn"(event, instance){
 		const target = $("textarea[name='message']")[0]
 		const body = target.value
@@ -226,7 +227,8 @@ Template.messageModal.helpers({
 })
 
 Template.messageModal.events({
-	"keypress textarea[name='message']": function(e, instance){
+	//sending message by ENTER key
+	/*"keypress textarea[name='message']": function(e, instance){
 		if (e.keyCode == 13 && !e.shiftKey) {
 			e.preventDefault()
 			const body = e.target.value.trim()
@@ -237,7 +239,7 @@ Template.messageModal.events({
 			    $(`#${data.modalId}`).modal('toggle')				
 			}
 		}
-	},
+	},*/
 	"click .send-message-btn"(event, instance){
 		const body = $("textarea[name='message']")[0].value
 		const data = Template.instance().data

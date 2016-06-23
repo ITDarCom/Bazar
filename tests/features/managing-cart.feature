@@ -46,7 +46,6 @@ Feature: Managing cart
 		And I should see "deliveryAddress" input field
 		And I should see "deliveryDate" input field
 
-@watch
 	Scenario: User submitting a cart after specifying delivery information
 		Given I have "1" items in cart		
 		And I am on "cart" page

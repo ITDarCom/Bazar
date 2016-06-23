@@ -1,3 +1,4 @@
+@watch
 Feature: Messaging
 
 	As a user or shop owner
@@ -79,7 +80,7 @@ Feature: Messaging
 		When I am on "inbox.personal" page
 		When I click on a thread 
 		When I enter "hi there you!" in the "message" textarea
-		And I press enter
+		And I click ".send-message" button
 		Then I should see "" in the "message" field
 		And I wait for "1" seconds		
 		And the last message in the thread should be "hi there you!"
@@ -93,7 +94,7 @@ Feature: Messaging
 		When I click on a thread 
 		When I enter "hi there you!" in the "message" textarea
 		When I enter "hi there you again!" in the "message" textarea
-		And I press enter
+		And I click ".send-message" button
 		Then I should see "" in the "message" field
 		And I wait for "1" seconds		
 		And the last message in the thread should be "hi there you again!"
@@ -105,16 +106,18 @@ Feature: Messaging
 		And there are "1" shops titled "McDoos"
 		And I am on "McDoos" shop page
 		When I click ".message" button
-		When I enter "hello I liked your shop page" in the "message" textarea
-		When I enter "I am waiting your reply" in the "message" textarea
-		And I press enter
+		And I enter "hello I liked your shop page" in the "message" textarea
+		And I click ".send-message" button
+		When I click ".message" button
+		And I enter "I am waiting your reply" in the "message" textarea
+		And I click ".send-message" button
 		When I am on "inbox.personal" page
 		Then I should see a list of "1" threads
 		And I should see a list of "0" unread threads
-		When I click on a thread 
+		When I click on a thread
 		Then the last message in the thread should be "I am waiting your reply"
 		And I should see "McDoos" as a recipient
-		And the recipient of the current thread should be notified				
+		And the recipient of the current thread should be notified
 
 	Scenario: Shop owner initiating a thread with a user
 		Given I am a registered user with a shop	
@@ -124,12 +127,15 @@ Feature: Messaging
 		And I am on "settings.orders" page
 		When I click ".message" button
 		When I enter "thank you for purchasing from our shop" in the "message" textarea
-		And I press enter
+		And I click ".send-message" button
+		When I click ".message" button
+		And I enter "thank you again" in the "message" textarea
+		And I click ".send-message" button		
 		When I am on "inbox.shop" page
 		Then I should see a list of "5" threads
 		And I should see a list of "0" unread threads
 		When I click on a thread 
-		Then the last message in the thread should be "thank you for purchasing from our shop"
+		Then the last message in the thread should be "thank you again"
 		And I should see "Ahmad" as a recipient
 		And the recipient of the current thread should be notified				
 

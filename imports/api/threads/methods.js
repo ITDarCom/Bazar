@@ -143,10 +143,10 @@ Meteor.methods({
 
 		var senderSelector
 		if (inboxType.match(/personal/)){
-			selector = { $elemMatch: { type:"user", id: this.userId } }
+			senderSelector = { $elemMatch: { type:"user", id: this.userId } }
 		} else {
 			const shopId = Meteor.users.findOne(this.userId).shop
-			selector = { $elemMatch: { type:"shop", id: shopId} }
+			senderSelector = { $elemMatch: { type:"shop", id: shopId} }
 		}
 
 		const existingThread = Threads.findOne({
@@ -155,6 +155,7 @@ Meteor.methods({
 				{ 'participants': { $elemMatch: { type:recepientType, id:recepientId}} }  
 			]
 		})
+
 
 		if (existingThread){
 
