@@ -126,5 +126,9 @@ Template.saleItem.helpers({
 		const data = Template.instance().data
 		const item = getItem(data.item)
 		if (item) return (item.price * data.quantity)
-	}	
+	},
+	modalId(){
+		const data = Template.instance().data		
+		return `message-modal-${data._id}`
+	}
 })

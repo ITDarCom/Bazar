@@ -2,11 +2,12 @@
 
   <div class="navbar navbar-fixed-top navbar-warning">
     <div class="container-fluid">
-      <div class="navbar-header navbar-right">
+      <div class="navbar-header">
         <button type="button" 
           class="navbar-toggle" 
+          style="float:right; margin-right:10px;"
           data-toggle="offcanvas" 
-          data-target=".navmenu" data-canvas="body">
+          data-target=".navmenu" data-canvas=".canvas, .navbar">
           {{#if unreadItems}}
             <span class="unread-mark"></span>
           {{/if}}
@@ -26,7 +27,7 @@
         </ul>        
       </div>
     </div>
-  </div>  
+  </div>
 
   <nav id="offcanvas" class="navmenu navmenu-inverse navmenu-fixed-right navmenu-site offcanvas" role="navigation">
       <a class="navmenu-brand">{{_ "bazar"}}</a>
@@ -111,7 +112,9 @@
       </ul>  
   </nav>    
 
-    <div class="container">
+
+  <div class="canvas">
+    <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12">
             {{> yield "nav"}}
@@ -119,5 +122,6 @@
         </div>
         {{> yield}}
     </div>
-
+  </div>
+  
 </template>

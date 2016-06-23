@@ -17,17 +17,20 @@
 <template name="orderItem">
 	<div class="order-item row">
 		<div class="col-xs-12">
-		<div class="btn-group btn-group-justified btn-group-raised pull-right">
-			<a class="btn btn-primary accept-order-btn">
-				<i class="material-icons">done</i> {{_ "accept"}}</a>
-			<a class="btn btn-danger reject-order-btn">
-				<i class="material-icons">clear</i> {{_ "reject"}}</a>
-			<a class="btn btn-info message-btn"
-				data-toggle="modal" data-target="#{{modalId}}">				
-				<i class="material-icons">mail</i>
-			</a>
+			<div class="btn-group btn-group-justified btn-group-raised">
+				<a class="btn btn-primary accept-order-btn" 
+					style="padding-right:15px;padding-left:15px;">
+					<i class="material-icons">done</i> {{_ "accept"}}</a>
+				<a class="btn btn-danger reject-order-btn"
+					style="padding-right:15px;padding-left:15px;">
+					<i class="material-icons">clear</i> {{_ "reject"}}</a>
+				<a class="btn btn-info message-btn"
+					data-toggle="modal" data-target="#{{modalId}}">				
+					<i class="material-icons">mail</i>
+				</a>
+			</div>
 		</div>
-		</div>
+		{{> itemThumbnail item}}
 		<div class="col-xs-6" style="padding:0px;">
 				<li class="list-group-item">{{_ "member"}}: {{member}}</li>
 				<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
@@ -39,7 +42,6 @@
 				<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>				
 				<li class="list-group-item">{{_ "total"}}: {{total}}</li>
 		</div>
-		{{> itemThumbnail item}}
 	</div>
 
 	{{> messageModal modalId=modalId recpientType='user' recpientId=user inboxType='shop'}}
@@ -48,6 +50,7 @@
 
 <template name="purchaseItem">
 	<div class="purchase-item row">
+		{{> itemThumbnail item}}
 		<div class="col-xs-6" style="padding:0px;">
 			<li class="list-group-item">{{_ "delivery"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a" }}</li>
 			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
@@ -56,8 +59,6 @@
 			<li class="list-group-item {{statusClass}}">{{_ "status"}}: {{{_ status}}}</li>
 			<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
 		</div>
-
-		{{> itemThumbnail item}}
 	</div>
 </template>
 
@@ -72,9 +73,12 @@
 				<a class="btn btn-danger reject-order-btn disabled">
 					<i class="material-icons">clear</i> {{_ "rejected"}}</a>
 				{{/if}}
-				<a class="btn btn-info message-user-btn"><i class="material-icons">mail</i></a>
+				<a class="btn btn-info message-btn"
+					data-toggle="modal" data-target="#{{modalId}}">				
+					<i class="material-icons">mail</i></a>				
 			</div>
 		</div>				
+		{{> itemThumbnail item}}
 		<div class="col-xs-6" style="padding:0px;">
 			<li class="list-group-item">{{_ "member"}}: {{member}}</li>
 			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
@@ -86,6 +90,9 @@
 			<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>				
 			<li class="list-group-item">{{_ "total"}}: {{total}}</li>
 		</div>
-		{{> itemThumbnail item}}
 	</div>
+
+
+	{{> messageModal modalId=modalId recpientType='user' recpientId=user inboxType='shop'}}
+
 </template>

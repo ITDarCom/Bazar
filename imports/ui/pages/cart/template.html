@@ -1,5 +1,5 @@
 <template name="cartPage">
-	<center><h1 class="page-header">{{_ "cart"}}</h1></center>
+	<h1 class="page-header">{{_ "cart"}}</h1>
 	{{#unless empty}}
 		<div class="cart-items-list">
 		{{#each purchases}}
@@ -20,10 +20,10 @@
 
 <template name="cartItem">
 	<div class="row cart-item">		
-		{{> cartItemForm this}}
 		{{> itemThumbnail item}}			
-		<hr class="col-xs-12" style="margin-top:0px;"/>
+		{{> cartItemForm this}}
 	</div>
+	<hr />
 </template>
 
 <template name="cartItemForm">
