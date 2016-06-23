@@ -13,7 +13,11 @@
 
 		{{> afQuickField name='title'}}
 		{{> afQuickField name='description' rows=3}}
-		{{> afQuickField name='city' type="select" options=cities}}
+		{{> afQuickField 
+			name='city' 
+			type="select" 
+			firstOption=(_ "selectCity")
+			options=cities}}
 
 		<button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
 			{{_ "submit"}}</button>

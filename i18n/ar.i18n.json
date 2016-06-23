@@ -21,6 +21,8 @@
 	"loadingMessage": "جار التحميل...",
 	"noResultsMessage": "لم يتم العثور على أية نتائج",
 	"city": "المدينة",
+	"allCities": "كل المدن",
+	"selectCity":"اختر مدينة",
 	"search": "البحث",
 	"riyals": "%s ريالا",
 	"myAccount": "حسابي",

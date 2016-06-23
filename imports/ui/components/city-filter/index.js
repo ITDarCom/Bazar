@@ -14,9 +14,6 @@ Template.itemsFilter.helpers({
 	schema(){
 		return SelectCity
 	},
-	cityi18n(){
-		return TAPi18n.__('city')
-	},
 	options: function () {
 		return [
 			{label: "جدة", value: "jeddah"},
