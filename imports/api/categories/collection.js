@@ -39,5 +39,24 @@ Categories.attachSchema(new SimpleSchema({
 				this.unset(); // we should unset every change to this field
 			}
 		}
+	},
+	order: {
+		type: Number,
+		label: function(){
+
+			return TAPi18n.__('categoryOrder')
+		},
+		autoValue: function () {
+			if (this.isInsert) {
+				return Categories.find().count()+1;
+
+			}
+			if (this.isUpdate) {
+				if(this.value > Categories.find().count() || this.value <= 0){
+					this.unset()
+				}else return this.value;
+			}
+
+		}
 	}
 }));

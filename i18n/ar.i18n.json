@@ -66,6 +66,7 @@
 	"cities":"المدن",
 	"deleteCity":"هل انت متأكد من حذف هذه المدينة",
 	"deleteCategory": "هل انت متأكد من حذف هذا الصنف ",
+	"categoryOrder": "ترتيب الصنف",
 	"Admin-Users":"إدارةالمستخدمين",
 	"lastSignIn":"آخر ظهور",
 	"registerdAt":"سجل بتاريخ",

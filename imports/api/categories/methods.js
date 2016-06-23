@@ -15,5 +15,12 @@ Meteor.methods({
     },
     "category.delete" : function (cityId) {
         Categories.remove({_id : cityId});
+    },
+    "categoryOrder.up" : function (identifier,newOrder) {
+
+            Categories.update({identifier: identifier},{$set: {order: newOrder}})
+    },
+    "categoryOrder.down": function (identifier,newOrder) {
+        Categories.update({identifier: identifier},{$set: {order: newOrder}})
     }
 });

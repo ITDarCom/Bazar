@@ -61,3 +61,6 @@ th, td {
 .admin-header{
     margin-bottom: 30px;
 }
+.table-categories td {
+    vertical-align: middle;
+}
