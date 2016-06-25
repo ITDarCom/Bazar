@@ -20,12 +20,20 @@ Template.cartPage.helpers({
 	},
 	showDeliveryForm(){
 		return Template.instance().showDeliveryForm.get()
+	},
+	lastShoppingContext(){
+		return Session.get('lastShoppingContext')
 	}
 })
 
 Template.cartPage.events({
 	'click .submit-cart-btn': function (event, instance){
 		instance.showDeliveryForm.set(true);	
+	},
+	'click .back-btn'(event, instance){
+		event.preventDefault()
+		Session.set('elementToScrollBack', null)
+		Router.go(Session.get('lastShoppingContext'))
 	}
 });
 

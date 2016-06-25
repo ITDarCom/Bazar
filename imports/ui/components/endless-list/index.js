@@ -203,6 +203,7 @@ Template.endlessList.onDestroyed(function () {
 //tracking what scroll position was the user at
 Template.endlessList.events({
     'click .endless-list > .item-thumbnail a': function (event, instance) {
+        Session.set('lastShoppingContext', Router.current().url)
         setTimeout(function(){
             const itemId = Router.current().params.itemId
             Session.set('elementToScrollBack', `#item-${itemId}`)

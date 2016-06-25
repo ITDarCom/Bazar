@@ -1,12 +1,19 @@
 <template name="cartPage">
-	<h1 class="page-header">{{_ "cart"}}</h1>
+	<h1 class="page-header">
+		{{_ "cart"}}
+		{{#if lastShoppingContext}}
+	  		<a href="#" alt="Return where you were" class="back-btn" style="float:left;">
+	  		<i  class="material-icons">undo</i>
+	  		</a>
+  		{{/if}}
+	</h1>
 	
 	{{#if currentUser.pendingPurchases}}
 		<p class="pending-purchases-message">
 			{{{_ "pendingPurchasesMessage" count=(currentUser.pendingPurchases) url='/settings/purchases'}}}
 		</p>
 		<hr />
-	{{/if}}	
+	{{/if}}
 
 	{{#unless empty}}
 		<div class="cart-items-list">
