@@ -9,13 +9,38 @@ import './template.html'
 
 import { Shops } from './../../../api/shops/collection.js'
 
+
 Template.applicationLayout.onRendered(function(){
 
 	//a small handler to hide menu when any menu link is clicked
-
 	$(document).on('click', '.navmenu li', function(){
 		$('.navmenu').offcanvas('toggle')
-	})
+	});
+
+	const navbarOffset = 80;
+	//we scroll to the active focused input when window is resized
+	//this also happens when soft keyboard appears
+	window.addEventListener("resize", function(){
+		setTimeout(function(){			
+			const target = $(':focus').get(0)
+			if (target){
+				const rect = target.getBoundingClientRect()
+				if (rect.top < 0 || rect.top < navbarOffset){
+					scrollBy(0, rect.top - navbarOffset)
+				}
+			}
+		}, 0)
+	});
+
+	//this is a fix for the problem of window resize on mobile 
+	//the problem occures when address bar shows/hides
+	//causing the scroll position to change
+	window.addEventListener("resize", function(){
+		const prevScrollPosition = window.scrollY
+		setTimeout(function(){
+			window.scrollTo(0, prevScrollPosition)			
+		},0);
+	});
 
 	$.material.init()
 

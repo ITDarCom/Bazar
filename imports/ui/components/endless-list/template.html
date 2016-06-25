@@ -49,7 +49,7 @@
 </template>
 
 <template name="shopThumbnail">
-  <div class="shop-thumbnail col-xs-6 col-md-3">
+  <div id="{{identifier}}" class="shop-thumbnail col-xs-6 col-md-3">
     <div class="thumbnail">
 		<a href="{{pathFor 'shops.show' shop=_id }}">
 			<img src="{{logo}}" alt="...">

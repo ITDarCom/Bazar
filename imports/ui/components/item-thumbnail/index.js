@@ -7,6 +7,9 @@ import './template.html'
 import './style.css'
 
 Template.itemThumbnail.helpers({
+    identifier(){
+        return `item-${Template.instance().data._id}`
+    },
     shop(){    	
     	if (Template.instance().data)
         	return Shops.findOne(Template.instance().data.shop)   
@@ -32,3 +35,4 @@ Template.itemThumbnail.events({
         }
     }
 });
+

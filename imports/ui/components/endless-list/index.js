@@ -182,15 +182,18 @@ Template.endlessList.onCreated(function () {
 })
 
 Template.endlessList.onRendered(function () {
-    //if we stored the lastScroll position, we'll scroll down to it
-    if (Session.get('lastScrollPosition')) {
-        if (Session.get('lastRoute') == Router.current().route.getName()) {
-            window.scrollTo(0, Session.get('lastScrollPosition'))
-            Tracker.nonreactive(function () {
-                Session.set('lastScrollPosition', null)
-            })
+
+    //if we stored the elementToScrollBack, we'll scroll down to it
+    var elementToScrollBack = Session.get('elementToScrollBack')
+    const navbarOffset = 50;
+
+    setTimeout(function(){
+        if (elementToScrollBack && $(elementToScrollBack)) {
+            window.scrollTo(0, $(elementToScrollBack).offset().top - navbarOffset);  
+            Session.set('elementToScrollBack', null)
         }
-    }
+    }, 0);
+
 });
 
 Template.endlessList.onDestroyed(function () {
@@ -200,16 +203,16 @@ Template.endlessList.onDestroyed(function () {
 //tracking what scroll position was the user at
 Template.endlessList.events({
     'click .endless-list > .item-thumbnail a': function (event, instance) {
-        Tracker.nonreactive(function () {
-            Session.set('lastRoute', Router.current().route.getName())
-        })
-        Session.set('lastScrollPosition', window.scrollY)
+        setTimeout(function(){
+            const itemId = Router.current().params.itemId
+            Session.set('elementToScrollBack', `#item-${itemId}`)
+        },500)
     },
     'click .endless-list > .shop-thumbnail a': function (event, instance) {
-        Tracker.nonreactive(function () {
-            Session.set('lastRoute', Router.current().route.getName())
-        })
-        Session.set('lastScrollPosition', window.scrollY)
+        setTimeout(function(){
+            const shop = Router.current().params.shop
+            Session.set('elementToScrollBack', `#shop-${shop}`)
+        },500)
     },
 })
 
@@ -259,3 +262,10 @@ Template.endlessList.helpers({
         return !(index % 2)
     }
 })
+
+
+Template.shopThumbnail.helpers({
+    identifier(){
+        return `shop-${Template.instance().data._id}`
+    }
+});
