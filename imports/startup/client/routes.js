@@ -11,7 +11,7 @@ AccountsTemplates.configure({
 });
 
 AccountsTemplates.configureRoute('signIn', {
-    name: 'signin',
+    name: 'accounts.signin',
     path: '/login',
     template: 'login',
     layoutTemplate: 'ApplicationLayout',
@@ -19,7 +19,7 @@ AccountsTemplates.configureRoute('signIn', {
 });
 
 AccountsTemplates.configureRoute('signUp', {
-    name: 'signup',
+    name: 'accounts.signup',
     path: '/signup',
     template: 'signup',
     layoutTemplate: 'ApplicationLayout',
@@ -27,7 +27,7 @@ AccountsTemplates.configureRoute('signUp', {
 });
 
 AccountsTemplates.configureRoute('changePwd', {
-    name: 'changePwd',
+    name: 'accounts.changePwd',
     path: '/settings/change-password',
     template: 'changePwd',
     layoutTemplate: 'ApplicationLayout',
@@ -67,7 +67,7 @@ Router.ensureLoggedIn = function () {
     } else {
         //console.log('finished logging in process.')
         if (!Meteor.user()) {
-            this.redirect('signin');
+            this.redirect('accounts.signin');
         } else {
             this.next();
         }        

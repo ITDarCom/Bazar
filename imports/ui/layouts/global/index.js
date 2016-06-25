@@ -10,6 +10,25 @@ import './template.html'
 import { Shops } from './../../../api/shops/collection.js'
 
 
+Template.login.onRendered(function(){
+	$('.btn').addClass('btn-raised btn-warning')
+})
+
+Template.signup.onRendered(function(){
+	$('.btn').addClass('btn-raised btn-warning')
+})
+
+Template.changePwd.onRendered(function(){
+	$('.btn').addClass('btn-raised btn-warning')
+	$('fieldset').append(`<div class="btn btn-block cancel-btn">${TAPi18n.__('cancel')}</div>`)
+})
+
+Template.changePwd.events({
+	'click .cancel-btn'(){
+		Router.go('settings.account')
+	}
+})
+
 Template.applicationLayout.onRendered(function(){
 
 	//a small handler to hide menu when any menu link is clicked

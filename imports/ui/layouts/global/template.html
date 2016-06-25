@@ -102,10 +102,10 @@
           <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; {{_ "admin"}}
         </a></li>
       {{else}}
-        <li class={{isActiveRoute 'signin'}}><a href="{{pathFor 'signin'}}">
+        <li class={{isActiveRoute 'accounts.signin'}}><a href="{{pathFor 'accounts.signin'}}">
           <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; {{_ "signIn"}}
         </a></li>
-        <li class={{isActiveRoute 'signup'}}><a href="{{pathFor 'signup'}}">
+        <li class={{isActiveRoute 'accounts.signup'}}><a href="{{pathFor 'accounts.signup'}}">
           <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; {{_ "signUp"}}
         </a></li>
         {{/if}}
