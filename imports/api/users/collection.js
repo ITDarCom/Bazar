@@ -13,6 +13,10 @@
         type: Number,
         defaultValue: 0
     },
+    'pendingPurchases': {
+        type: Number,
+        defaultValue: 0
+    },
     unreadPersonalInbox : {
         type: Number,
         defaultValue: 0

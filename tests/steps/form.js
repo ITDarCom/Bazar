@@ -7,6 +7,7 @@ module.exports = function(){
 		var doesExist = browser.waitForExist(`[name='${key}']`);
 		expect(doesExist).toBe(true);
 
+ 		browser.clearElement(`[name='${key}']`);
  		browser.setValue(`[name='${key}']`, value);
 
 	});

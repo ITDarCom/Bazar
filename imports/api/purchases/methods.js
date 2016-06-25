@@ -64,13 +64,14 @@ Meteor.methods({
 			throw new Meteor.Error('not-authorized');
 		}
 
-		var cartItems = Purchases.find({user: this.userId, status: 'cart'})
+		const cartItems = Purchases.find({user: this.userId, status: 'cart'}).fetch()
 		var currentUser = Meteor.users.findOne(this.userId)
 
 		cartItems.forEach(function(item){
 			//notify shop owner
 			var shopId = Shops.update(item.shop, { $inc: { unreadOrders: 1 }})			
 		})
+		Meteor.users.update(this.userId, { $inc: { 'pendingPurchases': cartItems.length }})
 
 		Purchases.update({user: this.userId, status: 'cart'}, 
 			{ $set: { status: 'pending', deliveryInfo: deliveryInfo }},
@@ -79,6 +80,7 @@ Meteor.methods({
 		if (!currentUser.phone){
 			Meteor.users.update(this.userId, { $set: { 'phone': deliveryInfo.phone }})
 		}
+
 
 	},
 
@@ -109,6 +111,7 @@ Meteor.methods({
 
 		//notifying purchase owner
         Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
+		Meteor.users.update(userId, { $inc: { 'pendingPurchases': -1 }});
 
 	},
 

@@ -17,6 +17,23 @@ module.exports = function(){
 
 	});
 
+	this.Given(/^I have "([^"]*)" pending purchases$/, function (count) {
+
+		count = parseInt(count)
+
+		if (count > 0){
+
+			var items = server.execute(function(count, options){
+	            return Meteor.call('generateItems', count, options);         
+	        }, count, {})
+
+			server.execute(function(userId, count, opts){
+				return Meteor.call('generatePurchaseItems', userId, count, opts);			
+			}, this.currentUser._id, count, { status: 'pending'})
+		}
+
+	});	
+
 	this.Then(/^I should see "([^"]*)" in the unread counter of "([^"]*)" in the app menu$/, function (count, menuItem) {		
 		const selector = `#${menuItem} .counter`;
 		var doesExist = browser.waitForExist(selector);

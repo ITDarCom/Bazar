@@ -125,11 +125,17 @@ Template.deliveryInformationForm.helpers({
 		return Template.instance().schema
 	},
 	defaultValues(){
-		const nextWeek = new Date((new Date()).getTime() + 7 * 24 * 60 * 60 * 1000)
 		return {
 			phone: Meteor.user().phone || "",
-			email: Meteor.user().emails[0].address,
-			deliveryDate: nextWeek
+			email: Meteor.user().emails[0].address
 		}
+	},
+	nextWeek(){
+		const nextWeek = new Date((new Date()).getTime() + 7 * 24 * 60 * 60 * 1000)
+		const format = "YYYY-MM-DDThh:mm"
+		moment.locale('en')
+		const str = moment(nextWeek).format(format);
+		moment.locale('ar')
+		return str
 	}
 })

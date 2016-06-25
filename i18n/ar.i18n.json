@@ -18,6 +18,7 @@
 	"signUp":"تسجيل",
 	"youDontHaveShopMessage":"ليس لديك متجرد حالياً",
 	"noItemsMessage": "لا يوجد هنا أية عناصر حاليا.",
+	"pendingPurchasesMessage":"لديك حاليا __count__ مشتريات قيد المعالجة. يمكنك تفقدها من صفحة <a href='__url__'>مشترياتي</a>",
 	"loadingMessage": "جار التحميل...",
 	"noResultsMessage": "لم يتم العثور على أية نتائج",
 	"city": "المدينة",

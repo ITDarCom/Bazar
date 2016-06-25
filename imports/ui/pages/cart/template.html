@@ -1,5 +1,13 @@
 <template name="cartPage">
 	<h1 class="page-header">{{_ "cart"}}</h1>
+	
+	{{#if currentUser.pendingPurchases}}
+		<p class="pending-purchases-message">
+			{{{_ "pendingPurchasesMessage" count=(currentUser.pendingPurchases) url='/settings/purchases'}}}
+		</p>
+		<hr />
+	{{/if}}	
+
 	{{#unless empty}}
 		<div class="cart-items-list">
 		{{#each purchases}}
@@ -12,10 +20,14 @@
 		<center><button class="btn btn-warning btn-lg btn-block btn-raised submit-cart-btn">
 			{{_ "submitCart"}}</button></center>
 		{{/if}}
-		<div style="margin-top:20px;" ></div>		
-	{{else}}
-		<p class="no-cart-items-message">{{_ "noItemsMessage"}}</p>
+		<div style="margin-top:20px;" ></div>
 	{{/unless}}
+
+	{{#if empty }}
+		{{#unless currentUser.pendingPurchases}}
+			<div class="no-cart-items-message">{{_ "noItemsMessage"}}</div>
+		{{/unless}}
+	{{/if}}
 </template>
 
 <template name="cartItem">
@@ -66,7 +78,7 @@
 		{{> afQuickField name='email'}}
 		{{> afQuickField name='phone' type="tel"}}
 		{{> afQuickField name='deliveryAddress'}}
-		{{> afQuickField name='deliveryDate'}}
+		{{> afQuickField name='deliveryDate' value=(nextWeek)}}
 
 		<center><button class="btn btn-warning btn-block btn-raised submit-cart-final-btn">
 			{{_ "submitCart"}}</button></center>

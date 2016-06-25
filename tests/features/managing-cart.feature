@@ -25,6 +25,12 @@ Feature: Managing cart
 		Given I have "0" items in cart		
 		And I am on "cart" page
 		Then I should see "no-cart-items" message
+
+	Scenario: User viewing an empty cart after previous purchase
+		Given I have "0" items in cart	
+		Given I have "1" pending purchases			
+		And I am on "cart" page
+		Then I should see "pending-purchases" message
 	
 	Scenario: User adding notes and quantity about an item
 		Given I am on "cart" page
@@ -56,8 +62,10 @@ Feature: Managing cart
 		And I click ".submit-cart-final" button
 		Then I should be redirected to the "settings.purchases" page
 		And I should see a list of "1" purchase items
-		And I should see "Near the city center" in "deliveryAddress"
-		And I should see "pending" in "status"
+		#And I should see "Near the city center" in "deliveryAddress"
+		#And I should see "pending" in "status"
+		When I am on "cart" page
+		Then I should see "pending-purchases" message
 
 	Scenario: User submitting a cart without specifying delivery information
 	Scenario: User viewing checkout will changing quantitiy

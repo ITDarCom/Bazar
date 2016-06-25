@@ -110,7 +110,10 @@ Meteor.methods({
         return Items.findOne(itemId)
 
     },
-    generatePurchaseItems(userId, count){
+    generatePurchaseItems(userId, count, options){
+
+        const opts = options || {}
+
         this.setUserId(userId)
 
         const deliveryInfo = {
@@ -127,12 +130,17 @@ Meteor.methods({
                 item: item._id,
                 user: this.userId,
                 shop: item.shop,
-                status: 'accepted',
+                status: opts.status? opts.status : 'accepted',
                 createdAt: new Date(),
             })
         };
 
-        Meteor.users.update(this.userId, { $inc: { 'unreadPurchases': count }})
+        if (opts.status && opts.status == 'pending'){
+            Meteor.users.update(this.userId, { $inc: { 'pendingPurchases': count }})
+        } else {
+            Meteor.users.update(this.userId, { $inc: { 'unreadPurchases': count }})
+        }
+
     }, 
     generateOrderItems(userId, count, fromUser){
 
