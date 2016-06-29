@@ -1,7 +1,8 @@
 {
   "galaxy.meteor.com": {
     "env": {
-      "MONGO_URL": "mongodb://root:rootpassword@ds023373.mlab.com:23373/bazar"
+      "MONGO_URL": "mongodb://app:password@ds059135.mlab.com:59135/bazar"
     }
   }
 }
+

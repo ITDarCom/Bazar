@@ -4,7 +4,8 @@
   "scripts": {
     "start": "meteor run",
     "chimp:watch": "chimp --ddp=http://localhost:3000 --watch --path=tests",
-    "chimp": "chimp --ddp=http://localhost:3000 --path=tests"
+    "chimp": "chimp --ddp=http://localhost:3000 --path=tests",
+    "deploy": "DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy bazar.meteorapp.com --settings settings.json"
   },
   "dependencies": {
     "meteor-node-stubs": "~0.2.0"

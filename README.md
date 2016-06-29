@@ -16,10 +16,18 @@ meteor
 Running all tests using `chimp`:
 
 ```
-npm run-script chimp:watch
+npm run-script chimp
 ```
 
 Running tagged tests  with `--watch ` option:
 ```
 npm run-script chimp:watch
+```
+
+## Deployment
+
+Deploying app to Galaxy:
+
+```
+npm run-script deploy
 ```
