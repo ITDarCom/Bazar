@@ -271,13 +271,21 @@ Meteor.methods({
             { username: 'username4', email: 'user4@gmail.com', password: 'password' },
             { username: 'username5', email: 'user5@gmail.com', password: 'password' },
             { username: 'username6', email: 'user6@gmail.com', password: 'password' },
-            { username: 'username7', email: 'user7@gmail.com', password: 'password' }
-        ]
+            { username: 'username7', email: 'user7@gmail.com', password: 'password' },
+            { username: 'username8', email: 'user8@gmail.com', password: 'password'},
+            { username: 'username9', email: 'user9@gmail.com', password: 'password'},
+            { username: 'username10', email: 'user10@gmail.com', password: 'password'},
+            { username: 'username11', email: 'user11@gmail.com', password: 'password'},
+            { username: 'username12', email: 'user12@gmail.com', password: 'password'},
+            { username: 'username13', email: 'user13@gmail.com', password: 'password'},
+            { username: 'username14', email: 'user14@gmail.com', password: 'password'},
+            { username: 'username15', email: 'user15@gmail.com', password: 'password'}
+        ];
         
         var accountsIds = accounts.map(function(account){
             var accountId = Accounts.createUser(account)
             return accountId
-        })
+        });
 
         const shops = [
             { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
@@ -288,7 +296,15 @@ Meteor.methods({
             { _id: Random.id(6).toString(), title: 'متجر أم ياسر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
             { _id: Random.id(6).toString(), title: 'متجر أم ياسر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
             { _id: Random.id(6).toString(), title: 'متجر أم محمد', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
-        ]
+            { _id: Random.id(6).toString(), title: 'متجر ياء', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png' }
+        ];
 
         const categories = [
             { identifier: 'deserts', label: 'حلويات' },

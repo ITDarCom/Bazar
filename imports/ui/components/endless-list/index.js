@@ -48,25 +48,21 @@ Template.endlessList.onCreated(function () {
     instance.cursor = ()=> {
         const route = Router.current().route.getName()
         const query = this.query.get()
-        //if (route.match(/shops.index/)){
-        //    return Shops.find(query)
-        //} else { return Items.find(query) }
+
         if (route.match(/shops.index/)) {
 
-            return Shops.find(query)
-        }
-        else if (route.match(/favorites.index/)) {
-              var user = Meteor.users.findOne({_id: Meteor.userId()});
-                if (user) {
+            return Shops.find(query, {sort: {title:1}});
 
-                    var favorites = user.favorites;
-                    if (!favorites){
+        } else if (route.match(/favorites.index/)) {
 
-                        favorites = [];
-                    }
-                    return Items.find({_id: {$in: favorites}});
+            var user = Meteor.users.findOne({_id: Meteor.userId()});
+            if (user) {
+                var favorites = user.favorites;
+                if (!favorites){
+                    favorites = [];
                 }
-
+                return Items.find({_id: {$in: favorites}}, {sort: { createdAt: -1 }});
+            }
 
         }
         else {
