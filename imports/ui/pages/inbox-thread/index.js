@@ -215,6 +215,9 @@ Template.message.helpers({
 		} else {
 			return Shops.findOne(author.id).logo
 		}
+	},
+	messageBody(){
+		return Template.instance().data.body.replace(/(?:\r\n|\r|\n)/g, '<br />');
 	}
 
 })
