@@ -38,12 +38,14 @@ Purchases.attachSchema(new SimpleSchema({
         type: String,
         label: function(){
             return TAPi18n.__('status')
-        }, 
-
+        }
     },
     createdAt: {
         type: Date
     },
+    sentAt: {
+        type: Date, optional: true
+    },    
     'deliveryInfo.email': { 
         type: String,
         regEx: SimpleSchema.RegEx.Email,
@@ -67,7 +69,7 @@ Purchases.attachSchema(new SimpleSchema({
 	'deliveryInfo.deliveryDate': { 
         type: Date,
         label: function(){
-            return TAPi18n.__('delivery')
+            return TAPi18n.__('deliveryDate')
         }
      }
 }));

@@ -107,7 +107,7 @@ Template.deliveryInformationForm.onCreated(function(){
 		'deliveryDate': { 
 		    type: Date,
 		    label: function(){
-		        return TAPi18n.__('delivery')
+		        return TAPi18n.__('deliveryDate')
 		    },
 			autoform: {
 		      afFieldInput: {

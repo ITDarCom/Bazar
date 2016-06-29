@@ -74,7 +74,7 @@ Meteor.methods({
 		Meteor.users.update(this.userId, { $inc: { 'pendingPurchases': cartItems.length }})
 
 		Purchases.update({user: this.userId, status: 'cart'}, 
-			{ $set: { status: 'pending', deliveryInfo: deliveryInfo }},
+			{ $set: { status: 'pending', deliveryInfo: deliveryInfo, sentAt: new Date() }},
 			{ multi: true })
 
 		if (!currentUser.phone){

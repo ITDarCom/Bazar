@@ -51,7 +51,7 @@ Template.purchasesList.helpers({
 				}
 			break;
 		}
-		return Purchases.find(selector)
+		return Purchases.find(selector, { sort: { sentAt: -1 }})
 	},
 	currentChannel(){
 		return Template.instance().channel.get()

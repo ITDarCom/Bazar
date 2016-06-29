@@ -27,7 +27,7 @@ Meteor.publishComposite('cart', function cartPublication(){
 	return {
 		find(){
 			//Meteor._sleepForMs(200);
-			return Purchases.find({user: this.userId, status: 'cart' }, { sort: { createdAt: -1 }});
+			return Purchases.find({user: this.userId, status: 'cart' }, { sort: { sentAt: -1 }});
 		}, 
 		children : children
 	}
@@ -37,7 +37,7 @@ Meteor.publishComposite('purchases', function purchasesPublication(){
 	return {
 		find(){
 			//Meteor._sleepForMs(200);
-			return Purchases.find({user: this.userId, status: { $ne: 'cart'}}, { sort: { createdAt: -1 }});
+			return Purchases.find({user: this.userId, status: { $ne: 'cart'}}, { sort: { sentAt: -1 }});
 		}, 
 		children : children
 	}
@@ -50,7 +50,7 @@ Meteor.publishComposite('orders', function ordersPublication(){
 			if (!this.userId) this.ready();
 			var shop = Meteor.users.findOne(this.userId).shop;
 			if (!shop) this.ready();
-			return Purchases.find({shop: shop, status: 'pending' }, { sort: { createdAt: -1 }});
+			return Purchases.find({shop: shop, status: 'pending' }, { sort: { sentAt: -1 }});
 		}, 
 		children : children
 	}
@@ -69,7 +69,7 @@ Meteor.publishComposite('sales', function salesPublication(){
 					{ status : 'accepted' },
 					{ status : 'rejected' },
 				] 
-			});				
+			}, { sort: { sentAt: -1 }});				
 		}, 
 		children : children
 	}
