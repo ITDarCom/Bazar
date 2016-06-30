@@ -60,6 +60,13 @@ body {
   left:20px;  
 }
 
+.btn-float-2{
+  z-index: 1000; 
+  position:fixed !important; 
+  bottom:20px; 
+  left:80px;  
+}
+
 .form-group{
   margin-top:0px;
 }
