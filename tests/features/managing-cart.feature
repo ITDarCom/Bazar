@@ -14,17 +14,20 @@ Feature: Managing cart
 		When I click ".add-to-cart" button
 		Then I should be redirected to the "cart" page
 		Then I should see a list of "1" cart items
+		And I should see "1" in the unread counter of "my-cart"
 		
 	Scenario: User removing an item from the cart
 		Given I have "3" items in cart		
 		And I am on "cart" page
 		When I click ".remove-cart-item" button
 		Then I should see a list of "2" cart items
+		And I should see "2" in the unread counter of "my-cart"
 
 	Scenario: User viewing an empty cart
 		Given I have "0" items in cart		
 		And I am on "cart" page
 		Then I should see "no-cart-items" message
+		And I should see "0" in the unread counter of "my-cart"
 
 	Scenario: User viewing an empty cart after previous purchase
 		Given I have "0" items in cart	

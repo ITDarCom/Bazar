@@ -28,6 +28,8 @@ Meteor.methods({
 				createdAt: new Date()
 			})
 
+        	Meteor.users.update(this.userId, { $inc: { 'cartItems': 1 }});
+
 		}
 	},
 
@@ -41,6 +43,7 @@ Meteor.methods({
 		}
 
 		Purchases.remove({_id: purchaseId, status: 'cart' })
+    	Meteor.users.update(this.userId, { $inc: { 'cartItems': -1 }});
 
 	},
 

@@ -52,14 +52,13 @@
 		id=cartItemFormId
 		type="method-update"
 		doc=this
-		autosaveOnKeyup=true
-		trimStrings=false
+		autosave=true
 		resetOnSuccess=false
 		meteormethod="cart.updatePurchase"}}
 		{{> afQuickField name='notes' label=false rows=5 placeholder=notesPlaceholder}}
 		<div class="form-group" style="margin-bottom:0px;">
 			<div class="input-group">    
-				{{> afQuickField name='quantity' style="width:100%;" type="number"}}
+				{{> afQuickField name='quantity' style="width:100%;" type="tel"}}
 				<span class="input-group-btn input-group-sm">
 					<button 
 						class="btn btn-danger btn-fab btn-fab-mini remove-cart-item-btn" 

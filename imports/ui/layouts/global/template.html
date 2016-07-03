@@ -19,8 +19,13 @@
           <img alt="Brand" src="/brand.png">
         </a>
         <ul class="nav navbar-nav pull-left" style="margin-top:0px; margin-bottom:0px;">
-          <li>          
+          <li id="my-cart">          
             <a href="{{pathFor 'cart'}}" style="padding-bottom:15px;">
+              {{#if currentUser.cartItems}}
+                <span class="counter">({{currentUser.cartItems}})</span>
+              {{else}}
+                <span class="counter">(0)</span>
+              {{/if}}            
               <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             </a>
           </li>

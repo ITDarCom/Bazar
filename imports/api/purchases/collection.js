@@ -12,7 +12,7 @@ Purchases.attachSchema(new SimpleSchema({
     'quantity' : {
         type: Number,
         defaultValue : 1,
-        min:1,
+        min:1, max:100,
         label: function(){
             return TAPi18n.__('quantity')
         }, 

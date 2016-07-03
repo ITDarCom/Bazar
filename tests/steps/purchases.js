@@ -41,6 +41,14 @@ module.exports = function(){
 		var actualText = browser.getHTML(selector);
 		expect(actualText.match(/\<span .*\>(\w+)\<\/span\>/)[1]).toEqual(count);			
 	});
+
+	this.Then(/^I should see "([^"]*)" in the unread counter of "([^"]*)"$/, function (count, menuItem) {		
+		const selector = `#${menuItem} .counter`;
+		var doesExist = browser.waitForExist(selector);
+		expect(doesExist).toBe(true);
+		var actualText = browser.getText(selector);
+		expect(actualText.match(/\((\w+)\)/)[1]).toEqual(count);			
+	});
 	
 	
 	this.When(/^I click "([^"]*)" in the app menu$/, function (menuItem) {	
