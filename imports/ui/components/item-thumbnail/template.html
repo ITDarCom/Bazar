@@ -32,7 +32,7 @@
                                 star{{else}}star_border{{/if}}</a>
                         {{else}}
                             <a href="#" style="font-size:20px;margin-right: 10px" class="material-icons hide-item-btn" title="{{#unless isHidden}}Hide{{else}}Show{{/unless}}">
-                                <span class="glyphicon{{#unless isHidden}} glyphicon-eye-close{{else}} glyphicon-eye-open{{/unless}}"></span>
+                                <span class="glyphicon glyphicon-eye-open"></span>
                             </a>
 
                             <a href="{{pathFor 'items.edit' shop=shop._id itemId=_id}}" style="font-size:20px;margin-right: 10px" class="material-icons edit-item-btn" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

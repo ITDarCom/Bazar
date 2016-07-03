@@ -48,15 +48,5 @@ Template.itemThumbnail.events({
         }
         var status = !this.isHidden
         Meteor.call("item.hide",this._id,status)
-    },
-    //"click .edit-item-btn": function () {
-    //     console.log("i am in edit function")
-    //    if (Meteor.user()){
-    //        console.log(Meteor.user());
-    //        console.log(this);
-    //        debugger;
-    //        Router.go('items.edit', {shop :this.shop, itemId: this._id})
-    //    }
-    //},
-
+    }
 });
