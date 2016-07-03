@@ -4,25 +4,17 @@ Feature: Messaging
 	In order to communicate any necessary info
 	I should be able to contact other users and shop owners
 	
-	Scenario: User with no shop viewing his personal inbox
+	Scenario: User viewing his inbox
 		Given I am a registered user with no shop	
 		And I am logged in
 		And I am on "home" page
-		Then I "should" see "personal-inbox" in the app menu
-		Then I "should not" see "shop-inbox" in the app menu
-
-	Scenario: Shop owner viewing his personal and shop inboxes
-		Given I am a registered user with a shop
-		And I am logged in
-		And I am on "home" page
-		Then I "should" see "personal-inbox" in the app menu
-		Then I "should" see "shop-inbox" in the app menu
+		Then I "should" see "inbox" in the app menu
 
 	Scenario: User checking his personal inbox
 		Given I am a registered user with no shop
 		And I am logged in		
 		And I have "3" messages in my "personal" inbox
-		And I am on "inbox.personal" page
+		And I am on "inbox" page
 		Then I should see a list of "3" threads
 
 	Scenario: Shop owner checking his shop inbox
@@ -30,11 +22,8 @@ Feature: Messaging
 		And I am logged in		
 		And I have "4" messages in my "shop" inbox
 		And I have "3" messages in my "personal" inbox		
-		And I am on "inbox.personal" page
-		Then I should see a list of "3" threads
-		And I am on "inbox.shop" page
-		And I wait for "1" seconds		
-		Then I should see a list of "4" threads
+		And I am on "inbox" page
+		Then I should see a list of "7" threads
 
 	Scenario: User notified about a new message as an ordinary user
 		Given I am a registered user with no shop
@@ -44,15 +33,15 @@ Feature: Messaging
 		Then I should see an unread mark on app menu
 		When I click app menu button
 		And I wait for "1" seconds
-		Then I should see "3" in the unread counter of "personal-inbox" in the app menu
-		When I am on "inbox.personal" page
+		Then I should see "3" in the unread counter of "inbox" in the app menu
+		When I am on "inbox" page
 		Then I should see a list of "6" threads
 		And I should see a list of "3" unread threads
 		When I click on an unread thread 
 		And I go back
 		And I click app menu button
 		Then I should see a list of "2" unread threads
-		Then I should see "2" in the unread counter of "personal-inbox" in the app menu
+		Then I should see "2" in the unread counter of "inbox" in the app menu
 
 	Scenario: User notified about a new message as a shop owner
 		Given I am a registered user with a shop
@@ -62,21 +51,21 @@ Feature: Messaging
 		Then I should see an unread mark on app menu
 		When I click app menu button
 		And I wait for "1" seconds		
-		Then I should see "3" in the unread counter of "shop-inbox" in the app menu
-		When I am on "inbox.shop" page
+		Then I should see "3" in the unread counter of "inbox" in the app menu
+		When I am on "inbox" page
 		Then I should see a list of "6" threads
 		And I should see a list of "3" unread threads
 		When I click on an unread thread 
 		And I go back
 		And I click app menu button
 		Then I should see a list of "2" unread threads
-		Then I should see "2" in the unread counter of "shop-inbox" in the app menu
+		Then I should see "2" in the unread counter of "inbox" in the app menu
 
 	Scenario: User replying to an existing thread (personal inbox)
 		Given I am a registered user with no shop
 		And I have "3" messages in my "personal" inbox				
 		And I am logged in
-		When I am on "inbox.personal" page
+		When I am on "inbox" page
 		When I click on a thread 
 		When I enter "hi there you!" in the "message" textarea
 		And I click ".send-message" button
@@ -89,7 +78,7 @@ Feature: Messaging
 		Given I am a registered user with a shop
 		And I have "3" messages in my "shop" inbox				
 		And I am logged in
-		When I am on "inbox.shop" page
+		When I am on "inbox" page
 		When I click on a thread 
 		When I enter "hi there you!" in the "message" textarea
 		When I enter "hi there you again!" in the "message" textarea
@@ -110,7 +99,7 @@ Feature: Messaging
 		When I click ".message" button
 		And I enter "I am waiting your reply" in the "message" textarea
 		And I click ".send-message" button
-		When I am on "inbox.personal" page
+		When I am on "inbox" page
 		Then I should see a list of "1" threads
 		And I should see a list of "0" unread threads
 		When I click on a thread
@@ -130,11 +119,10 @@ Feature: Messaging
 		When I click ".message" button
 		And I enter "thank you again" in the "message" textarea
 		And I click ".send-message" button		
-		When I am on "inbox.shop" page
+		When I am on "inbox" page
 		Then I should see a list of "5" threads
 		And I should see a list of "0" unread threads
 		When I click on a thread 
 		Then the last message in the thread should be "thank you again"
 		And I should see "Ahmad" as a recipient
-		And the recipient of the current thread should be notified				
-
+		And the recipient of the current thread should be notified

@@ -1,19 +1,19 @@
 import { Shops } from './../../../api/shops/collection'
 
-function getRecipient(thread, inboxType){
-	var author
-	if (inboxType.match(/personal/)){
-		author = _.findWhere(thread.participants, { type:'user', id: Meteor.userId() })
-	} else {
-		author = _.findWhere(thread.participants, { type:'shop', id: Meteor.user().shop })
-	}
+function getRecipient(thread){
+
+	const author = thread.participants.find(p => {
+		return ((p.id == Meteor.userId()) && (p.type == 'user')) ||
+			((p.id == Meteor.user().shop) && (p.type == 'shop'))
+	})
+
 	const index = thread.participants.indexOf(author)
 	const recipientIndex = index ? 0:1;
 	return thread.participants[recipientIndex]
 }
 
-function recipientHelper(thread, inboxType){
-	const recipient = getRecipient(thread, inboxType)
+function recipientHelper(thread){
+	const recipient = getRecipient(thread)
 
 	if (recipient.type == 'user'){
 		return Meteor.users.findOne(recipient.id)
@@ -22,8 +22,8 @@ function recipientHelper(thread, inboxType){
 	}
 }
 
-function recipientIsShopOwner(thread, inboxType){
-	const recipient = getRecipient(thread, inboxType)
+function recipientIsShopOwner(thread){
+	const recipient = getRecipient(thread)
 	return (recipient.type == 'shop')	
 }
 export {getRecipient}

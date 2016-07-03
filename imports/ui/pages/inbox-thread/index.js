@@ -55,8 +55,9 @@ function goInactive() {
 }
  
 function goActive() {
-    // do something
-	Meteor.call('threads.markAsUnread', false, Router.current().params.thread, Router.current().params.inbox, false);
+	if (Router.current().params.thread){
+		Meteor.call('threads.markAsUnread', false, Router.current().params.thread, false);		
+	}
 	//Meteor.call('threads.setActive', Meteor.userId(), Router.current().params.thread)         
     startTimer();
 }
@@ -95,7 +96,6 @@ function updateViews(){
 
 Template.threadPage.onCreated(function(){
 
-	this.inboxType = Router.current().params.inbox
 	this.threadId = Router.current().params.thread
 	this.ready = new ReactiveVar(false)
 
@@ -111,18 +111,13 @@ Template.threadPage.onCreated(function(){
 	if (Threads.findOne(this.threadId)){
 
 		const thread = Threads.findOne(this.threadId)
-		var unread = false
-		if (this.inboxType.match(/personal/)){
-			unread = thread.participants.find(p => {
-				return (p.id == Meteor.userId()) && (p.type == 'user')
-			}).unread			
-		} else {
-			unread = thread.participants.find(p => {
-				return (p.id == Meteor.user().shop) && (p.type == 'shop')
-			}).unread
-		}
+		const unread = thread.participants.find(p => {
+			return ((p.id == Meteor.userId()) && (p.type == 'user')) ||
+				((p.id == Meteor.user().shop) && (p.type == 'shop'))
+		}).unread
+			
 		if (unread){
-			Meteor.call('threads.markAsUnread', false, Router.current().params.thread, Router.current().params.inbox, false)				
+			Meteor.call('threads.markAsUnread', false, Router.current().params.thread, false)				
 		}
 	}
 
@@ -144,10 +139,10 @@ Template.threadPage.helpers({
 		return Threads.findOne(Template.instance().threadId)
 	},
 	recipient(){
-		return recipientHelper(Template.instance().thread, Template.instance().inboxType)
+		return recipientHelper(Template.instance().thread)
 	},
 	recipientIsShopOwner(){
-		return recipientIsShopOwner(Template.instance().thread, Template.instance().inboxType)
+		return recipientIsShopOwner(Template.instance().thread)
 	}	
 })
 
@@ -183,7 +178,7 @@ Template.threadPage.events({
 		const target = $("textarea[name='message']")[0]
 		const body = target.value
 		if (body.length > 0){
-		    Meteor.call('threads.addMessage', Template.instance().threadId, Template.instance().inboxType, body)
+		    Meteor.call('threads.addMessage', Template.instance().threadId, body)
 		    $("textarea[name='message']")[0].value = ""
 		    scrollToTheEnd()
 		    keepFocus(target)			
@@ -191,22 +186,16 @@ Template.threadPage.events({
 	},
 	"click .back-btn"(event, instance){
 		event.preventDefault()
-		const route = `inbox.${Template.instance().inboxType}`
-		Router.go(route)
+		Router.go('inbox')
 	}
 })
 
 Template.message.helpers({
 	isFromMe(){
-		const inboxType = Router.current().params.inbox
-
 		const author = Template.instance().data.author
 
-		if (inboxType.match(/personal/)){
-			return (author.type == 'user') && (author.id == Meteor.userId())
-		} else {
-			return (author.type == 'shop') && (author.id == Meteor.user().shop)
-		}
+		return ((author.type == 'user') && (author.id == Meteor.userId())) ||
+			((author.type == 'shop') && (author.id == Meteor.user().shop))
 	},
 	avatar(){
 		const author = Template.instance().data.author
@@ -221,7 +210,6 @@ Template.message.helpers({
 	}
 
 })
-
 
 Template.messageModal.helpers({
 	modalId(){

@@ -5,19 +5,21 @@ import { Threads } from './collection'
 
 import {getRecipient} from './../../ui/pages/inbox-thread/helpers'
 import {recipientHelper} from './../../ui/pages/inbox-thread/helpers'
+import {recipientIsShopOwner} from './../../ui/pages/inbox-thread/helpers'
 
 Meteor.methods({
 
-	'threads.markAsUnread'(unread, threadId, inboxType, forRecipient){	
+	'threads.markAsUnread'(unread, threadId, forRecipient){	
+
+		console.log('markAsUnread')
 
 		check(unread, Boolean);
 		check(threadId, String);
-		check(inboxType, String);
 		check(forRecipient, Boolean); //true if we want to change recipient status
 
 		const increment = unread? 1: -1; //we inc +1 if unread, -1 if read
 		const thread = Threads.findOne(threadId)
-		const recipient = getRecipient(thread, inboxType)
+		const recipient = getRecipient(thread)
 		
 		if (forRecipient){
 
@@ -34,13 +36,13 @@ Meteor.methods({
 						{ $set: { 'participants.$.unread': unread }
 					}, false, false);
 
-					Meteor.users.update(userId, { $inc: { 'unreadPersonalInbox': increment }})
+					Meteor.users.update(userId, { $inc: { 'unreadInbox': increment }})
 
 				} else if (recipient.type == 'shop'){
 
 					//finding the user who owns this shop inbox
 					const shopId = recipient.id
-					const userId = Meteor.users.findOne({ 'shop': shopId })
+					const userId = Meteor.users.findOne({ 'shop': shopId })._id
 
 					Threads.update({ 
 						_id: threadId, 
@@ -48,7 +50,7 @@ Meteor.methods({
 						{ $set: { 'participants.$.unread': unread }
 					}, false, false)
 
-					Meteor.users.update(userId, { $inc: { 'unreadShopInbox': increment }})
+					Meteor.users.update(userId, { $inc: { 'unreadInbox': increment }})
 				}				
 			}
 
@@ -62,7 +64,7 @@ Meteor.methods({
 			//we only update the value if it is different
 			if (unread != currentUser.unread){
 
-				if (inboxType.match(/personal/)){
+				if (currentUser.type == 'user'){
 
 					const userId = this.userId
 			        
@@ -72,9 +74,9 @@ Meteor.methods({
 			        	{ $set: { 'participants.$.unread': unread }
 			        }, false, false);
 		        	
-		        	Meteor.users.update(userId, { $inc: { 'unreadPersonalInbox': increment }})
+		        	Meteor.users.update(userId, { $inc: { 'unreadInbox': increment }})
 
-				} else if (inboxType.match(/shop/)){
+				} else if (currentUser.type == 'shop'){
 
 					const userId = this.userId
 					const shopId = Meteor.users.findOne(this.userId).shop
@@ -85,7 +87,7 @@ Meteor.methods({
 						{ $set: { 'participants.$.unread': unread }
 					}, false, false)
 
-					Meteor.users.update(userId, { $inc: { 'unreadShopInbox': increment }})
+					Meteor.users.update(userId, { $inc: { 'unreadInbox': increment }})
 				}
 
 			}
@@ -94,14 +96,15 @@ Meteor.methods({
 
 	},
 
-	'threads.addMessage'(threadId, inboxType, body){
+	'threads.addMessage'(threadId, body){
 
 		check(threadId, String);
-		check(inboxType, String);
 		check(body, String);
 
+		const thread = Threads.findOne(threadId)
+
 		var author
-		if (inboxType.match(/personal/)){
+		if (recipientIsShopOwner(thread)){
             author = {
                 type: 'user', id: this.userId
             }
@@ -127,7 +130,7 @@ Meteor.methods({
 		and the thread is is not already an unread for him
 		*/
 
-		Meteor.call('threads.markAsUnread', true, threadId, inboxType, true);
+		Meteor.call('threads.markAsUnread', true, threadId, true);
 
 	},
 
@@ -135,16 +138,16 @@ Meteor.methods({
 	'threads.sendMessage'(recepientType, recepientId, inboxType, body){
 
 		check(recepientType, String);
-		check(recepientId, String);
 		check(inboxType, String);
+		check(recepientId, String);
 		check(body, String);
 
 		//TODO, check no previous thread exists...
 
 		var senderSelector
-		if (inboxType.match(/personal/)){
+		if (inboxType == 'personal'){
 			senderSelector = { $elemMatch: { type:"user", id: this.userId } }
-		} else {
+		} else if (inboxType == 'shop') {
 			const shopId = Meteor.users.findOne(this.userId).shop
 			senderSelector = { $elemMatch: { type:"shop", id: shopId} }
 		}
@@ -159,12 +162,12 @@ Meteor.methods({
 
 		if (existingThread){
 
-			Meteor.call('threads.addMessage', existingThread._id, inboxType, body)
+			Meteor.call('threads.addMessage', existingThread._id, body)
 
 		} else {
 
 			var author
-			if (inboxType.match(/personal/)){
+			if (inboxType == 'personal'){
 	            author = {
 	                type: 'user', id: this.userId
 	            }
@@ -185,7 +188,7 @@ Meteor.methods({
 				unread: false,
 			}
 
-	        var thread = { 
+	        const thread = { 
 	            messages: [message], 
 	            participants: [
 	                _.extend(_.clone(author), { unread: false }), 
@@ -196,7 +199,7 @@ Meteor.methods({
 
 	        const threadId = Threads.insert(thread)	
 
-    		Meteor.call('threads.markAsUnread', true, threadId, inboxType, true);
+    		Meteor.call('threads.markAsUnread', true, threadId, true);
 
 		}
 	},

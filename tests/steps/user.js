@@ -22,8 +22,7 @@ const routes = [
 	{ name: 'admin.users', path: '/admin/users'},
 	{ name: 'my-shop', path: '/shops/mine'},
 	{ name: 'favorites', path: '/favorites'},
-	{ name: 'inbox.personal', path: '/inbox/personal'},
-	{ name: 'inbox.shop', path: '/inbox/shop'}
+	{ name: 'inbox', path: '/inbox'}
 ]
 
 module.exports = function(){

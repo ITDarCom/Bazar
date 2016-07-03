@@ -24,18 +24,15 @@ Meteor.publishComposite('inbox', function inboxPublication(opts, limit){
 	return {
 		find(){
 			//Meteor._sleepForMs(200);
-			if (opts.inboxType.match(/personal/)){
-				return Threads.find({
-					'participants.type': "user",
-					'participants.id': this.userId
-				}, { limit: limit, sort: { createdAt: -1 } });
-			} else if (opts.inboxType.match(/shop/)){
-				const shopId = Meteor.users.findOne(this.userId).shop
-				return Threads.find({
-					'participants.type': "shop",
-					'participants.id': shopId
-				}, { limit: limit, sort: { createdAt: -1 } });
-			}
+			const shopId = Meteor.users.findOne(this.userId).shop
+
+			return Threads.find({
+				$or : [
+					{'participants.type': "user",'participants.id': this.userId},
+					{'participants.type': "shop",'participants.id': shopId}
+				]				
+			}, { limit: limit, sort: { createdAt: -1 } });
+			
 		}, 
 		children : children
 	}

@@ -85,8 +85,7 @@ const privateRoutes = [
 	'settings.shop',
 	'settings.orders',
 	'settings.sales',
-	'inbox.personal',
-	'inbox.shop',
+	'inbox',
 	'inbox.thread',
 	'cart',
 	'admin.categories',
@@ -244,11 +243,11 @@ Router.route('/settings/sales', function () {
 
 
 //messages
-Router.route('/inbox/personal', function () {
+Router.route('/inbox', function () {
 	this.render('empty', {to: 'nav'});
-	this.render('personalInboxPage');
+	this.render('inboxPage');
 }, {
-	name: 'inbox.personal'
+	name: 'inbox'
 });
 
 Router.route('/inbox/shop', function () {
@@ -258,7 +257,7 @@ Router.route('/inbox/shop', function () {
 	name: 'inbox.shop'
 });
 
-Router.route('/inbox/:inbox/:thread', function () {
+Router.route('/inbox/:thread', function () {
 	this.render('empty', {to: 'nav'});
 	this.render('threadPage');
 }, {

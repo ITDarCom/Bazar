@@ -17,11 +17,7 @@
         type: Number,
         defaultValue: 0
     },
-    unreadPersonalInbox : {
-        type: Number,
-        defaultValue: 0
-    },
-    unreadShopInbox: {
+    unreadInbox : {
         type: Number,
         defaultValue: 0
     },

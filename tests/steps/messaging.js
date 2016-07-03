@@ -1,3 +1,15 @@
+function getRecipient(currentUser, thread){
+
+	const author = thread.participants.find(p => {
+		return ((p.id == currentUser._id) && (p.type == 'user')) ||
+			((p.id == currentUser.shop) && (p.type == 'shop'))
+	})
+
+	const index = thread.participants.indexOf(author)
+	const recipientIndex = index ? 0:1;
+	return thread.participants[recipientIndex]
+}
+
 module.exports = function(){
 	
 	this.Given(/^I have "([^"]*)" messages in my "([^"]*)" inbox$/, function (count, inbox) {
@@ -87,14 +99,20 @@ module.exports = function(){
         	return Meteor.call('getThread', threadId)
         }, threadId);
 
-        if (inboxType.match(/personal/)){
-        	const other = thread.participants.find(p => p.id != this.currentUser._id) 
+		const currentUser = client.execute(function(){
+            return Meteor.user()
+        }).value;        
+
+        const other = getRecipient(currentUser, thread)
+
+        if (other.type == 'user'){
+
 	        const otherUser = server.execute(function(other){
 	        	return Meteor.call('getOriginalUser', other)
 	        }, other);
 
         	expect(other.unread).toBe(true);
-	        expect(otherUser.unreadShopInbox).toEqual(1)
+	        expect(otherUser.unreadInbox).toEqual(1)
 
         } else {
 
@@ -102,13 +120,12 @@ module.exports = function(){
 	            return Meteor.user().shop
 	        }).value;
 
-        	const other = thread.participants.find(p => p.id != shopId)
 	        const otherUser = server.execute(function(other){
 	        	return Meteor.call('getOriginalUser', other)
 	        }, other);
 
         	expect(other.unread).toBe(true);
-	        expect(otherUser.unreadPersonalInbox).toEqual(1)
+	        expect(otherUser.unreadInbox).toEqual(1)
         }
 
 	});

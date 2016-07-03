@@ -28,8 +28,7 @@ import "./../../ui/pages/items-edit"
 import "./../../ui/pages/items-show"
 import "./../../ui/pages/favorites-show"
 
-import "./../../ui/pages/inbox-personal"
-import "./../../ui/pages/inbox-shop"
+import "./../../ui/pages/inbox"
 import "./../../ui/pages/inbox-thread"
 
 import "./../../ui/pages/admin-categories"

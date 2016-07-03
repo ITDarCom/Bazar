@@ -14,15 +14,9 @@ import './template.html'
 
 Template.threadsList.onCreated(function(){
 
-	this.inboxType = new ReactiveVar()
-
 	//subscribing to the appropriate channel on server
 	this.autorun(()=>{
-		var route = Router.current().route.getName()
-		var inboxType = route.match(/inbox.(\w+)/)[1] //personal or shop
-
-		this.subscribe('inbox', { inboxType: inboxType})
-		this.inboxType.set(inboxType)
+		this.subscribe('inbox')
 	})
 })
 
@@ -34,46 +28,30 @@ Template.threadsList.helpers({
 
 Template.threadListItem.helpers({
 	unread(){
-		var route = Router.current().route.getName()
-		var inboxType = route.match(/inbox.(\w+)/)[1] //personal or shop
 
-		if (inboxType.match(/personal/)){
-			return Template.instance().data.participants.find(p => {
-				return (p.id == Meteor.userId()) && (p.type == 'user')
-			}).unread			
-		} else {
-			return Template.instance().data.participants.find(p => {
-				return (p.id == Meteor.user().shop) && (p.type == 'shop')
-			}).unread
-		}
+		return Template.instance().data.participants.find(p => {
+			return ((p.id == Meteor.userId()) && (p.type == 'user')) ||
+				((p.id == Meteor.user().shop) && (p.type == 'shop'))
+		}).unread			
 
-	},
-	inbox(){
-		return Router.current().route.getName().match(/inbox.(\w+)/)[1]
 	},
 	lastMessage(){
 		const length = Template.instance().data.messages.length
 		return Template.instance().data.messages[length-1]
 	},
 	recipient(){
-		const route = Router.current().route.getName()
-		const inboxType = route.match(/inbox.(\w+)/)[1]
 		const thread = Template.instance().data
-		return recipientHelper(thread, inboxType)
+		return recipientHelper(thread)
 	},
 	recipientIsShopOwner(){
-		const route = Router.current().route.getName()
-		const inboxType = route.match(/inbox.(\w+)/)[1]
 		const thread = Template.instance().data		
-		return recipientIsShopOwner(thread, inboxType)
+		return recipientIsShopOwner(thread)
 	},
 	avatar(){
 
-		const route = Router.current().route.getName()
-		const inboxType = route.match(/inbox.(\w+)/)[1]
 		const thread = Template.instance().data		
 
-		const recipient = getRecipient(thread, inboxType)
+		const recipient = getRecipient(thread)
 
 		if (recipient.type == 'user'){
 			return Meteor.users.findOne(recipient.id).avatar

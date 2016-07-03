@@ -95,13 +95,12 @@ Template.registerHelper('unreadItems', function(){
 	if (!Meteor.user()){
 		return false
 	}
-	var shop = Shops.findOne({ user: Meteor.userId() })
-	var unreadOrders = shop ? shop.unreadOrders : false
+	const shop = Shops.findOne({ user: Meteor.userId() })
+	const unreadOrders = shop ? shop.unreadOrders : false
 
-	var unreadPersonalInbox = Meteor.user().unreadPersonalInbox
-	var unreadShopInbox = Meteor.user().unreadShopInbox
+	const unreadInbox = Meteor.user().unreadInbox
 
-	return unreadOrders || Meteor.user().unreadPurchases || unreadPersonalInbox || unreadShopInbox
+	return unreadOrders || Meteor.user().unreadPurchases || unreadInbox
 })
 
 

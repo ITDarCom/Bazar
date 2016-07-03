@@ -1,7 +1,7 @@
 
 import { Meteor } from 'meteor/meteor';
 //import { Factory } from 'meteor/factory';
-//import { resetDatabase } from 'meteor/xolvio:cleaner';
+import { resetDatabase } from 'meteor/xolvio:cleaner';
 import { Promise } from 'meteor/promise';
 
 /*const createList = (userId) => {
@@ -252,16 +252,12 @@ Meteor.methods({
         }
 
         if (unread){
-            if (opts.inbox.match(/personal/)){
-                Meteor.users.update(userId, { $inc: { 'unreadPersonalInbox': count }})
-            } else {
-                Meteor.users.update(userId, { $inc: { 'unreadShopInbox': count }})
-            }
+            Meteor.users.update(userId, { $inc: { 'unreadInbox': count }})
         }
 
     },             
     generateFixtures() {
-        //resetDatabase();
+        resetDatabase();
 
         const accounts = [
             { username: 'username', email: 'user@gmail.com', password: 'password'},
