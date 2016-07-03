@@ -62,5 +62,6 @@
 	"rejectOrderConfirmation":"هل أنت متأكد أنك تريد رفض هذا الطلب؟ (لا يمكنك التراجع)",
 	"personalInbox":"البريد الشخصي",
 	"shopInbox":"بريد المتجر",
-	"sendMessage": "إرسال رسالة"
+	"sendMessage": "إرسال رسالة",
+	"deleteItemConfirmation": "هل انت متأكد من حذف العنصر"
 }

@@ -35,6 +35,12 @@ Meteor.methods({
 		}
 		Items.update({ _id: documentId }, modifier, documentId);
 	},
+	'item.remove'(itemId) {
+		if (!this.userId) {
+			throw new Meteor.Error('not-authorized')
+		}
+		Items.remove({_id : itemId})
+	},
 	'item.hide'(itemId,status){
 		if (! this.userId) {
 			throw new Meteor.Error('not-authorized');
