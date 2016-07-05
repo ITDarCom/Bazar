@@ -42,9 +42,14 @@ Meteor.methods({
 		Items.remove({_id : itemId})
 	},
 	'item.hide'(itemId,status){
+
+		check(itemId, String);
+		check(status, Boolean);
+
 		if (! this.userId) {
 			throw new Meteor.Error('not-authorized');
 		}
+		
 		var item = Items.findOne(itemId)
 		if(item){
 			Items.update({_id: itemId},{isHidden: status});
