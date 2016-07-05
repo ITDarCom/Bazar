@@ -21,8 +21,7 @@ Template.adminTables.helpers({
     components(){
         var route = Router.current().route.getName();
         if (route.match(/admin.categories/)){
-
-            return Categories.find({},{sort: {order: -1}});
+            return Categories.find({},{sort: {order: 1}});
         }
         else {
             return Cities.find({},{sort: {createdAt: -1}});
@@ -66,28 +65,9 @@ Template.adminTables.events({
 
 Template.categotyOrder.events({
     "click .order-up-btn":function () {
-
-        var categ = Categories.findOne({identifier: this.data.identifier})
-        if (categ) {
-            var newOrder = categ.order + 1
-            if (newOrder > Categories.find().count())
-            return;
-            Meteor.call("categoryOrder.up",this.data.identifier,newOrder)
-        }
-
-
+        Meteor.call("categoryOrder.up",this.data.identifier)
     },
     "click .order-down-btn":function () {
-
-        var categ = Categories.findOne({identifier: this.data.identifier})
-        if (categ) {
-            var newOrder = categ.order - 1;
-            if (newOrder <= 0)
-                return;
-            Meteor.call("categoryOrder.down",this.data.identifier,newOrder)
-        }
-
-
+        Meteor.call("categoryOrder.down",this.data.identifier)
     }
-
 })

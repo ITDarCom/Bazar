@@ -82,7 +82,6 @@ Feature: Navigating items
 		When I select "" in the "selectedCity" field
 		Then I should see a list of "8" items
 
-@watch
 	Scenario: User playing with favorites feature
 		Given I am a registered user with no shop	
 		And I am logged in

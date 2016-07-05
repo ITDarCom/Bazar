@@ -43,20 +43,12 @@ Categories.attachSchema(new SimpleSchema({
 	order: {
 		type: Number,
 		label: function(){
-
 			return TAPi18n.__('categoryOrder')
 		},
 		autoValue: function () {
 			if (this.isInsert) {
 				return Categories.find().count()+1;
-
 			}
-			if (this.isUpdate) {
-				if(this.value > Categories.find().count() || this.value <= 0){
-					this.unset()
-				}else return this.value;
-			}
-
 		}
 	}
 }));

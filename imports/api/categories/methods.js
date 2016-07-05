@@ -13,14 +13,41 @@ Meteor.methods({
         }
 
     },
-    "category.delete" : function (cityId) {
-        Categories.remove({_id : cityId});
-    },
-    "categoryOrder.up" : function (identifier,newOrder) {
+    "category.delete" : function (id) {
+        const category = Categories.findOne(id)
+        const oldOrder = category.order
 
-            Categories.update({identifier: identifier},{$set: {order: newOrder}})
+        const toBeUpdated = Categories.find({ order: { $gt: oldOrder }}).fetch()
+
+        toBeUpdated.forEach(function(cat){
+            console.log(cat)
+            Categories.update({_id: cat._id}, { $inc: {'order': -1 }}, {strict: false})
+        })
+
+        Categories.remove({_id : id});
     },
-    "categoryOrder.down": function (identifier,newOrder) {
-        Categories.update({identifier: identifier},{$set: {order: newOrder}})
+    "categoryOrder.up" : function (identifier) {
+
+        const category = Categories.findOne({identifier: identifier})
+        const oldOrder = category.order
+        const newOrder = category.order - 1
+
+        if (newOrder > 0){
+            Categories.update({ order: newOrder }, {$set: {order: oldOrder }})
+            Categories.update({identifier: identifier},{$set: {order: newOrder}})            
+        }
+
+    },
+    "categoryOrder.down": function (identifier) {
+        const category = Categories.findOne({identifier: identifier})
+        const oldOrder = category.order
+        const newOrder = category.order + 1
+
+        const count = Categories.find().count()
+        
+        if (newOrder <= count){
+            Categories.update({ order: newOrder }, {$set: {order: oldOrder }})
+            Categories.update({identifier: identifier},{$set: {order: newOrder}})            
+        }    
     }
 });
