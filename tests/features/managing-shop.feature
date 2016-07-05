@@ -1,3 +1,4 @@
+@watch
 Feature: Managing shop
 
 	As a shop owner
@@ -30,7 +31,7 @@ Feature: Managing shop
 		And I select "jeddah" in the "city" field
 		And I submit the form
 		Then I should be redirected to the "shops.show" page
-		And I should see "Coolest shop"
+		Then I should see "Coolest shop"
 		And I should see "The best shop in the world"
 		And I should see "no-items" message	
 
@@ -108,7 +109,6 @@ Feature: Managing shop
 		When I am on "home" page
 		Then I should see a list of "7" items
 
-@watch
 	Scenario: Shop owner hiding his shop
 		Given I am a registered user with a shop
 		And I am logged in

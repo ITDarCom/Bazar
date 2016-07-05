@@ -31,8 +31,8 @@ module.exports = function(){
 	});            
 
 	this.Then(/^I should see "([^"]*)"$/, function (text) {
-		var doesExist = browser.waitForExist(".container");
-		var actualText = browser.getText(".container");
+		var doesExist = browser.waitForExist(".canvas");
+		var actualText = browser.getText(".canvas");
 		expect(actualText).toContain(text);
 	});
 
