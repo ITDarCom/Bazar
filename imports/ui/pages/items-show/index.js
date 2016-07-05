@@ -30,8 +30,15 @@ Template.itemsShowPage.helpers({
 		return Template.instance().ready.get()
 	},
 	item(){
-		if (!Items.findOne(Template.instance().itemId)){
+		const item = Items.findOne(Template.instance().itemId)
+		if (!item){
 			Router.go('NotFound'); return;			
+		}
+		//if this item is hidden and does not belong to the current user, redirect to home
+		if (item.isHidden){
+			if (!Meteor.user() || Meteor.user().shop != item.shop){
+				Router.go('home')				
+			}
 		}
 		return Items.findOne(Template.instance().itemId)
 	},

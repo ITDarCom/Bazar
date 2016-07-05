@@ -66,5 +66,28 @@ Meteor.methods({
 			})	
 
 		}
+
+
+	},
+	'shop.hide'(status){
+
+		// Make sure the user is logged in before inserting a task
+		if (! this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+
+		var user = Meteor.users.findOne(this.userId)
+
+		if (user.hasShop) {
+			Shops.update({_id: user.shop},{$set: {isHidden: status}});
+			Items.update({shop: user.shop},{$set: {isHidden: status}},{multi: true},function(err,res){
+				if(!err){
+					//console.log(res)
+				}else{
+					console.log("error is happened")
+				}
+			});
+
+		}
 	}
 });

@@ -1,16 +1,15 @@
 <template name="shopsNewPage">
-	<h1 class="page-header">{{_ "createShop"}}</h1>
-	{{> insertShopForm}}
+    <h1 class="page-header">{{_ "createShop"}}</h1>
+    {{> insertShopForm}}
 </template>
 
 <template name="insertShopForm">
-	{{#autoForm 
-		collection=formCollection 
-		id="insertShopForm" 
-		type=formType
-		doc=doc
-		meteormethod=method}}
-
+    {{#autoForm
+    collection=formCollection
+    id="insertShopForm"
+    type=formType
+    doc=doc
+    meteormethod=method}}
 		{{> afQuickField name='title'}}
 		{{> afQuickField name='description' rows=3}}
 		{{> afQuickField 
@@ -18,11 +17,14 @@
 			type="select" 
 			firstOption=(_ "selectCity")
 			options=cities}}
+        <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
+            {{_ "submit"}}</button>
+        {{#if hasShop}}
+            <button class="btn btn-danger btn-block btn-raised delete-shop-btn">
+                {{_ "removeShop"}}</button>
+            <button class="btn btn-warning btn-block btn-raised hide-shop-btn">
+                {{#if isHidden}} {{_ "unhideShop"}}{{else}}{{_ "hideShop"}} {{/if}} </button>
+        {{/if}}
 
-		<button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
-			{{_ "submit"}}</button>
-		<button class="btn btn-danger btn-block btn-raised delete-shop-btn">
-			{{_ "removeShop"}}</button>
-
-	{{/autoForm}}
+    {{/autoForm}}
 </template>

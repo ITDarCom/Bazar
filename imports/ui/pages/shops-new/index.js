@@ -41,5 +41,9 @@ Template.insertShopForm.helpers({
 			{label: "جدة", value: "jeddah"},
 			{label: "مكة", value: "mecca"},
 		]
-	}
+	},
+	isHidden(){
+		return Shops.findOne(Meteor.user().shop).isHidden;
+	},
+
 })

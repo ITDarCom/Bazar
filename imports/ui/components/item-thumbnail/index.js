@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import {Router} from 'meteor/iron:router'
 
 import { Items } from './../../../api/items/collection'
 import { Shops } from './../../../api/shops/collection'
@@ -25,6 +26,9 @@ Template.itemThumbnail.helpers({
         if (Meteor.userId()) {
             return Meteor.users.findOne({_id: Meteor.userId(), favorites: {$in: [this._id]}});
         }
+    },
+    isHidden(){
+        return Template.instance().data.isHidden
     }
 })
 
@@ -33,6 +37,20 @@ Template.itemThumbnail.events({
         if (Meteor.userId()) {
             Meteor.call("makeFavorite",this._id);
         }
+    },
+    "click .detete-item-btn": function () {
+        if (confirm(TAPi18n.__('deleteItemConfirmation'))){
+             Meteor.call("item.remove",this._id)
+        }
+    },
+    "click .hide-item-btn": function () {
+        var shop = Shops.findOne({user: Meteor.userId()})
+        if (shop.isHidden && this.isHidden) {
+            alert(TAPi18n.__('youCannothideItem'));
+            return
+        }
+        var status = !this.isHidden
+        Meteor.call("item.hide",this._id,status)
     }
 });
 

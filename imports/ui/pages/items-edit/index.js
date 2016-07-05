@@ -22,4 +22,4 @@ Template.itemsEditPage.helpers({
 		}
 		return Items.findOne(Router.current().params.itemId)
 	}
-})
+});

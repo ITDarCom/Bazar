@@ -8,7 +8,8 @@
     </div>
   </div>
   {{/if}}   
-  <div id="{{identifier}}" class="item-thumbnail col-xs-6 col-md-3">
+  <div id="{{identifier}}" 
+    class="item-thumbnail {{#if isHidden}} thumbnail-dark {{/if}} col-xs-6 col-md-3">
     <div class="thumbnail" style="position:relative;">
       <div style="position:absolute;right:8px;top:5px;font-size:8pt;color:blue;">
         <p>{{_id}}</p>
@@ -18,19 +19,33 @@
       </a>
       <div class="caption">
           <p>
-            <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
-              {{{title}}}
-            </a>
+              <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
+                  {{{title}}}
+              </a>
           </p>
           <p>{{shop.title}}، {{cityLabel city}}</p>
-        <div style="float:left;margin-right:5px;margin-left:5px;">
-          <p>
-            <i style="font-size:20px" class="material-icons">share</i> 
-            <a href="#" style="font-size:20px" class="favorite-btn material-icons">{{#if favorite}}star{{else}}star_border{{/if}}</a></p>
-        </div>
-        <p class="price">{{_ "riyals" price}}</p>
-      </div>
-    </div>
-  </div>
-</template>
 
+          <div style="float:left;margin-right:5px;margin-left:5px;">
+              <p>
+                  {{#unless isShopOwner}}
+                      <i style="font-size:20px" class="material-icons">share</i>
+                      <a href="#" 
+                          style="font-size:20px" class="favorite-btn material-icons">
+                          {{#if favorite}}star{{else}}star_border{{/if}}</a>
+                  {{else}}
+                      <a href="#" style="font-size:20px; margin-bottom:0px;" 
+                      class="material-icons hide-item-btn" 
+                      title="{{#unless isHidden}}{{_ 'hide'}}{{else}}{{_ 'show'}}{{/unless}}">{{#unless isHidden}}visibility_off{{else}}visibility{{/unless}}</a>
+                      <a href="{{pathFor 'items.edit' shop=shop._id itemId=_id}}" 
+                          style="font-size:20px;" class="material-icons edit-item-btn" title="Edit">create</a>
+                      <a href="#" style="font-size:20px;" 
+                          class="material-icons detete-item-btn" 
+                          title="{{_ 'delete'}}">delete</a>
+                  {{/unless}}
+              </p>
+          </div>
+          <p class="price">{{_ "riyals" price}}</p>
+      </div>
+        </div>
+    </div>
+</template>

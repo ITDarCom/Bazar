@@ -65,7 +65,19 @@ module.exports = function(){
                 return Meteor.call('generateItems', count, options);         
             }, count, options)
         }
-    });    
+    });
+
+    this.Given(/^there are "([^"]*)" items in my shop$/, function (count) {    
+        count = parseInt(count)
+
+        var options = { mine: true }
+
+        if (count > 0){
+            server.execute(function(count, options){
+                return Meteor.call('generateItems', count, options);         
+            }, count, options)
+        }
+    });            
 
 
     this.Then(/^I should see a list of "([^"]*)" items$/, function (count) {    
@@ -77,6 +89,18 @@ module.exports = function(){
         const elements = browser.elements(".endless-list > .item-thumbnail");
         expect(elements.value.length).toEqual(count);
     });
+
+
+    this.Then(/^I should see a list of "([^"]*)" hidden items$/, function (count) {    
+        count = parseInt(count)     
+        
+        var doesExist = browser.waitForExist(".endless-list");
+        expect(doesExist).toBe(true);
+
+        const elements = browser.elements(".endless-list > .item-thumbnail.thumbnail-dark");
+        expect(elements.value.length).toEqual(count);
+    });
+
 
 
     this.Then(/^I should see a list of "([^"]*)" shops$/, function (count) {    

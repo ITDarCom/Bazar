@@ -66,5 +66,16 @@ Shops.attachSchema(new SimpleSchema({
     unreadOrders: {
         type: Number,
         defaultValue: 0
-    }    
+    },
+    isHidden: {
+        type:Boolean,
+        autoValue: function () {
+            if (this.isInsert){
+                return false;
+            }
+            if (this.isUpdate){
+                return this.value;
+            }
+        }
+    }
 }));

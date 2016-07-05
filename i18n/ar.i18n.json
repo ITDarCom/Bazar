@@ -10,6 +10,11 @@
 	"settings":"إعدادات",
 	"createShop":"أنشئ متجرا",
 	"removeShop":"حذف المتجر",
+	"hideShop": "إخفاء المتجر",
+	"unhideShop": "إظهار المتجر",
+	"hideItem": "إخفاء العنصر",
+	"unhideItem": "إظهار العنصر",
+	"youCannothideItem":"لا يمكن اظهار العنصر لأن المتجر مخفي",
 	"myShop":"متجري",
 	"myFavorites":"مفضلاتي",
 	"signOut":"تسجيلي خروج",
@@ -62,5 +67,6 @@
 	"rejectOrderConfirmation":"هل أنت متأكد أنك تريد رفض هذا الطلب؟ (لا يمكنك التراجع)",
 	"personalInbox":"البريد الشخصي",
 	"shopInbox":"بريد المتجر",
-	"sendMessage": "إرسال رسالة"
+	"sendMessage": "إرسال رسالة",
+	"deleteItemConfirmation": "هل انت متأكد من حذف العنصر"
 }
