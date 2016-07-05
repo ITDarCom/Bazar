@@ -52,7 +52,7 @@ Template.endlessList.onCreated(function () {
         //    return Shops.find(query)
         //} else { return Items.find(query) }
         if (route.match(/shops.index/)) {
-
+            query.isHidden = false
             return Shops.find(query)
         }
         else if (route.match(/favorites.index/)) {
