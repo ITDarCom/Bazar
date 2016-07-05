@@ -1,8 +1,33 @@
 <template name="adminUsersPage">
-	<h1 class="page-header">Admin - Users</h1>
-	<ul>
-		{{#each users}}
-			<li>{{_id}}</li>
-		{{/each}}
-	</ul>
+	<h1 class="page-header">{{_ 'Admin-Users'}} </h1>
+    {{> tabular table=TabularTables.users class="users-table table table-striped table-bordered table-condensed"}}
+</template>
+
+<template name="lastSignInTemplate">
+    <span id='lastSignIn{{_id}}'> {{getlastSignIn}}</span>
+</template>
+
+<template name="registerdAtTemplate">
+    <span id='registerdAt{{_id}}'>{{getRegisterdAt}}</span>
+</template>
+
+<template name="userAdministrativeActions">
+    <div class="btn-group btn-group-vertical btn-group-raised" style="width:50px;">    
+        <a class="userIdLogIn btn btn-raised btn-primary btn-sm" userId = {{this._id}} title={{_ "loginAsThisUser"}}>
+            <i class="fa fa-sign-in userIdLogIn" userId = {{this._id}}></i>
+        </a>
+        <a class="blockUser btn btn-raised btn-warning btn-sm" userId = {{this._id}} 
+            title=
+            {{#unless blocked}}{{_ 'blockThisUser'}}{{else}}{{_ 'unblockThisUser'}}{{/unless}}>
+            <i class="fa fa-{{#unless blocked}}ban{{else}}repeat{{/unless}}" userId = {{this._id}} ></i>
+        </a>
+        {{#if blocked}}
+            <a class="deleteUser btn btn-raised btn-danger btn-sm" userId = {{this._id}} title={{_ 'deleteThisUser'}}>
+                <i class="fa fa-trash" userId = {{this._id}} ></i>
+            </a>
+        {{/if}}
+        <a class="resetPasswd btn btn-raised btn-default btn-sm" userId = {{this._id}} title={{_ "resetPasswdforThisUser"}}>
+            <i class="fa fa-refresh" userId = {{this._id}} ></i>
+        </a>
+    </div>
 </template>

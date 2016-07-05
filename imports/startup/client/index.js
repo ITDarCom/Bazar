@@ -32,13 +32,16 @@ import "./../../ui/pages/inbox"
 import "./../../ui/pages/inbox-thread"
 
 import "./../../ui/pages/admin-categories"
+import "./../../ui/pages/admin-cities"
 import "./../../ui/pages/admin-users"
+import "./../../ui/pages/admin-warning"
 
 import "./../../ui/components/item-thumbnail"
 import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"
 import "./../../ui/components/threads-list"
 import "./../../ui/components/city-filter"
+import "./../../ui/components/admin-tables"
 
 import "./routes"
 

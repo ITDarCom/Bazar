@@ -92,14 +92,19 @@
   <ul class="nav nav-pills">
     <li class={{isActiveRoute 'admin.users'}} role="presentation">
       <a href="{{pathFor 'admin.users'}}">
-        Users
+        {{_ "users"}}
       </a>
     </li>
     <li class={{isActiveRoute 'admin.categories'}} role="presentation">
       <a href="{{pathFor 'admin.categories'}}">
-        Categories
+       {{_ "categories"}}
       </a>
     </li>
+      <li class={{isActiveRoute 'admin.cities'}} role="presentation">
+          <a href="{{pathFor 'admin.cities'}}">
+              {{_ "cities"}}
+          </a>
+      </li>
   </ul>
   <hr style="margin-top:5px"/>
 </template>

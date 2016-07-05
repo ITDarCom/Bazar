@@ -147,3 +147,24 @@ body {
     margin-bottom: 50px;
     margin-top: 0px;
 }
+
+th, td {
+    padding: 15px;
+    text-align: right;
+}
+.table-categories{
+
+    margin-top: 50px;
+
+}
+.admin-header{
+    margin-bottom: 30px;
+}
+
+.users-table th{
+    font-size: 9pt;
+}
+
+.users-table td span{
+    font-size: 9pt;
+}

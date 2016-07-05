@@ -16,7 +16,7 @@ import { Shops } from './shops/collection.js'
 import { Purchases } from './purchases/collection.js'
 import { Categories } from './categories/collection.js'
 import { Threads } from './threads/collection.js'
-
+import { Cities } from './cities/collection.js'
 
 Meteor.methods({
     getCategories(){
@@ -281,13 +281,16 @@ Meteor.methods({
             { username: 'username12', email: 'user12@gmail.com', password: 'password'},
             { username: 'username13', email: 'user13@gmail.com', password: 'password'},
             { username: 'username14', email: 'user14@gmail.com', password: 'password'},
-            { username: 'username15', email: 'user15@gmail.com', password: 'password'}
+            { username: 'username15', email: 'user15@gmail.com', password: 'password'},
+            { username: 'bazar', email: 'bazar@gmail.com', password: '123456' }
         ];
         
         var accountsIds = accounts.map(function(account){
             var accountId = Accounts.createUser(account)
             return accountId
         });
+
+        Meteor.users.update({username: 'bazar'},{$set: {isAdmin: true}});
 
         const shops = [
             { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
@@ -316,6 +319,16 @@ Meteor.methods({
 
         categories.forEach(function(category){
             Categories.insert(category)
+        })
+
+        const cities = [
+            { identifier: 'jeddah', label:'جدة' },
+            { identifier: 'mecca', label: 'مكة' },
+            { identifier: 'Al-riyad', label: 'الرياض' }
+        ]
+
+        cities.forEach(function(city){
+            Cities.insert(city)
         })
 
         shops.forEach(function(shop, index){

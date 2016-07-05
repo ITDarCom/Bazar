@@ -8,6 +8,7 @@ import {TAPi18n} from "meteor/tap:i18n";
 import './template.html'
 
 import { Shops } from './../../../api/shops/collection.js'
+import { Cities } from './../../../api/cities/collection.js'
 
 
 Template.login.onRendered(function(){
@@ -118,12 +119,11 @@ Template.registerHelper('i18n', function(key){
 })
 
 Template.registerHelper('cityLabel', function(identifier){
-	const cities = [
-		{label: "جدة", value: "jeddah"},
-		{label: "مكة", value: "mecca"},
-	]
+	var city = Cities.findOne({identifier:identifier});
+	return city.label;
+})
+Template.registerHelper('isAdmin', function(){
 
-	const city = cities.find(x => x.value == identifier)
+	return (Meteor.user() && Meteor.user().isAdmin);
 
-	if (city) return city.label; else return false;
 })
