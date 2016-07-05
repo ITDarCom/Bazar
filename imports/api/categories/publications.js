@@ -2,5 +2,5 @@ import {Categories} from './collection'
 
 Meteor.publish('categories', function categoriesPublication() {
 	//Meteor._sleepForMs(200);
-	return Categories.find();
+	return Categories.find({}, {sort: {order: 1}});
 });

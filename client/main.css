@@ -158,12 +158,13 @@ th, td {
 .admin-header{
     margin-bottom: 30px;
 }
+.table-categories td {
+    vertical-align: middle;
+}
 table th{
     font-size: 9pt;
 }
 table td span{
     font-size: 9pt;
 }
-.table-categories td {
-    vertical-align: middle;
 }

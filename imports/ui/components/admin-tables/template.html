@@ -18,7 +18,6 @@
         <br/>
 
     {{/autoForm}}
-
     <div>
     <table class="table table-bordered table-condensed table-striped table-categories">
         <thead>
@@ -41,7 +40,7 @@
                 <td style="vertical-align: middle" class="col-md-3">{{label}}</td>
                 <td style="vertical-align: middle" class="col-md-3">{{identifier}}</td>
                 {{#if isActiveRoute 'admin.categories'}}
-                    <td class="col-md-3">{{> categotyOrder data=this}} {{order}}</td>
+                    <td class="col-md-3">{{> categotyOrder data=this}}</td>
                 {{/if}}
                 <td style="vertical-align: middle" class="col-md-2">
                     <button class="btn btn-warning btn-sm btn-raised btn-delete">{{_ "delete"}}</button>
