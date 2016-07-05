@@ -14,15 +14,14 @@
         {{> afQuickField name='title'}}
         {{> afQuickField name='description' rows=3}}
         {{> afQuickField name='city' type="select" options=cities}}
-        {{#unless hasShop}}
-            <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
-                {{_ "submit"}}</button>
-        {{else}}
+        <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
+            {{_ "submit"}}</button>
+        {{#if hasShop}}
             <button class="btn btn-danger btn-block btn-raised delete-shop-btn">
                 {{_ "removeShop"}}</button>
             <button class="btn btn-warning btn-block btn-raised hide-shop-btn">
                 {{#if isHidden}} {{_ "unhideShop"}}{{else}}{{_ "hideShop"}} {{/if}} </button>
-        {{/unless}}
+        {{/if}}
 
 
     {{/autoForm}}

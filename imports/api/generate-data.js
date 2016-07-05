@@ -45,6 +45,10 @@ Meteor.methods({
 
         const opts = options || {}
 
+        if (opts.mine && Meteor.user() && Meteor.user().profile){
+            opts.shop = Shops.findOne(Meteor.user().profile.shop)
+        }
+
         for (var i = 0; i < count; i++) {
             
             const shop = opts.shop? opts.shop : Shops.findOne()
@@ -59,7 +63,9 @@ Meteor.methods({
                 shop: shop._id, 
                 city: city, createdAt: new Date(), 
                 category: category, 
-                price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] }
+                price: 50, 
+                isHidden: false,
+                thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] }
 
             Items.insert(item, { getAutoValues : false })
         }
@@ -311,9 +317,9 @@ Meteor.methods({
                 { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
             ]
 
-            items.forEach(function(item){
+            /*items.forEach(function(item){
                 Items.insert(item, { getAutoValues : false })
-            })
+            })*/
 
         })              
 

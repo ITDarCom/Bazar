@@ -4,7 +4,6 @@ Feature: Managing shop
 	So that I can manage my shop
 	I want create and manage my shop info, in addition to creating and managing new items
 
-
 	Background:
 
 	Scenario: New user being able to create a shop 
@@ -61,30 +60,6 @@ Feature: Managing shop
 		When I click app menu button
 		Then I "should" see "create-shop" in the app menu
 
-	Scenario: Shop owner de-activiting his shop 
-		Given I am a registered user with a shop
-		And I am logged in		
-		And I am on "settings.shop" page
-		When I click ".deactivate-shop" button
-		And I click "ok" in the confirmation box
-		Then I "should" see ".activate-shop" button 	
-
-	Scenario: Shop owner with de-activited shop viewing his shop
-		Given I am a registered user with a deactivated shop
-		And I am logged in		
-		And I am on "my-shop" page	
-		And I should see "deactivated-shop" message
-
-	Scenario: Shop owner activiting his shop 
-		Given I am a registered user with a deactivated shop
-		And I am logged in		
-		And I am on "settings.shop" page
-		When I click ".activate-shop" button
-		And I click "ok" in the confirmation box
-		Then I "should" see ".deactivate-shop" button 
-		Given I am on "my-shop" page
-		Then I should not see "deactivated-shop" message
-
 	Scenario: Shop owner clicking new item button from his shop page
 		Given I am a registered user with a shop
 		And I am logged in
@@ -124,18 +99,25 @@ Feature: Managing shop
 
 	Scenario: Shop owner hiding an item		
 		Given I am a registered user with a shop
+		And there are "8" items in my shop
 		And I am logged in
-		And I on an item page I have created
-		When I click '.hide-item' button
-		Then I "should" see ".show-item" button 
+		And I am on "my-shop" page
+		When I click ".hide-item" button
+		Then I should see a list of "1" hidden items
+		And I should see a list of "8" items
+		When I am on "home" page
+		Then I should see a list of "7" items
 
-	Scenario: Shop owner un-hiding an item		
+	Scenario: Shop owner hiding his shop
 		Given I am a registered user with a shop
 		And I am logged in
-		And I on an item page I have created
-		When I click '.hide-item' button
-		And I click '.show-item' button
-		Then I "should" see ".hide-item" button 
+		And there are "8" items in my shop
+		And I am on "settings.shop" page
+		When I click ".hide-shop" button
+		Given I am on "home" page
+		Then I should see a list of "0" items		
+		Given I am on "my-shop" page
+		Then I should see a list of "8" hidden items		
 
 	Scenario: User trying to edit an item he does not own
 	Scenario: User trying to access new shop page while he already has a shop
