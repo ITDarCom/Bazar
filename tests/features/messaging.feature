@@ -1,5 +1,3 @@
-@watch
-
 Feature: Messaging
 
 	As a user or shop owner

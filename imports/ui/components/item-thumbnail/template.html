@@ -26,17 +26,20 @@
 
                 <div style="float:left;margin-right:5px;margin-left:5px;">
                     <p>
-                        {{#unless isActiveRoute 'shops.show'}}
+                        {{#unless isShopOwner}}
                             <i style="font-size:20px" class="material-icons">share</i>
-                            <a href="#" style="font-size:20px" class="favorite-btn material-icons">{{#if favorite}}
-                                star{{else}}star_border{{/if}}</a>
+                            <a href="#" 
+                                style="font-size:20px" class="favorite-btn material-icons">
+                                {{#if favorite}}star{{else}}star_border{{/if}}</a>
                         {{else}}
-                            <a href="#" style="font-size:20px;margin-right: 10px" class="material-icons hide-item-btn" title="{{#unless isHidden}}Hide{{else}}Show{{/unless}}">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                            </a>
-
-                            <a href="{{pathFor 'items.edit' shop=shop._id itemId=_id}}" style="font-size:20px;margin-right: 10px" class="material-icons edit-item-btn" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                            <a href="#" style="font-size:20px;margin-right: 10px" class="material-icons detete-item-btn" title="Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                            <a href="#" style="font-size:20px; margin-bottom:0px;" 
+                            class="material-icons hide-item-btn" 
+                            title="{{#unless isHidden}}{{_ 'hide'}}{{else}}{{_ 'show'}}{{/unless}}">{{#unless isHidden}}visibility_off{{else}}visibility{{/unless}}</a>
+                            <a href="{{pathFor 'items.edit' shop=shop._id itemId=_id}}" 
+                                style="font-size:20px;" class="material-icons edit-item-btn" title="Edit">create</a>
+                            <a href="#" style="font-size:20px;" 
+                                class="material-icons detete-item-btn" 
+                                title="{{_ 'delete'}}">delete</a>
                         {{/unless}}
                     </p>
                 </div>
