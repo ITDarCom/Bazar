@@ -9,7 +9,7 @@ Template.lastSignInTemplate.helpers({
     getlastSignIn: function () {
         var id = this._id;
         var user = Meteor.users.findOne({_id: id});
-        if (user.lastSignIn) {
+        if (user && user.lastSignIn) {
             return moment(user.lastSignIn).format('dddd DD-MM hh:mm');
         }
     }
@@ -20,7 +20,7 @@ Template.registerdAtTemplate.helpers({
     getRegisterdAt: function () {
         var id = this._id;
         var user = Meteor.users.findOne({_id: id});
-        if (user.registerdAt) {
+        if (user && user.registerdAt) {
             return  moment(user.registerdAt).format('dddd DD-MM hh:mm');
         }
     }
@@ -58,7 +58,9 @@ Template.userAdministrativeActions.events({
         }
     },
     'click .resetPasswd': function (event) {
-        var pwd = prompt('Are you sure you want to reset passowrd for' + Meteor.user().username);
+
+        const user = Meteor.users.findOne($(event.target).attr('userid'))
+        var pwd = prompt('Are you sure you want to reset passowrd for: ' + user.username);
 
         if (pwd != null) {
             var userId = $(event.target).attr('userid');

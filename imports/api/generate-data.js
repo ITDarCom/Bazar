@@ -312,9 +312,9 @@ Meteor.methods({
         ];
 
         const categories = [
-            { identifier: 'deserts', label: 'حلويات' },
-            { identifier: 'mashawee', label: 'مشاوي' },
-            { identifier: 'pateseries', label: 'معجنات' }
+            { identifier: 'deserts', label: 'حلويات',order: 1 },
+            { identifier: 'mashawee', label: 'مشاوي',order: 1 },
+            { identifier: 'pateseries', label: 'معجنات',order:1 }
         ]
 
         categories.forEach(function(category){
