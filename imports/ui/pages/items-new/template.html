@@ -17,11 +17,12 @@
         {{> afQuickField name='category' type="select" options=categories}}
 
         <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">{{_ "submit"}}</button>
-        <br/>
         {{#if isActiveRoute 'items.edit'}}
-            <button class="btn btn-warning btn-lg btn-block btn-raised hide-item-btn">
-                {{#if isHidden}} {{_ "unhideItem"}}{{else}}{{_ "hideItem"}} {{/if}} </button>
+        <button class="btn btn-warning btn-lg btn-block btn-raised hide-item-btn" style="margin-bottom:5px;">
+            {{#if isHidden}} {{_ "unhideItem"}}{{else}}{{_ "hideItem"}} {{/if}} </button>
         {{/if}}
+        <button class="btn btn-warning btn-lg btn-block cancel-btn">
+            {{_ "cancel"}}</button>        
     {{/autoForm}}
 
 

@@ -3,6 +3,7 @@
 		<ul class="purchase-items-list" style="padding-right:0px;">
 		{{#each purchases}}
 			{{> Template.dynamic template=purchaseTemplate data=this}}
+			<hr />
 		{{else}}
 			<div class="no-items-message">
 				{{_ "noItemsMessage"}}

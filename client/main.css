@@ -205,31 +205,31 @@ footer {
 
   .row-offcanvas-right
   .sidebar-offcanvas {
-    right: -300px; /* width of offcanvas menu */
+    right: -250px; /* width of offcanvas menu */
   }
 
   .row-offcanvas-left
   .sidebar-offcanvas {
-    left: -300px; /* width of offcanvas menu */
+    left: -250px; /* width of offcanvas menu */
   }
 
   .row-offcanvas-right.active {
-    right: 300px; /* width of offcanvas menu */
+    right: 250px; /* width of offcanvas menu */
   }
 
   .row-offcanvas-left.active {
-    left: 300px; /* width of offcanvas menu */
+    left: 250px; /* width of offcanvas menu */
   }
 
   .sidebar-offcanvas {
     position: absolute;
     top: 0;
-    width: 300px; /* width of offcanvas menu */
+    width: 250px; /* width of offcanvas menu */
   }
 
   .row-offcanvas-right.active
   .navbar {
-    right:300px;
+    right:250px;
     width:100%;
   }
 

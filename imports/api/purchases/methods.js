@@ -72,9 +72,14 @@ Meteor.methods({
 
 		cartItems.forEach(function(item){
 			//notify shop owner
-			var shopId = Shops.update(item.shop, { $inc: { unreadOrders: 1 }})			
+			var shopId = Shops.update(item.shop, { 
+				$inc: { 'unreadOrders': 1, 'totalOrders': 1 }
+			})
 		})
-		Meteor.users.update(this.userId, { $inc: { 'pendingPurchases': cartItems.length }})
+		Meteor.users.update(this.userId, { 
+			$inc: { 'pendingPurchases': cartItems.length, 'totalPurchases': cartItems.length },
+			$set: { 'cartItems': 0 }
+		})
 
 		Purchases.update({user: this.userId, status: 'cart'}, 
 			{ $set: { status: 'pending', deliveryInfo: deliveryInfo, sentAt: new Date() }},
@@ -83,7 +88,6 @@ Meteor.methods({
 		if (!currentUser.phone){
 			Meteor.users.update(this.userId, { $set: { 'phone': deliveryInfo.phone }})
 		}
-
 
 	},
 
@@ -110,11 +114,10 @@ Meteor.methods({
 		const shopId = purchase.shop
 		const userId = purchase.user
 
-		Shops.update(shopId, { $inc: { unreadOrders: -1 }})	
+		Shops.update(shopId, { $inc: { unreadOrders: -1, totalSales: 1 }})	
 
 		//notifying purchase owner
-        Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
-		Meteor.users.update(userId, { $inc: { 'pendingPurchases': -1 }});
+        Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1, 'pendingPurchases': -1 }});
 
 	},
 

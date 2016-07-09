@@ -63,11 +63,15 @@ Shops.attachSchema(new SimpleSchema({
         label: "Logo",
         defaultValue: '/shop-logo.png'
     },    
-    unreadOrders: {
+    'unreadOrders': {
         type: Number,
         defaultValue: 0
     },
-    isHidden: {
+    'totalSales': {
+        type: Number,
+        defaultValue: 0
+    },         
+    'isHidden': {
         type:Boolean,
         autoValue: function () {
             if (this.isInsert){

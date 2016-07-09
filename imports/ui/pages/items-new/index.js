@@ -69,5 +69,20 @@ Template.insertItemForm.events({
         }
         var status = !item.isHidden
         Meteor.call("item.hide",itemId,status)
-    }
+    },
+    'click .cancel-btn'(){
+
+        const route = Router.current().route.getName()
+
+        if (route.match(/edit/)){
+            Router.go('items.show', {
+                shop: Router.current().params.shop, 
+                itemId: Router.current().params.itemId
+            })            
+        } else {
+            Router.go('shops.mine')
+        }
+
+
+    }    
 })

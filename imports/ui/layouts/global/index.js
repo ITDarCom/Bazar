@@ -30,23 +30,44 @@ Template.changePwd.events({
 	}
 })
 
+var menuOpen = false
+
 Template.applicationLayout.onRendered(function(){
 
 	function toggleMenu(){
+		menuOpen = !menuOpen
 	    $('.row-offcanvas').toggleClass('active')
 	    $('.navmenu').toggleClass('offcanvas')
 	}
 
+	function hideMenu(){
+	    $('.row-offcanvas').removeClass('active')
+	    $('.navmenu').addClass('offcanvas')
+	}	
+
 	$(document).ready(function () {
-	  $('[data-toggle="offcanvas"]').click(function () {
-		toggleMenu()
-	  });
+
+		//a small handler to hide menu when any menu link is clicked
+		$(window).click(function(e){
+			//if user is not clicking on app menu toggle button
+			if (!e.toElement.className.match(/icon-bar|navbar-toggle/)){
+
+				//if user is not clicking on menu area
+				if (!e.toElement.className.match(/navmenu/)){
+					hideMenu()					
+				}
+			}
+		});	
+
+		$('[data-toggle="offcanvas"]').click(function () {
+			toggleMenu()
+		});
+
+
 	});
 
-	//a small handler to hide menu when any menu link is clicked
-	$(document).on('click', '.navmenu li', function(){
-		toggleMenu()
-	});	
+
+
 
 	const navbarOffset = 80;
 	//we scroll to the active focused input when window is resized
@@ -82,7 +103,7 @@ Template.registerHelper('hasShop', function(){
 })
 
 Template.registerHelper('currentShop', function(){
-    return Meteor.user().shop;
+    return Shops.findOne(Meteor.user().shop);
 })
 
 Template.registerHelper('isShopOwner', function(){

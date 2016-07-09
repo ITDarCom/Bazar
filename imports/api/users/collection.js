@@ -17,11 +17,15 @@
         type: Number,
         defaultValue: 0
     },
-    unreadInbox : {
+    'unreadInbox' : {
         type: Number,
         defaultValue: 0
     },
-    phone:{
+    'totalPurchases': {
+        type: Number,
+        defaultValue: 0
+    },       
+    'phone':{
         type: String,
         optional:true
     },
@@ -39,14 +43,14 @@
          type :boolean,
          defaultValue:false
      },
-     lastSignIn: {
+     'lastSignIn': {
          type: Date,
          defaultvalue: new Date(),
          autoValue: function () {
              return new Date();
          }
      },
-     registerdAt: {
+     'registerdAt': {
          type: Date,
          autoValue: function () {
              if (this.isInsert) {

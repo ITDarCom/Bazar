@@ -242,35 +242,35 @@ Router.route('/shops/:shop/items/:itemId/edit', function () {
 //settings
 
 Router.route('/settings/account', function () {
-    this.render('settingsNav', {to: 'nav'});
+    this.render('empty', {to: 'nav'});
     this.render('settingsAccountPage');
 }, {
     name: 'settings.account'
 });
 
 Router.route('/settings/purchases', function () {
-    this.render('settingsNav', {to: 'nav'});
+    this.render('empty', {to: 'nav'});
     this.render('settingsPurchasesPage');
 }, {
     name: 'settings.purchases'
 });
 
 Router.route('/settings/shop', function () {
-    this.render('settingsNav', {to: 'nav'});
+    this.render('empty', {to: 'nav'});
     this.render('settingsShopPage');
 }, {
     name: 'settings.shop'
 });
 
 Router.route('/settings/orders', function () {
-    this.render('settingsNav', {to: 'nav'});
+    this.render('empty', {to: 'nav'});
     this.render('settingsOrdersPage');
 }, {
     name: 'settings.orders'
 });
 
 Router.route('/settings/sales', function () {
-    this.render('settingsNav', {to: 'nav'});
+    this.render('empty', {to: 'nav'});
     this.render('settingsSalesPage');
 }, {
     name: 'settings.sales'

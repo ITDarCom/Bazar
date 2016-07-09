@@ -46,3 +46,9 @@ Template.insertShopForm.helpers({
 		})
 	}
 })
+
+Template.insertShopForm.events({
+    'click .cancel-btn'(){
+        Router.go('shops.mine')
+    }    
+})

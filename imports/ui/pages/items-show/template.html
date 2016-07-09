@@ -11,7 +11,7 @@
 		<center>
 			{{#if isShopOwner}}
 				<a class="btn btn-warning btn-fab edit-item-btn btn-float"
-					href="{{pathFor 'items.edit' itemId=item._id shop=currentShop}}">
+					href="{{pathFor 'items.edit' itemId=item._id shop=currentUser.shop}}">
 					<i class="material-icons">create</i>
 			</a>				
 			{{else}}
