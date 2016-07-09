@@ -1,13 +1,38 @@
 <template name="applicationLayout">
 
+
+  <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-right">
+      
+      {{> navbar}}
+
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas sidebar" id="sidebar">
+        {{> navmenu }}
+      </div><!--/.sidebar-offcanvas-->
+     
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="col-xs-12">
+            {{> yield "nav"}}
+          </div>
+        </div>
+        {{> yield}}
+      </div>
+    </div><!--/row-->
+
+  </div><!--/.container-->
+  
+</template>
+
+
+<template name="navbar">
   <div class="navbar navbar-fixed-top navbar-warning">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" 
           class="navbar-toggle" 
           style="float:right; margin-right:10px;"
-          data-toggle="offcanvas" 
-          data-target=".navmenu" data-canvas=".canvas, .navbar">
+          data-toggle="offcanvas" >
           {{#if unreadItems}}
             <span class="unread-mark"></span>
           {{/if}}
@@ -19,8 +44,8 @@
           <img alt="Brand" src="/brand.png">
         </a>
         <ul class="nav navbar-nav pull-left" style="margin-top:0px; margin-bottom:0px;">
-          <li id="my-cart">          
-            <a href="{{pathFor 'cart'}}" style="padding-bottom:15px;">
+          <li id="my-cart">
+            <a href="{{pathFor 'cart'}}" style="padding-bottom:15px; padding-top:15px;">
               {{#if currentUser.cartItems}}
                 <span class="counter">({{currentUser.cartItems}})</span>
               {{else}}
@@ -31,93 +56,83 @@
           </li>
         </ul>        
       </div>
-    </div>
   </div>
+</div> 
+</template>
+
+<template name="navmenu">
 
   <nav id="offcanvas" class="navmenu navmenu-inverse navmenu-fixed-right navmenu-site offcanvas" role="navigation">
-      <a class="navmenu-brand">{{_ "bazar"}}</a>
-      <ul class="nav navmenu-nav">
-        <li class={{isActiveRoute 'home'}}>
-          <a href="{{pathFor 'home'}}">
-            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; {{_ "home"}}
-          </a>
-        </li>
-        {{#if currentUser}}
-        <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
-          <a href="{{pathFor 'settings.purchases'}}">
-            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; {{_ "myPurchases"}}
-            {{#if currentUser.unreadPurchases}}
-              <span class="counter label label-danger">{{currentUser.unreadPurchases}}</span>
-            {{else}}
-              (<span class="counter">0</span>)
-            {{/if}}
-          </a>
-        </li>
-        <li class={{isActiveRoute 'favorites.index'}}><a href="{{pathFor 'favorites.index'}}">
-            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>&nbsp; {{_ "myFavorites"}}
-        </a></li>          
-        {{#if hasShop}}
-        <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
-          <a href="{{pathFor 'settings.orders'}}">
-            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
-            {{#if unreadOrders}}
-              <span class="counter label label-danger">{{unreadOrders}}</span>
-            {{else}}
-              (<span class="counter">0</span>)
-            {{/if}}              
-          </a>
-        </li>
-        {{/if}}
-        <li class={{isActiveRoute 'inbox'}} id="inbox">
-          <a href="{{pathFor 'inbox'}}">
-          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myMessages"}}
-          {{#if currentUser.unreadInbox}}
-            <span class="counter label label-danger">{{currentUser.unreadInbox}}</span>
+    <a class="navmenu-brand">{{_ "bazar"}}</a>
+    <ul class="nav navmenu-nav">
+      <li class={{isActiveRoute 'home'}}>
+        <a href="{{pathFor 'home'}}">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; {{_ "home"}}
+        </a>
+      </li>
+      {{#if currentUser}}
+      <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
+        <a href="{{pathFor 'settings.purchases'}}">
+          <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; {{_ "myPurchases"}}
+          {{#if currentUser.unreadPurchases}}
+            <span class="counter label label-danger">{{currentUser.unreadPurchases}}</span>
           {{else}}
             (<span class="counter">0</span>)
-          {{/if}}          
-        </a></li>
-        <li class={{isActiveRoute regex='settings.(account|shop|sales)'}}><a href="{{pathFor 'settings.account'}}">
-          <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; {{_ "settings"}}
-        </a></li>
-        {{#unless hasShop}}
-        <li class={{isActiveRoute 'shops.new'}} id="create-shop"><a href="{{pathFor 'shops.new'}}">
-          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{_ "createShop"}}
-        </a></li>
-        {{else}}
-        <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">
-          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{_ "myShop"}}
-        </a></li>
-        {{/unless}}
-        <li class={{isActiveRoute 'logout'}}><a href="{{pathFor 'logout'}}">
-          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; {{_ "signOut"}}
-        </a></li>
-      {{else}}
-        <li class={{isActiveRoute 'accounts.signin'}}><a href="{{pathFor 'accounts.signin'}}">
-          <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; {{_ "signIn"}}
-        </a></li>
-        <li class={{isActiveRoute 'accounts.signup'}}><a href="{{pathFor 'accounts.signup'}}">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; {{_ "signUp"}}
-        </a></li>
+          {{/if}}
+        </a>
+      </li>
+      <li class={{isActiveRoute 'favorites.index'}}><a href="{{pathFor 'favorites.index'}}">
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>&nbsp; {{_ "myFavorites"}}
+      </a></li>          
+      {{#if hasShop}}
+      <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
+        <a href="{{pathFor 'settings.orders'}}">
+          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
+          {{#if unreadOrders}}
+            <span class="counter label label-danger">{{unreadOrders}}</span>
+          {{else}}
+            (<span class="counter">0</span>)
+          {{/if}}              
+        </a>
+      </li>
       {{/if}}
-      {{#if isAdmin}}
-        <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
-          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; {{_ "admin"}}
-        </a></li>
-      {{/if}}        
-      </ul>  
-  </nav>    
-
-
-  <div class="canvas">
-    <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-12">
-            {{> yield "nav"}}
-          </div>
-        </div>
-        {{> yield}}
-    </div>
-  </div>
-  
+      <li class={{isActiveRoute 'inbox'}} id="inbox">
+        <a href="{{pathFor 'inbox'}}">
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "myMessages"}}
+        {{#if currentUser.unreadInbox}}
+          <span class="counter label label-danger">{{currentUser.unreadInbox}}</span>
+        {{else}}
+          (<span class="counter">0</span>)
+        {{/if}}          
+      </a></li>
+      <li class={{isActiveRoute regex='settings.(account|shop|sales)'}}><a href="{{pathFor 'settings.account'}}">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; {{_ "settings"}}
+      </a></li>
+      {{#unless hasShop}}
+      <li class={{isActiveRoute 'shops.new'}} id="create-shop"><a href="{{pathFor 'shops.new'}}">
+        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{_ "createShop"}}
+      </a></li>
+      {{else}}
+      <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">
+        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{_ "myShop"}}
+      </a></li>
+      {{/unless}}
+      <li class={{isActiveRoute 'logout'}}><a href="{{pathFor 'logout'}}">
+        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; {{_ "signOut"}}
+      </a></li>
+    {{else}}
+      <li class={{isActiveRoute 'accounts.signin'}}><a href="{{pathFor 'accounts.signin'}}">
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; {{_ "signIn"}}
+      </a></li>
+      <li class={{isActiveRoute 'accounts.signup'}}><a href="{{pathFor 'accounts.signup'}}">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; {{_ "signUp"}}
+      </a></li>
+    {{/if}}
+    {{#if isAdmin}}
+      <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
+        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; {{_ "admin"}}
+      </a></li>
+    {{/if}}        
+    </ul>  
+  </nav>
 </template>

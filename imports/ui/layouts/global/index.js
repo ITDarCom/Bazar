@@ -32,10 +32,21 @@ Template.changePwd.events({
 
 Template.applicationLayout.onRendered(function(){
 
+	function toggleMenu(){
+	    $('.row-offcanvas').toggleClass('active')
+	    $('.navmenu').toggleClass('offcanvas')
+	}
+
+	$(document).ready(function () {
+	  $('[data-toggle="offcanvas"]').click(function () {
+		toggleMenu()
+	  });
+	});
+
 	//a small handler to hide menu when any menu link is clicked
 	$(document).on('click', '.navmenu li', function(){
-		$('.navmenu').offcanvas('toggle')
-	});
+		toggleMenu()
+	});	
 
 	const navbarOffset = 80;
 	//we scroll to the active focused input when window is resized
