@@ -1,101 +1,111 @@
 <template name="purchasesList">
-	{{#if Template.subscriptionsReady}}	
-		<ul class="purchase-items-list" style="padding-right:0px;">
-		{{#each purchases}}
-			{{> Template.dynamic template=purchaseTemplate data=this}}
-		{{else}}
-			<div class="no-items-message">
-				{{_ "noItemsMessage"}}
-			</div>		
-		{{/each}}
-		</ul>
-	{{else}}
-		{{> spinner}}
-	{{/if}}
+    {{#if Template.subscriptionsReady}}
+        <ul class="purchase-items-list" style="padding-right:0px;">
+            {{#each purchases}}
+                {{> Template.dynamic template=purchaseTemplate data=this}}
+            {{else}}
+                <div class="no-items-message">
+                    {{_ "noItemsMessage"}}
+                </div>
+            {{/each}}
+        </ul>
+    {{else}}
+        {{> spinner}}
+    {{/if}}
 </template>
 
 <template name="orderItem">
-	<div class="order-item row">
-		<div class="col-xs-12">
-			<div class="btn-group btn-group-justified btn-group-raised">
-				<a class="btn btn-primary accept-order-btn" 
-					style="padding-right:15px;padding-left:15px;">
-					<i class="material-icons">done</i> {{_ "accept"}}</a>
-				<a class="btn btn-danger reject-order-btn"
-					style="padding-right:15px;padding-left:15px;">
-					<i class="material-icons">clear</i> {{_ "reject"}}</a>
-				<a class="btn btn-info message-btn"
-					data-toggle="modal" data-target="#{{modalId}}">				
-					<i class="material-icons">mail</i>
-				</a>
-			</div>
-		</div>
-		{{> itemThumbnail item}}
-		<div class="col-xs-6" style="padding:0px;">
-				<li class="list-group-item">{{_ "member"}}: {{member}}</li>
-				<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
-				<li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>
-				<li class="list-group-item">{{_ "deliveryDate"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a"}}</li>
-				<li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
-				<li class="list-group-item">{{_ "email"}}: {{deliveryInfo.email}}</li>
-				<li class="list-group-item">{{_ "mobile"}}: {{deliveryInfo.phone}}</li>
-				<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
-				<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>				
-				<li class="list-group-item">{{_ "total"}}: {{total}}</li>
-		</div>
-	</div>
+    <div class="order-item row">
+        <div class="col-xs-12">
+            <div class="btn-group btn-group-justified btn-group-raised delivery-status">
+                {{#unless accepted}}
+                    <a class="btn btn-primary accept-order-btn"
+                       style="padding-right:15px;padding-left:15px;">
+                        <i class="material-icons">done</i> {{_ "accept"}}</a>
+                    <a class="btn btn-danger reject-order-btn"
+                       style="padding-right:15px;padding-left:15px;">
+                        <i class="material-icons">clear</i> {{_ "reject"}}</a>
+                {{else}}
+                    <a class="btn btn-primary hasDelivered-order-btn"
+                       style="padding-right:15px;padding-left:15px;">
+                        <i class="material-icons">done_all</i> {{_ "deliver"}}</a>
+                {{/unless}}
 
-	{{> messageModal modalId=modalId recpientType='user' recpientId=user inboxType='shop'}}
+                <a class="btn btn-info message-btn"
+                   data-toggle="modal" data-target="#{{modalId}}">
+                    <i class="material-icons">mail</i>
+                </a>
+            </div>
+        </div>
+        {{> itemThumbnail item}}
+        <div class="col-xs-6" style="padding:0px;">
+            <li class="list-group-item">{{_ "member"}}: {{member}}</li>
+            <li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
+            <li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>
+            <li class="list-group-item">{{_ "deliveryDate"}}
+                : {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a"}}</li>
+            <li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
+            <li class="list-group-item">{{_ "email"}}: {{deliveryInfo.email}}</li>
+            <li class="list-group-item">{{_ "mobile"}}: {{deliveryInfo.phone}}</li>
+            <li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
+            <li class="list-group-item">{{_ "price"}}: {{item.price}}</li>
+            <li class="list-group-item">{{_ "total"}}: {{total}}</li>
+        </div>
+    </div>
+
+    {{> messageModal modalId=modalId recpientType='user' recpientId=user inboxType='shop'}}
 
 </template>
 
 <template name="purchaseItem">
-	<div class="purchase-item row">
-		{{> itemThumbnail item}}
-		<div class="col-xs-6" style="padding:0px;">
-			<li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>
-			<li class="list-group-item">{{_ "deliveryDate"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a" }}</li>
-			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
-			<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>
-			<li class="list-group-item">{{_ "total"}}: {{total}}</li>
-			<li class="list-group-item {{statusClass}}">{{_ "status"}}: {{{_ status}}}</li>
-			<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
-		</div>
-	</div>
+    <div class="purchase-item row">
+        {{> itemThumbnail item}}
+        <div class="col-xs-6" style="padding:0px;">
+            <li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>
+            <li class="list-group-item">{{_ "deliveryDate"}}
+                : {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a" }}</li>
+            <li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
+            <li class="list-group-item">{{_ "price"}}: {{item.price}}</li>
+            <li class="list-group-item">{{_ "total"}}: {{total}}</li>
+            <li class="list-group-item {{statusClass}}">{{_ "status"}}: {{{_ status}}}</li>
+            <li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
+        </div>
+    </div>
 </template>
 
 <template name="saleItem">
-	<div class="sold-item row">
-		<div class="col-xs-12">		
-			<div class="btn-group btn-group-justified btn-group-raised">
-				{{#if accepted}}
-				<a class="btn btn-primary accept-order-btn disabled">
-					<i class="material-icons">done</i> {{_ "accepted"}}</a>
-				{{else}}
-				<a class="btn btn-danger reject-order-btn disabled">
-					<i class="material-icons">clear</i> {{_ "rejected"}}</a>
-				{{/if}}
-				<a class="btn btn-info message-btn"
-					data-toggle="modal" data-target="#{{modalId}}">				
-					<i class="material-icons">mail</i></a>				
-			</div>
-		</div>				
-		{{> itemThumbnail item}}
-		<div class="col-xs-6" style="padding:0px;">
-			<li class="list-group-item">{{_ "member"}}: {{member}}</li>
-			<li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
-			<li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>			
-			<li class="list-group-item">{{_ "deliveryDate"}}: {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a"}}</li>
-			<li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
-			<li class="list-group-item">{{_ "email"}} {{deliveryInfo.email}}</li>
-			<li class="list-group-item">{{_ "mobile"}} {{deliveryInfo.phone}}</li>
-			<li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
-			<li class="list-group-item">{{_ "price"}}: {{item.price}}</li>				
-			<li class="list-group-item">{{_ "total"}}: {{total}}</li>
-		</div>
-	</div>
+    <div class="sold-item row">
+        <div class="col-xs-12">
+            <div class="btn-group btn-group-justified btn-group-raised">
+                {{#if hasDelivered}}
+                    <a class="btn btn-primary accept-order-btn disabled">
+                        <i class="material-icons">done_all</i> {{_ "deliver"}}</a>
+                {{else}}
+                    <a class="btn btn-danger reject-order-btn disabled">
+                        <i class="material-icons">clear</i> {{_ "rejected"}}</a>
+                {{/if}}
+                <a class="btn btn-info message-btn"
+                   data-toggle="modal" data-target="#{{modalId}}">
+                    <i class="material-icons">mail</i></a>
+            </div>
+        </div>
+        {{> itemThumbnail item}}
+        <div class="col-xs-6" style="padding:0px;">
+            <li class="list-group-item">{{_ "member"}}: {{member}}</li>
+            <li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
+            <li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>
+            <li class="list-group-item">{{_ "deliveryDate"}}
+                : {{moment deliveryInfo.deliveryDate "MM-DD-YYYY hh:mm a"}}</li>
+            <li class="list-group-item">{{_ "address"}}: {{deliveryInfo.deliveryAddress}}</li>
+            <li class="list-group-item">{{_ "email"}} {{deliveryInfo.email}}</li>
+            <li class="list-group-item">{{_ "mobile"}} {{deliveryInfo.phone}}</li>
+            <li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
+            <li class="list-group-item">{{_ "price"}}: {{item.price}}</li>
+            <li class="list-group-item">{{_ "total"}}: {{total}}</li>
+        </div>
+    </div>
 
 
-	{{> messageModal modalId=modalId recpientType='user' recpientId=user inboxType='shop'}}
+    {{> messageModal modalId=modalId recpientType='user' recpientId=user inboxType='shop'}}
 
 </template>

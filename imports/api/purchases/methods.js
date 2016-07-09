@@ -92,7 +92,7 @@ Meteor.methods({
 		check(purchaseId, String);
 		check(status, String);
 
-		if (!status.match(/accepted|rejected/)){
+		if (!status.match(/accepted|rejected|hasDelivered/)){
 			throw new Meteor.Error(`processed order status should be 'accepted' or 'rejected', found ${status}`);
 		}
 
@@ -104,17 +104,19 @@ Meteor.methods({
 			{ $set: { status: status }},
 			{ multi: false })
 
+       if (status.match(/accepted|rejected/)) {
 
-		//marking order as processed for shop owner
-		const purchase = Purchases.findOne(purchaseId)
-		const shopId = purchase.shop
-		const userId = purchase.user
+		   //marking order as processed for shop owner
+		   const purchase = Purchases.findOne(purchaseId)
+		   const shopId = purchase.shop
+		   const userId = purchase.user
 
-		Shops.update(shopId, { $inc: { unreadOrders: -1 }})	
+		   Shops.update(shopId, {$inc: {unreadOrders: -1}})
 
-		//notifying purchase owner
-        Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
-		Meteor.users.update(userId, { $inc: { 'pendingPurchases': -1 }});
+		   //notifying purchase owner
+		   Meteor.users.update(userId, {$inc: {'unreadPurchases': 1}});
+		   Meteor.users.update(userId, {$inc: {'pendingPurchases': -1}});
+	   }
 
 	},
 
