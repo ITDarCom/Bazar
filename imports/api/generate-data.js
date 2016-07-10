@@ -353,15 +353,14 @@ Meteor.methods({
                 { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
             ]
 
-            items.forEach(function(item){
-                while (Items.findOne(item._id)){
-                    item._id = Math.floor((Math.random() * 10000) + 1000).toString()
-                }
-            })
-
-            /*items.forEach(function(item){
-                Items.insert(item, { getAutoValues : false })
-            })*/
+            if (Items.find().count() == 0){
+                items.forEach(function(item){
+                    while (Items.findOne(item._id)){
+                        item._id = Math.floor((Math.random() * 10000) + 1000).toString()
+                    }
+                    Items.insert(item, { getAutoValues : false })
+                });
+            }
 
         })              
 

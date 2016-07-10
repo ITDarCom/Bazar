@@ -69,7 +69,7 @@ Shops.attachSchema(new SimpleSchema({
     },
     'totalSales': {
         type: Number,
-        defaultValue: 0
+        defaultValue: 0, optional:true
     },         
     'isHidden': {
         type:Boolean,
