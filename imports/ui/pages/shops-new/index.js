@@ -26,7 +26,6 @@ AutoForm.addHooks('insertShopForm', {
     after: {
       method: CfsAutoForm.Hooks.afterInsert
     },
-
 	beginSubmit: function() {
 		isUploading.set(true)
 	},

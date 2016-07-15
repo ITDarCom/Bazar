@@ -9,21 +9,46 @@ import { Items } from './../../../api/items/collection'
 import { Shops } from './../../../api/shops/collection'
 import { Categories } from './../../../api/categories/collection'
 
+import { Images } from './../../../api/images'
+
+import {CfsAutoForm} from "meteor/cfs:autoform"
+
 Template.itemsNewPage.helpers({
 	shop(){
 		return Shops.findOne(Meteor.user().shop)
 	}
 })
 
+var isUploading = new ReactiveVar(false)
+
 AutoForm.addHooks('insertItemForm', {
     onSuccess: function (formType, result) {
         if (!result) result = Router.current().params.itemId
         Router.go('items.show', {shop: Router.current().params.shop, itemId: result})
+    },
+    before: {
+      method: CfsAutoForm.Hooks.beforeInsert
+    },
+    after: {
+      method: CfsAutoForm.Hooks.afterInsert
+    },
+    beginSubmit: function() {
+        isUploading.set(true)
+    },
+    endSubmit: function() {
+        isUploading.set(false)
     }
 }, true);
 
-
 Template.insertItemForm.helpers({
+    isUploading(){
+        return isUploading.get()
+    },
+    disabled(){
+        if (isUploading.get()){
+            return "disabled"
+        } else { return "" }
+    },    
     formCollection(){
         return Items;
     },
@@ -31,6 +56,10 @@ Template.insertItemForm.helpers({
         var route = Router.current().route.getName()
         if (route.match(/edit/)) return 'method-update'
         return 'method'
+    },
+    isNew(){
+        var route = Router.current().route.getName()        
+        return (route.match(/new/))
     },
     method(){
         var route = Router.current().route.getName()

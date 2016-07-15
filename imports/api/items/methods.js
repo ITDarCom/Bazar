@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import { Items } from './collection'
+import { Images } from './../images'
 
 Meteor.methods({
 	'items.insert'(doc) {
@@ -10,6 +11,15 @@ Meteor.methods({
 		if (! this.userId) {
 			throw new Meteor.Error('not-authorized');
 		}
+
+		var thumbnails = []
+		if (doc.imageIds){
+			doc.imageIds.forEach(function(imageId, index){
+				const image = Images.findOne(imageId)
+				url = `/cfs/files/images/${image._id}/${image.original.name}`
+				thumbnails.push({ url: url, imageId: imageId, order: index + 1})
+			})
+		}		
 
 		const hasShop = Meteor.users.findOne(this.userId).hasShop
 
@@ -20,7 +30,8 @@ Meteor.methods({
 				description: doc.description,
 				price: doc.price,
 				category: doc.category,
-				thumbnails: [{ url: '/cookie.jpg'}]
+				thumbnails: thumbnails,
+				imageIds: doc.imageIds
 			}, (err, shopId) => {
 				if (err) {
 					throw err
