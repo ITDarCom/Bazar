@@ -4,6 +4,7 @@
 </template>
 
 <template name="insertShopForm">
+    {{#if isUploading}}{{>appLoading}}{{/if}}    
     {{#autoForm
     collection=formCollection
     id="insertShopForm"
@@ -17,15 +18,19 @@
                 <img src={{currentShop.logo.url}} class="shop-logo" alt="...">
             </a>
         </div>  
-        {{/if}}
         {{> fileInput mode="shop" }}
+        {{else}}
+            {{> afQuickField name="logo.imageId" type="cfs-file" collection="images"}}
+        {{/if}}
         {{> afQuickField name='description' rows=3}}
         {{> afQuickField 
             name='city' 
             type="select" 
             firstOption=(_ "selectCity")
             options=cities}}
-        <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
+        <button type="submit" 
+            class="btn btn-warning btn-lg btn-block btn-raised" {{disabled}}           
+            >
             {{_ "submit"}}</button>
         {{#if hasShop}}
             <button class="btn btn-danger btn-block btn-raised delete-shop-btn">

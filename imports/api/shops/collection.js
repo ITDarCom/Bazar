@@ -1,4 +1,5 @@
 import { Mongo } from 'meteor/mongo';
+import { Images } from './../images'
  
 export const Shops = new Mongo.Collection('shops');
 
@@ -66,7 +67,12 @@ Shops.attachSchema(new SimpleSchema({
     'logo.imageId': {
         type: String,
         label: "imageId",
-        optional:true
+        autoform: {
+          afFieldInput: {
+            type: "cfs-file",
+            collection: "imagegs"
+          }
+        }        
     },
     'unreadOrders': {
         type: Number,

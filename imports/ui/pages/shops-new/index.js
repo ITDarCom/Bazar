@@ -9,16 +9,42 @@ import { Shops } from './../../../api/shops/collection'
 import { Cities } from './../../../api/cities/collection.js'
 import { Images } from './../../../api/images'
 
+import {CfsAutoForm} from "meteor/cfs:autoform"
+
+var isUploading = new ReactiveVar(false)
+
 AutoForm.addHooks('insertShopForm', {
 	onSuccess: function(formType, result){
 		if (formType == 'method'){
 			console.log(result)
 			Router.go('shops.show', { shop: result })			
 		}
+	},
+    before: {
+      method: CfsAutoForm.Hooks.beforeInsert
+    },
+    after: {
+      method: CfsAutoForm.Hooks.afterInsert
+    },
+
+	beginSubmit: function() {
+		isUploading.set(true)
+	},
+	endSubmit: function() {
+		isUploading.set(false)
 	}
+
 }, true);
 
 Template.insertShopForm.helpers({
+	isUploading(){
+		return isUploading.get()
+	},
+	disabled(){
+		if (isUploading.get()){
+			return "disabled"
+		} else { return "" }
+	},
 	formCollection(){
 		return Shops;
 	},

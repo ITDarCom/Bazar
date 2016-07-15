@@ -50,7 +50,7 @@ Template.applicationLayout.onRendered(function(){
 		//a small handler to hide menu when any menu link is clicked
 		$(window).click(function(e){
 			//if user is not clicking on app menu toggle button
-			if (!e.toElement.className.match(/icon-bar|navbar-toggle/)){
+			if (e.toElement && !e.toElement.className.match(/icon-bar|navbar-toggle/)){
 
 				//if user is not clicking on menu area
 				if (!e.toElement.className.match(/navmenu/)){
