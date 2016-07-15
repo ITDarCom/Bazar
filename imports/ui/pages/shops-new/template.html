@@ -11,12 +11,20 @@
     doc=doc
     meteormethod=method}}
 		{{> afQuickField name='title'}}
-		{{> afQuickField name='description' rows=3}}
-		{{> afQuickField 
-			name='city' 
-			type="select" 
-			firstOption=(_ "selectCity")
-			options=cities}}
+        {{#if hasShop}}
+        <div class="col-xs-12">
+            <a href="{{pathFor 'shops.show' shop=shop._id}}" class="thumbnail">
+                <img src={{currentShop.logo.url}} class="shop-logo" alt="...">
+            </a>
+        </div>  
+        {{/if}}
+        {{> fileInput mode="shop" }}
+        {{> afQuickField name='description' rows=3}}
+        {{> afQuickField 
+            name='city' 
+            type="select" 
+            firstOption=(_ "selectCity")
+            options=cities}}
         <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
             {{_ "submit"}}</button>
         {{#if hasShop}}

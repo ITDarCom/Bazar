@@ -55,5 +55,62 @@ Meteor.methods({
 			Items.update({_id: itemId},{isHidden: status});
 		}
 
+	},
+	'items.addThumbnail'(itemId, url, imageId){
+
+		check(itemId, String);
+		check(url, String);
+		check(imageId, String);
+
+		const item = Items.findOne(itemId)
+		const order = item.thumbnails.length + 1
+
+    	Items.update(itemId, { $push: {'thumbnails': {url:url, imageId, imageId, order:order} } });		
+	},
+	'items.removeThumbnail'(itemId, imageId){
+
+		check(itemId, String);
+		check(imageId, String);
+
+        const item = Items.findOne(itemId)
+		const thumbnail = item.thumbnails.find(thumb => thumb.imageId == imageId )        
+        const oldOrder = thumbnail.order
+
+        Items.update({ _id: itemId, 'thumbnails.order': { $gt: oldOrder } }, {$inc: {'thumbnails.$.order': -1 }})
+    	Items.update(itemId, { $pull: {'thumbnails': {imageId: imageId} } });		
+	},
+	'items.thumbnailUp'(itemId, imageId){
+
+		check(itemId, String);
+		check(imageId, String);
+
+		const item = Items.findOne(itemId)
+		const thumbnail = item.thumbnails.find(thumb => thumb.imageId == imageId )
+
+        const oldOrder = thumbnail.order
+        const newOrder = thumbnail.order - 1
+
+        if (newOrder > 0){
+            Items.update({ _id: itemId, 'thumbnails.order': newOrder }, {$set: {'thumbnails.$.order': oldOrder }})
+            Items.update({ _id: itemId, 'thumbnails.imageId': imageId }, {$set: {'thumbnails.$.order': newOrder }})
+        }
+	},
+	'items.thumbnailDown'(itemId, imageId){
+
+		check(itemId, String);
+		check(imageId, String);
+
+		const item = Items.findOne(itemId)
+		const thumbnail = item.thumbnails.find(thumb => thumb.imageId == imageId )
+
+        const oldOrder = thumbnail.order
+        const newOrder = thumbnail.order + 1
+
+        const count = item.thumbnails.length
+
+        if (newOrder <= count){
+            Items.update({ _id: itemId, 'thumbnails.order': newOrder }, {$set: {'thumbnails.$.order': oldOrder }})
+            Items.update({ _id: itemId, 'thumbnails.imageId': imageId }, {$set: {'thumbnails.$.order': newOrder }})
+        }
 	}
 })

@@ -202,7 +202,7 @@ Template.message.helpers({
 		if (author.type == 'user'){
 			return Meteor.users.findOne(author.id).avatar
 		} else {
-			return Shops.findOne(author.id).logo
+			return Shops.findOne(author.id).logo.url
 		}
 	},
 	messageBody(){

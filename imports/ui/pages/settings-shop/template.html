@@ -1,5 +1,13 @@
 <template name="settingsShopPage">
-	<h1 class="page-header">{{_ "myShop"}}</h1>
+	<h1 class="page-header">
+		{{_ "myShop"}}
+			{{#if hasShop}}
+	  		<a href="{{pathFor 'shops.show' shop=shop._id}}" 
+	  			alt="{{_ 'back'}}" class="back-btn" style="float:left;">
+	  			<i  class="material-icons">undo</i>
+	  		</a>
+	  		{{/if}}
+	</h1>
 	{{#if hasShop}}
 		{{> insertShopForm}}
 	{{else}}

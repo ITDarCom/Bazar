@@ -84,6 +84,12 @@ Items.attachSchema(new SimpleSchema({
     'thumbnails.$.url': {
         type: String 
     },
+    'thumbnails.$.imageId': {
+        type: String, optional:true
+    },
+    'thumbnails.$.order': {
+        type: Number
+    },        
     isHidden: {
         type:Boolean,
         autoValue: function () {

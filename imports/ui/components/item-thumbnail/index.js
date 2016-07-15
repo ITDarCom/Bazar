@@ -4,8 +4,10 @@ import {Router} from 'meteor/iron:router'
 
 import { Items } from './../../../api/items/collection'
 import { Shops } from './../../../api/shops/collection'
+
 import './template.html'
 import './style.css'
+
 Template.itemThumbnail.helpers({
     identifier(){
         return `item-${Template.instance().data._id}`
@@ -16,7 +18,7 @@ Template.itemThumbnail.helpers({
     },
     defaultThumbnail(){
         if (Template.instance().data)
-            return Template.instance().data.thumbnails[0].url
+            return Template.instance().data.thumbnails.find(thumb => (thumb.order == 1)).url
     },
     isSearch(){
         return Template.instance().search
@@ -28,7 +30,7 @@ Template.itemThumbnail.helpers({
     },
     isHidden(){
         return Template.instance().data.isHidden
-    }
+    } 
 })
 
 Template.itemThumbnail.events({

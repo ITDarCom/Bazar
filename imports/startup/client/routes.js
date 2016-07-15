@@ -65,7 +65,6 @@ Router.onBeforeAction(function () {
 
 })
 
-
 Router.ensureLoggedIn = function () {
     if (Meteor.loggingIn()) {
         //console.log('logging in..')
@@ -79,6 +78,7 @@ Router.ensureLoggedIn = function () {
         }
     }
 };
+
 Router.ensureNotBlocked =function () {
     if(Meteor.user()&&Meteor.user().blocked){
         this.render('blockWarningPage');
@@ -87,13 +87,13 @@ Router.ensureNotBlocked =function () {
     }
 
 };
+
 Router.ensureIsAdmin =function () {
     if(Meteor.user()&&(!Meteor.user().isAdmin)){
         this.redirect('home');
     } else {
         this.next()
     }
-
 }
 
 const privateRoutes = [
@@ -102,6 +102,7 @@ const privateRoutes = [
     'shops.mine',
     'items.new',
     'items.edit',
+    'items.editImages',
     'favorites.index',
     'settings.account',
     'settings.purchases',
@@ -237,6 +238,22 @@ Router.route('/shops/:shop/items/:itemId/edit', function () {
     }
 }, {
     name: 'items.edit'
+});
+
+Router.route('/shops/:shop/items/:itemId/edit/images', function () {
+
+    if (Meteor.user() && 
+        Meteor.user().hasShop &&
+        Meteor.user().shop == this.params.shop){
+
+        this.render('empty', {to: 'nav'});
+        this.render('itemsEditImagesPage');
+
+    } else {
+        this.redirect('shops.index');
+    }
+}, {
+    name: 'items.editImages'
 });
 
 //settings

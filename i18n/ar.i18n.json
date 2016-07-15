@@ -74,6 +74,7 @@
 	"EnglishCategoryName" :"اسم الصنف في اللغة الانكليزية",
 	"ArabicCategoryName" : "اسم الصنف",
 	"delete" : "حذف",
+	"edit" : "تعديل",
 	"Admin-Categories":"إدارة الأصناف",
 	"Admin-Cities":"إدارة المدن",
 	"EnglishCityName":"اسم المدينة في اللغة الانكليزية",
@@ -93,5 +94,9 @@
 	"blockThisUser": "حجب هذا المستخدم",
 	"unblockThisUser": "إزالة حجب هذا المستخدم",
 	"deleteThisUser": "حذف هذا المستخدم",
-	"resetPasswdforThisUser": "تغيير كلمة سر هذا المستخدم"
+	"resetPasswdforThisUser": "تغيير كلمة سر هذا المستخدم",
+	"itemShouldHaveAtLeastOneThumbnail":"يجب أن يكون لكل منتج صورة واحدة على الأقل",
+	"itemImages":"صور المنتج",
+	"editItem":"تعديل منتج",
+	"addItemImage":"إضافة صورة جديدة"
 }

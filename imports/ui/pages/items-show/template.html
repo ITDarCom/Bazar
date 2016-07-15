@@ -34,7 +34,7 @@
 				</div>			  				
 			  <!-- Indicators -->
 			  <ol class="carousel-indicators">
-			  	{{#each thumbnails}}
+			  	{{#each orderedThumbnails}}
 				    <li data-target="#carousel-example-generic" 
 				    	class="{{#unless @index}}active{{/unless}}"
 				    	data-slide-to="0" ></li>
@@ -42,9 +42,9 @@
 			  </ol>
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner" role="listbox">
-			  	{{#each thumbnails}}  	
-					<div class="item {{#unless @index}}active{{/unless}}">							
-						<img src="/cookie.jpg" alt="...">
+			  	{{#each orderedThumbnails}}  	
+					<div class="item {{#unless @index}}active{{/unless}}">	
+						<img src="{{url}}" alt="...">
 					</div>
 			    {{/each}}
 			  </div>

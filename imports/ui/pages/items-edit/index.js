@@ -17,7 +17,7 @@ Template.itemsEditPage.helpers({
 		return Shops.findOne(Meteor.user().shop)
 	},
 	item(){
-		if (!Items.findOne(Router.current().params.itemId)){
+		if (Template.instance().subscriptionsReady() && !Items.findOne(Router.current().params.itemId) ){
 			Router.go('NotFound')
 		}
 		return Items.findOne(Router.current().params.itemId)

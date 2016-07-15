@@ -58,11 +58,16 @@ Shops.attachSchema(new SimpleSchema({
             return TAPi18n.__('city')
         }
 	},
-    logo: {
+    'logo.url': {
         type: String,
         label: "Logo",
         defaultValue: '/shop-logo.png'
-    },    
+    },
+    'logo.imageId': {
+        type: String,
+        label: "imageId",
+        optional:true
+    },
     'unreadOrders': {
         type: Number,
         defaultValue: 0

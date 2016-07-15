@@ -18,6 +18,12 @@ import { Categories } from './categories/collection.js'
 import { Threads } from './threads/collection.js'
 import { Cities } from './cities/collection.js'
 
+const defaultThumbnails = [ 
+    {url:'/cookie.jpg', imageId: '1', order: 1}, 
+    {url:'/cookie-2.png', imageId: '2', order: 2}, 
+    {url:'/cookie-3.png', imageId: '3', order: 3} 
+];
+
 Meteor.methods({
     getCategories(){
         return Categories.find().fetch()
@@ -65,7 +71,7 @@ Meteor.methods({
                 category: category, 
                 price: 50, 
                 isHidden: false,
-                thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ] }
+                thumbnails: defaultThumbnails }
 
             Items.insert(item, { getAutoValues : false })
         }
@@ -263,7 +269,8 @@ Meteor.methods({
 
     },             
     generateFixtures() {
-        //resetDatabase();
+        
+        //resetDatabase();        
 
         const accounts = [
             { username: 'username', email: 'user@gmail.com', password: 'password'},
@@ -293,22 +300,22 @@ Meteor.methods({
         Meteor.users.update({username: 'bazar'},{$set: {isAdmin: true}});
 
         const shops = [
-            { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر أم أحمد', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر أم تحسين', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر أم طلال', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر أم باسم', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر أم ياسر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر أم ياسر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر أم محمد', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر ياء', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false },
-            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: '/shop-logo.png', isHidden: false }
+            { _id: Random.id(6).toString(), title: 'متجر أم فيصل', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر أم أحمد', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر أم تحسين', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر أم طلال', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر أم باسم', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر أم ياسر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر أم ياسر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر أم محمد', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر ياء', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false },
+            { _id: Random.id(6).toString(), title: 'متجر ياء آخر', description: 'أفضل أنواع الحلويات تستحق التجربة الآن متوفرة بكميات كبيرة', city: 'jeddah', user:'tmp', createdAt: new Date(), unreadOrders: 0, logo: {url:'/shop-logo.png', imageId:''}, isHidden: false }
         ];
 
         const categories = [
@@ -343,14 +350,14 @@ Meteor.methods({
             })  
 
             const items = [
-                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
-                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
-                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
-                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
-                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
-                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
-                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
-                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: [ {url:'/cookie.jpg'}, {url:'/cookie.jpg'}, {url:'/cookie.jpg'} ],isHidden:false },
+                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: defaultThumbnails, isHidden:false },
+                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: defaultThumbnails, isHidden:false },
+                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: defaultThumbnails, isHidden:false },
+                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: defaultThumbnails, isHidden:false },
+                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: defaultThumbnails, isHidden:false },
+                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: defaultThumbnails, isHidden:false },
+                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: defaultThumbnails, isHidden:false },
+                { _id: Math.floor((Math.random() * 10000) + 1000).toString(), title: `كوكيز نرويجي`, description: 'أفاق واحدة الثقيلة. دنو أم أواخر وبريطانيا. مدن ان خلاف النفط إتفاقية, لغزو عالمية لم انه. لها إذ عُقر وصغار الدولارات, دار بل السيء الربيع', shop: shopId, city: 'jeddah', createdAt: new Date(), category: 'mashawee', price: 50, thumbnails: defaultThumbnails, isHidden:false },
             ]
 
             if (Items.find().count() == 0){

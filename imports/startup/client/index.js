@@ -25,6 +25,7 @@ import "./../../ui/pages/shops-new"
 import "./../../ui/pages/shops-show"
 import "./../../ui/pages/items-new"
 import "./../../ui/pages/items-edit"
+import "./../../ui/pages/items-edit-images"
 import "./../../ui/pages/items-show"
 import "./../../ui/pages/favorites-show"
 
@@ -42,6 +43,7 @@ import "./../../ui/components/purchases-list"
 import "./../../ui/components/threads-list"
 import "./../../ui/components/city-filter"
 import "./../../ui/components/admin-tables"
+import "./../../ui/components/file-input"
 
 import "./routes"
 

@@ -8,6 +8,8 @@ import { Categories } from './../../api/categories/collection.js'
 import { Threads } from './../../api/threads/collection.js'
 import {TAPi18n} from "meteor/tap:i18n";
 
+import './../../api/images'
+
 //SimpleSchema.debug = true
 
 import './../../api/shops/methods.js'

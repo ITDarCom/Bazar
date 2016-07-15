@@ -1,0 +1,35 @@
+<template name="itemsEditImagesPage">
+	<h1 class="page-header">
+		{{_ "itemImages"}}
+  		<a href="#" alt="Return where you were" class="back-btn" style="float:left;">
+  		<i  class="material-icons">undo</i>
+  		</a>
+	</h1>
+	{{#if Template.subscriptionsReady}}
+	    {{> fileInput mode="item" itemId=item._id }}	
+		{{#each orderedThumbnails}}
+			{{> itemThumbnailControl }}
+		{{/each}}		
+	{{else}}
+		{{> spinner}}
+	{{/if}}
+</template>
+
+<template name="itemThumbnailControl">
+	<div class="item-thumbnail col-xs-12 col-md-3">
+		<div class="thumbnail" style="position:relative;">
+			<img src="{{url}}" alt="...">
+		</div>
+		<div class="btn-group btn-group-justified btn-group-raised">
+			<a class="btn remove-thumbnail-btn" 
+				style="padding-right:15px;padding-left:15px;">
+				<i class="material-icons">delete</i></a>
+			<a class="btn thumbnail-order-down-btn" 
+				style="padding-right:15px;padding-left:15px;">
+				<i class="material-icons">keyboard_arrow_down</i></a>
+			<a class="btn thumbnail-order-up-btn" 
+				style="padding-right:15px;padding-left:15px;">
+				<i class="material-icons">keyboard_arrow_up</i></a>								
+		</div>
+	</div>
+</template>

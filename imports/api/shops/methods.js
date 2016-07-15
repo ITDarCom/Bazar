@@ -89,5 +89,13 @@ Meteor.methods({
 			});
 
 		}
+	},
+	'shops.setLogo'(url, fileId){
+
+		check(url, String);
+		check(fileId, String);
+
+    	Shops.update(Meteor.user().shop, { $set: {'logo.url': url, 'logo.fileId': fileId } });
 	}
+
 });
