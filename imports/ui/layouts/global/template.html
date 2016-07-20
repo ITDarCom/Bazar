@@ -66,7 +66,10 @@
     <a class="navmenu-brand">
       {{_ "bazar"}} 
       {{#if currentUser}}
-      <small>({{_ "hello" username=currentUser.username}})</small>
+      <small>({{_ "hello" username=currentUser.username}},
+        <a href="{{pathFor 'logout'}}">
+          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;{{_ "signOut"}}</a>)
+      </small>
       {{/if}}
     </a>
     <ul class="nav navmenu-nav">
@@ -113,7 +116,12 @@
           <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
           {{#if unreadOrders}}
             <span class="counter label label-danger">{{unreadOrders}}</span>
-          {{/if}}                       
+          {{/if}}
+          {{#if currentShop.undeliveredOrders}}          
+            (<span class="counter">{{currentShop.undeliveredOrders}}</span>)
+          {{else}}
+            (<span class="counter">0</span>)
+          {{/if}}                                 
         </a>
       </li>
       <li class={{isActiveRoute 'settings.sales'}} id="my-sales">
@@ -132,9 +140,6 @@
         <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{_ "createShop"}}
       </a></li>
       {{/unless}}
-      <li class={{isActiveRoute 'logout'}}><a href="{{pathFor 'logout'}}">
-        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; {{_ "signOut"}}
-      </a></li>
     {{else}}
       <li class={{isActiveRoute 'accounts.signin'}}><a href="{{pathFor 'accounts.signin'}}">
         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; {{_ "signIn"}}

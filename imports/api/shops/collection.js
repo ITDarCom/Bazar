@@ -4,7 +4,7 @@ import { Images } from './../images'
 export const Shops = new Mongo.Collection('shops');
 
 Shops.attachSchema(new SimpleSchema({
-    _id: {
+    '_id': {
         type: String,
         autoValue: function () {
             if (this.isInsert) {
@@ -18,7 +18,7 @@ Shops.attachSchema(new SimpleSchema({
                 this.unset();
         }
     },
-    user: {
+    'user': {
         type: String,
         autoValue: function () {
             if (this.isInsert) {
@@ -29,7 +29,7 @@ Shops.attachSchema(new SimpleSchema({
             }
         }
     },
-    createdAt: {
+    'createdAt': {
         type: Date,
         autoValue: function () {
             if (this.isInsert) {
@@ -40,20 +40,20 @@ Shops.attachSchema(new SimpleSchema({
             }
         }
     },        	
-	title: {
+	'title': {
 		type: String,
         label: function(){
             return TAPi18n.__('title')
         },		
 		max: 200
 	},
-	description: {
+	'description': {
 		type: String,
         label: function(){
             return TAPi18n.__('description')
         }		
 	},
-	city: {
+	'city': {
 		type: String,
 		label: function(){
             return TAPi18n.__('city')
@@ -77,6 +77,10 @@ Shops.attachSchema(new SimpleSchema({
     'unreadOrders': {
         type: Number,
         defaultValue: 0
+    },
+    'undeliveredOrders': {
+        type: Number,
+        defaultValue: 0, optional:true
     },
     'totalSales': {
         type: Number,

@@ -34,7 +34,12 @@ function goInactive() {
 }
  
 function goActive() {
-	Meteor.call('purchases.setReadStatus', true)
+	
+	const route = Router.current().route.getName();
+	if (route.match(/purchases/)){
+		Meteor.call('purchases.setReadStatus', true)		
+	}
+	
     startTimer();
 }
 

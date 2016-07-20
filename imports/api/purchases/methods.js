@@ -108,17 +108,23 @@ Meteor.methods({
 			{ $set: { status: status }},
 			{ multi: false })
 
+		const purchase = Purchases.findOne(purchaseId)
+		const shopId = purchase.shop
+		const userId = purchase.user
+
        if (status.match(/accepted|rejected/)) {
 
-		   //marking order as processed for shop owner
-		   const purchase = Purchases.findOne(purchaseId)
-		   const shopId = purchase.shop
-		   const userId = purchase.user
+			//marking order as processed for shop owner
+			Shops.update(shopId, { $inc: { unreadOrders: -1,  undeliveredOrders: 1 }})
 
-			Shops.update(shopId, { $inc: { unreadOrders: -1, totalSales: 1 }})
-			
 			//notifying purchase owner
-	        Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1, 'pendingPurchases': -1 }});
+			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
+
+        } else if (status.match(/delivered/)){
+
+			Shops.update(shopId, { $inc: { totalSales: 1, undeliveredOrders: -1 }})
+
+			Meteor.users.update(userId, { $inc: { 'pendingPurchases': -1 }});
         }
 
 	},
