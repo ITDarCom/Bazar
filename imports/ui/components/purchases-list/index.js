@@ -48,7 +48,7 @@ Template.purchasesList.helpers({
 				selector = { 
 					shop: Meteor.user().shop, 
 					$or : [
-						{ status : 'hasDelivered' },
+						{ status : 'delivered' },
 						{ status : 'rejected' },
 					]					
 				}
@@ -74,9 +74,9 @@ Template.orderItem.events ({
 			Meteor.call('orders.process', purchaseId, 'rejected')			
 		}
 	},
-	'click .hasDelivered-order-btn' : function (event, instance) {
+	'click .delivered-order-btn' : function (event, instance) {
 		var purchaseId = instance.data._id;
-		Meteor.call('orders.process', purchaseId, 'hasDelivered');
+		Meteor.call('orders.process', purchaseId, 'delivered');
 	}
 });
 
@@ -114,7 +114,7 @@ Template.purchaseItem.helpers({
 			case "pending": return "list-group-item-warning";
 			case "accepted": return "list-group-item-info";
 			case "rejected": return "list-group-item-danger";
-			case "hasDelivered": return "list-group-item-info";
+			case "delivered": return "list-group-item-success";
 		}		
 	},
 	total(){
@@ -128,8 +128,8 @@ Template.saleItem.helpers({
 	item(){
 		return getItem(Template.instance().data.item)
 	},
-	hasDelivered(){
-		return (Template.instance().data.status == 'hasDelivered')
+	delivered(){
+		return (Template.instance().data.status == 'delivered')
 	},
 	member(){
 		return Meteor.users.findOne(Template.instance().data.user).username

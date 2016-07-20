@@ -92,7 +92,7 @@ Meteor.methods({
 		check(purchaseId, String);
 		check(status, String);
 
-		if (!status.match(/accepted|rejected|hasDelivered/)){
+		if (!status.match(/accepted|rejected|delivered/)){
 			throw new Meteor.Error(`processed order status should be 'accepted' or 'rejected', found ${status}`);
 		}
 

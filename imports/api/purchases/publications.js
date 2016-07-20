@@ -65,7 +65,7 @@ Meteor.publishComposite('sales', function salesPublication(){
 			return Purchases.find({
 				shop: shop, 
 				$or : [
-					{ status : 'hasDelivered' },
+					{ status : 'delivered' },
 					{ status : 'rejected' },
 				] 
 			}, { sort: { sentAt: -1 }});				

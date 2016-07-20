@@ -39,7 +39,7 @@
 	"status":"الحالة",
 	"notes":"ملاحظات",
 	"accepted":"مقبول",
-	"hasDelivered":"مقبول",
+	"delivered":"تم التوصيل",
 	"rejected":"مرفوض",
 	"accept":"قبول",
 	"reject":"رفض",

@@ -26,7 +26,7 @@
                        style="padding-right:15px;padding-left:15px;">
                         <i class="material-icons">clear</i> {{_ "reject"}}</a>
                 {{else}}
-                    <a class="btn btn-primary hasDelivered-order-btn"
+                    <a class="btn btn-primary delivered-order-btn"
                        style="padding-right:15px;padding-left:15px;">
                         <i class="material-icons">done_all</i> {{_ "deliver"}}</a>
                 {{/unless}}
@@ -77,7 +77,7 @@
     <div class="sold-item row">
         <div class="col-xs-12">
             <div class="btn-group btn-group-justified btn-group-raised">
-                {{#if hasDelivered}}
+                {{#if delivered}}
                     <a class="btn btn-primary accept-order-btn disabled">
                         <i class="material-icons">done_all</i> {{_ "deliver"}}</a>
                 {{else}}
