@@ -23,8 +23,29 @@ var isUploading = new ReactiveVar(false)
 
 AutoForm.addHooks('insertItemForm', {
     onSuccess: function (formType, result) {
-        if (!result) result = Router.current().params.itemId
-        Router.go('items.show', {shop: Router.current().params.shop, itemId: result})
+
+        if (!result) result = Router.current().params.itemId        
+        
+        Meteor.subscribe('singleItem', result)
+        Meteor.autorun(function(c){
+            const item = Items.findOne(result)
+            if (item){
+
+                item.imageIds.forEach(function(imageId){
+                    Meteor.subscribe('image', imageId)                
+                })
+
+                //don't release the form until we finished upload
+                const images = Images.find({ _id: { $in : item.imageIds } }).fetch()
+                const length = images.length
+                
+                if (length && images[length-1].url()){
+                    isUploading.set(false)
+                    c.stop()
+                    Router.go('items.show', {shop: Router.current().params.shop, itemId: result})
+                }
+            }             
+        })
     },
     before: {
       method: CfsAutoForm.Hooks.beforeInsert
@@ -36,7 +57,6 @@ AutoForm.addHooks('insertItemForm', {
         isUploading.set(true)
     },
     endSubmit: function() {
-        isUploading.set(false)
     }
 }, true);
 

@@ -171,12 +171,12 @@ Router.route('/shops', function () {
 });
 
 Router.route('/shops/new', function () {
-	if (Meteor.user() && !Meteor.user().hasShop){
-		this.render('empty', {to: 'nav'});
-		this.render('shopsNewPage');		
+	this.render('empty', {to: 'nav'});
+	this.render('shopsNewPage');		
+/*    if (Meteor.user() && !Meteor.user().hasShop){
 	} else {
 		//this.redirect('shops.index');
-	}
+	}*/
 
 }, {
     name: 'shops.new'
