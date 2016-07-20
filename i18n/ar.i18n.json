@@ -45,6 +45,7 @@
 	"status":"الحالة",
 	"notes":"ملاحظات",
 	"accepted":"مقبول",
+	"delivered":"تم التوصيل",
 	"rejected":"مرفوض",
 	"accept":"قبول",
 	"reject":"رفض",
@@ -93,5 +94,6 @@
 	"blockThisUser": "حجب هذا المستخدم",
 	"unblockThisUser": "إزالة حجب هذا المستخدم",
 	"deleteThisUser": "حذف هذا المستخدم",
-	"resetPasswdforThisUser": "تغيير كلمة سر هذا المستخدم"
+	"resetPasswdforThisUser": "تغيير كلمة سر هذا المستخدم",
+	"deliver": "تم التسليم"
 }

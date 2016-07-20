@@ -50,8 +50,7 @@ Meteor.publishComposite('orders', function ordersPublication(){
 			if (!this.userId) this.ready();
 			var shop = Meteor.users.findOne(this.userId).shop;
 			if (!shop) this.ready();
-			return Purchases.find({shop: shop, status: 'pending' }, { sort: { sentAt: -1 }});
-		}, 
+			return Purchases.find({shop: shop, $or : [{status : 'pending'}, {status : 'accepted'}] }, { sort: { sentAt: -1 }});},
 		children : children
 	}
 });
@@ -66,7 +65,7 @@ Meteor.publishComposite('sales', function salesPublication(){
 			return Purchases.find({
 				shop: shop, 
 				$or : [
-					{ status : 'accepted' },
+					{ status : 'delivered' },
 					{ status : 'rejected' },
 				] 
 			}, { sort: { sentAt: -1 }});				

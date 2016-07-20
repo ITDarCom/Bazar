@@ -38,14 +38,17 @@ Template.purchasesList.helpers({
 			case "orders": 
 				selector = { 
 					shop: Meteor.user().shop, 
-					status : 'pending'
+					$or : [
+						{status : 'pending'},
+						{status : 'accepted'},
+					]
 				}
 			break;
 			case "sales": 
 				selector = { 
 					shop: Meteor.user().shop, 
 					$or : [
-						{ status : 'accepted' },
+						{ status : 'delivered' },
 						{ status : 'rejected' },
 					]					
 				}
@@ -63,12 +66,17 @@ Template.orderItem.events ({
 		var purchaseId = instance.data._id
 		Meteor.call('orders.process', purchaseId, 'accepted')
 
+
 	},
 	'click .reject-order-btn':function(event, instance){
 		var purchaseId = instance.data._id
 		if (confirm(TAPi18n.__('rejectOrderConfirmation'))){
 			Meteor.call('orders.process', purchaseId, 'rejected')			
 		}
+	},
+	'click .delivered-order-btn' : function (event, instance) {
+		var purchaseId = instance.data._id;
+		Meteor.call('orders.process', purchaseId, 'delivered');
 	}
 });
 
@@ -91,7 +99,10 @@ Template.orderItem.helpers({
 	modalId(){
 		const data = Template.instance().data		
 		return `message-modal-${data._id}`
-	}	
+	},
+	accepted(){
+		return (Template.instance().data.status == 'accepted')
+	}
 })
 
 Template.purchaseItem.helpers({
@@ -103,6 +114,7 @@ Template.purchaseItem.helpers({
 			case "pending": return "list-group-item-warning";
 			case "accepted": return "list-group-item-info";
 			case "rejected": return "list-group-item-danger";
+			case "delivered": return "list-group-item-success";
 		}		
 	},
 	total(){
@@ -116,8 +128,8 @@ Template.saleItem.helpers({
 	item(){
 		return getItem(Template.instance().data.item)
 	},
-	accepted(){
-		return (Template.instance().data.status == 'accepted')
+	delivered(){
+		return (Template.instance().data.status == 'delivered')
 	},
 	member(){
 		return Meteor.users.findOne(Template.instance().data.user).username
