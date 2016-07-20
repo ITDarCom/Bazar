@@ -81,9 +81,24 @@ Items.attachSchema(new SimpleSchema({
             return TAPi18n.__('category')
         },	
 	},
+    'imageIds': {
+        type: [String],
+        autoform: {
+            afFieldInput: {
+                type: "cfs-files",
+                collection: "images"
+            }
+        }, min:1
+    },      
     'thumbnails.$.url': {
-        type: String 
+        type: String, optional:true
     },
+    'thumbnails.$.imageId': {
+        type: String, optional:true
+    },
+    'thumbnails.$.order': {
+        type: Number, optional:true
+    },        
     isHidden: {
         type:Boolean,
         autoValue: function () {

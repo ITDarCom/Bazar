@@ -1,4 +1,5 @@
 import { Mongo } from 'meteor/mongo';
+import { Images } from './../images'
  
 export const Shops = new Mongo.Collection('shops');
 
@@ -58,11 +59,21 @@ Shops.attachSchema(new SimpleSchema({
             return TAPi18n.__('city')
         }
 	},
-    logo: {
+    'logo.url': {
         type: String,
         label: "Logo",
         defaultValue: '/shop-logo.png'
-    },    
+    },
+    'logo.imageId': {
+        type: String,
+        label: "imageId",
+        autoform: {
+          afFieldInput: {
+            type: "cfs-file",
+            collection: "imagegs"
+          }
+        }        
+    },
     'unreadOrders': {
         type: Number,
         defaultValue: 0

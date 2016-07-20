@@ -58,3 +58,18 @@ Template.itemsShowPage.events({
 
 	}
 })
+
+Template.itemCarousel.helpers({
+    orderedThumbnails(){
+        const item = Items.findOne(Router.current().params.itemId)
+        var thumbnails = item.thumbnails.concat()
+        thumbnails.sort(function(a, b){
+            if (a.order < b.order){
+                return -1
+            } else if (a.order > b.order){
+                return 1
+            } else return 0
+        })
+        return thumbnails
+    }   	
+})

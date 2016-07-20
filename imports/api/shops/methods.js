@@ -4,6 +4,8 @@ import { check } from 'meteor/check';
 import { Shops } from './collection'
 import { Items } from './../items/collection'
 
+import { Images } from './../images'
+
 Meteor.methods({
 	'shops.insert'(doc) {
 
@@ -16,6 +18,12 @@ Meteor.methods({
 			throw new Meteor.Error('not-authorized');
 		}
 
+		var url
+		if (doc.logo.imageId){
+			const image = Images.findOne(doc.logo.imageId)
+			url = `/cfs/files/images/${image._id}/${image.original.name}`
+		}
+
 		const hasShop = Meteor.users.findOne(this.userId).hasShop
 
 		if (!hasShop){
@@ -24,7 +32,10 @@ Meteor.methods({
 				title: doc.title,
 				description: doc.description,
 				city: doc.city,
-				createdAt: new Date()
+				createdAt: new Date(),
+				logo: {
+					url: url, imageId: doc.logo.imageId
+				}
 			}, (err, shopId) => {
 				if (!err) {
 					Meteor.users.update({ _id: this.userId}, 
@@ -89,5 +100,13 @@ Meteor.methods({
 			});
 
 		}
+	},
+	'shops.setLogo'(url, fileId){
+
+		check(url, String);
+		check(fileId, String);
+
+    	Shops.update(Meteor.user().shop, { $set: {'logo.url': url, 'logo.fileId': fileId } });
 	}
+
 });

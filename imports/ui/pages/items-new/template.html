@@ -4,11 +4,13 @@
 </template>
 
 <template name="insertItemForm">
+    {{#if isUploading}}{{>appLoading}}{{/if}}   
     {{#autoForm
     collection=formCollection
     id="insertItemForm"
     type=formType
     doc=doc
+    resetOnSuccess=false    
     meteormethod=method}}
 
         {{> afQuickField name='title'}}
@@ -16,7 +18,14 @@
         {{> afQuickField name='price'}}
         {{> afQuickField name='category' type="select" options=categories}}
 
-        <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">{{_ "submit"}}</button>
+        {{#if isNew}}
+            {{> afQuickField name="imageIds" type="cfs-files" collection="images"}}
+        {{/if}}
+
+        <button type="submit" 
+            class="btn btn-warning btn-lg btn-block btn-raised"
+            {{disabled}}>{{_ "submit"}}</button>
+
         {{#if isActiveRoute 'items.edit'}}
         <button class="btn btn-warning btn-lg btn-block btn-raised hide-item-btn" style="margin-bottom:5px;">
             {{#if isHidden}} {{_ "unhideItem"}}{{else}}{{_ "hideItem"}} {{/if}} </button>

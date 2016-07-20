@@ -42,3 +42,7 @@ aldeed:autoform-bs-datetimepicker
 twbs:bootstrap
 tsega:bootstrap3-datetimepicker@=3.1.3_3
 aldeed:tabular
+cfs:standard-packages
+cfs:s3
+cfs:gridfs
+cfs:autoform

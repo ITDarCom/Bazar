@@ -4,27 +4,41 @@
 </template>
 
 <template name="insertShopForm">
+    {{#if isUploading}}{{>appLoading}}{{/if}}    
     {{#autoForm
     collection=formCollection
     id="insertShopForm"
     type=formType
     doc=doc
+    resetOnSuccess=false
     meteormethod=method}}
 		{{> afQuickField name='title'}}
-		{{> afQuickField name='description' rows=3}}
-		{{> afQuickField 
-			name='city' 
-			type="select" 
-			firstOption=(_ "selectCity")
-			options=cities}}
-        <button type="submit" class="btn btn-warning btn-lg btn-block btn-raised">
+        {{#unless isNew}}
+        <div class="col-xs-12">
+            <a href="{{pathFor 'shops.show' shop=shop._id}}" class="thumbnail">
+                <img src={{currentShop.logo.url}} class="shop-logo" alt="...">
+            </a>
+        </div>  
+        {{> fileInput mode="shop" }}
+        {{else}}
+            {{> afQuickField name="logo.imageId" type="cfs-file" collection="images"}}
+        {{/unless}}
+        {{> afQuickField name='description' rows=3}}
+        {{> afQuickField 
+            name='city' 
+            type="select" 
+            firstOption=(_ "selectCity")
+            options=cities}}
+        <button type="submit" 
+            class="btn btn-warning btn-lg btn-block btn-raised" {{disabled}}
+            >
             {{_ "submit"}}</button>
-        {{#if hasShop}}
+        {{#unless isNew}}
             <button class="btn btn-danger btn-block btn-raised delete-shop-btn">
                 {{_ "removeShop"}}</button>
             <button class="btn btn-warning btn-block btn-raised hide-shop-btn">
                 {{#if isHidden}} {{_ "unhideShop"}}{{else}}{{_ "hideShop"}} {{/if}} </button>
-        {{/if}}
+        {{/unless}}
         <button class="btn btn-warning btn-lg btn-block cancel-btn">
             {{_ "cancel"}}</button>            
 

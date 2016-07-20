@@ -1,6 +1,10 @@
 {
   "name": "bazar",
   "private": true,
+  "engines": {
+    "node": "4.4.4",
+    "npm": "2.15.1"
+  },
   "scripts": {
     "start": "meteor run",
     "chimp:watch": "chimp --ddp=http://localhost:3000 --watch --path=tests",

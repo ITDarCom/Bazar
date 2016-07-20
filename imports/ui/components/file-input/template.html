@@ -1,0 +1,11 @@
+<template name="fileInput">
+	{{#if isUploading}}{{> spinner }}{{/if}}
+	<div class="form-group">
+		<label for="">{{_ "addItemImage"}}</label>
+	    {{#if isUploading}}
+		    <input type="file" name="default" class="form-control" disabled>
+	    {{else}}
+	    	<input type="file" name="default" class="form-control">
+	    {{/if}}
+	</div>
+</template>
