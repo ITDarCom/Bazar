@@ -115,10 +115,11 @@ Meteor.methods({
 		   const shopId = purchase.shop
 		   const userId = purchase.user
 
-		Shops.update(shopId, { $inc: { unreadOrders: -1, totalSales: 1 }})
-		
-		//notifying purchase owner
-        Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1, 'pendingPurchases': -1 }});
+			Shops.update(shopId, { $inc: { unreadOrders: -1, totalSales: 1 }})
+			
+			//notifying purchase owner
+	        Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1, 'pendingPurchases': -1 }});
+        }
 
 	},
 
