@@ -13,16 +13,12 @@ Meteor.methods({
     "item.favoriteIt" : function (itemId,favoriteStatus){
         check(itemId, String);
         check(favoriteStatus, Boolean);
+
         if (this.userId){
             if(favoriteStatus) {
-
                 Meteor.users.upsert({_id: this.userId}, {$addToSet: {favorites: itemId}});
-
-            }
-            else {
-
+            } else {
                 Meteor.users.update({_id: this.userId}, {$pull: {favorites: itemId}});
-
             }
         }
     },

@@ -35,16 +35,18 @@ Template.itemThumbnail.helpers({
 
 Template.itemThumbnail.events({
     "click .favorite-btn": function (event) {
-        var star = event.target;
-        var favoriteStatus;
-        if (($(star).attr("class") == "fa fa-star-o")) {
-            favoriteStatus = true;
-        } else {
-            favoriteStatus = false;
-        }
 
-        if (Meteor.userId()) {
-            Meteor.call("item.favoriteIt", this._id, favoriteStatus);
+        var favoriteStatus;
+        
+        if (Meteor.user()) {
+            const itemId = Template.instance().data._id
+            if (Meteor.user().favorites && 
+                (Meteor.user().favorites.indexOf(itemId) != -1)){
+                favoriteStatus = false;                  
+            } else {
+                favoriteStatus = true;
+            }
+            Meteor.call("item.favoriteIt", itemId, favoriteStatus);
         }
     },
     "click .detete-item-btn": function () {
