@@ -1,7 +1,7 @@
 
 import { Meteor } from 'meteor/meteor';
 //import { Factory } from 'meteor/factory';
-import { resetDatabase } from 'meteor/xolvio:cleaner';
+//import { resetDatabase } from 'meteor/xolvio:cleaner';
 import { Promise } from 'meteor/promise';
 
 /*const createList = (userId) => {
@@ -273,7 +273,7 @@ Meteor.methods({
     },             
     generateFixtures() {
         
-        resetDatabase();
+        //resetDatabase();
 
         const accounts = [
             { username: 'username', email: 'user@gmail.com', password: 'password'},
@@ -368,7 +368,7 @@ Meteor.methods({
                     while (Items.findOne(item._id)){
                         item._id = Math.floor((Math.random() * 10000) + 1000).toString()
                     }
-                    //Items.insert(item, { getAutoValues : false })
+                    Items.insert(item, { getAutoValues : false })
                 });
             }
 
