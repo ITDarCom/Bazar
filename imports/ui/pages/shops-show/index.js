@@ -14,9 +14,9 @@ Template.shopsShowPage.helpers({
 	shop(){
 
 		const shop = Shops.findOne(Router.current().params.shop)
-		if (!shop){
+		/*if (!shop){
 			Router.go('NotFound'); return;
-		}
+		}*/
 		
 		return Shops.findOne(Router.current().params.shop)
 	}

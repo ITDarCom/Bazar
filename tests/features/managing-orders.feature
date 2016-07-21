@@ -12,7 +12,7 @@ Feature: Managing orders
 	Scenario: Shop owner with no order items yet
 		Given I have "0" new unprocessed orders	
 		When I click app menu button			
-		Then I should see "0" in the unread counter of "my-orders" in the app menu
+		Then I should see "0" in the counter next to "my-orders" in the app menu
 		Then I should not see an unread mark on app menu
 		
 	Scenario: Shop owner with no order items yet
@@ -35,12 +35,17 @@ Feature: Managing orders
 		And I should see a list of "4" order items
 		And I should see "4" in the unread counter of "my-orders" in the app menu
 
-	Scenario: Shop owner accepting an order
+	Scenario: Shop owner accepting an order and delivering it
 		Given I have "4" new unprocessed orders	
 		And I am on "settings.orders" page
 		When I click ".accept-order" button
 		And I click app menu button
 		Then I should see "3" in the unread counter of "my-orders" in the app menu
+		Then I should see "1" in the counter next to "my-orders" in the app menu
+		When I click ".delivered-order" button
+		And I click app menu button		
+		Then I should see "1" in the counter next to "my-sales" in the app menu
+		Then I should see "0" in the counter next to "my-orders" in the app menu		
 		Then I should see "order-processed" success alert
 
 	Scenario: Shop owner confirming an order reject
@@ -50,6 +55,7 @@ Feature: Managing orders
 		And I click "ok" in the confirmation box
 		And I click app menu button
 		Then I should see "3" in the unread counter of "my-orders" in the app menu	
+		Then I should see "0" in the counter next to "my-orders" in the app menu				
 		Then I should see "order-processed" success alert	
 
 	Scenario: Shop owner canceling an order reject

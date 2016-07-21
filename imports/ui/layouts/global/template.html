@@ -10,7 +10,7 @@
         {{> navmenu }}
       </div><!--/.sidebar-offcanvas-->
      
-      <div class="col-xs-12">
+      <div class="col-xs-12 canvas">
         <div class="row">
           <div class="col-xs-12">
             {{> yield "nav"}}
@@ -86,7 +86,7 @@
         <a href="{{pathFor 'settings.purchases'}}">
           <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; {{_ "purchases"}}
           {{#if currentUser.unreadPurchases}}
-            <span class="counter label label-danger">{{currentUser.unreadPurchases}}</span>
+            <span class="unread-counter label label-danger">{{currentUser.unreadPurchases}}</span>
           {{/if}}
           {{#if currentUser.pendingPurchases}}          
             (<span class="counter">{{currentUser.pendingPurchases}}</span>)
@@ -99,7 +99,7 @@
         <a href="{{pathFor 'inbox'}}">
         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "messages"}}
         {{#if currentUser.unreadInbox}}
-          <span class="counter label label-danger">{{currentUser.unreadInbox}}</span>
+          <span class="unread-counter label label-danger">{{currentUser.unreadInbox}}</span>
         {{else}}
           (<span class="counter">0</span>)
         {{/if}}          
@@ -115,7 +115,7 @@
         <a href="{{pathFor 'settings.orders'}}">
           <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
           {{#if unreadOrders}}
-            <span class="counter label label-danger">{{unreadOrders}}</span>
+            <span class="unread-counter label label-danger">{{unreadOrders}}</span>
           {{/if}}
           {{#if currentShop.undeliveredOrders}}          
             (<span class="counter">{{currentShop.undeliveredOrders}}</span>)

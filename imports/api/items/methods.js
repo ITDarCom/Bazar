@@ -4,6 +4,15 @@ import { check } from 'meteor/check';
 import { Items } from './collection'
 import { Images } from './../images'
 
+function authorizeIfOwner(itemId){
+	// Make sure the user is logged in and is owner of item
+	const user = Meteor.users.findOne(this.userId)
+	const item = Items.findOne(itemId)
+	if (! this.userId || item.shop != user.shop) {
+		throw new Meteor.Error('not-authorized');
+	}	
+}
+
 Meteor.methods({
 	'items.insert'(doc) {
 
@@ -12,14 +21,17 @@ Meteor.methods({
 			throw new Meteor.Error('not-authorized');
 		}
 
-		var thumbnails = []
+		var thumbnails = [], imageIds = []
 		if (doc.imageIds){
 			doc.imageIds.forEach(function(imageId, index){
 				const image = Images.findOne(imageId)
 				url = `/cfs/files/images/${image._id}/${image.original.name}`
 				thumbnails.push({ url: url, imageId: imageId, order: index + 1})
+				imageIds.push(imageId)
 			})
-		}		
+		}
+
+		if (!imageIds.length){ imageIds.push('dummyId')}
 
 		const hasShop = Meteor.users.findOne(this.userId).hasShop
 
@@ -31,7 +43,7 @@ Meteor.methods({
 				price: doc.price,
 				category: doc.category,
 				thumbnails: thumbnails,
-				imageIds: doc.imageIds
+				imageIds: imageIds
 			}, (err, shopId) => {
 				if (err) {
 					throw err
@@ -40,27 +52,25 @@ Meteor.methods({
 		} 
 	},
 	'items.update'(modifier, documentId){
-		// Make sure the user is logged in before inserting a task
-		if (! this.userId) {
-			throw new Meteor.Error('not-authorized');
-		}
+
+		//authorizeIfOwner(documentId)
+
 		Items.update({ _id: documentId }, modifier, documentId);
 	},
 	'item.remove'(itemId) {
-		if (!this.userId) {
-			throw new Meteor.Error('not-authorized')
-		}
+		
+		//authorizeIfOwner(itemId)
+
 		Items.remove({_id : itemId})
 	},
 	'item.hide'(itemId,status){
 
+		//authorizeIfOwner(itemId)
+
 		check(itemId, String);
 		check(status, Boolean);
 
-		if (! this.userId) {
-			throw new Meteor.Error('not-authorized');
-		}
-		
+
 		var item = Items.findOne(itemId)
 		if(item){
 			Items.update({_id: itemId},{isHidden: status});
@@ -68,6 +78,8 @@ Meteor.methods({
 
 	},
 	'items.addThumbnail'(itemId, url, imageId){
+
+		//authorizeIfOwner(itemId)
 
 		check(itemId, String);
 		check(url, String);
@@ -80,6 +92,8 @@ Meteor.methods({
 	},
 	'items.removeThumbnail'(itemId, imageId){
 
+		//authorizeIfOwner(itemId)
+
 		check(itemId, String);
 		check(imageId, String);
 
@@ -91,6 +105,8 @@ Meteor.methods({
     	Items.update(itemId, { $pull: {'thumbnails': {imageId: imageId} } });		
 	},
 	'items.thumbnailUp'(itemId, imageId){
+
+		//authorizeIfOwner(itemId)
 
 		check(itemId, String);
 		check(imageId, String);
@@ -107,6 +123,8 @@ Meteor.methods({
         }
 	},
 	'items.thumbnailDown'(itemId, imageId){
+
+		//authorizeIfOwner(itemId)
 
 		check(itemId, String);
 		check(imageId, String);

@@ -34,12 +34,12 @@ Feature: Managing cart
 		Given I have "1" pending purchases			
 		And I am on "cart" page
 		Then I should see "pending-purchases" message
-	
+
 	Scenario: User adding notes and quantity about an item
 		Given I am on "cart" page
 		And I have "1" items in cart
-		And I enter "5" in the "quantity" field		
 		When I enter "fresh please" in the "notes" field
+		And I select "5" in the "quantity" field		
 		And I wait for "1" seconds
 		And I go to "cart" page
 		Then I should see "fresh please" in the "notes" field

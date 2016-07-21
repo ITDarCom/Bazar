@@ -21,6 +21,7 @@ Feature: Managing shop
 		When I click app menu button
 		Then I "should not" see "create-shop" in the app menu
 
+@ignore
 	Scenario: User creating a shop for the first time
 		Given I am a registered user with no shop
 		And I am logged in
@@ -67,6 +68,7 @@ Feature: Managing shop
 		And I click ".add-item" button
 		Then I should be redirected to the "items.new" page
 	
+	@ignore
 	Scenario: Shop owner adding a new item
 		Given I am a registered user with a shop
 		And I am logged in
@@ -82,6 +84,8 @@ Feature: Managing shop
 		And I should see "Delicious item"
 		And I should see "The best thing to eat"
 		And I should see "60"
+
+
 
 	Scenario: Shop owner editing an item from an item page
 		Given I am a registered user with a shop

@@ -24,28 +24,34 @@ var isUploading = new ReactiveVar(false)
 AutoForm.addHooks('insertItemForm', {
     onSuccess: function (formType, result) {
 
-        if (!result) result = Router.current().params.itemId        
+        const route = Router.current().route.getName();   
         
-        Meteor.subscribe('singleItem', result)
-        Meteor.autorun(function(c){
-            const item = Items.findOne(result)
-            if (item){
+        if (route.match(/new/)){            
+            Meteor.subscribe('singleItem', result)
+            Meteor.autorun(function(c){
+                const item = Items.findOne(result)
+                if (item){
 
-                item.imageIds.forEach(function(imageId){
-                    Meteor.subscribe('image', imageId)                
-                })
+                    item.imageIds.forEach(function(imageId){
+                        Meteor.subscribe('image', imageId)                
+                    })
 
-                //don't release the form until we finished upload
-                const images = Images.find({ _id: { $in : item.imageIds } }).fetch()
-                const length = images.length
-                
-                if (length && images[length-1].url()){
-                    isUploading.set(false)
-                    c.stop()
-                    Router.go('items.show', {shop: Router.current().params.shop, itemId: result})
-                }
-            }             
-        })
+                    //don't release the form until we finished upload
+                    const images = Images.find({ _id: { $in : item.imageIds } }).fetch()
+                    const length = images.length
+                    
+                    if (length && images[length-1].url()){
+                        isUploading.set(false)
+                        c.stop()
+                        Router.go('items.show', {shop: Router.current().params.shop, itemId: result})
+                    }
+                }             
+            })
+        } else if (route.match(/edit/)){
+            isUploading.set(false)
+            const itemId = Router.current().params.itemId             
+            Router.go('items.show', {shop: Router.current().params.shop, itemId: itemId})            
+        }
     },
     before: {
       method: CfsAutoForm.Hooks.beforeInsert
@@ -56,7 +62,7 @@ AutoForm.addHooks('insertItemForm', {
     beginSubmit: function() {
         isUploading.set(true)
     },
-    endSubmit: function() {
+    endSubmit: function() {        
     }
 }, true);
 

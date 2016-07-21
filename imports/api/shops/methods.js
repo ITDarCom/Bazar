@@ -18,10 +18,11 @@ Meteor.methods({
 			throw new Meteor.Error('not-authorized');
 		}
 
-		var url
-		if (doc.logo.imageId){
-			const image = Images.findOne(doc.logo.imageId)
-			url = `/cfs/files/images/${image._id}/${image.original.name}`
+		var url, imageId = 'dumpId'
+		if (doc.logo && doc.logo.imageId){
+			imageId = doc.logo.imageId
+			const image = Images.findOne(imageId)
+			url = `/cfs/files/images/${imageId}/${image.original.name}`
 		}
 
 		const hasShop = Meteor.users.findOne(this.userId).hasShop
@@ -34,7 +35,7 @@ Meteor.methods({
 				city: doc.city,
 				createdAt: new Date(),
 				logo: {
-					url: url, imageId: doc.logo.imageId
+					url: url, imageId: imageId
 				}
 			}, (err, shopId) => {
 				if (!err) {

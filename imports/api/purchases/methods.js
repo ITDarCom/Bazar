@@ -114,11 +114,16 @@ Meteor.methods({
 
        if (status.match(/accepted|rejected/)) {
 
-			//marking order as processed for shop owner
-			Shops.update(shopId, { $inc: { unreadOrders: -1,  undeliveredOrders: 1 }})
-
 			//notifying purchase owner
 			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
+
+			//we only increment undeliveredOrders, if shop owner accepted that order
+			var undeliveredOrdersInc = 0;
+			if (status.match(/accepted/)) { undeliveredOrdersInc = 1; }
+
+			//marking order as processed for shop owner
+			Shops.update(shopId, { $inc: { unreadOrders: -1,  undeliveredOrders: undeliveredOrdersInc }})
+
 
         } else if (status.match(/delivered/)){
 

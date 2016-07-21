@@ -17,8 +17,10 @@ Template.itemThumbnail.helpers({
         	return Shops.findOne(Template.instance().data.shop)   
     },
     defaultThumbnail(){
-        if (Template.instance().data)
-            return Template.instance().data.thumbnails.find(thumb => (thumb.order == 1)).url
+        if (Template.instance().data){
+            const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
+            if (thumb) return thumb.url
+        }
     },
     isSearch(){
         return Template.instance().search

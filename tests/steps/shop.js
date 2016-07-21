@@ -25,7 +25,7 @@ module.exports = function(){
 		}, shopTitle)
 
         const route = client.execute(function(shopId){
-            return Router.go('shops.show', {shop:shopId})
+            Router.go('shops.show', {shop:shopId})
         }, shop._id);
 
 	});            
