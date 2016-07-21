@@ -60,6 +60,13 @@ Template.cartItemForm.helpers({
 	autoSaveMode(){
 		return true
 	},
+	quantities() {
+		var values = [];
+		for (var i = 1; i <= 100; i++) { values.push(i); }
+		return values.map(function(value){
+			return {label:value, value:value}
+		})
+	},	
 	//we need to assign a unique formId for each autoform. 
 	//check this github issue: https://github.com/aldeed/meteor-autoform/issues/298
 	cartItemFormId(){
