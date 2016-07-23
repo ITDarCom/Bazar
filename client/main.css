@@ -220,3 +220,11 @@ table td span{
 
 
 }
+
+.slick-prev:before, .slick-next:before { 
+    color:red !important;
+}
+
+.slick-slide{
+  float: right !important;
+}

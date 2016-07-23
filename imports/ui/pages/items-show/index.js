@@ -59,6 +59,17 @@ Template.itemsShowPage.events({
 	}
 })
 
+Template.itemCarousel.onRendered(function(){
+	$('.item-carousel').slick({
+		dots: true,
+		infinite: true,
+		speed: 300,
+		rtl: true, 
+		arrows: false,
+		adaptiveHeight: true,
+	});
+})
+
 Template.itemCarousel.helpers({
     orderedThumbnails(){
         const item = Items.findOne(Router.current().params.itemId)

@@ -25,42 +25,15 @@
 </template>
 
 <template name="itemCarousel">
-	<div class="row">			
-		<div class="col-xs-2 col-md-4"></div>
- 		<div class="col-xs-8 col-md-4">
-			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-				<div style="position:absolute;right:8px;top:5px;width:100px;font-size:8pt;color:blue;z-index:10000">
-				<p>{{_id}}</p>
-				</div>			  				
-			  <!-- Indicators -->
-			  <ol class="carousel-indicators">
-			  	{{#each orderedThumbnails}}
-				    <li data-target="#carousel-example-generic" 
-				    	class="{{#unless @index}}active{{/unless}}"
-				    	data-slide-to="0" ></li>
-				{{/each}}
-			  </ol>
-			  <!-- Wrapper for slides -->
-			  <div class="carousel-inner" role="listbox">
-			  	{{#each orderedThumbnails}}  	
-					<div class="item {{#unless @index}}active{{/unless}}">	
-						<img src="{{url}}" alt="...">
-					</div>
-			    {{/each}}
-			  </div>
-
-			  <!-- Controls -->
-			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			    <span class="sr-only">Previous</span>
-			  </a>
-			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			    <span class="sr-only">Next</span>
-			  </a>
+	<div class="row">		
+ 		<div class="col-xs-12">
+ 			<div class="item-carousel">
+		  	{{#each orderedThumbnails}}  	
+				<div class="thumbnail">					
+					<img src="{{url}}" alt="...">
+				</div>				
+		    {{/each}}
 			</div>
-
 		</div>
-	</div>	
-
+	</div>
 </template>
