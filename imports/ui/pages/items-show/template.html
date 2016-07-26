@@ -27,9 +27,12 @@
 <template name="itemCarousel">
 	<div class="row">		
  		<div class="col-xs-12">
+		      <div style="z-index:3000;position:absolute;right:24px;top:5px;font-size:8pt;color:blue;">
+		        <p>{{_id}}</p>
+		      </div>							
  			<div class="item-carousel">
 		  	{{#each orderedThumbnails}}  	
-				<div class="thumbnail">					
+				<div class="thumbnail">	
 					<img src="{{url}}" alt="...">
 				</div>				
 		    {{/each}}

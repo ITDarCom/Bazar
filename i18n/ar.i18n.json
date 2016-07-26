@@ -67,6 +67,8 @@
 	"changePwd":"غير كلمة السر",
 	"deleteShopConfirmation":"تحذير: هل أنت متأكد أنك تريد حذف متجرك وجميع متعلقاته من منتجات ومبيعات وطلبات؟",
 	"rejectOrderConfirmation":"هل أنت متأكد أنك تريد رفض هذا الطلب؟ (لا يمكنك التراجع)",
+	"acceptOrderConfirmation":"هل أنت متأكد أنك تريد قبول هذا الطلب؟ (لا يمكنك التراجع)",
+	"deliverOrderConfirmation":"هل أنت متأكد أنه تم تسليم هذا الطلب؟",
 	"personalInbox":"البريد الشخصي",
 	"shopInbox":"بريد المتجر",
 	"sendMessage": "إرسال رسالة",

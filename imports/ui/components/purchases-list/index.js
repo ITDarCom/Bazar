@@ -64,9 +64,9 @@ Template.purchasesList.helpers({
 Template.orderItem.events ({
 	'click .accept-order-btn':function(event, instance){
 		var purchaseId = instance.data._id
-		Meteor.call('orders.process', purchaseId, 'accepted')
-
-
+		if (confirm(TAPi18n.__('acceptOrderConfirmation'))){
+			Meteor.call('orders.process', purchaseId, 'accepted')
+		}
 	},
 	'click .reject-order-btn':function(event, instance){
 		var purchaseId = instance.data._id
@@ -76,7 +76,9 @@ Template.orderItem.events ({
 	},
 	'click .delivered-order-btn' : function (event, instance) {
 		var purchaseId = instance.data._id;
-		Meteor.call('orders.process', purchaseId, 'delivered');
+		if (confirm(TAPi18n.__('deliverOrderConfirmation'))){
+			Meteor.call('orders.process', purchaseId, 'delivered');
+		}		
 	}
 });
 

@@ -16,23 +16,23 @@
 </template>
 
 <template name="orderItem">
-    <div class="order-item row">
-        <div class="col-xs-12">
+    <div class="order-item">
+        <div class="col-xs-12" style="padding:0px;">
             <div class="btn-group btn-group-justified btn-group-raised delivery-status">
                 {{#unless accepted}}
-                    <a class="btn btn-primary accept-order-btn"
+                    <a class="btn btn-warning accept-order-btn"
                        style="padding-right:15px;padding-left:15px;">
                         <i class="material-icons">done</i> {{_ "accept"}}</a>
-                    <a class="btn btn-danger reject-order-btn"
+                    <a class="btn btn-warning reject-order-btn"
                        style="padding-right:15px;padding-left:15px;">
                         <i class="material-icons">clear</i> {{_ "reject"}}</a>
                 {{else}}
-                    <a class="btn btn-primary delivered-order-btn"
+                    <a class="btn btn-warning delivered-order-btn"
                        style="padding-right:15px;padding-left:15px;">
                         <i class="material-icons">done_all</i> {{_ "deliver"}}</a>
                 {{/unless}}
 
-                <a class="btn btn-info message-btn"
+                <a class="btn btn-warning message-btn"
                    data-toggle="modal" data-target="#{{modalId}}">
                     <i class="material-icons">mail</i>
                 </a>
@@ -76,16 +76,9 @@
 
 <template name="saleItem">
     <div class="sold-item row">
-        <div class="col-xs-12">
+        <div class="col-xs-12" style="padding:0px;">
             <div class="btn-group btn-group-justified btn-group-raised">
-                {{#if delivered}}
-                    <a class="btn btn-primary accept-order-btn disabled">
-                        <i class="material-icons">done_all</i> {{_ "deliver"}}</a>
-                {{else}}
-                    <a class="btn btn-danger reject-order-btn disabled">
-                        <i class="material-icons">clear</i> {{_ "rejected"}}</a>
-                {{/if}}
-                <a class="btn btn-info message-btn"
+                <a class="btn btn-warning message-btn"
                    data-toggle="modal" data-target="#{{modalId}}">
                     <i class="material-icons">mail</i></a>
             </div>
