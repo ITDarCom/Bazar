@@ -43,7 +43,7 @@ Template.endlessList.onCreated(function () {
 
     //scroll listener to detect when we reach the end of page
     instance.listener = new ScrollListener(instance)
-    window.addEventListener('scroll', instance.listener)
+    window.document.body.addEventListener('scroll', instance.listener)
 
     instance.cursor = ()=> {
         const route = Router.current().route.getName()

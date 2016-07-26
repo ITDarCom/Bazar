@@ -26,7 +26,7 @@ body {
   background-color: white;
 }
 
-body {
+html, body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 body {
