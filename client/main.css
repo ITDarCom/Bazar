@@ -235,3 +235,9 @@ table td span{
 .slick-slide{
   float: right !important;
 }
+
+
+.badge-danger{
+  background-color:red;
+  top:3px; position:relative;
+}

@@ -87,13 +87,13 @@
       <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
         <a href="{{pathFor 'settings.purchases'}}">
           <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; {{_ "purchases"}}
-          {{#if currentUser.unreadPurchases}}
-            <span class="unread-counter label label-danger">{{currentUser.unreadPurchases}}</span>
-          {{/if}}
           {{#if currentUser.pendingPurchases}}          
             (<span class="counter">{{currentUser.pendingPurchases}}</span>)
           {{else}}
             (<span class="counter">0</span>)
+          {{/if}}
+          {{#if currentUser.unreadPurchases}}
+            <span class="unread-counter badge badge-danger">{{currentUser.unreadPurchases}}</span>
           {{/if}}
         </a>
       </li>
@@ -101,7 +101,7 @@
         <a href="{{pathFor 'inbox'}}">
         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "messages"}}
         {{#if currentUser.unreadInbox}}
-          <span class="unread-counter label label-danger">{{currentUser.unreadInbox}}</span>
+          <span class="unread-counter badge badge-danger">{{currentUser.unreadInbox}}</span>
         {{else}}
           (<span class="counter">0</span>)
         {{/if}}          
@@ -116,14 +116,14 @@
       <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
         <a href="{{pathFor 'settings.orders'}}">
           <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
-          {{#if unreadOrders}}
-            <span class="unread-counter label label-danger">{{unreadOrders}}</span>
-          {{/if}}
-          {{#if currentShop.undeliveredOrders}}          
-            (<span class="counter">{{currentShop.undeliveredOrders}}</span>)
+          {{#if currentShop.totalOrders}}          
+            (<span class="counter">{{currentShop.totalOrders}}</span>)
           {{else}}
             (<span class="counter">0</span>)
           {{/if}}                                 
+          {{#if unreadOrders}}
+            <span class="unread-counter badge badge-danger">{{unreadOrders}}</span>
+          {{/if}}
         </a>
       </li>
       <li class={{isActiveRoute 'settings.sales'}} id="my-sales">

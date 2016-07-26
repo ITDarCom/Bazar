@@ -78,7 +78,7 @@ Shops.attachSchema(new SimpleSchema({
         type: Number,
         defaultValue: 0
     },
-    'undeliveredOrders': {
+    'totalOrders': {
         type: Number,
         defaultValue: 0, optional:true
     },
