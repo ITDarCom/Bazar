@@ -1,11 +1,11 @@
 <template name="cartPage">
 	<h1 class="page-header">
-		{{_ "cart"}}
 		{{#if lastShoppingContext}}
-	  		<a href="#" alt="Return where you were" class="back-btn" style="float:left;">
-	  		<i  class="material-icons">undo</i>
+	  		<a href="#" alt="Return where you were" class="back-btn">
+            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
 	  		</a>
   		{{/if}}
+		{{_ "cart"}}
 	</h1>
 	
 	{{#if currentUser.pendingPurchases}}

@@ -13,12 +13,12 @@
 				<a class="btn btn-warning btn-fab edit-item-btn btn-float"
 					href="{{pathFor 'items.edit' itemId=item._id shop=currentUser.shop}}">
 					<i class="material-icons">create</i>
-			</a>				
+				</a>
+				<br/><br/><br/><!--So that floating buttons do not cover last elements -->
 			{{else}}
 				<button class="btn btn-warning btn-block btn-raised add-to-cart-btn">{{_ "addToCart"}}</button><br />
 			{{/if}}		
 		</center>
-
 	{{else}}
 		{{> spinner }}
 	{{/if}}
@@ -34,6 +34,12 @@
 				</div>				
 		    {{/each}}
 			</div>
+			{{#if isEdit}}
+			<a style="position:relative; bottom:30px; float:left;" 
+				class="remove-thumbnail-btn"
+				href="{{pathFor 'items.editImages' shop=shop itemId=_id}}" >
+				<i class="material-icons md-18">create</i></a> 			
+			{{/if}}
 		</div>
 	</div>
 </template>

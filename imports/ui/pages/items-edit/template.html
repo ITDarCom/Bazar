@@ -1,15 +1,12 @@
 <template name="itemsEditPage">
 	{{#if Template.subscriptionsReady}}
 		<h1 class="page-header">
-			{{_ "editItem"}}	
 	  		<a href="{{pathFor 'items.show' itemId=item._id shop=item.shop}}" 
-	  			alt="{{_ 'back'}}" class="back-btn" style="float:left;">
-	  		<i  class="material-icons">undo</i>
-  		</a>				
+		  			alt="{{_ 'back'}}" class="back-btn">
+	            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
+	  		</a>				
+			{{_ "editItem"}}	
 		</h1>
-        <a href="{{pathFor 'items.editImages' shop=item.shop itemId=item._id}}" 
-            class="btn btn-raised btn-default btn-xs"
-            style="float:left;">{{_"edit"}}</a>
         {{> itemCarousel item}}
 		{{> insertItemForm}}
 	{{else}}

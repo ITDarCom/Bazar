@@ -82,5 +82,9 @@ Template.itemCarousel.helpers({
             } else return 0
         })
         return thumbnails
+    },
+    isEdit(){
+    	const route = Router.current().route.getName()
+    	if (route.match(/edit/)){ return true; } else { return false; }
     }   	
 })

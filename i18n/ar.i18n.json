@@ -70,7 +70,7 @@
 	"personalInbox":"البريد الشخصي",
 	"shopInbox":"بريد المتجر",
 	"sendMessage": "إرسال رسالة",
-	"deleteItemConfirmation": "هل انت متأكد من حذف العنصر",
+	"deleteItemConfirmation": "هل انت متأكد من حذف العنصر?",
 	"enter":"ادخل",
 	"EnglishCategoryName" :"اسم الصنف في اللغة الانكليزية",
 	"ArabicCategoryName" : "اسم الصنف",
@@ -100,5 +100,5 @@
 	"itemShouldHaveAtLeastOneThumbnail":"يجب أن يكون لكل منتج صورة واحدة على الأقل",
 	"itemImages":"صور المنتج",
 	"editItem":"تعديل منتج",
-	"addItemImage":"إضافة صورة جديدة"
+	"addItemImage":"اضغط لإضافة صورة جديدة"
 }

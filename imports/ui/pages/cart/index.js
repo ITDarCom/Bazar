@@ -85,7 +85,9 @@ Template.cartItem.helpers({
 
 Template.cartItemForm.events({
 	'click .remove-cart-item-btn': function (event, instance){
-		Meteor.call('cart.removePurchase', instance.data._id)
+        if (confirm(TAPi18n.__('deleteItemConfirmation')) == true) {
+			Meteor.call('cart.removePurchase', instance.data._id)
+        }		
 	}
 });
 

@@ -11,8 +11,6 @@ Meteor.methods({
 
 	'threads.markAsUnread'(unread, threadId, forRecipient){	
 
-		console.log('markAsUnread')
-
 		check(unread, Boolean);
 		check(threadId, String);
 		check(forRecipient, Boolean); //true if we want to change recipient status
