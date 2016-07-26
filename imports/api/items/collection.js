@@ -88,7 +88,10 @@ Items.attachSchema(new SimpleSchema({
                 type: "cfs-files",
                 collection: "images"
             }
-        }, min:1
+        }, min:1,
+        label: function(){
+            return TAPi18n.__('itemImages')
+        },        
     },      
     'thumbnails.$.url': {
         type: String, optional:true

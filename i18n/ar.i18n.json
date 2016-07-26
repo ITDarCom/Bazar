@@ -30,6 +30,7 @@
 	"city": "المدينة",
 	"allCities": "كل المدن",
 	"selectCity":"اختر مدينة",
+	"selectCategory":"اختر تصنيفا",
 	"search": "البحث",
 	"riyals": "%s ريالا",
 	"myAccount": "حسابي",
@@ -101,6 +102,9 @@
 	"deliver": "تم التسليم",
 	"itemShouldHaveAtLeastOneThumbnail":"يجب أن يكون لكل منتج صورة واحدة على الأقل",
 	"itemImages":"صور المنتج",
+	"shopLogo": "شعار المتجر",
 	"editItem":"تعديل منتج",
-	"addItemImage":"اضغط لإضافة صورة جديدة"
+	"addItemImage":"اضغط لإضافة صورة جديدة",
+	"clickToUploadFile": "اضغط هنا لإضافة ملف أو أدرجه هنا",
+	"clickToUploadFiles": "اضغط هنا لإضافة ملفات أو أدرجها هنا"
 }

@@ -16,7 +16,10 @@
         {{> afQuickField name='title'}}
         {{> afQuickField name='description' rows=3}}
         {{> afQuickField name='price'}}
-        {{> afQuickField name='category' type="select" options=categories}}
+        {{> afQuickField name='category' 
+            type="select" 
+            firstOption=(_ "selectCategory")
+            options=categories}}
 
         {{#if isNew}}
             {{> afQuickField name="imageIds" type="cfs-files" collection="images"}}

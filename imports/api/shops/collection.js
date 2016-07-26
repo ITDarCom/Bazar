@@ -66,13 +66,15 @@ Shops.attachSchema(new SimpleSchema({
     },
     'logo.imageId': {
         type: String,
-        label: "imageId",
         autoform: {
           afFieldInput: {
             type: "cfs-file",
             collection: "imagegs"
           }
-        }        
+        },
+        label: function(){
+            return TAPi18n.__('shopLogo')
+        },               
     },
     'unreadOrders': {
         type: Number,

@@ -11,7 +11,19 @@ import { Images } from './../../../api/images'
 
 import {CfsAutoForm} from "meteor/cfs:autoform"
 
-var isUploading = new ReactiveVar(false)
+var isUploading = new ReactiveVar()
+
+Template.insertShopForm.onCreated(function(){
+	isUploading.set(false)
+	AutoForm.resetForm('insertShopForm')
+	setTimeout(function(){
+		$("input[name='logo.imageId']").attr('placeholder', TAPi18n.__('clickToUploadFile'))		
+	},0)
+})
+
+Template.insertShopForm.onDestroyed(function(){
+	isUploading.set(false)
+})
 
 AutoForm.addHooks('insertShopForm', {
 	onSuccess: function(formType, result){
@@ -42,6 +54,9 @@ AutoForm.addHooks('insertShopForm', {
 		isUploading.set(true)
 	},
 	endSubmit: function() {
+        if (!this.validationContext.isValid()){
+			isUploading.set(false)
+        }
 	}	
 }, true);
 
@@ -62,6 +77,7 @@ Template.insertShopForm.helpers({
 		return Shops;
 	},
 	formType(){
+		if (isUploading.get()){ return "disabled" }
 		var route = Router.current().route.getName()
 		if (route.match(/settings/)) return 'method-update'
 		return 'method'
@@ -88,7 +104,24 @@ Template.insertShopForm.helpers({
 })
 
 Template.insertShopForm.events({
-    'click .cancel-btn'(){
-        Router.go('shops.mine')
-    }     
+    'click .cancel-btn'(e){ 
+
+    	e.preventDefault()
+		const route = Router.current().route.getName()
+
+    	if (isUploading.get()){
+    		//FS.HTTP.uploadQueue.cancel() //doesn't seem to work    		
+            if (route.match(/new/)){
+                Meteor.call('shops.remove')                
+            }
+			isUploading.set(false)
+
+    	} else {    		
+			if (route.match(/new/)){ 
+				Router.go('settings.shop')
+			} else {
+				Router.go('shops.mine')
+			}
+    	}   	
+    }
 })

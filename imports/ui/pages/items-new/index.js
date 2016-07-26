@@ -20,11 +20,25 @@ Template.itemsNewPage.helpers({
 })
 
 var isUploading = new ReactiveVar(false)
+var resultItemId = null
+
+Template.insertItemForm.onCreated(function(){
+    isUploading.set(false)
+    AutoForm.resetForm('insertItemForm')
+    setTimeout(function(){
+        $("input[name='imageIds']").attr('placeholder', TAPi18n.__('clickToUploadFiles'))        
+    },0)
+})
+
+Template.insertItemForm.onDestroyed(function(){
+    isUploading.set(false)
+})
 
 AutoForm.addHooks('insertItemForm', {
     onSuccess: function (formType, result) {
 
-        const route = Router.current().route.getName();   
+        const route = Router.current().route.getName();  
+        resultItemId = result 
         
         if (route.match(/new/)){            
             Meteor.subscribe('singleItem', result)
@@ -62,7 +76,10 @@ AutoForm.addHooks('insertItemForm', {
     beginSubmit: function() {
         isUploading.set(true)
     },
-    endSubmit: function() {        
+    endSubmit: function() {
+        if (!this.validationContext.isValid()){
+            isUploading.set(false)
+        }
     }
 }, true);
 
@@ -79,6 +96,7 @@ Template.insertItemForm.helpers({
         return Items;
     },
     formType(){
+        if (isUploading.get()){ return "disabled" }        
         var route = Router.current().route.getName()
         if (route.match(/edit/)) return 'method-update'
         return 'method'
@@ -125,19 +143,29 @@ Template.insertItemForm.events({
         var status = !item.isHidden
         Meteor.call("item.hide",itemId,status)
     },
-    'click .cancel-btn'(){
+    'click .cancel-btn'(e){
 
+        e.preventDefault()
         const route = Router.current().route.getName()
+ 
+        if (isUploading.get()){
+            //FS.HTTP.uploadQueue.cancel() //doesn't seem to work         
+            if (route.match(/new/)){
+                Meteor.call('items.remove', resultItemId)                
+            }
+            isUploading.set(false)
 
-        if (route.match(/edit/)){
-            Router.go('items.show', {
-                shop: Router.current().params.shop, 
-                itemId: Router.current().params.itemId
-            })            
         } else {
-            Router.go('shops.mine')
+
+            if (route.match(/edit/)){
+                Router.go('items.show', {
+                    shop: Router.current().params.shop, 
+                    itemId: Router.current().params.itemId
+                })            
+            } else {
+                Router.go('shops.mine')
+            }
+
         }
-
-
     }    
 })
