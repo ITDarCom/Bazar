@@ -13,6 +13,10 @@
     font-family: 'Glyphicons Halflings', serif !important;
 }
 
+.back-btn .glyphicon {
+  font-size: 30px;
+}
+
 
 @media (min-width: 0) {
   .navbar-toggle {

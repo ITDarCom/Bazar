@@ -16,30 +16,29 @@
 </template>
 
 <template name="orderItem">
-    <div class="order-item">
-        <div class="col-xs-12" style="padding:0px;">
-            <div class="btn-group btn-group-justified btn-group-raised delivery-status">
-                {{#unless accepted}}
-                    <a class="btn btn-warning accept-order-btn"
-                       style="padding-right:15px;padding-left:15px;">
-                        <i class="material-icons">done</i> {{_ "accept"}}</a>
-                    <a class="btn btn-warning reject-order-btn"
-                       style="padding-right:15px;padding-left:15px;">
-                        <i class="material-icons">clear</i> {{_ "reject"}}</a>
-                {{else}}
-                    <a class="btn btn-warning delivered-order-btn"
-                       style="padding-right:15px;padding-left:15px;">
-                        <i class="material-icons">done_all</i> {{_ "deliver"}}</a>
-                {{/unless}}
-
-                <a class="btn btn-warning message-btn"
-                   data-toggle="modal" data-target="#{{modalId}}">
-                    <i class="material-icons">mail</i>
-                </a>
-            </div>
-        </div>
+    <div class="order-item row">
         {{> itemThumbnail item}}
         <div class="col-xs-6" style="padding:0px;">
+            <li class="list-group-item"  style="padding:5px;">
+                <div class="btn-group-sm delivery-status">
+                    {{#unless accepted}}
+                        <a class="btn btn-fab btn-warning accept-order-btn"
+                           style="padding-top:7px;padding-right:5px;padding-left:5px; text-align:center;" alt={{_ "accept"}}>
+                            {{_ "accept"}}</a>
+                        <a class="btn btn-fab btn-warning reject-order-btn"
+                           style="padding-top:7px;padding-right:5px;padding-left:5px; text-align:center;" alt={{_ "reject"}}>
+                            {{_ "reject"}}</a>
+                    {{else}}
+                        <a class="btn btn-fab btn-warning delivered-order-btn"
+                           style="padding-top:7px;padding-right:5px;padding-left:5px; text-align:center;" alt={{_ "deliver"}}>
+                            {{_ "deliver"}}</a>
+                    {{/unless}}
+                    <a class="btn btn-fab btn-warning message-btn"
+                       data-toggle="modal" data-target="#{{modalId}}">
+                        <i class="material-icons">mail</i>
+                    </a>
+                </div>                
+            </li>
             <li class="list-group-item">{{_ "member"}}: {{member}}</li>
             <li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
             <li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>
@@ -76,15 +75,15 @@
 
 <template name="saleItem">
     <div class="sold-item row">
-        <div class="col-xs-12" style="padding:0px;">
-            <div class="btn-group btn-group-justified btn-group-raised">
-                <a class="btn btn-warning message-btn"
-                   data-toggle="modal" data-target="#{{modalId}}">
-                    <i class="material-icons">mail</i></a>
-            </div>
-        </div>
         {{> itemThumbnail item}}
         <div class="col-xs-6" style="padding:0px;">
+            <li class="list-group-item" style="padding:5px;">
+                <div class="btn-group-sm">
+                    <a class="btn btn-fab btn-warning message-btn"
+                       data-toggle="modal" data-target="#{{modalId}}">
+                        <i class="material-icons">mail</i></a>
+                </div>
+            </li>
             <li class="list-group-item">{{_ "member"}}: {{member}}</li>
             <li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
             <li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>

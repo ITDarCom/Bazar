@@ -62,7 +62,8 @@ AccountsTemplates.addFields([
       type: "text",
       displayName: "اسم المستخدم",
       required: true,
-      minLength: 4,
+      func: function(value){ return (value.length < 4); },
+      errStr: 'اسم المستخدم يجب أن يقول 4 محارف على الأقل',
   },
   {
       _id: 'email',
@@ -70,9 +71,14 @@ AccountsTemplates.addFields([
       required: true,
       displayName: "البريد الإلكتروني",
       re: /.+@(.+){2,}\.(.+){2,}/,
-      //errStr: 'Invalid email',
+      errStr: 'البريد الذي أدخلته غير صالح',
   },
-  pwd
+  {
+      _id: 'password',
+      type: 'password',
+      required: true,
+      displayName: "كلمة السر",
+      func: function(value){ return (value.length < 6); },
+      errStr: 'كلمة السر يجب أن تكون 6 محارف على الأقل',
+  }
 ]);
-
-

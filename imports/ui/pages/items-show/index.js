@@ -62,11 +62,11 @@ Template.itemsShowPage.events({
 Template.itemCarousel.onRendered(function(){
 	$('.item-carousel').slick({
 		dots: true,
-		infinite: true,
+		infinite: false,
 		speed: 300,
 		rtl: true, 
 		arrows: false,
-		adaptiveHeight: true,
+		adaptiveHeight: false,
 	});
 })
 
