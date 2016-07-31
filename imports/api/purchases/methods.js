@@ -115,10 +115,12 @@ Meteor.methods({
        if (status.match(/accepted|rejected/)) {
 
 			//notifying purchase owner
-			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
+			const pendingPurchasesInc = status.match(/rejected/)? -1 : 0;
+			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1, pendingPurchases: pendingPurchasesInc }});
 
 			//marking order as processed for shop owner
-			Shops.update(shopId, { $inc: { unreadOrders: -1 }})
+			const totalOrdersInc = status.match(/rejected/)? -1 : 0;
+			Shops.update(shopId, { $inc: { unreadOrders: -1, totalOrders: totalOrdersInc }})
 
 
         } else if (status.match(/delivered/)){
