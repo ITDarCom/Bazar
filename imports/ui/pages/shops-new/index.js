@@ -38,10 +38,12 @@ AutoForm.addHooks('insertShopForm', {
 			        if (logo && logo.url()){
 						isUploading.set(false)	
 						c.stop()		        	
-						Router.go('shops.show', { shop: result })		        	
+						Router.go('shops.show', { shop: result })
 			        }
 	    		})				
 			}
+		} else {
+			Router.go('shops.show', { shop: Meteor.user().shop })
 		}
 	},
     before: {
