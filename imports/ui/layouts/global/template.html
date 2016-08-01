@@ -9,15 +9,18 @@
       <div class="col-xs-6 col-sm-3 sidebar-offcanvas sidebar" id="sidebar">
         {{> navmenu }}
       </div><!--/.sidebar-offcanvas-->
-     
-      <div class="col-xs-12 canvas">
-        <div class="row">
-          <div class="col-xs-12">
-            {{> yield "nav"}}
+
+      <div class="canvas">     
+        <div class="col-xs-12 inner-canvas">
+          <div class="row">
+            <div class="col-xs-12">
+              {{> yield "nav"}}
+            </div>
           </div>
+          {{> yield}}
         </div>
-        {{> yield}}
       </div>
+
     </div><!--/row-->
 
   </div><!--/.container-->

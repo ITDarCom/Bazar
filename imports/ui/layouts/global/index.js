@@ -63,7 +63,6 @@ Template.applicationLayout.onRendered(function(){
 			toggleMenu()
 		});
 
-
 	});
 
 
