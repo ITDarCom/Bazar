@@ -46,3 +46,4 @@ cfs:standard-packages
 cfs:s3
 cfs:gridfs
 cfs:autoform
+cfs:graphicsmagick

@@ -1,5 +1,6 @@
 import {Items} from './collection'
 import {Shops} from './../shops/collection'
+import {Images} from './../images'
 
 import './search'
 
@@ -40,6 +41,12 @@ Meteor.publishComposite('singleItem', function singleItemPublication(itemId){
 			{
 				find(item){
 					return Shops.find({ _id: item.shop})
+				}
+			}, 
+			{
+				find(item){
+					const imageIds = _.pluck(item.thumbnails, 'imageId')
+					return Images.find({_id: { $in: imageIds }})
 				}
 			}
 

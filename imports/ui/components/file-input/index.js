@@ -34,16 +34,18 @@ Template.fileInput.onCreated(function(){
             
             if (fileObj && fileObj.url()) {
 
-            	//console.log(fileObj.url())
 
                 if (mode == 'shop'){
 
                     Meteor.call('shops.setLogo', fileObj.url(), fileInProgressId)
+                    instance.fileInProgressId.set(null)
+                    
 
                 } else if (mode == 'item'){
 
                     const itemId = instance.data.itemId
                     Meteor.call('items.addThumbnail', itemId, fileObj.url(), fileInProgressId)
+                    instance.fileInProgressId.set(null)
                     scrollToTheEnd()
 
                 }

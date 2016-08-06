@@ -4,6 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Router } from 'meteor/iron:router'
 import { Items } from './../../../api/items/collection'
 import { Shops } from './../../../api/shops/collection'
+import { Images } from './../../../api/images'
 
 import './template.html'
 
@@ -71,8 +72,10 @@ Template.itemCarousel.onRendered(function(){
 })
 
 Template.itemCarousel.helpers({
+
     orderedThumbnails(){
         const item = Items.findOne(Router.current().params.itemId)
+
         var thumbnails = item.thumbnails.concat()
         thumbnails.sort(function(a, b){
             if (a.order < b.order){
@@ -81,7 +84,10 @@ Template.itemCarousel.helpers({
                 return 1
             } else return 0
         })
-        return thumbnails
+
+        return thumbnails.map(function(thumb){
+        	return Images.findOne(thumb.imageId)
+        })
     },
     isEdit(){
     	const route = Router.current().route.getName()

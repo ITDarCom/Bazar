@@ -6,7 +6,7 @@
 	{{#if listLoadingFirstTime}}
 		{{> spinner }}
 	{{else}}
-		<div class="endless-list row">
+		<div class="endless-list row" style="-webkit-overflow-scrolling: touch; -webkit-transform: translateZ(0px);">
 		{{#if noItems}}
 			<div class="no-items-message col-xs-12">
 	  			{{_ "noItemsMessage" }}

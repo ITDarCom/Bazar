@@ -54,7 +54,7 @@ AutoForm.addHooks('insertItemForm', {
                     const images = Images.find({ _id: { $in : item.imageIds } }).fetch()
                     const length = images.length
                     
-                    if (length && images[length-1].url()){
+                    if (length && images[length-1].url({ store: 'images' })){
                         isUploading.set(false)
                         c.stop()
                         Router.go('items.show', {shop: Router.current().params.shop, itemId: result})
@@ -151,7 +151,7 @@ Template.insertItemForm.events({
         if (isUploading.get()){
             //FS.HTTP.uploadQueue.cancel() //doesn't seem to work         
             if (route.match(/new/)){
-                Meteor.call('items.remove', resultItemId)                
+                Meteor.call('item.remove', resultItemId)                
             }
             isUploading.set(false)
 
