@@ -74,6 +74,7 @@
 	"shopInbox":"بريد المتجر",
 	"sendMessage": "إرسال رسالة",
 	"deleteItemConfirmation": "هل انت متأكد من حذف العنصر؟",
+	"deleteItemImageConfirmation": "هل انت متأكد من حذف هذه الصورة؟",
 	"enter":"ادخل",
 	"EnglishCategoryName" :"اسم الصنف في اللغة الانكليزية",
 	"ArabicCategoryName" : "اسم الصنف",

@@ -101,8 +101,21 @@ Meteor.methods({
 		const thumbnail = item.thumbnails.find(thumb => thumb.imageId == imageId )        
         const oldOrder = thumbnail.order
 
-        Items.update({ _id: itemId, 'thumbnails.order': { $gt: oldOrder } }, {$inc: {'thumbnails.$.order': -1 }})
-    	Items.update(itemId, { $pull: {'thumbnails': {imageId: imageId} } });		
+        const count = item.thumbnails.length - 1
+
+        const index = item.thumbnails.indexOf(thumbnail)
+        var updatedThumbnails = item.thumbnails.concat()
+        updatedThumbnails.splice(index, 1)
+
+        updatedThumbnails = updatedThumbnails.map(function(thumb){
+        	if (thumb.order > oldOrder){
+        		thumb.order = thumb.order -1
+        	}
+    		return thumb
+        })
+
+    	Items.update({ _id: itemId}, {$set: {'thumbnails': updatedThumbnails }} )
+
 	},
 	'items.thumbnailUp'(itemId, imageId){
 

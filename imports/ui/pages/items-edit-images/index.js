@@ -49,7 +49,10 @@ Template.itemThumbnailControl.events({
 		const item = Items.findOne(itemId)
 
 		if (item.thumbnails.length > 1){
-			Meteor.call('items.removeThumbnail', itemId, imageId)			
+            if (confirm(TAPi18n.__('deleteItemImageConfirmation')) == true) {
+				Meteor.call('items.removeThumbnail', itemId, imageId)           	
+            }
+
 		} else {
 			alert(TAPi18n.__('itemShouldHaveAtLeastOneThumbnail'))
 		}
