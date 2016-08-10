@@ -20,7 +20,6 @@ Meteor.methods({
         const toBeUpdated = Categories.find({ order: { $gt: oldOrder }}).fetch()
 
         toBeUpdated.forEach(function(cat){
-            console.log(cat)
             Categories.update({_id: cat._id}, { $inc: {'order': -1 }}, {strict: false})
         })
 

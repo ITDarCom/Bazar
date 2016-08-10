@@ -24,17 +24,14 @@
   }
 }
 
-body {
-  padding-top: 60px;
-  position: relative; 
-  background-color: white;
-}
-
 html, body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;  
 }
 
 body {
+  background-color: white;
   padding-top: 70px;
 }
 
