@@ -52,9 +52,9 @@
 <template name="shopThumbnail">
   <div id="{{identifier}}" class="shop-thumbnail col-xs-6 col-md-3">
     <div class="thumbnail">
-		<a href="{{pathFor 'shops.show' shop=_id }}">
-			<img src="{{logo.url}}" alt="...">
-		</a>
+		<a href="{{pathFor 'shops.show' shop=_id}}" >
+    		<div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{logo.url}}'); background-repeat: no-repeat, no-repeat; background-size: 100% auto;" alt="..." ></div>				
+		</a>		
       <div class="caption">
 		<a href="{{pathFor 'shops.show' shop=_id }}">
 			{{title}}

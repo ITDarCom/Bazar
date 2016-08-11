@@ -27,12 +27,12 @@
 
 <template name="shopHeader">
 	<div class="row shop-header">
-		<div class="thumbnail col-xs-3 pull-left">
+		<div class="col-xs-3 pull-left">
 			<a href="{{pathFor 'shops.show' shop=_id}}" >
         		<div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{logo.url}}'); background-repeat: no-repeat, no-repeat; background-size: 100% auto;" alt="..." ></div>				
 			</a>
 		</div>
-		<h3>{{title}} ({{cityLabel city}})</h3>
+		<a href="{{pathFor 'shops.show' shop=_id }}"><h3>{{title}} ({{cityLabel city}})</h3></a>
 		<p>{{description}}</p>
 		<hr />
 	</div>
