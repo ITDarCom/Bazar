@@ -15,7 +15,7 @@ var imageStore = new FS.Store.S3("images", {
 
 var createThumb = function(fileObj, readStream, writeStream) {
   // Thumbnail width or height will be at least 170px 
-  gm(readStream, fileObj.name()).resize('130', null, '^').stream().pipe(writeStream);
+  gm(readStream, fileObj.name()).resize('150', null, '^').stream().pipe(writeStream);
 };
 
 var thumbStore = new FS.Store.S3("thumbnails", {
