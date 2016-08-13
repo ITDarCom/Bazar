@@ -26,7 +26,8 @@ Template.insertItemForm.onCreated(function(){
     isUploading.set(false)
     AutoForm.resetForm('insertItemForm')
     setTimeout(function(){
-        $("input[name='imageIds']").attr('placeholder', TAPi18n.__('clickToUploadFiles'))        
+        $("input[name='imageIds']").attr('placeholder', TAPi18n.__('clickToUploadFiles'))  
+        $("input[type='file']").attr('accept', 'image/*')      
     },0)
 })
 

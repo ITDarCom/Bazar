@@ -17,7 +17,9 @@ Template.insertShopForm.onCreated(function(){
 	isUploading.set(false)
 	AutoForm.resetForm('insertShopForm')
 	setTimeout(function(){
-		$("input[name='logo.imageId']").attr('placeholder', TAPi18n.__('clickToUploadFile'))		
+		$("input[name='logo.imageId']")
+			.attr('placeholder', TAPi18n.__('clickToUploadFile'))
+			.attr('accept', 'image/*')
 	},0)
 })
 
