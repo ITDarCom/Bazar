@@ -14,8 +14,7 @@ import './template.html'
 function scrollToTheEnd(){
 	//we scroll after a bit so we scroll after new items have been rendered
 	setTimeout(function(){
-		//we add 100px because of thread footer
-		window.scrollTo(0,document.body.scrollHeight + 100);		
+		$('.message-container:last-child').get(0).scrollIntoView()	
 	}, 0);
 }
 

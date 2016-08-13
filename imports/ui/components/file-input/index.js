@@ -9,7 +9,7 @@ import { Shops } from './../../../api/shops/collection'
 
 function scrollToTheEnd(){
     setTimeout(function(){
-        window.scrollTo(0,document.body.scrollHeight);        
+        $('.thumbnail:last-child').get(0).scrollIntoView()
     }, 1000);
 }
 
