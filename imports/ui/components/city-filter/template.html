@@ -5,9 +5,10 @@
 		<span>{{> afQuickField name="selectedCity" 
 					style="width:80px;"
 			    	label=false options=options  
+			    	value=defaultValue
 			    	firstOption=(_ "allCities") }}</span>				
 		<span class="form-group" style="width:70%">
-			<input name='search' type="text" style="width:100%"
+			<input name='search' type="text" style="width:100%" value={{searchText}}
 				class="form-control" placeholder="{{_ 'search'}}">
 		</span>
 	  {{/autoForm}}

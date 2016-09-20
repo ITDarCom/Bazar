@@ -91,7 +91,9 @@ Template.endlessList.onCreated(function () {
 
         //if a city is selected, we'll filter by city
         var city = Session.get('selectedCity')
-        instance.city.set(city);
+        if (!route.match(/shops.show|favorites/)){
+            instance.city.set(city);            
+        }
 
         //if we are on a shop page, we'll filter by shop
         if (route.match(/shops.show/)) {
@@ -152,8 +154,8 @@ Template.endlessList.onCreated(function () {
     this.autorun(()=> {
         //search initialization
         var options = {
-            keepHistory: 1000 * 60 * 5,
-            localSearch: true
+            keepHistory: false,
+            localSearch: false
         };
         var fields = ['title', 'description'];
 
@@ -168,7 +170,12 @@ Template.endlessList.onCreated(function () {
     //here we initiate a search request
     this.autorun(()=> {
         const searchText = Session.get('searchText')
-        this.itemsSearch.search(searchText);
+        const query = {
+            category: instance.category.get(),
+            shop: instance.shop.get(),
+            city: instance.city.get()
+        }
+        this.itemsSearch.search(searchText, query);
     })
 
     this.getSearchResults = ()=> {

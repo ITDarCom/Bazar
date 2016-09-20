@@ -2,17 +2,19 @@ import {SearchSource} from 'meteor/meteorhacks:search-source'
 
 import {Items} from './collection'
 
-SearchSource.defineSource('items', function(searchText, options) {
-	var options = {sort: {isoScore: -1}, limit: 20};
+SearchSource.defineSource('items', function(searchText, query) {
+
+	var opts = {sort: {isoScore: -1}, limit: 20};
 
 	//Meteor._sleepForMs(200);	
 
-	if(searchText) {
+	if (searchText) {
 		var regExp = buildRegExp(searchText);
-		var selector = { $or: [{title: regExp}, {description: regExp}],isHidden: false};
-		return Items.find(selector, options).fetch();
+		var selector = { $or: [{title: regExp}, {description: regExp}], isHidden: false };
+		Object.assign(selector, query)
+		return Items.find(selector, opts).fetch();
 	} else {
-		return Items.find({}, options).fetch();
+		return Items.find({}, opts).fetch();
 	}
 });
 

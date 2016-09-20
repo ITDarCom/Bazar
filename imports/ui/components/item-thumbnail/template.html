@@ -1,13 +1,4 @@
 <template name="itemThumbnail">
-  {{#if searchResult}}
-  <div class="col-xs-6 col-md-3">  
-    <div class="thumbnail" style="position:relative;">
-      <div class="caption">
-        <p>{{{description}}}</p>
-      </div>
-    </div>
-  </div>
-  {{/if}}   
   <div id="{{identifier}}" 
     class="item-thumbnail {{#if isHidden}} thumbnail-dark {{/if}} col-xs-6 col-md-3">
     <div class="thumbnail" style="position:relative;">
@@ -49,11 +40,20 @@
           <hr style="margin-top:5px; margin-bottom:5px;"/>
           <a href="{{pathFor 'shops.show' shop=shop._id}}" 
           style="margin-left:5px; float:right; width:30px;">
-            <img src={{currentShop.logo.url}} class="shop-logo" alt="...">
+            <img src={{shop.logo.url}} class="shop-logo" alt="...">
           </a>
           <p><a href="{{pathFor 'shops.show' shop=shop._id}}">{{shop.title}}</a></p>
           <p><small>{{cityLabel city}}</small></p>
       </div>
         </div>
     </div>
+  {{#if searchResult}}
+  <div class="col-xs-6 col-md-3">  
+    <div class="thumbnail" style="position:relative;">
+      <div class="caption">
+        <p>{{{description}}}</p>
+      </div>
+    </div>
+  </div>
+  {{/if}}       
 </template>

@@ -12,6 +12,12 @@ SelectCity = new SimpleSchema({
 });
 
 Template.itemsFilter.helpers({
+	defaultValue(){
+		return Session.get('selectedCity')
+	},
+	searchText(){
+		return Session.get('searchText')
+	},
 	schema(){
 		return SelectCity
 	},
@@ -28,8 +34,21 @@ Template.itemsFilter.events({
 	}
 })
 
+Template.itemsFilter.onCreated(function(){
+
+    //we reset our stored state whenever the route changes
+    this.autorun(function () {
+        var route = Router.current().route.getName()
+        var params = Router.current().params        
+        Session.set('searchText', null)
+    })
+	Session.set('searchText', null)
+
+})
+
 Template.itemsFilter.onDestroyed(function(){
-	Session.set('selectedCity',null)
+	//WE KEEP SELECTED CITY
+	//Session.set('selectedCity',null)
     Session.set('searchText', null)
 })
 
