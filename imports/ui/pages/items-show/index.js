@@ -81,6 +81,16 @@ Template.itemCarousel.onRendered(function(){
 
 Template.itemCarousel.helpers({
 
+	singleThumb(){
+        const item = Items.findOne(Router.current().params.itemId)
+
+		if (item.thumbnails.length == 1){
+			return true
+		} else {
+			return false
+		}
+	},
+
     orderedThumbnails(){
         const item = Items.findOne(Router.current().params.itemId)
 

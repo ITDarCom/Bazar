@@ -28,8 +28,22 @@ accessKeyId: "AKIAI4B6P6HCMBHSZM4Q", //required if environment variables are not
     transformWrite: createThumb
 });
 
+var createMicroThumb = function(fileObj, readStream, writeStream) {
+  // Thumbnail width or height will be at least 170px 
+  gm(readStream, fileObj.name()).resize('50', null, '>').stream().pipe(writeStream);
+};
+
+var microthumbStore = new FS.Store.S3("microthumbnails", {
+accessKeyId: "AKIAI4B6P6HCMBHSZM4Q", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set    
+    bucket: "ebazaar", //required
+    maxTries: 1, //optional, default 5
+    folder: 'microthumbnails',
+    transformWrite: createMicroThumb
+});
+
 export const Images = new FS.Collection("images", {
-    stores: [thumbStore, imageStore]
+    stores: [thumbStore, imageStore, microthumbStore]
 });
 
 Images.allow({
