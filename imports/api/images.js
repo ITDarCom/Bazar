@@ -6,9 +6,9 @@ var resize = function(fileObj, readStream, writeStream) {
 };
 
 var imageStore = new FS.Store.S3("images", {
-    accessKeyId: "AKIAJIX3DMTAIYKFDE4A", //required if environment variables are not set
-    secretAccessKey: "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", //required if environment variables are not set
-    bucket: "seensaad", //required
+    accessKeyId: "AKIAI4B6P6HCMBHSZM4Q", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set
+    bucket: "ebazaar", //required
     maxTries: 1, //optional, default 5
     folder: 'images'
 });
@@ -19,9 +19,9 @@ var createThumb = function(fileObj, readStream, writeStream) {
 };
 
 var thumbStore = new FS.Store.S3("thumbnails", {
-    accessKeyId: "AKIAJIX3DMTAIYKFDE4A", //required if environment variables are not set
-    secretAccessKey: "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", //required if environment variables are not set
-    bucket: "seensaad", //required
+accessKeyId: "AKIAI4B6P6HCMBHSZM4Q", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set    
+    bucket: "ebazaar", //required
     maxTries: 1, //optional, default 5
     folder: 'thumbnails',
     transformWrite: createThumb
