@@ -11,11 +11,14 @@
   <div id="{{identifier}}" 
     class="item-thumbnail {{#if isHidden}} thumbnail-dark {{/if}} col-xs-6 col-md-3">
     <div class="thumbnail" style="position:relative;">
+      <!-- 
+      DISPLAYING ITEM ID FOR COSTUMER: commented for future use
       <div style="position:absolute;right:8px;top:5px;font-size:8pt;color:blue;">
         <p>{{_id}}</p>
-      </div>
+      </div> 
+      -->
       <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
-        <div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{defaultThumbnail}}'); background-repeat: no-repeat, no-repeat; background-size: auto 100%;" alt="..." ></div>
+        <div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{backgroundImage}}'); background-repeat: no-repeat, no-repeat; background-size: {{backgroundSize}};" alt="..." ></div>
       </a>
       <div class="caption">
           <p>

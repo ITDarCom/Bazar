@@ -269,8 +269,38 @@ Template.endlessList.helpers({
 })
 
 
+Template.shopThumbnail.onCreated(function(){
+    
+    this.loaded = new ReactiveVar(false)
+
+    var instance = this
+    this.image = document.createElement('img');
+    this.image.onload = function () {
+        instance.loaded.set(true)
+    };
+
+    this.image.src = Template.instance().data.logo.url
+})
+
 Template.shopThumbnail.helpers({
     identifier(){
         return `shop-${Template.instance().data._id}`
-    }
+    },
+    backgroundImage(){
+        if (!Template.instance().loaded.get()){
+            return '/ajax-loader.gif'
+        } else {            
+            return Template.instance().data.logo.url
+        }
+    },
+    backgroundSize(){
+        const instance = Template.instance()
+        if (!instance.loaded.get()){
+            return "auto auto"
+        } else if (instance.image.width > instance.image.height) {            
+            return "auto 100%"
+        } else {
+            return "100% auto"
+        }
+    },        
 });

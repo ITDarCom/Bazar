@@ -2,7 +2,7 @@ import { FS } from "meteor/cfs:base-package"
 
 var resize = function(fileObj, readStream, writeStream) {
   // Do not allow an image of a width or height more than 335px
-  gm(readStream, fileObj.name()).resize('335', '335', '>').stream().pipe(writeStream);
+  gm(readStream, fileObj.name()).resize(null, '200', '>').stream().pipe(writeStream);
 };
 
 var imageStore = new FS.Store.S3("images", {
@@ -10,7 +10,8 @@ var imageStore = new FS.Store.S3("images", {
     secretAccessKey: "nMLJ86ryatpVaGfA+DRJGUIS5YZSxOzJ5fWOYrJV", //required if environment variables are not set
     bucket: "ebazaar", //required
     maxTries: 1, //optional, default 5
-    folder: 'images'
+    folder: 'images',
+    transformWrite: resize
 });
 
 var createThumb = function(fileObj, readStream, writeStream) {

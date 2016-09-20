@@ -8,6 +8,20 @@ import { Shops } from './../../../api/shops/collection'
 import './template.html'
 import './style.css'
 
+Template.itemThumbnail.onCreated(function(){
+    
+    this.loaded = new ReactiveVar(false)
+
+    var instance = this
+    this.image = document.createElement('img');
+    this.image.onload = function () {
+        instance.loaded.set(true)
+    };
+
+    const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
+    this.image.src = thumb.url
+})
+
 Template.itemThumbnail.helpers({
     identifier(){
         return `item-${Template.instance().data._id}`
@@ -16,12 +30,24 @@ Template.itemThumbnail.helpers({
     	if (Template.instance().data)
         	return Shops.findOne(Template.instance().data.shop)   
     },
-    defaultThumbnail(){
-        if (Template.instance().data){
+    backgroundImage(){
+        if (!Template.instance().loaded.get()){
+            return '/ajax-loader.gif'
+        } else {            
             const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
             if (thumb) return thumb.url
         }
     },
+    backgroundSize(){
+        const instance = Template.instance()
+        if (!instance.loaded.get()){
+            return "auto auto"
+        } else if (instance.image.width > instance.image.height) {            
+            return "auto 100%"
+        } else {
+            return "100% auto"
+        }
+    },    
     isSearch(){
         return Template.instance().search
     },
