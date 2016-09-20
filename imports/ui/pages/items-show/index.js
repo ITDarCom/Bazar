@@ -53,10 +53,18 @@ Template.itemsShowPage.helpers({
 
 Template.itemsShowPage.events({
 	'click .add-to-cart-btn': function(event, instance){
+		if (!Meteor.user()){
+			Router.go('accounts.signin')
+		} else {			
+			Meteor.call('cart.addItem', instance.itemId, function(err, data){
+				if (err){
+					$.snackbar({content: TAPi18n.__('somethingWrong')});
+				} else {
+					$.snackbar({content: TAPi18n.__('itemAddedToCartSuccessfully')});
+				}
 
-		Meteor.call('cart.addItem', instance.itemId)
-		Router.go('cart')
-
+			})
+		}
 	}
 })
 
@@ -92,5 +100,28 @@ Template.itemCarousel.helpers({
     isEdit(){
     	const route = Router.current().route.getName()
     	if (route.match(/edit/)){ return true; } else { return false; }
-    }   	
+    },
+    favorite(){
+        if (Meteor.userId()) {
+            return Meteor.users.findOne({_id: Meteor.userId(), favorites: {$in: [this._id]}});
+        }
+    },       	
+})
+
+Template.itemCarousel.events({
+    "click .favorite-btn": function (event) {
+
+        var favoriteStatus;
+        
+        if (Meteor.user()) {
+            const itemId = Template.instance().data._id
+            if (Meteor.user().favorites && 
+                (Meteor.user().favorites.indexOf(itemId) != -1)){
+                favoriteStatus = false;                  
+            } else {
+                favoriteStatus = true;
+            }
+            Meteor.call("item.favoriteIt", itemId, favoriteStatus);
+        }
+    }
 })

@@ -123,7 +123,11 @@ Template.purchaseItem.helpers({
 		const data = Template.instance().data
 		const item = getItem(data.item)
 		if (item) return (item.price * data.quantity)
-	}
+	},
+	modalId(){
+		const data = Template.instance().data		
+		return `message-modal-${data._id}`
+	},
 })
 
 Template.saleItem.helpers({
@@ -136,6 +140,14 @@ Template.saleItem.helpers({
 	member(){
 		return Meteor.users.findOne(Template.instance().data.user).username
 	},
+	statusClass(){
+		switch (Template.instance().data.status){
+			case "pending": return "list-group-item-warning";
+			case "accepted": return "list-group-item-info";
+			case "rejected": return "list-group-item-danger";
+			case "delivered": return "list-group-item-success";
+		}		
+	},	
 	total(){
 		const data = Template.instance().data
 		const item = getItem(data.item)

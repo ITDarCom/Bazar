@@ -11,10 +11,12 @@
 			<i class="material-icons">add</i>
 		</a>
 	{{else}}
+		{{#if currentUser}}
 		<button class="btn btn-info btn-fab message-btn btn-float"
 			data-toggle="modal" data-target="#shop-modal">
 			<i class="material-icons">mail</i>
 		</button>	
+		{{/if}}
 	{{/if}}
 	{{> endlessList }}
 	{{else}}

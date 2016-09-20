@@ -21,12 +21,7 @@
 			{{> cartItem }}
 		{{/each}}
 		</div>
-		{{#if showDeliveryForm}}
-			{{> deliveryInformationForm }}
-		{{else}}
-		<center><button class="btn btn-warning btn-lg btn-block btn-raised submit-cart-btn">
-			{{_ "submitCart"}}</button></center>
-		{{/if}}
+		{{> deliveryInformationForm }}
 		<div style="margin-top:20px;" ></div>
 	{{/unless}}
 
@@ -55,18 +50,13 @@
 		autosave=true
 		resetOnSuccess=false
 		meteormethod="cart.updatePurchase"}}
-		{{> afQuickField name='notes' label=false rows=5 placeholder=notesPlaceholder}}
-		<div class="form-group" style="margin-bottom:0px;">
-			<div class="input-group">    
-				{{> afQuickField name='quantity' style="width:100%;" options=quantities}}
-				<span class="input-group-btn input-group-sm">
-					<button 
-						class="btn btn-danger btn-fab btn-fab-mini remove-cart-item-btn" 
-						style="float:left; top:25px;">
-						<i class="material-icons">clear</i></button>
-				</span>
-			</div>
-		</div>
+		{{> afQuickField name='notes' label=false rows=3 placeholder=notesPlaceholder}}
+		{{> afQuickField name='quantity' style="width:100%;" options=quantities}}
+		<div class="form-group">
+				<button 
+					class="btn btn-danger btn-sm btn-raised remove-cart-item-btn">
+					{{_ "removeItem"}}</button>				
+		</div>	
 	{{/autoForm}}
 	</div>
 </template>

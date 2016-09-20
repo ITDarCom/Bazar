@@ -25,7 +25,8 @@
 
   </div><!--/.container-->
 
-<script type="text/javascript" src="/slick.min.js"></script>
+  <script type="text/javascript" src="/slick.min.js"></script>
+  <script type="text/javascript" src="/snackbar.min.js"></script>
     
 </template>
 
@@ -93,8 +94,8 @@
       <li class={{isActiveRoute 'settings.purchases'}} id="my-purchases">
         <a href="{{pathFor 'settings.purchases'}}">
           <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp; {{_ "purchases"}}
-          {{#if currentUser.pendingPurchases}}          
-            (<span class="counter">{{currentUser.pendingPurchases}}</span>)
+          {{#if currentUser.totalPurchases}}          
+            (<span class="counter">{{currentUser.totalPurchases}}</span>)
           {{else}}
             (<span class="counter">0</span>)
           {{/if}}

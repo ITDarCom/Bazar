@@ -14,11 +14,21 @@
 					href="{{pathFor 'items.edit' itemId=item._id shop=currentUser.shop}}">
 					<i class="material-icons">create</i>
 				</a>
-				<br/><br/><br/><!--So that floating buttons do not cover last elements -->
 			{{else}}
-				<button class="btn btn-warning btn-block btn-raised add-to-cart-btn">{{_ "addToCart"}}</button><br />
+				<a class="btn btn-warning btn-fab add-to-cart-btn btn-float">
+					<i class="material-icons">shopping_cart</i>
+				</a>
+				{{#if currentUser}}
+				<a class="btn btn-info btn-fab message-btn btn-float-2"
+					data-toggle="modal" data-target="#shop-modal">
+					<i class="material-icons">mail</i>
+				</a>
+				{{/if}}
 			{{/if}}		
+			<br/><br/><br/><!--So that floating buttons do not cover last elements -->
 		</center>
+
+		{{> messageModal modalId='shop-modal' recpientType='shop' recpientId=shop._id inboxType='personal'}}		
 	{{else}}
 		{{> spinner }}
 	{{/if}}
@@ -27,6 +37,12 @@
 <template name="itemCarousel">
 	<div class="row">		
  		<div class="col-xs-12">
+			<div style="z-index:3000;position:absolute;left:24px;bottom:0px; ">
+				<i style="font-size:20px" class="material-icons">share</i>
+				<a href="#" 
+				  style="font-size:20px" class="favorite-btn material-icons">
+				  {{#if favorite}}star{{else}}star_border{{/if}}</a>
+			</div> 			
 			<!-- 
 			DISPLAYING ITEM ID FOR COSTUMER: commented for future use
 			<div style="z-index:3000;position:absolute;right:24px;top:5px;font-size:8pt;color:blue;"><p>{{_id}}</p></div> -->

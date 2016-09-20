@@ -29,7 +29,6 @@ Meteor.methods({
 			})
 
         	Meteor.users.update(this.userId, { $inc: { 'cartItems': 1 }});
-
 		}
 	},
 
@@ -115,15 +114,21 @@ Meteor.methods({
        if (status.match(/accepted|rejected/)) {
 
 			//notifying purchase owner
-			const pendingPurchasesInc = status.match(/rejected/)? -1 : 0;
-			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1, pendingPurchases: pendingPurchasesInc }});
+			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
 
 			//marking order as processed for shop owner
-			const totalOrdersInc = status.match(/rejected/)? -1 : 0;
-			Shops.update(shopId, { $inc: { unreadOrders: -1, totalOrders: totalOrdersInc }})
+			Shops.update(shopId, { $inc: { 'unreadOrders': -1 }})
 
+        } 
 
-        } else if (status.match(/delivered/)){
+        if (status.match(/delivered/)){
+
+			//notifying purchase owner
+			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});        	
+
+        }
+
+        if (status.match(/delivered|rejected/)){
 
 			Shops.update(shopId, { $inc: { totalSales: 1, totalOrders: -1 }})
 
