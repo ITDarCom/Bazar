@@ -35,6 +35,19 @@ import './../../ui/pages/admin-users/users-table.js'
 
 Meteor.startup(() => {
 
+	Accounts.emailTemplates.siteName = "ebazaar.online";
+
+	Accounts.emailTemplates.resetPassword.from = function () {
+	   // Overrides value set in Accounts.emailTemplates.from when resetting passwords
+	   return "eBazaar Reset <no-reply@ebazaar.online>";
+	};	
+
+	Accounts.emailTemplates.resetPassword.text = function(user, url) {
+		url = url.replace('#\/', '')
+		console.log(url)
+		return "Click this link to reset your password: \n" + url;
+	}  	
+
 	Accounts.onLogin(function(){
 	    var userId = Meteor.userId();
 	    Meteor.users.upsert({_id: userId}, {$set: {lastSignIn: new Date()}});

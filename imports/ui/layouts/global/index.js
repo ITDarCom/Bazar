@@ -24,9 +24,24 @@ Template.changePwd.onRendered(function(){
 	$('fieldset').append(`<div class="btn btn-block cancel-btn">${TAPi18n.__('cancel')}</div>`)
 })
 
+Template.forgotPwd.onRendered(function(){
+	$('.btn').addClass('btn-raised btn-warning')
+	$('fieldset').append(`<div class="btn btn-block cancel-btn">${TAPi18n.__('cancel')}</div>`)
+})
+
+Template.resetPwd.onRendered(function(){
+	$('.btn').addClass('btn-raised btn-warning')
+})
+
 Template.changePwd.events({
 	'click .cancel-btn'(){
 		Router.go('settings.account')
+	}
+})
+
+Template.changePwd.events({
+	'click .cancel-btn'(){
+		Router.go('home')
 	}
 })
 

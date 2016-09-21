@@ -82,3 +82,8 @@ AccountsTemplates.addFields([
       errStr: 'كلمة السر يجب أن تكون 6 محارف على الأقل',
   }
 ]);
+
+Accounts.resetPassword.text = function(user, url) {
+  var id = url.substring(url.lastIndexOf('/') + 1)
+  return "Click this link to reset your password: /reset-password/" + id;
+}

@@ -34,6 +34,22 @@ AccountsTemplates.configureRoute('changePwd', {
     redirect: 'settings.account'
 });
 
+AccountsTemplates.configureRoute('forgotPwd', {
+    name: 'accounts.forgotPwd',
+    path: '/settings/forgot-password',
+    template: 'forgotPwd',
+    layoutTemplate: 'ApplicationLayout',
+    redirect: '/'
+});
+
+AccountsTemplates.configureRoute('resetPwd', {
+    name: 'accounts.resetPwd',
+    template: 'resetPwd',
+    layoutTemplate: 'ApplicationLayout',
+    redirect: '/'
+});
+
+
 Router.route('/logout', {
     name: 'logout',
     onBeforeAction: function () {
