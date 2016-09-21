@@ -22,7 +22,9 @@
             options=categories}}
 
         {{#if isNew}}
+        <div class="imageIds is-focused">
             {{> afQuickField name="imageIds" type="cfs-files" collection="images"}}
+        </div>
         {{/if}}
 
         <button type="submit" 

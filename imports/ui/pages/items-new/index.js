@@ -74,6 +74,12 @@ AutoForm.addHooks('insertItemForm', {
     after: {
       method: CfsAutoForm.Hooks.afterInsert
     },
+    onError : function(){
+        //a hack to display the error when missing files
+        if (this.validationContext._invalidKeys.find(key => key.name == 'imageIds' )){
+            $('.imageIds .form-group').addClass('is-focused')            
+        }
+    },
     beginSubmit: function() {
         isUploading.set(true)
     },
@@ -155,6 +161,9 @@ Template.insertItemForm.events({
                 Meteor.call('item.remove', resultItemId)                
             }
             isUploading.set(false)
+
+            //a hack to reset the file field, so that user has to upload it again
+            $('.cfsaf-field').val('')
 
         } else {
 
