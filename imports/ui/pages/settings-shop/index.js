@@ -12,12 +12,15 @@ Template.settingsShopPage.helpers({
 })
 
 Template.settingsShopPage.events({
-    'click .delete-shop-btn': function () {
+    'click .delete-shop-btn': function (e) {
+        e.preventDefault()
         if (confirm(TAPi18n.__('deleteShopConfirmation'))) {
             Meteor.call('shops.remove')
         }
     },
-    'click .hide-shop-btn': function () {
+    'click .hide-shop-btn': function (e) {
+
+        e.preventDefault()
         if (Meteor.user().hasShop) {
             var shop = Shops.findOne({_id: Meteor.user().shop})
             if (shop) {

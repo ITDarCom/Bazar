@@ -152,11 +152,19 @@ Template.insertItemForm.events({
     },
     'click .cancel-btn'(e){
 
+        AutoForm.resetForm('insertItemForm')        
+
         e.preventDefault()
         const route = Router.current().route.getName()
  
         if (isUploading.get()){
-            //FS.HTTP.uploadQueue.cancel() //doesn't seem to work         
+
+            //https://github.com/CollectionFS/Meteor-CollectionFS/issues/370#issuecomment-88043692
+            var list = FS.HTTP.uploadQueue.processingList()
+            _.each(list, function(item) {
+              item.queue.cancel();
+            });
+
             if (route.match(/new/)){
                 Meteor.call('item.remove', resultItemId)                
             }

@@ -4,7 +4,7 @@
 </template>
 
 <template name="insertShopForm">
-    {{#if isUploading}}{{>appLoading}}{{/if}}    
+    {{#if isUploading}}{{>appLoading}}{{/if}}  
     {{#autoForm
     collection=formCollection
     id="insertShopForm"
@@ -21,7 +21,9 @@
         </div>  
         {{> fileInput mode="shop" }}
         {{else}}
+            <div class="imageId">
             {{> afQuickField name="logo.imageId" type="cfs-file" collection="images"}}
+            </div>
         {{/unless}}
         {{> afQuickField name='description' rows=3}}
         {{> afQuickField 

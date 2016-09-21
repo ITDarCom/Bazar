@@ -69,7 +69,7 @@ Shops.attachSchema(new SimpleSchema({
         autoform: {
           afFieldInput: {
             type: "cfs-file",
-            collection: "imagegs"
+            collection: "images"
           }
         },
         label: function(){
