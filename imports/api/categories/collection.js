@@ -5,13 +5,6 @@ export const Categories = new Mongo.Collection('categories');
 SimpleSchema.RegEx.EnglishCategoryName = /(^[A-Za-z-]*$)/i
 SimpleSchema.RegEx.ArabicCategoryName = /^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FF\s]*$/i
 
-Categories.allow({
-	insert: function(userId, doc) {
-		// only allow posting if you are logged in
-		return !! userId;
-	}
-});
-
 Categories.attachSchema(new SimpleSchema({
 	identifier: {
 		type: String,

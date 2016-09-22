@@ -2,6 +2,9 @@
  * Created by kasem on 01.06.2016.
  */
 import { Categories } from './collection'
+
+import { Items } from './../items/collection'
+
 Meteor.methods({
 
     "category.insert" : function (categ) {
@@ -12,6 +15,21 @@ Meteor.methods({
             }
         }
 
+    },
+    'category.update'(modifier, documentId){
+
+        const oldIdentifier = Categories.findOne(documentId).identifier
+
+        if (Categories.update({ _id: documentId }, modifier) == 1 ){
+
+            //update all old items to the new category
+            const newIdentifier = Categories.findOne(documentId).identifier
+            if (newIdentifier != oldIdentifier){
+                Items.update({ category: oldIdentifier }, 
+                    { $set: { category: newIdentifier}}, 
+                    { multi: true })
+            }
+        }
     },
     "category.delete" : function (id) {
         const category = Categories.findOne(id)

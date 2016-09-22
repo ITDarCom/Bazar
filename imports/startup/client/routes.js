@@ -129,11 +129,13 @@ const privateRoutes = [
     'messages.thread',
     'cart',
     'admin.categories',
+    'admin.categories.edit',
     'admin.users'
 ];
 
 const adminRoute = [
     'admin.categories',
+    'admin.categories.edit',
     'admin.cities',
     'admin.users'
 ]
@@ -357,6 +359,12 @@ Router.route('/admin/categories', function () {
     name: 'admin.categories'
 });
 
+Router.route('/admin/categories/:categoryId', function () {
+    this.render('adminNav', {to: 'nav'});
+    this.render('adminCategoriesEditPage');
+}, {
+    name: 'admin.categories.edit'
+});
 
 Router.route('/admin/cities', function () {
     this.render('adminNav', {to: 'nav'});
@@ -364,7 +372,6 @@ Router.route('/admin/cities', function () {
 }, {
     name: 'admin.cities'
 });
-
 
 Router.route('/admin/users', function () {
     this.render('adminNav', {to: 'nav'});

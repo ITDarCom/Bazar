@@ -33,6 +33,7 @@ import "./../../ui/pages/inbox"
 import "./../../ui/pages/inbox-thread"
 
 import "./../../ui/pages/admin-categories"
+import "./../../ui/pages/admin-categories-edit"
 import "./../../ui/pages/admin-cities"
 import "./../../ui/pages/admin-users"
 import "./../../ui/pages/admin-warning"
@@ -70,6 +71,13 @@ Meteor.startup(function () {
 	moment.locale("ar")
 
 	T9n.map('ar', {
-  		email: 'بريد إلكتروني'		
+  		email: 'بريد إلكتروني',
+  		error: {
+  			accounts: {
+				'User not found': 'خطأ في اسم المستخدم أو كلمة السر!',
+				'Incorrect password': 'خطأ في اسم المستخدم أو كلمة السر!',
+				"Login forbidden": "خطأ في اسم المستخدم أو كلمة السر!"
+  			}
+  		}	
 	});
 })

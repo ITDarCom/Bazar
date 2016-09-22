@@ -7,17 +7,7 @@ import { Categories } from './../../../api/categories/collection'
 import { Cities } from './../../../api/cities/collection'
 
 Template.adminTables.helpers({
-    formCollection(){
-        var route = Router.current().route.getName();
-        if (route.match(/admin.categories/)){
 
-            return Categories;
-        }
-        else {
-           return Cities;
-        }
-
-    },
     components(){
         var route = Router.current().route.getName();
         if (route.match(/admin.categories/)){
@@ -27,16 +17,11 @@ Template.adminTables.helpers({
             return Cities.find({},{sort: {createdAt: -1}});
         }
     },
-    method(){
-        var route = Router.current().route.getName();
-        if (route.match(/admin.categories/)){
-
-            return "category.insert";
-        }
-        else {
-            return "city.insert";
-        }
+    isCategory(){
+        var route = Router.current().route.getName();        
+        return route.match(/categories/)
     }
+
 
 });
 
@@ -67,4 +52,36 @@ Template.categotyOrder.events({
     "click .order-down-btn":function () {
         Meteor.call("categoryOrder.down",this.data.identifier)
     }
+})
+
+Template.insertCategoryForm.helpers({
+    formCollection(){
+        const route = Router.current().route.getName();
+        if (route.match(/admin.categories/)){
+            return Categories;
+        } else {
+           return Cities;
+        }
+    },
+    method(){
+        const route = Router.current().route.getName();
+        if (route.match(/edit/)){
+            return "category.update";
+        } else if (route.match(/categories/)) {
+            return "category.insert";
+        } else {
+            return "city.insert";
+        }
+    },    
+    doc(){
+        return Categories.findOne(Router.current().params.categoryId)
+    },
+    formType(){
+        const route = Router.current().route.getName();
+        if (route.match(/edit/)){
+            return "method-update"
+        } else {
+            return "method"
+        }
+    }    
 })

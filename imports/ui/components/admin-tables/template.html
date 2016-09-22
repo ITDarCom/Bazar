@@ -5,19 +5,8 @@
         <h1 class="page-header admin-header">{{_ "Admin-Cities"}}</h1>
     {{/if}}
 
-    {{#autoForm
-    collection=formCollection
-    id="insertCategoryForm"
-    type="method"
-    meteormethod = method}}
+    {{> insertCategoryForm }}
 
-        {{> afQuickField name='label'}}
-        {{> afQuickField name='identifier'}}
-
-        <button type="submit" class="btn btn-warning btn-lg btn-raised">{{_ "enter"}}</button>
-        <br/>
-
-    {{/autoForm}}
     <div>
     <table class="table table-bordered table-condensed table-striped table-categories">
         <thead>
@@ -44,6 +33,9 @@
                 {{/if}}
                 <td style="vertical-align: middle" class="col-md-2">
                     <button class="btn btn-warning btn-sm btn-raised btn-delete">{{_ "delete"}}</button>
+                    {{#if isCategory}}
+                    <a href="{{pathFor 'admin.categories.edit' categoryId=_id }}" class="btn btn-warning btn-sm btn-raised btn-edit">{{_ "edit"}}</a>
+                    {{/if}}
                 </td>
             </tr>
         {{/each}}
@@ -63,4 +55,20 @@
             <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
         </button>
     </div>
+</template>
+
+<template name="insertCategoryForm">    
+    {{#autoForm
+        collection=formCollection
+        id="insertCategoryForm"
+        type=formType
+        doc=doc
+        meteormethod = method}}
+
+        {{> afQuickField name='label'}}
+        {{> afQuickField name='identifier'}}
+
+        <button type="submit" class="btn btn-warning btn-lg btn-raised">{{_ "enter"}}</button>
+        <br/>
+    {{/autoForm}}    
 </template>
