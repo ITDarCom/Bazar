@@ -134,7 +134,11 @@ Template.insertItemForm.helpers({
             return item.isHidden;
         }
 
-    }
+    },
+    resetOnSuccess(){
+        var route = Router.current().route.getName()
+        if (route.match(/edit/)){ return true } else { return false }
+    }    
 })
 
 Template.insertItemForm.events({

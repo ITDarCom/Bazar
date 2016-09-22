@@ -10,11 +10,14 @@
     id="insertShopForm"
     type=formType
     doc=doc
-    resetOnSuccess=false
+    validation='submit'
+    resetOnSuccess=resetOnSuccess
     meteormethod=method}}
+        <div class="title">
 		{{> afQuickField name='title'}}
+        </div>
         {{#unless isNew}}
-        <div class="col-xs-12">
+        <div class="col-xs-12" style="padding-top:10px;">
             <a href="{{pathFor 'shops.show' shop=shop._id}}" class="thumbnail">
                 <img src={{currentShop.logo.url}} class="shop-logo" alt="...">
             </a>

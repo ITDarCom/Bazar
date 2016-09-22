@@ -49,6 +49,20 @@ Meteor.methods({
 		}
 	},
 
+	'shopTitleAvailable'(title){
+
+		const shop = Shops.find({title: title})
+
+		if (!shop) return true;
+		else if (shop){
+			if (shop.user == this.userId){
+				return true;
+			} else {
+				return false;
+			}
+		}
+	},
+
 	'shops.update'(modifier, documentId){
 		// Make sure the user is logged in before inserting a task
 		if (! this.userId) {

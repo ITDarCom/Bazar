@@ -21,6 +21,7 @@ Template.insertShopForm.onCreated(function(){
 			.attr('placeholder', TAPi18n.__('clickToUploadFile'))
 			.attr('accept', 'image/*')
 	},0)
+
 })
 
 Template.insertShopForm.onDestroyed(function(){
@@ -63,10 +64,18 @@ AutoForm.addHooks('insertShopForm', {
       method: CfsAutoForm.Hooks.afterInsert
     },
     onError : function(){
+    	console.log(this.validationContext._invalidKeys)
         //a hack to display the error when missing files
         if (this.validationContext._invalidKeys.find(key => key.name.match(/imageId/) )){
             $('.imageId .form-group').addClass('is-focused')            
         }
+        if (this.validationContext._invalidKeys.find(key => key.name.match(/title/) )){
+            $('.title .form-group').addClass('is-focused')
+            $('.page-header').get(0).scrollIntoView()
+            $('.title .form-group').keyup(function(){
+            	$('.title .form-group').removeClass('is-focused')
+            })
+    	}
     },    
 	beginSubmit: function() {
 		isUploading.set(true)
@@ -118,6 +127,10 @@ Template.insertShopForm.helpers({
 		return Cities.find().fetch().map(function(city){
 			return {label:city.label, value:city.identifier}
 		})
+	},
+	resetOnSuccess(){
+		var route = Router.current().route.getName()
+		if (route.match(/edit/)){ return true } else { return false }
 	}
 })
 

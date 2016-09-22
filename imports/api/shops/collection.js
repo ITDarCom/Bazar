@@ -45,7 +45,16 @@ Shops.attachSchema(new SimpleSchema({
         label: function(){
             return TAPi18n.__('title')
         },		
-		max: 200
+		max: 200, unique: true,
+        custom: function () {
+            if (Meteor.isClient) {
+                Meteor.call("shopTitleAvailable", this.value, function (error, result) {
+                    if (!result) {
+                        Shops.simpleSchema().namedContext("insertShopForm").addInvalidKeys([{name: "title", type: "shopNotUnique"}]);
+                    }
+                });
+            }
+        }        
 	},
 	'description': {
 		type: String,
