@@ -60,5 +60,12 @@
                  this.unset();
              }
          }
-     }
+     },
+    'tmpShopLogo.url': {
+        type: String, optional:true
+    },
+    'tmpShopLogo.fileId': {
+        type: String, optional: true               
+    }
+
 }));

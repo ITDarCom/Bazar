@@ -40,7 +40,7 @@ Meteor.methods({
 			}, (err, shopId) => {
 				if (!err) {
 					Meteor.users.update({ _id: this.userId}, 
-						{ $set: { 'hasShop': true, 'shop': shopId } 
+						{ $set: { 'hasShop': true, 'shop': shopId, 'tmpShopLogo.url': null, 'tmpShopLogo.url': null } 
 					})			
 				} else {
 					throw err
@@ -51,7 +51,7 @@ Meteor.methods({
 
 	'shopTitleAvailable'(title){
 
-		const shop = Shops.find({title: title})
+		const shop = Shops.findOne({title: title})
 
 		if (!shop) return true;
 		else if (shop){
@@ -121,7 +121,12 @@ Meteor.methods({
 		check(url, String);
 		check(fileId, String);
 
-    	Shops.update(Meteor.user().shop, { $set: {'logo.url': url, 'logo.fileId': fileId } });
+		if (!Meteor.user().hasShop){
+			Meteor.users.update(this.userId, { $set: {'tmpShopLogo.url': url, 'tmpShopLogo.fileId': fileId } })
+		} else {
+    		Shops.update(Meteor.user().shop, { $set: {'logo.url': url, 'logo.fileId': fileId } });			
+		}
+
 	}
 
 });

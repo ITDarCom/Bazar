@@ -75,12 +75,6 @@ Shops.attachSchema(new SimpleSchema({
     },
     'logo.imageId': {
         type: String,
-        autoform: {
-          afFieldInput: {
-            type: "cfs-file",
-            collection: "images"
-          }
-        },
         label: function(){
             return TAPi18n.__('shopLogo')
         },               

@@ -191,11 +191,9 @@ Router.route('/shops', function () {
 Router.route('/shops/new', function () {
 	this.render('empty', {to: 'nav'});
 	this.render('shopsNewPage');		
-/*    if (Meteor.user() && !Meteor.user().hasShop){
-	} else {
-		//this.redirect('shops.index');
-	}*/
-
+    if (Meteor.user() && Meteor.user().hasShop){
+		this.redirect('shops.mine');
+    }
 }, {
     name: 'shops.new'
 });

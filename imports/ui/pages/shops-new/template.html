@@ -24,8 +24,18 @@
         </div>  
         {{> fileInput mode="shop" }}
         {{else}}
-            <div class="imageId">
+            <!-- <div class="imageId">
             {{> afQuickField name="logo.imageId" type="cfs-file" collection="images"}}
+            </div> -->
+            {{#if currentUser.tmpShopLogo.url}}
+            <div class="col-xs-12" style="padding-top:10px;">
+                <div class="thumbnail">
+                    <img src={{currentUser.tmpShopLogo.url}} class="shop-logo" alt="...">
+                </div>
+            </div>
+            {{/if}}
+            <div class="logo">
+            {{> fileInput mode="shop" }}
             </div>
         {{/unless}}
         {{> afQuickField name='description' rows=3}}
