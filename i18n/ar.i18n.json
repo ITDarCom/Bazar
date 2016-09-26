@@ -110,5 +110,6 @@
 	"clickToUploadFile": "اضغط هنا لإضافة ملف أو أدرجه هنا",
 	"clickToUploadFiles": "اضغط هنا لإضافة ملفات أو أدرجها هنا",
 	"itemAddedToCartSuccessfully": "تم إضافة العنصر للسلة بنجاح",
-	"somethingWrong":"حدث خطأ ما. الرجاء المحاولة مرة أخرى"
+	"somethingWrong":"حدث خطأ ما. الرجاء المحاولة مرة أخرى",
+	"itemAlreadyInCart":"العنصر موجود في السلة من قبل!"
 }

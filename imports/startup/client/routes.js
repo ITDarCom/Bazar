@@ -67,11 +67,15 @@ Router.route('/logout', {
 Router.onBeforeAction(function () {
     //top-level app subscriptions that we need to wait
 
+    $('.snackbar').each(function(){
+        $(this).snackbar('hide')
+    })      
+
     this.wait(Meteor.subscribe('cart'))
     this.wait(Meteor.subscribe('categories'))
     this.wait(Meteor.subscribe('cities'))
     this.wait(Meteor.subscribe('userData'))
-    this.wait(Meteor.subscribe('shopData'))
+    this.wait(Meteor.subscribe('shopData'))    
 
     if (this.ready()) {
         this.next()

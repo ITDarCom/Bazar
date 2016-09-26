@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import { Router } from 'meteor/iron:router'
 import { Items } from './../../../api/items/collection'
+import { Purchases } from './../../../api/purchases/collection'
 import { Shops } from './../../../api/shops/collection'
 import { Images } from './../../../api/images'
 
@@ -23,7 +24,6 @@ Template.itemsShowPage.onCreated(function(){
 	    	this.ready.set(subscription.ready())
 	    }
 	})
-
 })
 
 Template.itemsShowPage.helpers({
@@ -55,15 +55,36 @@ Template.itemsShowPage.events({
 	'click .add-to-cart-btn': function(event, instance){
 		if (!Meteor.user()){
 			Router.go('accounts.signin')
-		} else {			
-			Meteor.call('cart.addItem', instance.itemId, function(err, data){
-				if (err){
-					$.snackbar({content: TAPi18n.__('somethingWrong')});
-				} else {
-					$.snackbar({content: TAPi18n.__('itemAddedToCartSuccessfully')});
-				}
+		} else {
 
-			})
+			var previous = Purchases.findOne({ 
+				status: 'cart', 
+				user: Meteor.userId(), 
+				item: instance.itemId })
+
+			if (previous){			
+
+				var snack = $.snackbar({
+					content: TAPi18n.__('itemAlreadyInCart'), 
+					timeout: 0
+				})
+				$(snack).find('.snackbar-content').append("<span style='float:left;'><i class=\"material-icons\">close</i></span>")
+
+			} else {				
+				Meteor.call('cart.addItem', instance.itemId, function(err, data){
+					var snack
+					if (err){
+						snack = $.snackbar({content: TAPi18n.__('somethingWrong'), timeout: 0});
+					} else {
+						snack = $.snackbar({
+							content: TAPi18n.__('itemAddedToCartSuccessfully'),
+							timeout: 0
+						})
+					}
+					$(snack).find('.snackbar-content').append("<span style='float:left;'><i class=\"material-icons\">close</i></span>")
+
+				})
+			}
 		}
 	}
 })

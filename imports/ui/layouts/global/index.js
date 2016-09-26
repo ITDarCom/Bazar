@@ -58,7 +58,7 @@ Template.applicationLayout.onRendered(function(){
 	function hideMenu(){
 	    $('.row-offcanvas').removeClass('active')
 	    $('.navmenu').addClass('offcanvas')
-	}	
+	}
 
 	$(document).ready(function () {
 
@@ -79,9 +79,6 @@ Template.applicationLayout.onRendered(function(){
 		});
 
 	});
-
-
-
 
 	const navbarOffset = 80;
 	//we scroll to the active focused input when window is resized
