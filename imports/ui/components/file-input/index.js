@@ -30,7 +30,10 @@ Template.fileInput.onCreated(function(){
         } else {
 
             var fileObj = Images.findOne(fileInProgressId)
-            //console.log('fileObj.uploadProgress()', fileObj.uploadProgress())
+
+            if (fileObj){
+                console.log(fileObj.copies, fileObj.isUploaded(), fileObj.hasStored(), fileObj.uploadProgress())
+            }
             
             if (fileObj && fileObj.url()) {
 
