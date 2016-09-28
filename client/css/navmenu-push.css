@@ -28,6 +28,7 @@ body {
 /* https://github.com/jasny/bootstrap/issues/253 */
 .navmenu-fixed-right {
    left: auto !important;
+   display:block;
 }
 
 .navbar-toggle {left: auto !important;}
