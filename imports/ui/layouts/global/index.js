@@ -52,12 +52,9 @@ Template.applicationLayout.onRendered(function(){
 	function toggleMenu(){
 		menuOpen = !menuOpen
 	    $('.row-offcanvas').toggleClass('active')
+	    $('.navbar.navbar-fixed-top').toggleClass('active')
+    	$('.navmenu-fixed-right').toggleClass('active')
 	    $('.navmenu').toggleClass('offcanvas')
-	    if (menuOpen){
-	    	$('.navmenu-fixed-right').css('display', 'block')
-	    } else {
-	    	$('.navmenu-fixed-right').css('display', '')
-	    }	    
 	}
 
 	function hideMenu(){
