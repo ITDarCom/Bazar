@@ -59,8 +59,9 @@ Template.applicationLayout.onRendered(function(){
 
 	function hideMenu(){
 	    $('.row-offcanvas').removeClass('active')
+	    $('.navbar.navbar-fixed-top').removeClass('active')
+    	$('.navmenu-fixed-right').addClass('inactive')	    
 	    $('.navmenu').addClass('offcanvas')
-	    $('.navmenu-fixed-right').css('display', '')	
 	}
 
 	$(document).ready(function () {
