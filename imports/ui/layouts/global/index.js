@@ -58,6 +58,7 @@ Template.applicationLayout.onRendered(function(){
 	function hideMenu(){
 	    $('.row-offcanvas').removeClass('active')
 	    $('.navmenu').addClass('offcanvas')
+	
 	}
 
 	$(document).ready(function () {
@@ -65,10 +66,9 @@ Template.applicationLayout.onRendered(function(){
 		//a small handler to hide menu when any menu link is clicked
 		$(window).click(function(e){
 			//if user is not clicking on app menu toggle button
-			if (e.toElement && !e.toElement.className.match(/icon-bar|navbar-toggle/)){
-
+			if (e.target && !e.target.className.match(/icon-bar|navbar-toggle/)){
 				//if user is not clicking on menu area
-				if (!e.toElement.className.match(/navmenu/)){
+				if (!e.target.className.match(/navmenu/)){
 					hideMenu()					
 				}
 			}
