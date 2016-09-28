@@ -53,7 +53,7 @@ Template.applicationLayout.onRendered(function(){
 		menuOpen = !menuOpen
 	    $('.row-offcanvas').toggleClass('active')
 	    $('.navbar.navbar-fixed-top').toggleClass('active')
-    	$('.navmenu-fixed-right').toggleClass('active')
+    	$('.navmenu-fixed-right').toggleClass('inactive')
 	    $('.navmenu').toggleClass('offcanvas')
 	}
 

@@ -28,11 +28,13 @@ body {
 /* https://github.com/jasny/bootstrap/issues/253 */
 .navmenu-fixed-right {
    left: auto !important;
+   display:block;   
 }
 
-.navmenu-fixed-right.active {
-   display:block;
+.navmenu-fixed-right.inactive {
+right:-250px;
 }
+
 
 .navbar-toggle {left: auto !important;}
 body.canvas-sliding, body.canvas-slid {left: auto !important;}
