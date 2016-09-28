@@ -53,12 +53,17 @@ Template.applicationLayout.onRendered(function(){
 		menuOpen = !menuOpen
 	    $('.row-offcanvas').toggleClass('active')
 	    $('.navmenu').toggleClass('offcanvas')
+	    if (menuOpen){
+	    	$('.navmenu-fixed-right').css('display', 'block')
+	    } else {
+	    	$('.navmenu-fixed-right').css('display', '')
+	    }	    
 	}
 
 	function hideMenu(){
 	    $('.row-offcanvas').removeClass('active')
 	    $('.navmenu').addClass('offcanvas')
-	
+	    $('.navmenu-fixed-right').css('display', '')	
 	}
 
 	$(document).ready(function () {
