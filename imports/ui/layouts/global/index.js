@@ -52,16 +52,13 @@ Template.applicationLayout.onRendered(function(){
 	function toggleMenu(){
 		menuOpen = !menuOpen
 	    $('.row-offcanvas').toggleClass('active')
-	    $('.navbar.navbar-fixed-top').toggleClass('active')
-    	$('.navmenu-fixed-right').toggleClass('inactive')
-	    $('.navmenu').toggleClass('offcanvas')
+	    $('.sidebar-offcanvas').toggleClass('active')
 	}
 
 	function hideMenu(){
 	    $('.row-offcanvas').removeClass('active')
+	    $('.sidebar-offcanvas').removeClass('active')
 	    $('.navbar.navbar-fixed-top').removeClass('active')
-    	$('.navmenu-fixed-right').addClass('inactive')	    
-	    $('.navmenu').addClass('offcanvas')
 	}
 
 	$(document).ready(function () {
