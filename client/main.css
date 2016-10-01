@@ -211,15 +211,14 @@ table td span{
   }
 
   .sidebar-offcanvas {
-    position:fixed !important;
-    position:absolute;
+    position:fixed;
     top: 0px;
     bottom:0;
     right:-250px;
     width: 250px; /* width of offcanvas menu */
     background-color: #222;
     color:white;    
-    z-index: 1000;
+    z-index: 3000;
   }
 
   .sidebar-offcanvas a {
