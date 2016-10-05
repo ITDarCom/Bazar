@@ -35,15 +35,6 @@ import './../../ui/pages/admin-users/users-table.js'
 
 Meteor.startup(() => {
 
-	/*
-	Migration code, will be removed in the next commit
-	*/
-	const shops = Shops.find({})
-
-	shops.forEach(function(shop){
-		Shops.update(shop._id, { $set: { titleLowerCase: shop.title.toLowerCase() }})
-	})
-
 	Accounts.emailTemplates.siteName = "ebazaar.online";
 
 	Accounts.emailTemplates.resetPassword.from = function () {
