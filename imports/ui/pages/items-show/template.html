@@ -1,11 +1,18 @@
 <template name="itemsShowPage">
 	{{#if ready }}
 
+
 		{{>shopHeader shop}}	
 		{{> itemCarousel item}}
-		<center>
-			<h2 class="item-title">{{item.title}}</h2>
-		</center>
+		<h2 class="item-title" style="text-align:center;position:relative;right:-20px;">
+			{{#if lastShoppingContext}}
+		  		<a href="#" alt="Return where you were" class="back-btn" 
+		  		style="position:relative; top:-50px; left:-20px; float:right;">
+	            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
+		  		</a>
+	  		{{/if}}			
+			{{item.title}}
+		</h2>
 		<p>{{item.description}}	</p>
 		<p>{{_ "price"}}: {{_ "riyals" item.price}}</p>
 		<center>

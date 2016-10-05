@@ -48,10 +48,18 @@ Template.itemsShowPage.helpers({
 		if (item){
 			return Shops.findOne(item.shop)			
 		}
-	}
+	},
+	lastShoppingContext(){
+		return Session.get('lastShoppingContext')
+	}	
 })
 
 Template.itemsShowPage.events({
+	'click .back-btn'(event, instance){
+		event.preventDefault()
+		Session.set('elementToScrollBack', null)
+		Router.go(Session.get('lastShoppingContext'))
+	},	
 	'click .add-to-cart-btn': function(event, instance){
 		if (!Meteor.user()){
 			Router.go('accounts.signin')

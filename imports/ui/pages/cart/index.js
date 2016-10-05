@@ -20,9 +20,6 @@ Template.cartPage.helpers({
 	},
 	showDeliveryForm(){
 		return Template.instance().showDeliveryForm.get()
-	},
-	lastShoppingContext(){
-		return Session.get('lastShoppingContext')
 	}
 })
 
@@ -32,8 +29,7 @@ Template.cartPage.events({
 	},
 	'click .back-btn'(event, instance){
 		event.preventDefault()
-		Session.set('elementToScrollBack', null)
-		Router.go(Session.get('lastShoppingContext'))
+		window.history.back()
 	}
 });
 
