@@ -51,7 +51,7 @@ Meteor.methods({
 
 	'shopTitleAvailable'(title){
 
-		const shop = Shops.findOne({title: title})
+		const shop = Shops.findOne({titleLowerCase: title.toLowerCase() })
 
 		if (!shop) return true;
 		else if (shop){

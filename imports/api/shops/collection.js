@@ -56,6 +56,13 @@ Shops.attachSchema(new SimpleSchema({
             }
         }        
 	},
+    'titleLowerCase': {
+        type: String,
+        max: 200, unique: true, optional:true,
+        autoValue: function () {
+            return this.field('title').value.toLowerCase()
+        }
+    },
 	'description': {
 		type: String,
         label: function(){
