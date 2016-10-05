@@ -60,7 +60,9 @@ Shops.attachSchema(new SimpleSchema({
         type: String,
         max: 200, unique: true, optional:true,
         autoValue: function () {
-            return this.field('title').value.toLowerCase()
+            if (this.field('title').isSet){
+                return this.field('title').value.toLowerCase()                
+            }
         }
     },
 	'description': {
