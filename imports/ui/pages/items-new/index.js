@@ -154,6 +154,14 @@ Template.insertItemForm.events({
         var status = !item.isHidden
         Meteor.call("item.hide",itemId,status)
     },
+    "click .delete-item-btn": function (event) {
+        event.preventDefault()
+        var itemId = Router.current().params.itemId;        
+        if (confirm(TAPi18n.__('deleteItemConfirmation'))){
+             Meteor.call("item.remove", itemId)
+             Router.go('shops.mine')
+        }
+    },
     'click .cancel-btn'(e){
 
         AutoForm.resetForm('insertItemForm')        

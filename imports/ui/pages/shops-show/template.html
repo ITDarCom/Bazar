@@ -10,13 +10,6 @@
 			href="{{pathFor 'items.new' shop=currentUser.shop}}">
 			<i class="material-icons">add</i>
 		</a>
-	{{else}}
-		{{#if currentUser}}
-		<button class="btn btn-info btn-fab message-btn btn-float"
-			data-toggle="modal" data-target="#shop-modal">
-			<i class="material-icons">mail</i>
-		</button>	
-		{{/if}}
 	{{/if}}
 	{{> endlessList }}
 	{{else}}
@@ -29,13 +22,18 @@
 
 <template name="shopHeader">
 	<div class="row shop-header">
-		<div class="col-xs-4 pull-left">
+		<div class="col-xs-4 pull-left" style="text-align:left;">
 			<a href="{{pathFor 'shops.show' shop=_id}}" >
         		<div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{logo.url}}'); background-repeat: no-repeat, no-repeat; background-size: 100% auto;" alt="..." ></div>				
 			</a>
+			<div style="text-align:center;">
+			<button class="btn btn-info btn-sm btn-raised" 
+				data-toggle="modal" data-target="#shop-modal">
+				<i class="material-icons" style="font-size:15px;">mail</i></button>
+			</div>
 		</div>
 		<a href="{{pathFor 'shops.show' shop=_id }}"><h3>{{title}} ({{cityLabel city}})</h3></a>
-		<p>{{description}}</p>
+		<small>{{description}}</small>
 		<hr />
 	</div>
 </template>

@@ -17,7 +17,6 @@
   font-size: 30px;
 }
 
-
 @media (min-width: 0) {
   .navbar-toggle {
     display: block; /* force showing the toggle */
@@ -26,7 +25,7 @@
 
 html, body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
-  overflow-y: scroll; /* has to be scroll, not auto */
+  height: 100%;
   -webkit-overflow-scrolling: touch;  
 }
 
