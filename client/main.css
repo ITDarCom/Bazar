@@ -25,13 +25,19 @@
 
 html, body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
-  height: 100%;
   -webkit-overflow-scrolling: touch;  
 }
 
 body {
   background-color: white;
   padding-top: 70px;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
 }
 
 #main-nav{
