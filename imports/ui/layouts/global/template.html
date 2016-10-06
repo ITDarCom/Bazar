@@ -7,12 +7,12 @@
       {{> navbar}}
 
       <div class="canvas">     
-        <div class="col-xs-12 canvas">
-          <div class="col-xs-6 col-sm-3 sidebar-offcanvas sidebar" id="sidebar">
-            {{> navmenu }}
-          </div><!--/.sidebar-offcanvas-->          
+        <div class="col-xs-12 canvas">         
           <div class="row">
             <div class="col-xs-12">
+              <div class="sidebar-offcanvas sidebar" id="sidebar">
+                {{> navmenu }}
+              </div><!--/.sidebar-offcanvas-->           
               {{> yield "nav"}}
             </div>
           </div>
