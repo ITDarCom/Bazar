@@ -3,6 +3,8 @@ import { check } from 'meteor/check';
 
 import { Items } from './collection'
 import { Images } from './../images'
+import { Purchases } from './../purchases/collection'
+
 
 function authorizeIfOwner(itemId){
 	// Make sure the user is logged in and is owner of item
@@ -56,12 +58,27 @@ Meteor.methods({
 		//authorizeIfOwner(documentId)
 
 		Items.update({ _id: documentId }, modifier, documentId);
+
 	},
 	'item.remove'(itemId) {
 		
 		//authorizeIfOwner(itemId)
 
-		Items.remove({_id : itemId})
+		Items.update(itemId, { $set: {isRemoved: true} }, function(err, count){
+			if (err) throw err
+			if (count){
+
+				//removing cart items related to this item
+				const purchases = Purchases.find({item:itemId, status: 'cart'})
+
+				const purchasesIds = purchases.map(p => p._id)
+				const userIds = purchases.map(p => p.user)
+
+				Meteor.users.update({_id: { $in : userIds }}, { $inc: { 'cartItems': -1 }}, {multi: true})
+
+				Purchases.remove({item:itemId, status: 'cart'})
+			}
+		})
 	},
 	'item.hide'(itemId,status){
 

@@ -24,7 +24,11 @@
     'totalPurchases': {
         type: Number,
         defaultValue: 0
-    },       
+    }, 
+    'cartItems': {
+        type: Number,
+        defaultValue: 0
+    },           
     'phone':{
         type: String,
         optional:true

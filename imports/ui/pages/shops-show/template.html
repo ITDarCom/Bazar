@@ -26,11 +26,13 @@
 			<a href="{{pathFor 'shops.show' shop=_id}}" >
         		<div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{logo.url}}'); background-repeat: no-repeat, no-repeat; background-size: 100% auto;" alt="..." ></div>				
 			</a>
+			{{#unless isShopOwner}}
 			<div style="text-align:center;">
 			<button class="btn btn-info btn-sm btn-raised" 
 				data-toggle="modal" data-target="#shop-modal">
 				<i class="material-icons" style="font-size:15px;">mail</i></button>
 			</div>
+			{{/unless}}
 		</div>
 		<a href="{{pathFor 'shops.show' shop=_id }}"><h3>{{title}} ({{cityLabel city}})</h3></a>
 		<small>{{description}}</small>

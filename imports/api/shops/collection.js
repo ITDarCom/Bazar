@@ -110,5 +110,8 @@ Shops.attachSchema(new SimpleSchema({
                 return this.value;
             }
         }
+    },
+    isRemoved: {
+        type:Boolean, defaultValue:false, optional:true
     }
 }));

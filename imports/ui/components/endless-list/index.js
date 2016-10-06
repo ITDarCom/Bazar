@@ -49,6 +49,8 @@ Template.endlessList.onCreated(function () {
         const route = Router.current().route.getName()
         const query = this.query.get()
 
+        query.isRemoved = false
+
         if (route.match(/shops.index/)) {
 
             query.isHidden = false

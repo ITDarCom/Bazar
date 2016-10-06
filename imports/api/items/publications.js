@@ -9,15 +9,16 @@ Meteor.publishComposite('items', function itemsPublication(query, limit){
 		find(){
 			//Meteor._sleepForMs(200);
 			var user = Meteor.users.findOne(this.userId);
-             if(user && user.hasShop){
-				 //query.shop will take value when the user visit shops.show page else query.shop is undefined
-				 if(!(query.shop  && (user.shop == query.shop))){
-					 query.isHidden = false;
-				 }
+			if (user && user.hasShop){
+				//query.shop will take value when the user visit shops.show page else query.shop is undefined
+				if(!(query.shop  && (user.shop == query.shop))){
+				 query.isHidden = false;
+				}
 
-			 }else {
-				 query.isHidden = false
-			 }
+			} else {
+				query.isHidden = false
+			}
+			query.isRemoved = false
 			return Items.find(query, { limit: limit, sort: { createdAt: -1 } });
 		}, 
 		children : [
