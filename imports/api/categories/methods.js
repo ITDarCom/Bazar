@@ -32,7 +32,13 @@ Meteor.methods({
         }
     },
     "category.delete" : function (id) {
+
         const category = Categories.findOne(id)
+
+        if (Items.findOne({ category: category.identifier })){
+            throw new Error('Cannot delete a category that has at least one item')
+        }
+
         const oldOrder = category.order
 
         const toBeUpdated = Categories.find({ order: { $gt: oldOrder }}).fetch()
@@ -42,6 +48,15 @@ Meteor.methods({
         })
 
         Categories.remove({_id : id});
+    },
+    "category.canDelete": function(id){
+        const category = Categories.findOne(id)
+
+        if (Items.findOne({ category: category.identifier })){
+            return false;
+        } else {
+            return true;
+        }      
     },
     "categoryOrder.up" : function (identifier) {
 

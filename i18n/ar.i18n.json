@@ -113,5 +113,7 @@
 	"clickToUploadFiles": "اضغط هنا لإضافة ملفات أو أدرجها هنا",
 	"itemAddedToCartSuccessfully": "تم إضافة العنصر للسلة بنجاح",
 	"somethingWrong":"حدث خطأ ما. الرجاء المحاولة مرة أخرى",
-	"itemAlreadyInCart":"العنصر موجود في السلة من قبل!"
+	"itemAlreadyInCart":"العنصر موجود في السلة من قبل!",
+	"cannotDeleteCategory":"لا يمكن حذف التصنيف طالما يوجد منتجات ضمنه",
+	"cannotDeleteCity":"لا يمكن حذف مدينة طالما يوجد متاجر ضمنها"
 }

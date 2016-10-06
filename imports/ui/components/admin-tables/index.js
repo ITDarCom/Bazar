@@ -28,19 +28,37 @@ Template.adminTables.helpers({
 Template.adminTables.events({
     "click .btn-delete": function (){
 
+        var self = this
+
         //var identifier = this.identifier;
         //$("#" + identifier).remove();
         var route = Router.current().route.getName();
         if (route.match(/admin.categories/)){
-            if (confirm(TAPi18n.__('deleteCategory')) == true) {
-                Meteor.call("category.delete",this._id);
-            }
+
+            Meteor.call("category.canDelete",this._id, function(err, result){
+                if (err){
+                    throw err
+                } else if (result){
+                    if (confirm(TAPi18n.__('deleteCategory')) == true) {
+                        Meteor.call("category.delete",this._id);
+                    }
+                } else if (!result){
+                    alert(TAPi18n.__('cannotDeleteCategory'))
+                }
+            })            
         }
         else {
-            if (confirm(TAPi18n.__('deleteCity')) == true) {
-                Meteor.call("city.delete",this._id);
-            }
-
+            Meteor.call("city.canDelete",this._id, function(err, result){
+                if (err){
+                    throw err
+                } else if (result){
+                    if (confirm(TAPi18n.__('deleteCity')) == true) {
+                        Meteor.call("city.delete", self._id);
+                    }
+                } else if (!result){
+                    alert(TAPi18n.__('cannotDeleteCity'))
+                }
+            })
         }
     }
 });
