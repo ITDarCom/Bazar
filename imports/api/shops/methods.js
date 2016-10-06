@@ -68,7 +68,19 @@ Meteor.methods({
 		if (! this.userId) {
 			throw new Meteor.Error('not-authorized');
 		}
-		Shops.update({ _id: documentId }, modifier, documentId);
+
+		const oldCity = Shops.findOne(documentId).city
+
+		Shops.update({ _id: documentId }, modifier, function(err, count){
+
+			//if the user edits the city of the shop, modify his old items
+			const newCity = Shops.findOne(documentId).city
+
+			if (oldCity != newCity){
+				Items.update({shop: documentId}, { $set: { city: newCity} }, { multi: true })
+			}
+		})
+
 	},
 
 	'shops.remove'(){

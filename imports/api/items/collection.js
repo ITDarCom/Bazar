@@ -64,9 +64,6 @@ Items.attachSchema(new SimpleSchema({
 		        var shop = Shops.findOne(Meteor.user().shop)
 		        return shop.city
 		    }
-		    if (this.isUpdate) {
-		        this.unset(); // we should unset every change to this field
-		    }
 		}			
 	},
 	price: {

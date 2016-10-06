@@ -12,7 +12,7 @@
         <div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{backgroundImage}}'); background-repeat: no-repeat, no-repeat; background-size: {{backgroundSize}};" alt="..." ></div>
       </a>
       <div class="caption" style="margin-top:5px;">
-            <p>
+            <p style="max-height:18px; overflow:hidden;">
                 <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
                     {{{title}}}
                 </a>
@@ -38,12 +38,14 @@
           </div>
           <p class="price">{{_ "riyals" price}}</p>
           <hr style="margin-top:5px; margin-bottom:5px;"/>
-          <a href="{{pathFor 'shops.show' shop=shop._id}}" 
-          style="margin-left:5px; float:right; width:30px;">
-            <img src={{shop.logo.url}} class="shop-logo" alt="...">
-          </a>
-          <p><a href="{{pathFor 'shops.show' shop=shop._id}}">{{shop.title}}</a></p>
-          <p><small>{{cityLabel city}}</small></p>
+            <a href="{{pathFor 'shops.show' shop=shop._id}}" 
+            style="margin-left:5px; float:right; width:30px;">
+              <img src={{shop.logo.url}} class="shop-logo" alt="...">
+            </a>
+          <div style="max-height:18px; overflow:hidden;">
+            <p><a href="{{pathFor 'shops.show' shop=shop._id}}">{{shop.title}}</a></p>
+          </div>
+            <p><small>{{cityLabel city}}</small></p>
       </div>
         </div>
     </div>
