@@ -48,3 +48,5 @@ cfs:gridfs
 cfs:autoform
 cfs:graphicsmagick
 kadira:debug
+dburles:google-maps
+yogiben:autoform-map

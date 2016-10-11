@@ -71,5 +71,13 @@ Purchases.attachSchema(new SimpleSchema({
         label: function(){
             return TAPi18n.__('deliveryDate')
         }
-     }
+     },
+    'deliveryInfo.location.lat': {
+        type: Number,
+        decimal: true
+    },
+    'deliveryInfo.location.lng': {
+        type: Number,
+        decimal: true
+    },     
 }));

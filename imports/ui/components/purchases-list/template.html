@@ -37,6 +37,9 @@
                        data-toggle="modal" data-target="#{{modalId}}">
                         <i class="material-icons">mail</i>
                     </a>
+                    <a class="btn btn-fab btn-success location-modal-btn"
+                       data-toggle="modal" data-target="#{{mapModalId}}">
+                        <i class="material-icons">location_on</i></a>                   
                 </div>                
             </li>
             <li class="list-group-item">{{_ "member"}}: {{member}}</li>
@@ -54,6 +57,7 @@
     </div>
 
     {{> messageModal modalId=modalId recpientType='user' recpientId=user inboxType='shop'}}
+    {{> locationModal modalId=mapModalId location=deliveryInfo.location}}
 
 </template>
 
@@ -66,6 +70,9 @@
                     <a class="btn btn-fab btn-warning message-btn"
                        data-toggle="modal" data-target="#{{modalId}}">
                         <i class="material-icons">mail</i></a>
+                    <a class="btn btn-fab btn-success location-modal-btn"
+                       data-toggle="modal" data-target="#{{mapModalId}}">
+                        <i class="material-icons">location_on</i></a>                        
                 </div>
             </li>            
             <li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>
@@ -77,9 +84,12 @@
             <li class="list-group-item {{statusClass}}">{{_ "status"}}: {{{_ status}}}</li>
             <li class="list-group-item">{{_ "notes"}}: {{notes}}</li>
         </div>
+
+
     </div>
 
     {{> messageModal modalId=modalId recpientType='shop' recpientId=item.shop inboxType='personal'}}
+    {{> locationModal modalId=mapModalId location=deliveryInfo.location}}
 
 </template>
 
@@ -92,6 +102,9 @@
                     <a class="btn btn-fab btn-warning message-btn"
                        data-toggle="modal" data-target="#{{modalId}}">
                         <i class="material-icons">mail</i></a>
+                    <a class="btn btn-fab btn-success location-modal-btn"
+                       data-toggle="modal" data-target="#{{mapModalId}}">
+                        <i class="material-icons">location_on</i></a>                        
                 </div>
             </li>
             <li class="list-group-item">{{_ "member"}}: {{member}}</li>
@@ -109,7 +122,28 @@
         </div>
     </div>
 
-
+    {{> locationModal modalId=mapModalId location=deliveryInfo.location}}
     {{> messageModal modalId=modalId recpientType='user' recpientId=user inboxType='shop'}}
 
+</template>
+
+
+<template name="locationModal">
+    <div class="modal location-modal" id={{modalId}} tabindex="-1">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center">
+        <div class="modal-content well" style="padding:10px; height:80%;">
+          <div class="modal-header">
+            <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">{{_ "deliveryLocation"}}</h4>
+          </div>
+          <div class="modal-body" style="padding:10px;">
+            <div class="map-container">
+                {{> googleMap name=modalId options=mapOptions}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>  
 </template>

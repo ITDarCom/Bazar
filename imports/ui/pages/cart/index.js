@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import {GoogleMaps} from 'meteor/dburles:google-maps'
+
 import { Router } from 'meteor/iron:router';
 import { Purchases } from './../../../api/purchases/collection'
 import { Items } from './../../../api/items/collection'
@@ -120,7 +122,27 @@ Template.deliveryInformationForm.onCreated(function(){
 		        	"datetime-local": "bootstrap-datetimepicker"
 		      }
 		    }
-		}
+		},
+		location: {
+	        type: Object,
+	        autoform: {
+	            type: 'map',
+	            afFieldInput:{
+	            	mapType: 'roadmap',
+	            	geolocation:true,
+				    zoom: 4,
+				    defaultLat: 24.766784522874453, defaultLng: 45.87890625, //riyad
+	            }	        	
+	        }			
+		},
+	    'location.lat': {
+			type: Number,
+			decimal: true
+	    },
+	    'location.lng': {
+			type: Number,
+			decimal: true
+	    },
 	});
 });
 

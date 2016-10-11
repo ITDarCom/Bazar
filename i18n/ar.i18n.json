@@ -75,6 +75,7 @@
 	"personalInbox":"البريد الشخصي",
 	"shopInbox":"بريد المتجر",
 	"sendMessage": "إرسال رسالة",
+	"deliveryLocation": "موقع التوصيل",
 	"deleteItemConfirmation": "هل انت متأكد من حذف العنصر؟",
 	"deleteItemImageConfirmation": "هل انت متأكد من حذف هذه الصورة؟",
 	"enter":"ادخل",

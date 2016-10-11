@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import {GoogleMaps} from 'meteor/dburles:google-maps'
+
 import {Router} from 'meteor/iron:router'
 
 import { Purchases } from './../../../api/purchases/collection'
@@ -102,6 +104,10 @@ Template.orderItem.helpers({
 		const data = Template.instance().data		
 		return `message-modal-${data._id}`
 	},
+	mapModalId(){
+		const data = Template.instance().data		
+		return `location-modal-${data._id}`
+	},	
 	accepted(){
 		return (Template.instance().data.status == 'accepted')
 	}
@@ -128,6 +134,10 @@ Template.purchaseItem.helpers({
 		const data = Template.instance().data		
 		return `message-modal-${data._id}`
 	},
+	mapModalId(){
+		const data = Template.instance().data		
+		return `location-modal-${data._id}`
+	},		
 })
 
 Template.saleItem.helpers({
@@ -156,5 +166,48 @@ Template.saleItem.helpers({
 	modalId(){
 		const data = Template.instance().data		
 		return `message-modal-${data._id}`
-	}
+	},
+	mapModalId(){
+		const data = Template.instance().data		
+		return `location-modal-${data._id}`
+	},	
+})
+
+
+Template.locationModal.onRendered(function() {
+	GoogleMaps.load({ key: 'AIzaSyBiCLkIztt-fy3DUVGE64sxAuwJ2Mbe1iM' });
+
+	var instance = this
+
+	const mapSelector = `#${instance.data.modalId} .map-canvas`
+
+	$(`#${instance.data.modalId}`).on("shown.bs.modal", function () {
+		const map = $(mapSelector).get(0)
+		const location = instance.data.location
+	    window.google.maps.event.trigger(map, "resize");
+
+		GoogleMaps.ready(instance.data.modalId, function(map) {
+    		map.instance.setCenter({lat: location.lat, lng: location.lng })
+
+			var marker = new window.google.maps.Marker({
+			  position: new window.google.maps.LatLng(location.lat, location.lng),
+			  map: map.instance
+			});    		
+		})
+	});	
+});
+
+Template.locationModal.helpers({
+	modalId(){		
+		return Template.instance().data.modalId
+	},	
+	mapOptions(){		
+		if (GoogleMaps.loaded()) {
+			const location = Template.instance().data.location
+			return {
+				center: new window.google.maps.LatLng(location.lat, location.lng),
+			    zoom: 16			
+			}			
+		}		
+	}	
 })
