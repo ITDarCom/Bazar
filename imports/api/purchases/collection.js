@@ -61,7 +61,7 @@ Purchases.attachSchema(new SimpleSchema({
         }, 
     },
 	'deliveryInfo.deliveryAddress': { 
-        type: String,
+        type: String, optional: true,
         label: function(){
             return TAPi18n.__('address')
         }, 

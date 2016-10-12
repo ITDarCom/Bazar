@@ -58,7 +58,6 @@ Meteor.methods({
 
 		check(deliveryInfo.email, String);
 		check(deliveryInfo.phone, String);
-		check(deliveryInfo.deliveryAddress, String);
 		check(deliveryInfo.deliveryDate, Date);
 
 		// Make sure the user is logged in before inserting a task

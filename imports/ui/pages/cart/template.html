@@ -71,8 +71,10 @@
 
 		{{> afQuickField name='email'}}
 		{{> afQuickField name='phone' type="tel"}}
+		<div class="location-on-map">
+			{{> afQuickField name='location'}}	
+		</div>
 		{{> afQuickField name='deliveryAddress'}}
-		{{> afQuickField name='location'}}	
 
 		{{> afQuickField name='deliveryDate' value=(nextWeek)}}
 

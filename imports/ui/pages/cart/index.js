@@ -11,9 +11,23 @@ import './template.html'
 
 Template.cartPage.onCreated(function(){
 	this.showDeliveryForm = new ReactiveVar(false);
-	GoogleMaps.load({ key: 'AIzaSyBiCLkIztt-fy3DUVGE64sxAuwJ2Mbe1iM' });
-	
+	GoogleMaps.load({ key: 'AIzaSyBiCLkIztt-fy3DUVGE64sxAuwJ2Mbe1iM' });	
 });
+
+AutoForm.addHooks('deliveryInformationForm', {
+    onError : function(){
+
+        if (this.validationContext._invalidKeys.find(key => key.name.match(/location/) )){
+            $('.location-on-map .form-group').addClass('is-focused')
+
+            $('.location-on-map').click(function(){
+
+            	$('.location-on-map .form-group').removeClass('is-focused')
+
+            })
+        }
+    }
+})
 
 Template.cartPage.helpers({
 	empty(){
@@ -111,7 +125,7 @@ Template.deliveryInformationForm.onCreated(function(){
 		    type: String,
 		    label: function(){
 		        return TAPi18n.__('address')
-		    }, 
+		    }, optional:true
 		},
 		'deliveryDate': { 
 		    type: Date,
@@ -131,11 +145,16 @@ Template.deliveryInformationForm.onCreated(function(){
 	            type: 'map',
 	            afFieldInput:{
 	            	mapType: 'roadmap',
-	            	geolocation:true,
-				    zoom: 4,
+	            	geolocation: false,
+	            	zoom:4,
 				    defaultLat: 24.766784522874453, defaultLng: 45.87890625, //riyad
+				    googleMap:{
+				    }
 	            }	        	
-	        }			
+	        },
+	        label: function(){
+	            return TAPi18n.__('locationOnMap')
+	        }      			
 		},
 	    'location.lat': {
 			type: Number,
