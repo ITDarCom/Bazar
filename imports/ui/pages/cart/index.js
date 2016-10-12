@@ -11,6 +11,8 @@ import './template.html'
 
 Template.cartPage.onCreated(function(){
 	this.showDeliveryForm = new ReactiveVar(false);
+	GoogleMaps.load({ key: 'AIzaSyBiCLkIztt-fy3DUVGE64sxAuwJ2Mbe1iM' });
+	
 });
 
 Template.cartPage.helpers({
