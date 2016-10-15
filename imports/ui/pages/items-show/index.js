@@ -51,6 +51,10 @@ Template.itemsShowPage.helpers({
 	},
 	lastShoppingContext(){
 		return Session.get('lastShoppingContext')
+	},
+	isRemoved(){
+		return Items.findOne(Template.instance().itemId).isRemoved		
+
 	}	
 })
 

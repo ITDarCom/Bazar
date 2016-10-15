@@ -10,10 +10,11 @@
 	            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
 		  		</a>
 	  		{{/if}}			
-			{{item.title}}
+			{{item.title}}{{#if isRemoved}} ({{_ "itemRemoved"}}){{/if}}
 		</h2>
 		<p>{{item.description}}	</p>
 		<p>{{_ "price"}}: {{_ "riyals" item.price}}</p>
+		{{#unless isRemoved}}		
 		<center class="btn-group-sm">
 			{{#if isShopOwner}}
 				<a class="btn btn-warning btn-fab edit-item-btn btn-float"
@@ -27,6 +28,7 @@
 			{{/if}}		
 			<br/><br/><br/><!--So that floating buttons do not cover last elements -->
 		</center>
+		{{/unless}}
 
 		{{> messageModal modalId='shop-modal' recpientType='shop' recpientId=shop._id inboxType='personal'}}		
 	{{else}}

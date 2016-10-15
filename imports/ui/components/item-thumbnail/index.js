@@ -58,7 +58,14 @@ Template.itemThumbnail.helpers({
     },
     isHidden(){
         return Template.instance().data.isHidden
-    } 
+    },
+    isRemoved(){
+        console.log(Template.instance().data.isRemoved)
+        return Template.instance().data.isRemoved
+    },
+    thumbnailDark(){
+      return Template.instance().data.isRemoved || Template.instance().data.isHidden
+    }      
 })
 
 Template.itemThumbnail.events({

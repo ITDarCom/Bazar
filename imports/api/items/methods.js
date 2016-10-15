@@ -68,15 +68,12 @@ Meteor.methods({
 			if (err) throw err
 			if (count){
 
-				//removing cart items related to this item
-				const purchases = Purchases.find({item:itemId, status: 'cart'})
+				//rejecting all purchases related to this order
+				const purchases = Purchases.find({item:itemId})
 
-				const purchasesIds = purchases.map(p => p._id)
-				const userIds = purchases.map(p => p.user)
-
-				Meteor.users.update({_id: { $in : userIds }}, { $inc: { 'cartItems': -1 }}, {multi: true})
-
-				Purchases.remove({item:itemId, status: 'cart'})
+				purchases.forEach(function(purchaseItem){
+					Meteor.call('orders.process', purchaseItem._id, 'rejected')
+				})
 			}
 		})
 	},
