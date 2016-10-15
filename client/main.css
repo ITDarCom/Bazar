@@ -46,15 +46,15 @@ body {
   min-height: 100vh;
 }
 
-.navbar.navbar-warning {
+#bootstrap-overrides .navbar.navbar-warning {
   background-color: #E69335;
 }
 
-.btn.btn-fab.btn-warning{
+#bootstrap-overrides .btn.btn-fab.btn-warning{
  background-color: #E69335; 
 }
 
-.btn.btn-raised.btn-warning{
+#bootstrap-overrides .btn.btn-raised.btn-warning{
  background-color: #E69335; 
 }
 
