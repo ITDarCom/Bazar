@@ -26,7 +26,9 @@ Template.shopsShowPage.events({
 	'click .back-btn'(event, instance){
 		event.preventDefault()
 		//Session.set('elementToScrollBack', null)		
-		if (Session.get('lastShoppingContext') == Router.current().url){
+		if (!Session.get('lastShoppingContext')){
+			Router.go('shops.index')
+		} else if (Session.get('lastShoppingContext') == Router.current().url){
 			Router.go('shops.index')
 		} else {
 			Router.go(Session.get('lastShoppingContext'))			

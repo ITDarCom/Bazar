@@ -11,13 +11,20 @@ import { Images } from './../../../api/images'
 
 import {CfsAutoForm} from "meteor/cfs:autoform"
 
+var isUploading = new ReactiveVar(false)
+
 Template.insertShopForm.onCreated(function(){
+    isUploading.set(false)	
 	AutoForm.resetForm('insertShopForm')
 	setTimeout(function(){
 		$("input[name='logo.imageId']")
 			.attr('placeholder', TAPi18n.__('clickToUploadFile'))
 			.attr('accept', 'image/*')
 	},0)
+})
+
+Template.insertShopForm.onDestroyed(function(){
+    isUploading.set(false)
 })
 
 AutoForm.addHooks('insertShopForm', {
@@ -61,30 +68,38 @@ AutoForm.addHooks('insertShopForm', {
 
 		}
 	},
-    onError : function(){
 
-        if (this.validationContext._invalidKeys.find(key => key.name.match(/logo/) )){
-            $('.logo .form-group').addClass('is-focused')
-            $('.logo .form-group').addClass('has-error')
-            $('.logo .form-group').append("<span class=\"help-block\">شعار المتجر إلزامي</span>")
+    beginSubmit: function() {
+        isUploading.set(true)
+    },
+    endSubmit(){
+        if (!this.validationContext.isValid()){
+            isUploading.set(false)
 
-            $("input:file").change(function (){
-				var fileName = $(this).val();
-				if (fileName){
-		            $('.logo .form-group').removeClass('is-focused')
-		            $('.logo .form-group').removeClass('has-error')
-		            $('.logo span.help-block').remove()
-				}
-			});
+	        if (this.validationContext._invalidKeys.find(key => key.name.match(/title/) )){
+	            $('.title .form-group').addClass('is-focused')
+	            $('.page-header').get(0).scrollIntoView()
+	            $('.title .form-group').keyup(function(){
+	            	$('.title .form-group').removeClass('is-focused')
+	            })
+	    	}
+
+	        if (this.validationContext._invalidKeys.find(key => key.name.match(/logo/) )){
+	            $('.logo .form-group').addClass('is-focused')
+	            $('.logo .form-group').addClass('has-error')
+	            $('.logo .form-group').append("<span class=\"help-block\">شعار المتجر إلزامي</span>")
+
+	            $("input:file").change(function (){
+					var fileName = $(this).val();
+					if (fileName){
+			            $('.logo .form-group').removeClass('is-focused')
+			            $('.logo .form-group').removeClass('has-error')
+			            $('.logo span.help-block').remove()
+					}
+				});
+	        }	    	    	
+        	
         }
-
-        if (this.validationContext._invalidKeys.find(key => key.name.match(/title/) )){
-            $('.title .form-group').addClass('is-focused')
-            $('.page-header').get(0).scrollIntoView()
-            $('.title .form-group').keyup(function(){
-            	$('.title .form-group').removeClass('is-focused')
-            })
-    	}
     }
 }, true);
 
