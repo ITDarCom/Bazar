@@ -27,9 +27,14 @@ Meteor.publishComposite('inbox', function inboxPublication(opts, limit){
 			const shopId = Meteor.users.findOne(this.userId).shop
 
 			return Threads.find({
-				$or : [
-					{'participants.type': "user",'participants.id': this.userId},
-					{'participants.type': "shop",'participants.id': shopId}
+				$and: [
+					{
+						$or : [
+							{'participants.type': "user",'participants.id': this.userId},
+							{'participants.type': "shop",'participants.id': shopId}
+						]
+					},
+					{ isRemoved: false}
 				]				
 			}, { limit: limit, sort: { createdAt: -1 } });
 			

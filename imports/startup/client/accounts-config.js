@@ -38,7 +38,7 @@ AccountsTemplates.configure({
     preSignUpHook: myPreSubmitFunc,
     postSignUpHook: myPostSubmitFunc,*/
     /*onSubmitHook: function(error, state){},*/
-    
+
     // Texts
     texts: {
       button: {
@@ -62,6 +62,7 @@ AccountsTemplates.addFields([
       type: "text",
       displayName: "اسم المستخدم",
       required: true,
+      trim: true,
       func: function(value){ return (value.length < 4); },
       errStr: 'اسم المستخدم يجب أن يقول 4 محارف على الأقل',
   },
@@ -69,10 +70,18 @@ AccountsTemplates.addFields([
       _id: 'email',
       type: 'email',
       required: true,
+      trim: true,
       displayName: "البريد الإلكتروني",
       re: /.+@(.+){2,}\.(.+){2,}/,
       errStr: 'البريد الذي أدخلته غير صالح',
   },
+  {
+      _id: 'username_and_email',
+      type: 'text',
+      required: true,
+      displayName: "اسم المستخدم أو البريد الإلكتروني",
+      trim: true
+  },  
   {
       _id: 'password',
       type: 'password',

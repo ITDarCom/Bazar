@@ -2,6 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import { Images } from './../images'
  
 export const Shops = new Mongo.Collection('shops');
+export const ShopsRemoved = new Mongo.Collection('shopsremoved');
 
 Shops.attachSchema(new SimpleSchema({
     '_id': {

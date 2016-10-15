@@ -39,7 +39,10 @@ Threads.attachSchema(new SimpleSchema({
     },
     updatedAt: {
         type: Date
-    }
+    },
+    isRemoved: {
+        type:Boolean, defaultValue:false, optional:true
+    }    
 }));
 
 Threads.before.update(function (userId, doc, fieldNames, modifier, options) {

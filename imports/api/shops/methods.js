@@ -2,8 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import { Shops } from './collection'
+import { ShopsRemoved } from './collection'
 import { Items } from './../items/collection'
-
+import { Purchases } from './../purchases/collection'
+import { Threads } from './../threads/collection'
 import { Images } from './../images'
 
 Meteor.methods({
@@ -51,7 +53,7 @@ Meteor.methods({
 
 	'shopTitleAvailable'(title){
 
-		const shop = Shops.findOne({titleLowerCase: title.toLowerCase() })
+		const shop = Shops.findOne({titleLowerCase: title.toLowerCase(), isRemoved: false })
 
 		if (!shop) return true;
 		else if (shop){
@@ -92,12 +94,29 @@ Meteor.methods({
 
 		const hasShop = Meteor.users.findOne(this.userId).hasShop
 		const shop = Meteor.users.findOne(this.userId).shop
+		const shopObj = Shops.findOne(shop)
 
 		if (hasShop){
 
-			Items.remove({ shop: shop})
+			Items.update({ shop: shop}, { $set: { isRemoved: true }}, { multi: true })
+			ShopsRemoved.insert(shopObj)
 			Shops.remove({ _id: shop })
-			//Purchases.remove({ _id: shop })
+
+			//if he had any unread message, decrement them from counter then hide them
+			const inboxDecrement = Threads.find({ 
+				'participants': { $elemMatch: { type:'shop', id:shop, unread: true}} 
+			}).count() * (-1)
+			Meteor.users.update(this.userId, { $inc: { 'unreadInbox': inboxDecrement }})
+			Threads.update({ 
+				'participants': { $elemMatch: { type:'shop', id:shop}} 
+			},{ $set: { isRemoved: true }}, { multi: true })
+
+			//rejecting all purchases related to this order
+			const purchases = Purchases.find({shop:shop})
+
+			purchases.forEach(function(purchaseItem){
+				Meteor.call('orders.process', purchaseItem._id, 'rejected')
+			})
 
 			Meteor.users.update({ _id: this.userId}, 
 				{ $set: { 'hasShop': false, 'shop': null } 
