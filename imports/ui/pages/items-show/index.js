@@ -61,7 +61,7 @@ Template.itemsShowPage.helpers({
 Template.itemsShowPage.events({
 	'click .back-btn'(event, instance){
 		event.preventDefault()
-		Session.set('elementToScrollBack', null)
+		//Session.set('elementToScrollBack', null)
 		Router.go(Session.get('lastShoppingContext'))
 	},	
 	'click .add-to-cart-btn': function(event, instance){

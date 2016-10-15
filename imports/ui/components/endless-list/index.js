@@ -223,6 +223,7 @@ Template.endlessList.events({
         },500)
     },
     'click .endless-list > .shop-thumbnail a': function (event, instance) {
+        Session.set('lastShoppingContext', Router.current().url)        
         setTimeout(function(){
             const shop = Router.current().params.shop
             Session.set('elementToScrollBack', `#shop-${shop}`)

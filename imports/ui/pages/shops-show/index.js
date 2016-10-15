@@ -21,3 +21,15 @@ Template.shopsShowPage.helpers({
 		return Shops.findOne(Router.current().params.shop)
 	}
 })
+
+Template.shopsShowPage.events({
+	'click .back-btn'(event, instance){
+		event.preventDefault()
+		//Session.set('elementToScrollBack', null)		
+		if (Session.get('lastShoppingContext') == Router.current().url){
+			Router.go('shops.index')
+		} else {
+			Router.go(Session.get('lastShoppingContext'))			
+		}
+	},		
+})

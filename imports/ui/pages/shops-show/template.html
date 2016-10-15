@@ -27,7 +27,7 @@
 	<div class="row shop-header">
 		<div class="col-xs-4 pull-left" style="text-align:left;">
 			<a href="{{pathFor 'shops.show' shop=_id}}" >
-        		<div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{logo.url}}'); background-repeat: no-repeat, no-repeat; background-size: 100% auto;" alt="..." ></div>				
+        		<div style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{logo.url}}'); background-repeat: no-repeat, no-repeat; background-size: 100% auto;" alt="..." ></div>			
 			</a>
 			{{#unless isShopOwner}}
 			<div style="text-align:center;">
@@ -37,8 +37,12 @@
 			</div>
 			{{/unless}}
 		</div>
-		<a href="{{pathFor 'shops.show' shop=_id }}"><h3>{{title}} ({{cityLabel city}})</h3></a>
-		<small>{{description}}</small>
+  		<a href="#" alt="Return where you were" class="back-btn" 
+  		style="float:right; margin-left:10px; position:relative; bottom:-15px;">
+        <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
+  		</a>
+		<a href="{{pathFor 'shops.show' shop=_id }}"><h3>{{title}}</h3></a>
+		<small>{{description}} ({{cityLabel city}})</small>
 		<hr />
 	</div>
 </template>

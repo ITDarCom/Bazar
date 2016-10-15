@@ -3,13 +3,7 @@
 		{{>shopHeader shop}}		
 		{{> itemCarousel item}}
 		<h2 class="item-title" 
-			style="text-align:center;position:relative;right:-20px; font-size:20px;">
-			{{#if lastShoppingContext}}
-		  		<a href="#" alt="Return where you were" class="back-btn" 
-		  		style="position:relative; top:-50px; left:-20px; float:right;">
-	            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
-		  		</a>
-	  		{{/if}}			
+			style="text-align:center;position:relative;right:-20px; font-size:20px;">	
 			{{item.title}}{{#if isRemoved}} ({{_ "itemRemoved"}}){{/if}}
 		</h2>
 		<p>{{item.description}}	</p>
