@@ -46,6 +46,19 @@ body {
   min-height: 100vh;
 }
 
+.navbar.navbar-warning {
+  background-color: #E69335;
+}
+
+.btn.btn-fab.btn-warning{
+ background-color: #E69335; 
+}
+
+.btn.btn-raised.btn-warning{
+ background-color: #E69335; 
+}
+
+
 #main-nav{
 	width: 100%;
 	z-index: 9999 !important;
@@ -84,7 +97,7 @@ body {
   z-index: 1000; 
   position:fixed !important; 
   bottom:20px; 
-  left:80px;  
+  left:65px;  
 }
 
 .form-group{

@@ -2,6 +2,8 @@
 	{{#if Template.subscriptionsReady}}
 	{{>shopHeader shop}}
 	{{#if isShopOwner}}
+	<div class="btn-group-sm">
+
 		<a class="btn btn-warning btn-fab shop-settings-btn btn-float"
 			href="{{pathFor 'settings.shop'}}">
 			<i class="material-icons">settings</i>
@@ -10,6 +12,7 @@
 			href="{{pathFor 'items.new' shop=currentUser.shop}}">
 			<i class="material-icons">add</i>
 		</a>
+	</div>
 	{{/if}}
 	{{> endlessList }}
 	{{else}}
