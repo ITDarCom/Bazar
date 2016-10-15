@@ -35,10 +35,10 @@ AccountsTemplates.configure({
     // Hooks
     /*
     onLogoutHook: function(){
-    onSubmitHook: mySubmitFunc,
     preSignUpHook: myPreSubmitFunc,
     postSignUpHook: myPostSubmitFunc,*/
-
+    /*onSubmitHook: function(error, state){},*/
+    
     // Texts
     texts: {
       button: {

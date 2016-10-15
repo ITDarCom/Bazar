@@ -13,7 +13,22 @@ import { Cities } from './../../../api/cities/collection.js'
 
 Template.login.onRendered(function(){
 	$('.btn').addClass('btn-raised btn-warning')
+
+	$('.at-form').bind('DOMSubtreeModified', function(e) {
+
+		if ($('.at-error p').get(0)){
+			const msg = $('.at-error p').get(0).innerHTML
+			$('.at-error').get(0).remove()
+			snack = $.snackbar({
+				content: msg,
+				timeout: 0
+			})
+			$(snack).find('.snackbar-content').append("<span style='float:left;'><i class=\"material-icons\">close</i></span>")          		
+		}
+
+	});	
 })
+
 
 Template.signup.onRendered(function(){
 	$('.btn').addClass('btn-raised btn-warning')
