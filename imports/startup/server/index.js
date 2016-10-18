@@ -37,12 +37,12 @@ Meteor.startup(() => {
 
 	/* MIGRATION CODE  */
 	/*
+	*/
 	Items.update({}, { $set: { isRemoved: false } }, {multi:true})
 	Shops.update({}, { $set: { isRemoved: false, unreadOrders:0, totalOrders:0, totalSales:0 } }, {multi:true})
 	Meteor.users.update({}, {$set: { unreadInbox:0, pendingPurchases:0, unreadInbox:0, totalPurchases:0, cartItems:0}}, {multi:true})
 	Purchases.remove({})
 	Threads.update({}, { $set: { isRemoved: false } }, {multi:true})
-	*/
 
 	Accounts.emailTemplates.siteName = "ebazaar.online";
 
