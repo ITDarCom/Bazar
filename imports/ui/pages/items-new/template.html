@@ -25,6 +25,9 @@
         <div class="imageIds">
             {{> afQuickField name="imageIds" type="cfs-files" collection="images"}}
         </div>
+        {{#each fileObjs}} 
+            {{> FS.UploadProgressBar bootstrap=true}} 
+        {{/each}}        
         {{/if}}
 
         <button type="submit" 

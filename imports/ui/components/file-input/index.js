@@ -32,7 +32,7 @@ Template.fileInput.onCreated(function(){
             var fileObj = Images.findOne(fileInProgressId)
 
             if (fileObj){
-                console.log(fileObj.copies, fileObj.isUploaded(), fileObj.hasStored(), fileObj.uploadProgress())
+                //console.log(fileObj.copies, fileObj.isUploaded(), fileObj.hasStored(), fileObj.uploadProgress())
             }
             
             if (fileObj && fileObj.url()) {
@@ -63,7 +63,11 @@ Template.fileInput.onCreated(function(){
 Template.fileInput.helpers({
 	isUploading(){
 		return Template.instance().isUploading.get()
-	}
+	},
+    fileObj(){
+        const id = Template.instance().fileInProgressId.get()
+        return Images.findOne(id)
+    }
 })
 
 Template.fileInput.events({
@@ -73,6 +77,13 @@ Template.fileInput.events({
 
 		FS.Utility.eachFile(event, function(file) {
 			file.owner = Meteor.user().shop
+
+            //this is to make upload progress visible for small files
+            if (file.size < (2097152)*10) { 
+                var chunkSize = file.size / 10;   
+                FS.config.uploadChunkSize = chunkSize; 
+            } 
+
 			Images.insert(file, function (err, fileObj) {
 				// Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
                 if (err) {

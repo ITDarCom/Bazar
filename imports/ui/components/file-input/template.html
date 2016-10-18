@@ -8,4 +8,7 @@
 	    	<input type="file" name="default" class="btn btn-primary" accept="image/*">
 	    {{/if}}
 	</div>
+	{{#with fileObj}} 
+        {{> FS.UploadProgressBar bootstrap=true}} 
+	{{/with}}
 </template>

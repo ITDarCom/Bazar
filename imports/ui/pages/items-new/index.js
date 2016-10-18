@@ -20,7 +20,7 @@ Template.itemsNewPage.helpers({
 })
 
 var isUploading = new ReactiveVar(false)
-var resultItemId = null
+var resultItemId = new ReactiveVar()
 
 Template.insertItemForm.onCreated(function(){
     isUploading.set(false)
@@ -33,13 +33,14 @@ Template.insertItemForm.onCreated(function(){
 
 Template.insertItemForm.onDestroyed(function(){
     isUploading.set(false)
+    resultItemId.set(null)
 })
 
 AutoForm.addHooks('insertItemForm', {
     onSuccess: function (formType, result) {
 
-        const route = Router.current().route.getName();  
-        resultItemId = result 
+        const route = Router.current().route.getName();          
+        resultItemId.set(result)
         
         if (route.match(/new/)){            
             Meteor.subscribe('singleItem', result)
@@ -57,6 +58,7 @@ AutoForm.addHooks('insertItemForm', {
                     
                     if (length && images[length-1].url({ store: 'images' })){
                         isUploading.set(false)
+                        resultItemId.set(null)
                         c.stop()
                         Router.go('items.show', {shop: Router.current().params.shop, itemId: result})
                     }
@@ -64,12 +66,38 @@ AutoForm.addHooks('insertItemForm', {
             })
         } else if (route.match(/edit/)){
             isUploading.set(false)
+            resultItemId.set(null)
             const itemId = Router.current().params.itemId             
             Router.go('items.show', {shop: Router.current().params.shop, itemId: itemId})            
         }
     },
     before: {
-      method: CfsAutoForm.Hooks.beforeInsert
+      method(doc){
+
+        //this is to make upload progress visible for small files
+        const files = $('.cfsaf-hidden').get(0).files
+        var minChunckSize = files[0].size /10
+        var largeFile = false
+
+        for (var key in files){
+            var file = files[key]
+            if ((file.size / 10) < minChunckSize){
+                minChunckSize = file.size / 10
+            }    
+
+            if (file.size > (2097152)*10){
+                largeFile = true
+            }        
+        }
+
+        //only if files are small enough
+        if (!largeFile){
+            FS.config.uploadChunkSize = minChunckSize            
+        }
+
+        FS.config.uploadChunkSize = minChunckSize
+        CfsAutoForm.Hooks.beforeInsert.bind(this)(doc)
+      }
     },
     after: {
       method: CfsAutoForm.Hooks.afterInsert
@@ -86,6 +114,7 @@ AutoForm.addHooks('insertItemForm', {
     endSubmit: function() {
         if (!this.validationContext.isValid()){
             isUploading.set(false)
+            resultItemId.set(null)
         }
     }
 }, true);
@@ -138,6 +167,11 @@ Template.insertItemForm.helpers({
     resetOnSuccess(){
         var route = Router.current().route.getName()
         if (route.match(/edit/)){ return true } else { return false }
+    },
+    fileObjs(){
+        const id = resultItemId.get()
+        const item = Items.findOne(id)
+        if (isUploading.get() && item) return item.imageIds
     }    
 })
 
@@ -181,6 +215,7 @@ Template.insertItemForm.events({
                 Meteor.call('item.remove', resultItemId)                
             }
             isUploading.set(false)
+            resultItemId.set(null)
 
             //a hack to reset the file field, so that user has to upload it again
             $('.cfsaf-field').val('')
