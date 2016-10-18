@@ -62,6 +62,32 @@ Template.changePwd.events({
 
 var menuOpen = false
 
+Template.applicationLayout.onCreated(function(){
+    Session.set("time", new Date().getTime());
+
+	Meteor.setInterval(function() {
+	    Session.set("time", new Date().getTime());
+	}, 1000);
+
+})
+
+Template.applicationLayout.helpers({
+	networkErrorMessage(){
+		console.log(Meteor.status().retryTime, Session.get('time'))
+		return `هناك مشكلة في الشبكة، جار إعادة الاتصال خلال ${Math.floor((Meteor.status().retryTime - Session.get('time'))/1000)} ثانية`		
+	},
+	networkError(){
+		return !Meteor.status().connected && (Meteor.status().retryCount > 1)
+	}
+})
+
+Template.applicationLayout.events({
+	'click .network-error-nav a'(e, instance){
+		e.preventDefault()
+		Meteor.reconnect()
+	}
+})
+
 Template.applicationLayout.onRendered(function(){
 
 	function toggleMenu(){

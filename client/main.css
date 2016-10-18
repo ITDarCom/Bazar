@@ -140,6 +140,18 @@ body {
    padding: 15px;
 }
 
+.network-error-nav {
+   position:fixed;
+   left:0px;
+   top:50px;
+   height: 70px;
+   width:100%;
+   background: #f44336;
+   padding: 15px;
+   z-index: 4000;
+   color:white;
+}
+
 /* IE 6 */
 * html .thread-form {
    position:absolute;

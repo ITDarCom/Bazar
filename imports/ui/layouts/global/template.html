@@ -16,6 +16,11 @@
               {{> yield "nav"}}
             </div>
           </div>
+          {{#if networkError}}
+          <div class="network-error-nav">
+            {{networkErrorMessage}}. <a href='#'>أعد الاتصال الآن</a>
+          </div>
+          {{/if}}
           {{> yield}}
         </div>
       </div>
