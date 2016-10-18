@@ -76,13 +76,13 @@ AutoForm.addHooks('insertItemForm', {
 
         //this is to make upload progress visible for small files
         const files = $('.cfsaf-hidden').get(0).files
-        var minChunckSize = files[0].size /10
+        var maxChunckSize = files[0].size /10
         var largeFile = false
 
         for (var key in files){
             var file = files[key]
-            if ((file.size / 10) < minChunckSize){
-                minChunckSize = file.size / 10
+            if ((file.size / 10) > maxChunckSize){
+                maxChunckSize = file.size / 10
             }    
 
             if (file.size > (2097152)*10){
@@ -92,10 +92,10 @@ AutoForm.addHooks('insertItemForm', {
 
         //only if files are small enough
         if (!largeFile){
-            FS.config.uploadChunkSize = minChunckSize            
+            FS.config.uploadChunkSize = maxChunckSize            
         }
 
-        FS.config.uploadChunkSize = minChunckSize
+        FS.config.uploadChunkSize = maxChunckSize
         CfsAutoForm.Hooks.beforeInsert.bind(this)(doc)
       }
     },
