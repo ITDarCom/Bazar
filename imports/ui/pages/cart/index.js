@@ -11,7 +11,7 @@ import './template.html'
 
 Template.cartPage.onCreated(function(){
 	this.showDeliveryForm = new ReactiveVar(false);
-	GoogleMaps.load({ key: 'AIzaSyBiCLkIztt-fy3DUVGE64sxAuwJ2Mbe1iM' });	
+	GoogleMaps.load({ key: 'AIzaSyBiCLkIztt-fy3DUVGE64sxAuwJ2Mbe1iM', v: '3' });	
 });
 
 AutoForm.addHooks('deliveryInformationForm', {
@@ -145,11 +145,9 @@ Template.deliveryInformationForm.onCreated(function(){
 	            type: 'map',
 	            afFieldInput:{
 	            	mapType: 'roadmap',
-	            	geolocation: false,
-	            	zoom:4,
-				    defaultLat: 24.766784522874453, defaultLng: 45.87890625, //riyad
-				    googleMap:{
-				    }
+	            	autolocate: true,
+	            	zoom:11,
+				    defaultLat: 24.68773, defaultLng: 46.72185, //riyad
 	            }	        	
 	        },
 	        label: function(){
