@@ -33,7 +33,7 @@ Template.itemsShowPage.helpers({
 	item(){
 		const item = Items.findOne(Template.instance().itemId)
 		if (!item){
-			Router.go('NotFound'); return;			
+			Router.go('home'); return;			
 		}
 		//if this item is hidden and does not belong to the current user, redirect to home
 		if (item.isHidden){
@@ -62,7 +62,12 @@ Template.itemsShowPage.events({
 	'click .back-btn'(event, instance){
 		event.preventDefault()
 		//Session.set('elementToScrollBack', null)
-		Router.go(Session.get('lastShoppingContext'))
+		if (!Session.get('lastShoppingContext')){
+			const shop = Router.current().params.shop
+			Router.go('shops.show', { shop: shop })
+		} else {
+			Router.go(Session.get('lastShoppingContext'))			
+		}		
 	},	
 	'click .add-to-cart-btn': function(event, instance){
 		if (!Meteor.user()){

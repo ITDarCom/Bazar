@@ -70,7 +70,7 @@ Items.attachSchema(new SimpleSchema({
 		type: Number,
 		label: function(){
             return TAPi18n.__('price')
-        },
+        }, min:0       
 	},
 	category: {
 		type: String,

@@ -10,6 +10,7 @@
     id="insertItemForm"
     type=formType
     doc=doc
+    validation='submit'    
     resetOnSuccess=resetOnSuccess    
     meteormethod=method}}
 
@@ -31,8 +32,8 @@
         {{/if}}
 
         <button type="submit" 
-            class="btn btn-warning btn-lg btn-block btn-raised"
-            {{disabled}}>{{_ "submit"}}</button>
+            class="submit-btn btn btn-warning btn-lg btn-block btn-raised"
+        {{disabled}}>{{_ "submit"}}</button>
 
         {{#if isActiveRoute 'items.edit'}}
             <button class="btn btn-warning btn-lg btn-block btn-raised delete-item-btn" style="margin-bottom:5px;">{{_ "deleteItem"}}</button>

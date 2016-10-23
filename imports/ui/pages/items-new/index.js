@@ -14,20 +14,32 @@ import { Images } from './../../../api/images'
 import {CfsAutoForm} from "meteor/cfs:autoform"
 
 Template.itemsNewPage.helpers({
-	shop(){
-		return Shops.findOne(Meteor.user().shop)
-	}
+    shop(){
+        return Shops.findOne(Meteor.user().shop)
+    }
 })
 
 var isUploading = new ReactiveVar(false)
 var resultItemId = new ReactiveVar()
+var fileObjIds = new ReactiveArray([]);
+
+Images.files.after.insert(function(userId, doc){
+    if (userId == Meteor.userId()){
+        fileObjIds.push(this._id)
+        Meteor.subscribe('image', this._id)            
+    }
+})
 
 Template.insertItemForm.onCreated(function(){
+    var instance = this
     isUploading.set(false)
     AutoForm.resetForm('insertItemForm')
+    fileObjIds = new ReactiveArray([]);
+
     setTimeout(function(){
         $("input[name='imageIds']").attr('placeholder', TAPi18n.__('clickToUploadFiles'))  
         $("input[type='file']").attr('accept', 'image/*')      
+        $('.imageIds .form-group input[type=file]').before("<label class=\"control-label\">"+TAPi18n.__('youCanUploadMoreThanOne') +"</label>")
     },0)
 })
 
@@ -72,32 +84,7 @@ AutoForm.addHooks('insertItemForm', {
         }
     },
     before: {
-      method(doc){
-
-        //this is to make upload progress visible for small files
-        const files = $('.cfsaf-hidden').get(0).files
-        var maxChunckSize = files[0].size /10
-        var largeFile = false
-
-        for (var key in files){
-            var file = files[key]
-            if ((file.size / 10) > maxChunckSize){
-                maxChunckSize = file.size / 10
-            }    
-
-            if (file.size > (2097152)*10){
-                largeFile = true
-            }        
-        }
-
-        //only if files are small enough
-        if (!largeFile){
-            //FS.config.uploadChunkSize = maxChunckSize            
-        }
-
-        //FS.config.uploadChunkSize = maxChunckSize
-        CfsAutoForm.Hooks.beforeInsert.bind(this)(doc)
-      }
+        method: CfsAutoForm.Hooks.beforeInsert
     },
     after: {
       method: CfsAutoForm.Hooks.afterInsert
@@ -112,6 +99,7 @@ AutoForm.addHooks('insertItemForm', {
         isUploading.set(true)
     },
     endSubmit: function() {
+
         if (!this.validationContext.isValid()){
             isUploading.set(false)
             resultItemId.set(null)
@@ -132,7 +120,7 @@ Template.insertItemForm.helpers({
         return Items;
     },
     formType(){
-        if (isUploading.get()){ return "disabled" }        
+        if (isUploading.get()){ return "disabled" }
         var route = Router.current().route.getName()
         if (route.match(/edit/)) return 'method-update'
         return 'method'
@@ -169,13 +157,31 @@ Template.insertItemForm.helpers({
         if (route.match(/edit/)){ return true } else { return false }
     },
     fileObjs(){
-        const id = resultItemId.get()
-        const item = Items.findOne(id)
-        if (isUploading.get() && item) return item.imageIds
+        fileObjIds.list()
+        const ids = fileObjIds.array()
+        return Images.find({_id: {$in: ids}})
     }    
 })
 
 Template.insertItemForm.events({
+    'click .submit-btn'(event, instance){
+
+        //this is to make upload progress visible for small files
+        const files = $('.cfsaf-hidden').get(0).files
+        if (files && files[0]){
+
+            var maxChunckSize = files[0].size /10
+            var largeFile = false
+
+            for (var key in files){
+                var file = files[key]
+                if ((file.size / 10) > maxChunckSize){
+                    maxChunckSize = file.size / 10
+                }     
+            }
+            FS.config.uploadChunkSize = maxChunckSize            
+        }        
+    },
     'click .hide-item-btn': function (event) {
         event.preventDefault()
         var itemId = Router.current().params.itemId;
@@ -198,7 +204,8 @@ Template.insertItemForm.events({
     },
     'click .cancel-btn'(e){
 
-        AutoForm.resetForm('insertItemForm')        
+        AutoForm.resetForm('insertItemForm')   
+        fileObjIds = new ReactiveArray([]);             
 
         e.preventDefault()
         const route = Router.current().route.getName()
@@ -220,17 +227,18 @@ Template.insertItemForm.events({
             //a hack to reset the file field, so that user has to upload it again
             $('.cfsaf-field').val('')
 
+        } /*else {
+
+
+        }*/
+
+        if (route.match(/edit/)){
+            Router.go('items.show', {
+                shop: Router.current().params.shop, 
+                itemId: Router.current().params.itemId
+            })            
         } else {
-
-            if (route.match(/edit/)){
-                Router.go('items.show', {
-                    shop: Router.current().params.shop, 
-                    itemId: Router.current().params.itemId
-                })            
-            } else {
-                Router.go('shops.mine')
-            }
-
+            Router.go('shops.mine')
         }
     }    
 })

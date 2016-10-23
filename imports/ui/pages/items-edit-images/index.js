@@ -15,7 +15,7 @@ Template.itemsEditImagesPage.onCreated(function(){
 Template.itemsEditImagesPage.helpers({
 	item(){
 		if (Template.instance().subscriptionsReady() && !Items.findOne(Router.current().params.itemId) ){
-			Router.go('NotFound')
+			Router.go('shops.mine')
 		}
 		return Items.findOne(Router.current().params.itemId)
 	},
