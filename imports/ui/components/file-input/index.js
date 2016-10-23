@@ -81,7 +81,7 @@ Template.fileInput.events({
             //this is to make upload progress visible for small files
             if (file.size < (2097152)*10) { 
                 var chunkSize = file.size / 10;   
-                FS.config.uploadChunkSize = chunkSize; 
+                //FS.config.uploadChunkSize = chunkSize; 
             } 
 
 			Images.insert(file, function (err, fileObj) {

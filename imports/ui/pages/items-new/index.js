@@ -92,10 +92,10 @@ AutoForm.addHooks('insertItemForm', {
 
         //only if files are small enough
         if (!largeFile){
-            FS.config.uploadChunkSize = maxChunckSize            
+            //FS.config.uploadChunkSize = maxChunckSize            
         }
 
-        FS.config.uploadChunkSize = maxChunckSize
+        //FS.config.uploadChunkSize = maxChunckSize
         CfsAutoForm.Hooks.beforeInsert.bind(this)(doc)
       }
     },
