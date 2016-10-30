@@ -339,7 +339,7 @@ Router.route('/cart', function () {
 
 Router.route('/about', function () {
     this.render('empty', {to: 'nav'});
-    this.render('defaultPage');
+    this.render('aboutPage');
 }, {
     name: 'about'
 });

@@ -14,8 +14,13 @@
 }
 
 .back-btn .glyphicon {
-  font-size: 30px;
+  font-size: 20px;
+  padding-top: 5px;
 }
+
+a {
+  color:#008AD1;
+} 
 
 .map-container {
   width: 100%;
@@ -243,11 +248,14 @@ table td span{
 
   .sidebar-offcanvas {
     width: 250px; /* width of offcanvas menu */
-    background-color: #222;
-    color:white;    
+    background-color: white;
+    color:black;    
     z-index: 4000;
     position:fixed;
     right:-250px;
+    border-style:solid;
+    border-color: #222;
+    border-width: 1px;
   }
 
   .sidebar-offcanvas.active {
@@ -258,7 +266,7 @@ table td span{
   }
 
   .sidebar-offcanvas a {
-    color:#999;
+    color:black;
   }  
 
   .row-offcanvas-right.active

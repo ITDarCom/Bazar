@@ -13,7 +13,7 @@
       </a>
       <div class="caption" style="margin-top:5px;">
             <p style="max-height:18px; overflow:hidden;">
-                <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}">
+                <a href="{{pathFor 'items.show' shop=shop._id itemId=_id}}" style="color:black">
                     {{{title}}}
                 </a>
             </p>
@@ -36,11 +36,11 @@
                   {{/unless}}
               </p>
           </div>
-          <p class="price">{{_ "riyals" price}}</p>
+          <p style="color:grey;" class="price">{{_ "riyals" price}}</p>
           <hr style="margin-top:5px; margin-bottom:5px;"/>
             <a href="{{pathFor 'shops.show' shop=shop._id}}" 
             style="margin-left:5px; float:right; width:30px;">
-              <img src={{shop.logo.url}} class="shop-logo" alt="...">
+              <img src={{shop.logo.url}} class="shop-mini-logo" alt="...">
             </a>
           <div style="max-height:18px; overflow:hidden;">
             <p><a href="{{pathFor 'shops.show' shop=shop._id}}">{{shop.title}}</a></p>

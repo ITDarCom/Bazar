@@ -51,7 +51,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="brand" href="{{pathFor 'home'}}">
-          <img alt="Brand" src="/brand.png">
+          <img alt="Brand" src="/bazar-brand.png" style="height:40px;">
         </a>
         <ul class="nav navbar-nav pull-left" style="margin-top:0px; margin-bottom:0px;">
           <li id="my-cart">
@@ -75,7 +75,7 @@
   <nav id="offcanvas" role="navigation">
     <a class="navmenu-brand" style="margin-bottom:5px; margin-top:5px;">
       {{#if currentUser}}
-      <small>{{_ "hello" username=currentUser.username}}
+      <small>{{_ "hello"}} <span style="color:blue">{{currentUser.username}}</span>
         <a href="{{pathFor 'logout'}}">
           (&nbsp;{{_ "signOut"}} <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>)
           </a>
@@ -120,15 +120,18 @@
       <li class={{isActiveRoute regex='settings.account'}}><a href="{{pathFor 'settings.account'}}">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; {{_ "settings"}}
       </a></li>
+      <li class={{isActiveRoute 'about'}}><a href="{{pathFor 'about'}}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; {{_ "about"}}
+      </a></li>      
       {{#if hasShop}}
       <hr style="margin-bottom:5px; margin-top:5px;"/>
       <center>
         <a href="{{pathFor 'shops.show' shop=currentShop._id}}" class="thumbnail" style="width:100px; margin-bottom:5px; margin-top:10px;">
-        <img src={{currentShop.logo.url}} class="shop-logo" alt="...">
+        <img src={{currentShop.logo.url}} class="shop-logo img-circle" alt="...">
         </a>
       </center>     
-      <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">
-        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{currentShop.title}}
+      <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">        
+        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; <span style="color:blue">{{currentShop.title}}</span>
       </a></li>
       <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
         <a href="{{pathFor 'settings.orders'}}">

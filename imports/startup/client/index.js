@@ -38,6 +38,8 @@ import "./../../ui/pages/admin-cities"
 import "./../../ui/pages/admin-users"
 import "./../../ui/pages/admin-warning"
 
+import "./../../ui/pages/about"
+
 import "./../../ui/components/item-thumbnail"
 import "./../../ui/components/endless-list"
 import "./../../ui/components/purchases-list"

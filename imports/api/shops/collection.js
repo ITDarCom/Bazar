@@ -44,7 +44,7 @@ Shops.attachSchema(new SimpleSchema({
 	'title': {
 		type: String,
         label: function(){
-            return TAPi18n.__('title')
+            return TAPi18n.__('shopTitle')
         },		
 		max: 200, unique: true,
         custom: function () {
