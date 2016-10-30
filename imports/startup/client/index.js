@@ -18,6 +18,7 @@ import "./../../ui/pages/settings-account"
 import "./../../ui/pages/settings-shop"
 import "./../../ui/pages/settings-purchases"
 import "./../../ui/pages/settings-orders"
+import "./../../ui/pages/settings-orders-rejected"
 import "./../../ui/pages/settings-sales"
 import "./../../ui/pages/cart"
 

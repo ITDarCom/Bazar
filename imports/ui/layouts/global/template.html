@@ -155,7 +155,12 @@
             (<span class="counter">0</span>)
           {{/if}}                     
         </a>
-      </li>      
+      </li>
+      <li class={{isActiveRoute 'settings.rejectedOrders'}} id="my-sales">
+        <a href="{{pathFor 'settings.rejectedOrders'}}">
+          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "rejectedOrders"}}             
+        </a>
+      </li>            
       {{/if}}
       {{#unless hasShop}}
       <li class={{isActiveRoute 'shops.new'}} id="create-shop"><a href="{{pathFor 'shops.new'}}">

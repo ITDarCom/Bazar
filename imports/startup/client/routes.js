@@ -128,6 +128,7 @@ const privateRoutes = [
     'settings.purchases',
     'settings.shop',
     'settings.orders',
+    'settings.rejectedOrders',
     'settings.sales',
     'messages.index',
     'messages.thread',
@@ -304,6 +305,13 @@ Router.route('/settings/orders', function () {
     this.render('settingsOrdersPage');
 }, {
     name: 'settings.orders'
+});
+
+Router.route('/settings/rejectedOrders', function () {
+    this.render('empty', {to: 'nav'});
+    this.render('settingsOrdersRejectedPage');
+}, {
+    name: 'settings.rejectedOrders'
 });
 
 Router.route('/settings/sales', function () {

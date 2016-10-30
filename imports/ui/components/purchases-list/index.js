@@ -29,6 +29,7 @@ Template.purchasesList.helpers({
 			case "purchases": return "purchaseItem";
 			case "orders": return "orderItem";
 			case "sales": return "saleItem";
+			case "rejectedOrders": return "saleItem";
 		}
 	},
 	purchases(){
@@ -51,10 +52,19 @@ Template.purchasesList.helpers({
 					shop: Meteor.user().shop, 
 					$or : [
 						{ status : 'delivered' },
-						{ status : 'rejected' },
+						/*{ status : 'rejected' },*/
 					]					
 				}
 			break;
+			case "rejectedOrders": 
+				selector = { 
+					shop: Meteor.user().shop, 
+					$or : [
+						/*{ status : 'delivered' },*/
+						{ status : 'rejected' },
+					]					
+				}
+			break;			
 		}
 		return Purchases.find(selector, { sort: { sentAt: -1 }})
 	},
@@ -175,7 +185,7 @@ Template.saleItem.helpers({
 
 
 Template.locationModal.onRendered(function() {
-	GoogleMaps.load({ key: 'AIzaSyBiCLkIztt-fy3DUVGE64sxAuwJ2Mbe1iM' });
+	GoogleMaps.load({ key: 'AIzaSyBiCLkIztt-fy3DUVGE64sxAuwJ2Mbe1iM', v: '3'});
 
 	var instance = this
 

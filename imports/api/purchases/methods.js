@@ -120,18 +120,17 @@ Meteor.methods({
 
         } 
 
-        if (status.match(/delivered/)){
-
-			//notifying purchase owner
-			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});        	
-
-        }
-
         if (status.match(/delivered|rejected/)){
 
-			Shops.update(shopId, { $inc: { totalSales: 1, totalOrders: -1 }})
-
+			Shops.update(shopId, { $inc: { totalOrders: -1 }})
 			Meteor.users.update(userId, { $inc: { 'pendingPurchases': -1 }});
+
+			if (status.match(/delivered/)){				
+				//notifying purchase owner
+				Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }}); 
+				Shops.update(shopId, { $inc: { totalSales: 1}})
+			}
+
         }
 
 	},

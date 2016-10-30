@@ -66,6 +66,25 @@ Meteor.publishComposite('sales', function salesPublication(){
 				shop: shop, 
 				$or : [
 					{ status : 'delivered' },
+					/*{ status : 'rejected' },*/
+				] 
+			}, { sort: { sentAt: -1 }});				
+		}, 
+		children : children
+	}
+});
+
+Meteor.publishComposite('rejectedOrders', function salesPublication(){
+	return {
+		find(){
+			//Meteor._sleepForMs(200);
+			if (!this.userId) this.ready();
+			var shop = Meteor.users.findOne(this.userId).shop;
+			if (!shop) this.ready();
+			return Purchases.find({
+				shop: shop, 
+				$or : [
+					/*{ status : 'delivered' },*/
 					{ status : 'rejected' },
 				] 
 			}, { sort: { sentAt: -1 }});				
