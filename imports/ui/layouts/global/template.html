@@ -135,7 +135,7 @@
       </a></li>
       <li class={{isActiveRoute 'settings.orders'}} id="my-orders">
         <a href="{{pathFor 'settings.orders'}}">
-          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "orders"}}              
+          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "newOrders"}}              
           {{#if currentShop.totalOrders}}          
             (<span class="counter">{{currentShop.totalOrders}}</span>)
           {{else}}
@@ -146,6 +146,11 @@
           {{/if}}
         </a>
       </li>
+      <li class={{isActiveRoute 'settings.rejectedOrders'}} id="my-sales">
+        <a href="{{pathFor 'settings.rejectedOrders'}}">
+          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "rejectedOrders"}}             
+        </a>
+      </li>          
       <li class={{isActiveRoute 'settings.sales'}} id="my-sales">
         <a href="{{pathFor 'settings.sales'}}">
           <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "sales"}}
@@ -156,11 +161,7 @@
           {{/if}}                     
         </a>
       </li>
-      <li class={{isActiveRoute 'settings.rejectedOrders'}} id="my-sales">
-        <a href="{{pathFor 'settings.rejectedOrders'}}">
-          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; {{_ "rejectedOrders"}}             
-        </a>
-      </li>            
+        
       {{/if}}
       {{#unless hasShop}}
       <li class={{isActiveRoute 'shops.new'}} id="create-shop"><a href="{{pathFor 'shops.new'}}">
