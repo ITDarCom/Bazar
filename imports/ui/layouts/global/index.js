@@ -78,6 +78,11 @@ Template.applicationLayout.helpers({
 	},
 	networkError(){
 		return !Meteor.status().connected && (Meteor.status().retryCount > 1)
+	},
+	currentShopUrl(){
+		const shop = Shops.findOne(Meteor.user().shop);
+
+		return (Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url );
 	}
 })
 

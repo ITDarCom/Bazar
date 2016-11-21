@@ -14,12 +14,19 @@ Template.itemThumbnail.onCreated(function(){
 
     var instance = this
     this.image = document.createElement('img');
+    this.shopLogo = document.createElement('img');
     this.image.onload = function () {
         instance.loaded.set(true)
     };
 
     const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
-    this.image.src = thumb.url
+    this.image.src = Meteor.absoluteUrl() + thumb.url
+
+    this.autorun(()=>{
+        const shop = Shops.findOne(Template.instance().data.shop) 
+        if (shop) this.shopLogo.src = Meteor.absoluteUrl() + shop.logo.url         
+    })
+
 })
 
 Template.itemThumbnail.helpers({
@@ -27,17 +34,21 @@ Template.itemThumbnail.helpers({
         return `item-${Template.instance().data._id}`
     },
     shop(){    	
-    	if (Template.instance().data)
-        	return Shops.findOne(Template.instance().data.shop)   
+    	return Shops.findOne(Template.instance().data.shop)   
     },
     backgroundImage(){
+        const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
+        return (Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url)
         if (!Template.instance().loaded.get()){
             return '/ajax-loader.gif'
-        } else {            
-            const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
-            if (thumb) return thumb.url
+        } else {
+            return (Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url)
         }
     },
+    shopLogoAbsolute(){
+        const shop = Shops.findOne(Template.instance().data.shop) 
+        if (shop) return Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url
+    },    
     backgroundSize(){
         const instance = Template.instance()
         if (!instance.loaded.get()){
@@ -47,7 +58,17 @@ Template.itemThumbnail.helpers({
         } else {
             return "100% auto"
         }
-    },    
+    },
+    shopLogobackgroundSize(){
+        const instance = Template.instance()
+        if (!instance.loaded.get()){
+            return "auto auto"
+        } else if (instance.shopLogo.width > instance.shopLogo.height) {            
+            return "auto 100%"
+        } else {
+            return "100% auto"
+        }
+    },         
     isSearch(){
         return Template.instance().search
     },
@@ -60,7 +81,6 @@ Template.itemThumbnail.helpers({
         return Template.instance().data.isHidden
     },
     isRemoved(){
-        console.log(Template.instance().data.isRemoved)
         return Template.instance().data.isRemoved
     },
     thumbnailDark(){

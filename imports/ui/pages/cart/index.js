@@ -146,7 +146,7 @@ Template.deliveryInformationForm.onCreated(function(){
 	            afFieldInput:{
 	            	mapType: 'roadmap',
 	            	autolocate: true,
-	            	geolocation: true,
+	            	geolocation: false,
 	            	zoom:11,
 				    defaultLat: 24.68773, defaultLng: 46.72185, //riyad
 	            }	        	
