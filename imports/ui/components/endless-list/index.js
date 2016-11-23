@@ -289,7 +289,7 @@ Template.shopThumbnail.onCreated(function(){
         instance.loaded.set(true)
     };
 
-    this.image.src = Template.instance().data.logo.url
+    this.image.src = Meteor.absoluteUrl().replace(/\/$/,"") + Template.instance().data.logo.url
 })
 
 Template.shopThumbnail.helpers({
@@ -300,7 +300,7 @@ Template.shopThumbnail.helpers({
         if (!Template.instance().loaded.get()){
             return '/ajax-loader.gif'
         } else {            
-            return Template.instance().data.logo.url
+            return (Meteor.absoluteUrl().replace(/\/$/,"")) + Template.instance().data.logo.url
         }
     },
     backgroundSize(){

@@ -201,13 +201,12 @@ Template.message.helpers({
 		if (author.type == 'user'){
 			return Meteor.users.findOne(author.id).avatar
 		} else {
-			return Shops.findOne(author.id).logo.url
+			return (Meteor.absoluteUrl().replace(/\/$/,"") + Shops.findOne(author.id).logo.url)
 		}
 	},
 	messageBody(){
 		return Template.instance().data.body.replace(/(?:\r\n|\r|\n)/g, '<br />');
 	}
-
 })
 
 Template.messageModal.helpers({

@@ -78,12 +78,14 @@ Template.applicationLayout.helpers({
 	},
 	networkError(){
 		return !Meteor.status().connected && (Meteor.status().retryCount > 1)
-	},
-	currentShopUrl(){
-		const shop = Shops.findOne(Meteor.user().shop);
-
-		return (Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url );
 	}
+})
+
+Template.navmenu.helpers({
+	currentShopLogoUrl(){
+		const shop = Shops.findOne(Meteor.user().shop);
+		return (Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url );
+	}	
 })
 
 Template.applicationLayout.events({
@@ -178,6 +180,7 @@ Template.registerHelper('isShopOwner', function(){
 
 Template.registerHelper('unreadOrders', function(){
 	var shop = Shops.findOne({ user: Meteor.userId() })
+	console.log(shop.unreadOrders)
 	return shop ? shop.unreadOrders : false ;    
 })
 

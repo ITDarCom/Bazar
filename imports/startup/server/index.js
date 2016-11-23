@@ -43,6 +43,7 @@ Meteor.startup(() => {
 	Meteor.users.update({}, {$set: { unreadInbox:0, pendingPurchases:0, unreadInbox:0, totalPurchases:0, cartItems:0}}, {multi:true})
 	Purchases.remove({})
 	Threads.update({}, { $set: { isRemoved: false } }, {multi:true})
+	Threads.remove({})
 
 	Accounts.emailTemplates.siteName = "ebazaar.online";
 

@@ -42,6 +42,12 @@ Template.itemsEditImagesPage.events({
 	}	
 })
 
+Template.itemThumbnailControl.helpers({
+	thumbUrl(){
+		return Meteor.absoluteUrl().replace(/\/$/,"") + Template.instance().data.url
+	}
+})
+
 Template.itemThumbnailControl.events({
 	'click .remove-thumbnail-btn'(event, instance){
 		const itemId = Router.current().params.itemId

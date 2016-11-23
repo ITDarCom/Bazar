@@ -17,7 +17,7 @@
 				</a>
 			{{else}}
 				<a class="btn btn-warning btn-fab add-to-cart-btn btn-float">
-					<i class="material-icons">shopping_cart</i>
+					<i class="material-icons">&#xE8CC;</i>
 				</a>
 			{{/if}}		
 			<br/><br/><br/><!--So that floating buttons do not cover last elements -->
@@ -34,10 +34,8 @@
 	<div class="row">		
  		<div class="col-xs-12" style="height:245px;">
 			<div style="z-index:3000;position:absolute;left:24px;bottom:0px;">
-				<i style="font-size:20px" class="material-icons">share</i>
-				<a href="#" 
-				  style="font-size:20px" class="favorite-btn material-icons">
-				  {{#if favorite}}star{{else}}star_border{{/if}}</a>
+                <i class="favorite-btn fa {{#if favorite}}fa-star{{else}}fa-star-o{{/if}} " aria-hidden="true"></i>
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
 			</div> 			
 			<!-- 
 			DISPLAYING ITEM ID FOR COSTUMER: commented for future use

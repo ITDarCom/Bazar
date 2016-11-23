@@ -127,7 +127,7 @@
       <hr style="margin-bottom:5px; margin-top:5px;"/>
       <center>
         <a href="{{pathFor 'shops.show' shop=currentShop._id}}" class="thumbnail" style="width:100px; margin-bottom:5px; margin-top:10px;">
-        <img src={{currentShop.logo.url}} class="shop-logo img-circle" alt="...">
+        <img src={{currentShopLogoUrl}} class="shop-logo img-circle" alt="...">
         </a>
       </center>     
       <li class={{isActiveRoute 'shops.mine'}} id="my-shop"><a href="{{pathFor 'shops.mine'}}">        

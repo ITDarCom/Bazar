@@ -22,6 +22,13 @@ Template.shopsShowPage.helpers({
 	}
 })
 
+Template.shopHeader.helpers({
+	shopLogoUrl(){
+		const shop = Shops.findOne(Router.current().params.shop)		
+        return (Meteor.absoluteUrl().replace(/\/$/,"")) + shop.logo.url
+	}
+})
+
 Template.shopsShowPage.events({
 	'click .back-btn'(event, instance){
 		event.preventDefault()

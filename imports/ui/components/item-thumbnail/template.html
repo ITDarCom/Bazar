@@ -17,26 +17,27 @@
                     {{{title}}}
                 </a>
             </p>
-          <div style="float:left;margin-right:5px;margin-left:5px;">
-              <p>
-                  {{#unless isShopOwner}}
-                      <i style="font-size:15px" class="material-icons">share</i>
-                      <a href="#" 
-                          style="font-size:15px" class="favorite-btn material-icons">
-                          {{#if favorite}}star{{else}}star_border{{/if}}</a>
-                  {{else}}
-                      <a href="#" style="font-size:15px; margin-bottom:0px;" 
-                      class="material-icons hide-item-btn" 
-                      title="{{#unless isHidden}}{{_ 'hide'}}{{else}}{{_ 'show'}}{{/unless}}">{{#unless isHidden}}visibility_off{{else}}visibility{{/unless}}</a>
-                      <a href="{{pathFor 'items.edit' shop=shop._id itemId=_id}}" 
-                          style="font-size:15px;" class="material-icons edit-item-btn" title="Edit">create</a>
-                      <a href="#" style="font-size:15px;" 
-                          class="material-icons detete-item-btn" 
-                          title="{{_ 'delete'}}">delete</a>
-                  {{/unless}}
-              </p>
-          </div>
           <p style="color:grey;" class="price">{{_ "riyals" price}}</p>
+          <span style="float:left;margin-right:5px;margin-left:5px;">
+            {{#unless isShopOwner}}
+                <i class="favorite-btn fa {{#if favorite}}fa-star{{else}}fa-star-o{{/if}} " aria-hidden="true"></i>
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                <!-- 
+                <i style="font-size:15px" class="material-icons">share</i>
+                <a href="#" 
+                    style="font-size:15px" class="favorite-btn material-icons">
+                    {{#if favorite}}star{{else}}star_border{{/if}}</a> -->
+            {{else}}
+                <a href="#" style="font-size:15px; margin-bottom:0px;" 
+                class="material-icons hide-item-btn" 
+                title="{{#unless isHidden}}{{_ 'hide'}}{{else}}{{_ 'show'}}{{/unless}}">{{#unless isHidden}}visibility_off{{else}}visibility{{/unless}}</a>
+                <a href="{{pathFor 'items.edit' shop=shop._id itemId=_id}}" 
+                    style="font-size:15px;" class="material-icons edit-item-btn" title="Edit">create</a>
+                <a href="#" style="font-size:15px;" 
+                    class="material-icons detete-item-btn" 
+                    title="{{_ 'delete'}}">delete</a>
+            {{/unless}}
+          </span>
           <hr style="margin-top:5px; margin-bottom:5px;"/>
             <a href="{{pathFor 'shops.show' shop=shop._id}}" 
             style="margin-left:5px; float:right; width:25px;">

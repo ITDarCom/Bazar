@@ -38,11 +38,10 @@ Template.itemThumbnail.helpers({
     },
     backgroundImage(){
         const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
-        return (Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url)
         if (!Template.instance().loaded.get()){
             return '/ajax-loader.gif'
         } else {
-            return (Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url)
+            return (Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url)            
         }
     },
     shopLogoAbsolute(){
