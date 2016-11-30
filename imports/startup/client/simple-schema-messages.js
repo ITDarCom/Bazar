@@ -7,6 +7,7 @@ SimpleSchema.RegEx.ArabicName = /^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FF\s]*$/
 
 
 SimpleSchema.messages({
+  addressRequired: "العنوان خريطة أو كتابة إلزامي",
   required: "حقل [label] إلزامي",
   shopNotUnique: "يوجد متجر بنفس هذا الاسم. حاول استخدام اسم آخر",
   minString: "حقل [label] يجب أن يكون [min] محارف على الأقل",

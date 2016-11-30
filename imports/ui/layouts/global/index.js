@@ -180,7 +180,6 @@ Template.registerHelper('isShopOwner', function(){
 
 Template.registerHelper('unreadOrders', function(){
 	var shop = Shops.findOne({ user: Meteor.userId() })
-	console.log(shop.unreadOrders)
 	return shop ? shop.unreadOrders : false ;    
 })
 

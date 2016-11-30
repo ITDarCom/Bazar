@@ -1,3 +1,4 @@
+
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
@@ -16,6 +17,8 @@ Template.cartPage.onCreated(function(){
 
 AutoForm.addHooks('deliveryInformationForm', {
     onError : function(){
+
+    	console.log(this.validationContext._invalidKeys)
 
         if (this.validationContext._invalidKeys.find(key => key.name.match(/location/) )){
             $('.location-on-map .form-group').addClass('is-focused')
@@ -125,7 +128,12 @@ Template.deliveryInformationForm.onCreated(function(){
 		    type: String,
 		    label: function(){
 		        return TAPi18n.__('address')
-		    }, optional:true
+		    }, optional:true,
+	        custom: function(){
+	        	if (!this.field("deliveryAddress").isSet && !this.field("location").isSet){
+	        		return "addressRequired"
+	        	}
+	        },		    
 		},
 		'deliveryDate': { 
 		    type: Date,
@@ -145,7 +153,7 @@ Template.deliveryInformationForm.onCreated(function(){
 	            type: 'map',
 	            afFieldInput:{
 	            	mapType: 'roadmap',
-	            	autolocate: true,
+	            	autolocate: false,
 	            	geolocation: false,
 	            	zoom:11,
 				    defaultLat: 24.68773, defaultLng: 46.72185, //riyad
@@ -153,15 +161,20 @@ Template.deliveryInformationForm.onCreated(function(){
 	        },
 	        label: function(){
 	            return TAPi18n.__('locationOnMap')
-	        }      			
+	        }, optional:true,
+	        custom: function(){
+	        	if (!this.field("deliveryAddress").isSet && !this.field("location").isSet){
+	        		return "addressRequired"
+	        	}
+	        },      			
 		},
 	    'location.lat': {
 			type: Number,
-			decimal: true
+			decimal: true, optional:true
 	    },
 	    'location.lng': {
 			type: Number,
-			decimal: true
+			decimal: true, optional:true
 	    },
 	});
 });

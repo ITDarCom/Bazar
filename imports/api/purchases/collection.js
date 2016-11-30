@@ -61,10 +61,11 @@ Purchases.attachSchema(new SimpleSchema({
         }, 
     },
 	'deliveryInfo.deliveryAddress': { 
-        type: String, optional: true,
+        type: String, 
         label: function(){
             return TAPi18n.__('address')
         }, 
+        optional:true,
     },
 	'deliveryInfo.deliveryDate': { 
         type: Date,
@@ -74,10 +75,10 @@ Purchases.attachSchema(new SimpleSchema({
      },
     'deliveryInfo.location.lat': {
         type: Number,
-        decimal: true
+        decimal: true, optional:true,
     },
     'deliveryInfo.location.lng': {
         type: Number,
-        decimal: true
+        decimal: true, optional:true,
     },     
 }));

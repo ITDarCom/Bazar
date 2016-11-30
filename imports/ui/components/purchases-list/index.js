@@ -120,6 +120,14 @@ Template.orderItem.helpers({
 	},	
 	accepted(){
 		return (Template.instance().data.status == 'accepted')
+	},
+	hasLocation(){
+		const data = Template.instance().data;
+		if (data.deliveryInfo.location){
+			return true
+		} else {
+			return false
+		}
 	}
 })
 
@@ -147,7 +155,15 @@ Template.purchaseItem.helpers({
 	mapModalId(){
 		const data = Template.instance().data		
 		return `location-modal-${data._id}`
-	},		
+	},	
+	hasLocation(){
+		const data = Template.instance().data;
+		if (data.deliveryInfo.location){
+			return true
+		} else {
+			return false
+		}
+	}		
 })
 
 Template.saleItem.helpers({
@@ -181,6 +197,14 @@ Template.saleItem.helpers({
 		const data = Template.instance().data		
 		return `location-modal-${data._id}`
 	},	
+	hasLocation(){
+		const data = Template.instance().data;
+		if (data.deliveryInfo.location){
+			return true
+		} else {
+			return false
+		}
+	}	
 })
 
 
@@ -191,20 +215,25 @@ Template.locationModal.onRendered(function() {
 
 	const mapSelector = `#${instance.data.modalId} .map-canvas`
 
-	$(`#${instance.data.modalId}`).on("shown.bs.modal", function () {
-		const map = $(mapSelector).get(0)
-		const location = instance.data.location
-	    window.google.maps.event.trigger(map, "resize");
+	if (instance.data.location){
 
-		GoogleMaps.ready(instance.data.modalId, function(map) {
-    		map.instance.setCenter({lat: location.lat, lng: location.lng })
+		$(`#${instance.data.modalId}`).on("shown.bs.modal", function () {
+			const map = $(mapSelector).get(0)
+			const location = instance.data.location
+		    window.google.maps.event.trigger(map, "resize");
 
-			var marker = new window.google.maps.Marker({
-			  position: new window.google.maps.LatLng(location.lat, location.lng),
-			  map: map.instance
-			});    		
-		})
-	});	
+			GoogleMaps.ready(instance.data.modalId, function(map) {
+	    		map.instance.setCenter({lat: location.lat, lng: location.lng })
+
+				var marker = new window.google.maps.Marker({
+				  position: new window.google.maps.LatLng(location.lat, location.lng),
+				  map: map.instance
+				});    		
+			})
+		});	
+		
+	}
+
 });
 
 Template.locationModal.helpers({
@@ -212,7 +241,7 @@ Template.locationModal.helpers({
 		return Template.instance().data.modalId
 	},	
 	mapOptions(){		
-		if (GoogleMaps.loaded()) {
+		if (GoogleMaps.loaded() && Template.instance().data.location) {
 			const location = Template.instance().data.location
 			return {
 				center: new window.google.maps.LatLng(location.lat, location.lng),

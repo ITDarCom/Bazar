@@ -20,11 +20,11 @@ Template.itemThumbnail.onCreated(function(){
     };
 
     const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
-    this.image.src = Meteor.absoluteUrl() + thumb.url
+    this.image.src = Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url
 
     this.autorun(()=>{
         const shop = Shops.findOne(Template.instance().data.shop) 
-        if (shop) this.shopLogo.src = Meteor.absoluteUrl() + shop.logo.url         
+        if (shop) this.shopLogo.src = Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url         
     })
 
 })
