@@ -6,3 +6,7 @@ Meteor.publish("userData", function () {
     	return this.ready(); 
     }
 });
+
+Meteor.publish("adminData", function () {
+    return Meteor.users.find({isAdmin: true});
+});

@@ -26,6 +26,16 @@ function recipientIsShopOwner(thread){
 	const recipient = getRecipient(thread)
 	return (recipient.type == 'shop')	
 }
+
+function bothAreUsers(thread){
+	if (thread.participants[0].type == 'user' && thread.participants[1].type == 'user'){
+		return true
+	} else {
+		return false
+	}
+}
+
+export {bothAreUsers}
 export {getRecipient}
 export {recipientHelper}
 export {recipientIsShopOwner}

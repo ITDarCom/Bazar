@@ -17,16 +17,16 @@
                     {{{title}}}
                 </a>
             </p>
-          <p style="color:grey;" class="price">{{_ "riyals" price}}</p>
           <span style="float:left;margin-right:5px;margin-left:5px;">
             {{#unless isShopOwner}}
-                <i class="favorite-btn fa {{#if favorite}}fa-star{{else}}fa-star-o{{/if}} " aria-hidden="true"></i>
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                <i style="font-size:18px" class="favorite-btn fa {{#if favorite}}fa-star{{else}}fa-star-o{{/if}} " aria-hidden="true"></i>
+                <i style="font-size:18px" class="fa fa-share-alt" aria-hidden="true"></i>
                 <!-- 
                 <i style="font-size:15px" class="material-icons">share</i>
                 <a href="#" 
                     style="font-size:15px" class="favorite-btn material-icons">
-                    {{#if favorite}}star{{else}}star_border{{/if}}</a> -->
+                    {{#if favorite}}star{{else}}star_border{{/if}}</a> 
+                -->
             {{else}}
                 <a href="#" style="font-size:15px; margin-bottom:0px;" 
                 class="material-icons hide-item-btn" 
@@ -38,14 +38,13 @@
                     title="{{_ 'delete'}}">delete</a>
             {{/unless}}
           </span>
+          <p style="color:grey;" class="price">{{_ "riyals" price}}</p>
           <hr style="margin-top:5px; margin-bottom:5px;"/>
             <a href="{{pathFor 'shops.show' shop=shop._id}}" 
             style="margin-left:5px; float:right; width:25px;">
               <div class="img-circle" style="height: 0; padding-bottom: 100%; background-position: center center; background-image:url('{{shopLogoAbsolute}}'); background-repeat: no-repeat, no-repeat; background-size: {{shopLogobackgroundSize}};" alt="..." ></div>                
-            </a>
-          <div style="max-height:18px; overflow:hidden;">
-            <p><a href="{{pathFor 'shops.show' shop=shop._id}}">{{shop.title}}</a></p>
-          </div>
+            </a>          
+            <a style="max-height:18px; overflow:hidden;" href="{{pathFor 'shops.show' shop=shop._id}}"><small>{{shop.title}}</small></a>
             <p><small>{{cityLabel city}}</small></p>
       </div>
         </div>

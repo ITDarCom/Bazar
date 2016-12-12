@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import { Threads } from './collection'
 
 import {getRecipient} from './../../ui/pages/inbox-thread/helpers'
+import {bothAreUsers} from './../../ui/pages/inbox-thread/helpers'
 import {recipientHelper} from './../../ui/pages/inbox-thread/helpers'
 import {recipientIsShopOwner} from './../../ui/pages/inbox-thread/helpers'
 
@@ -102,7 +103,7 @@ Meteor.methods({
 		const thread = Threads.findOne(threadId)
 
 		var author
-		if (recipientIsShopOwner(thread)){
+		if (bothAreUsers(thread) || recipientIsShopOwner(thread)){
             author = {
                 type: 'user', id: this.userId
             }
@@ -143,12 +144,12 @@ Meteor.methods({
 		//TODO, check no previous thread exists...
 
 		var senderSelector
-		if (inboxType == 'personal'){
+		if (inboxType.match(/personal|flag/)){
 			senderSelector = { $elemMatch: { type:"user", id: this.userId } }
 		} else if (inboxType == 'shop') {
 			const shopId = Meteor.users.findOne(this.userId).shop
 			senderSelector = { $elemMatch: { type:"shop", id: shopId} }
-		}
+		} 
 
 		const existingThread = Threads.findOne({
 			$and: [
@@ -165,7 +166,7 @@ Meteor.methods({
 		} else {
 
 			var author
-			if (inboxType == 'personal'){
+			if (inboxType.match(/personal|flag/)){
 	            author = {
 	                type: 'user', id: this.userId
 	            }

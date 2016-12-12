@@ -75,7 +75,8 @@ Router.onBeforeAction(function () {
     this.wait(Meteor.subscribe('categories'))
     this.wait(Meteor.subscribe('cities'))
     this.wait(Meteor.subscribe('userData'))
-    this.wait(Meteor.subscribe('shopData'))    
+    this.wait(Meteor.subscribe('shopData'))
+    this.wait(Meteor.subscribe('adminData'))    
 
     if (this.ready()) {
         this.next()

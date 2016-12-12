@@ -24,6 +24,8 @@
 		</center>
 		{{/unless}}
 
+		{{> messageModal modalId='report-item-modal' item=item flag=true }}	
+
 		{{> messageModal modalId='shop-modal' recpientType='shop' recpientId=shop._id inboxType='personal'}}		
 	{{else}}
 		{{> spinner }}
@@ -33,9 +35,10 @@
 <template name="itemCarousel">
 	<div class="row">		
  		<div class="col-xs-12" style="height:245px;">
-			<div style="z-index:3000;position:absolute;left:24px;bottom:0px;">
-                <i class="favorite-btn fa {{#if favorite}}fa-star{{else}}fa-star-o{{/if}} " aria-hidden="true"></i>
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
+			<div style="z-index:2000;position:absolute;left:24px;bottom:0px;">
+                <i style="font-size:18px" class="favorite-btn fa {{#if favorite}}fa-star{{else}}fa-star-o{{/if}} " aria-hidden="true"></i>
+                <i style="font-size:18px" class="fa fa-share-alt" aria-hidden="true"></i>
+				<i data-toggle="modal" data-target="#report-item-modal" class="material-icons" style="font-size:18px;">&#xE153;</i>               
 			</div> 			
 			<!-- 
 			DISPLAYING ITEM ID FOR COSTUMER: commented for future use

@@ -6,9 +6,9 @@ var resize = function(fileObj, readStream, writeStream) {
 };
 
 var imageStore = new FS.Store.S3("images", {
-    accessKeyId: "AKIAI5Q3LNFQCHLOKSXA", //required if environment variables are not set
-    secretAccessKey: "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", //required if environment variables are not set
-    bucket: "ebazaar.online", //required
+    accessKeyId: "AKIAJJKU2FNCCJPBGYMA", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set
+    bucket: "ebazaaronline", //required
     maxTries: 1, //optional, default 5
     folder: 'images',
     transformWrite: resize
@@ -20,9 +20,9 @@ var createThumb = function(fileObj, readStream, writeStream) {
 };
 
 var thumbStore = new FS.Store.S3("thumbnails", {
-    accessKeyId: "AKIAI5Q3LNFQCHLOKSXA", //required if environment variables are not set
-    secretAccessKey: "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", //required if environment variables are not set
-    bucket: "ebazaar.online", //required
+    accessKeyId: "AKIAJJKU2FNCCJPBGYMA", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set
+    bucket: "ebazaaronline", //required
     maxTries: 1, //optional, default 5
     folder: 'thumbnails',
     transformWrite: createThumb
@@ -34,9 +34,9 @@ var createMicroThumb = function(fileObj, readStream, writeStream) {
 };
 
 var microthumbStore = new FS.Store.S3("microthumbnails", {
-    accessKeyId: "AKIAI5Q3LNFQCHLOKSXA", //required if environment variables are not set
-    secretAccessKey: "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", //required if environment variables are not set
-    bucket: "ebazaar.online", //required
+    accessKeyId: "AKIAJJKU2FNCCJPBGYMA", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set
+    bucket: "ebazaaronline", //required
     maxTries: 1, //optional, default 5
     folder: 'microthumbnails',
     transformWrite: createMicroThumb

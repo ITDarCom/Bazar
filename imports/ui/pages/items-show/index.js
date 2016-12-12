@@ -27,6 +27,9 @@ Template.itemsShowPage.onCreated(function(){
 })
 
 Template.itemsShowPage.helpers({
+	admin(){
+		return Meteor.users.findOne({isAdmin:true})
+	},
 	ready(){
 		return Template.instance().ready.get()
 	},

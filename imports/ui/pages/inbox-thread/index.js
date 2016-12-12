@@ -213,6 +213,12 @@ Template.messageModal.helpers({
 	modalId(){
 		return Template.instance().data.modalId
 	},
+	isFlag(){
+		return Template.instance().data.flag
+	},
+	item(){
+		return Template.instance().data.item
+	}
 })
 
 Template.messageModal.events({
@@ -232,8 +238,15 @@ Template.messageModal.events({
 	"click .send-message-btn"(event, instance){
 		const body = $("textarea[name='message']")[0].value
 		const data = Template.instance().data
+
 		if (body.length > 0){
-		    Meteor.call('threads.sendMessage', data.recpientType, data.recpientId, data.inboxType, body)
+			if (data.flag){
+				const admin = Meteor.users.findOne({isAdmin:true})
+				Meteor.call('threads.sendMessage', 'user', admin._id, 'flag', body)
+			} else {
+		    	Meteor.call('threads.sendMessage', data.recpientType, data.recpientId, data.inboxType, body)				
+			}
+
 		    $("textarea[name='message']")[0].value = ""
 			$(`#${data.modalId}`).modal('toggle')			
 		}
