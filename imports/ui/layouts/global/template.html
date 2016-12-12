@@ -119,10 +119,7 @@
       </a></li>
       <li class={{isActiveRoute regex='settings.account'}}><a href="{{pathFor 'settings.account'}}">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; {{_ "settings"}}
-      </a></li>
-      <li class={{isActiveRoute 'about'}}><a href="{{pathFor 'about'}}">
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; {{_ "about"}}
-      </a></li>      
+      </a></li>  
       {{#if hasShop}}
       <hr style="margin-bottom:5px; margin-top:5px;"/>
       <center>
@@ -180,7 +177,10 @@
       <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; {{_ "admin"}}
       </a></li>
-    {{/if}}        
+    {{/if}}   
+      <li class={{isActiveRoute 'about'}}><a href="{{pathFor 'about'}}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; {{_ "about"}}
+      </a></li>             
     </ul>  
   </nav>
 </template>
