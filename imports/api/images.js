@@ -6,9 +6,9 @@ var resize = function(fileObj, readStream, writeStream) {
 };
 
 var imageStore = new FS.Store.S3("images", {
-    accessKeyId: "AKIAI4B6P6HCMBHSZM4Q", //required if environment variables are not set
-    secretAccessKey: "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", //required if environment variables are not set
-    bucket: "ebazaar", //required
+    accessKeyId: "AKIAI5Q3LNFQCHLOKSXA", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set
+    bucket: "ebazaar.online", //required
     maxTries: 1, //optional, default 5
     folder: 'images',
     transformWrite: resize
@@ -20,9 +20,9 @@ var createThumb = function(fileObj, readStream, writeStream) {
 };
 
 var thumbStore = new FS.Store.S3("thumbnails", {
-accessKeyId: "AKIAI4B6P6HCMBHSZM4Q", //required if environment variables are not set
-    secretAccessKey: "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", //required if environment variables are not set    
-    bucket: "ebazaar", //required
+    accessKeyId: "AKIAI5Q3LNFQCHLOKSXA", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set
+    bucket: "ebazaar.online", //required
     maxTries: 1, //optional, default 5
     folder: 'thumbnails',
     transformWrite: createThumb
@@ -34,9 +34,9 @@ var createMicroThumb = function(fileObj, readStream, writeStream) {
 };
 
 var microthumbStore = new FS.Store.S3("microthumbnails", {
-accessKeyId: "AKIAI4B6P6HCMBHSZM4Q", //required if environment variables are not set
-    secretAccessKey: "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", //required if environment variables are not set    
-    bucket: "ebazaar", //required
+    accessKeyId: "AKIAI5Q3LNFQCHLOKSXA", //required if environment variables are not set
+    secretAccessKey: "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", //required if environment variables are not set
+    bucket: "ebazaar.online", //required
     maxTries: 1, //optional, default 5
     folder: 'microthumbnails',
     transformWrite: createMicroThumb
