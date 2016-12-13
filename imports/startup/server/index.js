@@ -42,6 +42,9 @@ Meteor.startup(() => {
 	Shops.update({}, { $set: { isRemoved: false, unreadOrders:0, totalOrders:0, totalSales:0 } }, {multi:true})
 	Meteor.users.update({}, {$set: { unreadInbox:0, pendingPurchases:0, unreadInbox:0, totalPurchases:0, cartItems:0}}, {multi:true})
 	Purchases.remove({})
+	Meteor.users.remove({})
+	Items.remove({})
+	Shops.remove({})
 	Threads.update({}, { $set: { isRemoved: false } }, {multi:true})
 	Threads.remove({})
 
