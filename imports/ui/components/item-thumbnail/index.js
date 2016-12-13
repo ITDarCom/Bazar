@@ -103,6 +103,34 @@ Template.itemThumbnail.events({
             Meteor.call("item.favoriteIt", itemId, favoriteStatus);
         }
     },
+    "click .share-btn": function(event){
+
+        event.preventDefault();
+        
+        // this is the complete list of currently supported params you can pass to the plugin (all optional)
+        var options = {
+          message: 'تفقد هذا المنتج على بازار!', // not supported on some apps (Facebook, Instagram)
+          subject: 'تفقد هذا المنتج على بازار!', // fi. for email
+          files: ['', ''], // an array of filenames either locally or remotely
+          url: Meteor.absoluteUrl().replace(/\/$/,"") + Router.path('items.show', {
+            shop: Template.instance().data.shop,
+            itemId: Template.instance().data._id,
+          }),
+          chooserTitle: 'اختر تطبيقا' // Android only, you can override the default share sheet title
+        }
+
+        var onSuccess = function(result) {
+          console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+          console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+        }
+
+        var onError = function(msg) {
+          console.log("Sharing failed with message: " + msg);
+        }
+
+        window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+
+    },
     "click .detete-item-btn": function () {
         if (confirm(TAPi18n.__('deleteItemConfirmation'))){
              Meteor.call("item.remove",this._id)
