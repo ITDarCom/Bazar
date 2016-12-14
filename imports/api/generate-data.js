@@ -346,9 +346,9 @@ Meteor.methods({
             while (Shops.findOne(shop._id)){
                 shop._id = Random.id(6).toString()
             }
-            var shopId = Shops.insert(shop, { getAutoValues : false })
+            //var shopId = Shops.insert(shop, { getAutoValues : false })
 
-            Meteor.users.update({ _id: accountsIds[index]}, 
+            /*Meteor.users.update({ _id: accountsIds[index]}, 
                 { $set: { 'hasShop': true, 'shop': shopId } 
             })  
 
@@ -376,9 +376,9 @@ Meteor.methods({
                     while (Items.findOne(item._id)){
                         item._id = Math.floor((Math.random() * 10000) + 1000).toString()
                     }
-                    Items.insert(item, { getAutoValues : false })
+                    //Items.insert(item, { getAutoValues : false })
                 });
-            }
+            }*/
 
         })              
 
