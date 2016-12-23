@@ -76,6 +76,7 @@ Meteor.startup(function () {
 	T9n.map('ar', {
   		email: 'بريد إلكتروني',
   		error: {
+  			pwdsDontMatch: "كلمتي السر لا تتطابقان",
   			accounts: {
 				'User not found': 'خطأ في اسم المستخدم أو كلمة السر!',
 				'Incorrect password': 'خطأ في اسم المستخدم أو كلمة السر!',

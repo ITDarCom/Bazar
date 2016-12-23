@@ -64,7 +64,7 @@ AccountsTemplates.addFields([
       required: true,
       trim: true,
       func: function(value){ return (value.length < 4); },
-      errStr: 'اسم المستخدم يجب أن يقول 4 محارف على الأقل',
+      errStr: 'اسم المستخدم يجب أن يقول 4 خانات على الأقل',
   },
   {
       _id: 'email',
@@ -88,7 +88,7 @@ AccountsTemplates.addFields([
       required: true,
       displayName: "كلمة السر",
       func: function(value){ return (value.length < 6); },
-      errStr: 'كلمة السر يجب أن تكون 6 محارف على الأقل',
+      errStr: 'كلمة السر يجب أن تكون 6 خانات على الأقل',
   }
 ]);
 

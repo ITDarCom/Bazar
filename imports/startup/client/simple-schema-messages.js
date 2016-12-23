@@ -10,7 +10,7 @@ SimpleSchema.messages({
   addressRequired: "العنوان خريطة أو كتابة إلزامي",
   required: "حقل [label] إلزامي",
   shopNotUnique: "يوجد متجر بنفس هذا الاسم. حاول استخدام اسم آخر",
-  minString: "حقل [label] يجب أن يكون [min] محارف على الأقل",
+  minString: "حقل [label] يجب أن يكون [min] خانات على الأقل",
   maxString: "حقل [label] لا يمكن أن يتجاوز [max] محرفا",
   minNumber: "[label] يجب أن يكون على الأقل [min]",
   maxNumber: "[label] لا يمكن أن يتجاوز [max]",

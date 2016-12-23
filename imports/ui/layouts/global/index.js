@@ -74,7 +74,13 @@ Template.applicationLayout.onCreated(function(){
 Template.applicationLayout.helpers({
 	networkErrorMessage(){
 		console.log(Meteor.status().retryTime, Session.get('time'))
-		return `هناك مشكلة في الشبكة، جار إعادة الاتصال خلال ${Math.floor((Meteor.status().retryTime - Session.get('time'))/1000)} ثانية`		
+		const remaining = Math.floor((Meteor.status().retryTime - Session.get('time'))/1000)
+
+		var remainingMessage = ""
+		if (remaining) {
+			remainingMessage = ` خلال ${remaining} ثانية`
+		}
+		return `هناك مشكلة في الشبكة، جار إعادة الاتصال${remainingMessage}`		
 	},
 	networkError(){
 		return !Meteor.status().connected && (Meteor.status().retryCount > 1)
