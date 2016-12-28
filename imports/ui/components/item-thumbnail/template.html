@@ -37,6 +37,11 @@
                     class="material-icons detete-item-btn" 
                     title="{{_ 'delete'}}">delete</a>
             {{/unless}}
+            {{#if isAdmin}}
+                <a href="#" style="font-size:15px;" 
+                        class="material-icons detete-item-btn" 
+                        title="{{_ 'delete'}}">delete</a>
+            {{/if}}
           </span>
           <p style="color:grey;" class="price">{{_ "riyals" price}}</p>
           <hr style="margin-top:5px; margin-bottom:5px;"/>

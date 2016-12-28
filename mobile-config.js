@@ -5,7 +5,7 @@ App.info({
   author: 'ITDar',
   email: 'contact@example.com',
   website: 'http://www.ebazaar.online',
-  version: "0.9"
+  version: "1.0"
 });
 
 // Set up resources such as icons and launch screens.
