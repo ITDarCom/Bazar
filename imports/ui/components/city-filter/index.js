@@ -15,6 +15,13 @@ Template.itemsFilter.helpers({
 	defaultValue(){
 		return Session.get('selectedCity')
 	},
+	selectedCityStyle(){
+		const city = Cities.findOne({identifier: Session.get('selectedCity')})
+		if (city && city.label.length > 8)
+		return "width:80px; font-size:10px;"
+		else 
+			return "width:80px;"
+	},
 	searchText(){
 		return Session.get('searchText')
 	},

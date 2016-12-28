@@ -3,7 +3,7 @@
 	<div class="col-xs-12">
 	  {{#autoForm class="form-inline" id="itemsFilterForm" schema=schema template="bootstrap3-inline"}}
 		<span>{{> afQuickField name="selectedCity" 
-					style="width:80px;"
+					style=selectedCityStyle
 			    	label=false options=options  
 			    	value=defaultValue
 			    	firstOption=(_ "allCities") }}</span>				
