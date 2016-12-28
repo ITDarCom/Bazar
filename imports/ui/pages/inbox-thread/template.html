@@ -12,7 +12,7 @@
 		  		</a>
 				<center>
 					{{#unless recipientIsShopOwner}}
-						{{_"member"}} <span class="recipient">{{recipient.username}}</span>
+						{{#unless recipient.isAdmin}}{{_"member"}}{{/unless}} <span class="recipient">{{recipient.username}}</span>
 					{{else}}
 						{{_"shop"}} <span class="recipient">{{recipient.title}}</span>
 				{{/unless}}	

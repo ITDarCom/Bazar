@@ -174,11 +174,11 @@ Template.threadPage.events({
 		}
 	},*/
 	"click .send-message-btn"(event, instance){
-		const target = $("textarea[name='message']")[0]
+		const target = $(".thread-form textarea[name='message']")[0]
 		const body = target.value
 		if (body.length > 0){
 		    Meteor.call('threads.addMessage', Template.instance().threadId, body)
-		    $("textarea[name='message']")[0].value = ""
+		    $(".thread-form textarea[name='message']")[0].value = ""
 		    scrollToTheEnd()
 		    keepFocus(target)			
 		}
@@ -236,18 +236,21 @@ Template.messageModal.events({
 		}
 	},*/
 	"click .send-message-btn"(event, instance){
-		const body = $("textarea[name='message']")[0].value
 		const data = Template.instance().data
+		const body = $(`#${data.modalId} textarea[name='message']`)[0].value
 
 		if (body.length > 0){
 			if (data.flag){
+				const admin = Meteor.users.findOne({isAdmin:true})
+				Meteor.call('threads.sendMessage', 'user', admin._id, 'flag', body)
+			} else if (data.contactUs) {
 				const admin = Meteor.users.findOne({isAdmin:true})
 				Meteor.call('threads.sendMessage', 'user', admin._id, 'flag', body)
 			} else {
 		    	Meteor.call('threads.sendMessage', data.recpientType, data.recpientId, data.inboxType, body)				
 			}
 
-		    $("textarea[name='message']")[0].value = ""
+		    $(`#${data.modalId} textarea[name='message']`)[0].value = ""
 			$(`#${data.modalId}`).modal('toggle')			
 		}
 	},		

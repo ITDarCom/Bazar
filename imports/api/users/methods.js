@@ -36,6 +36,7 @@ Meteor.methods({
         this.unblock();
         check(userId, String);
             if (Meteor.user().isAdmin) {
+                    Meteor.call("shops.remove", userId)
                     Meteor.users.remove({_id: userId});
             }
     },
@@ -45,6 +46,7 @@ Meteor.methods({
 
         if (Meteor.users.findOne(this.userId).isAdmin){
             if (Meteor.users.findOne(userId)) {
+                Meteor.call("shop.hide", blocked, userId)                
                 Meteor.users.update({ _id: userId }, { $set: { blocked: blocked } })
             }
         }

@@ -180,7 +180,16 @@
     {{/if}}   
       <li class={{isActiveRoute 'about'}}><a href="{{pathFor 'about'}}">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; {{_ "about"}}
-      </a></li>             
+      </a></li>
+
+    {{#if currentUser}}
+      <li><a href="#" data-toggle="modal" data-target="#contact-us-modal">
+        <span class="glyphicon glyphicon-mail" aria-hidden="true"></span>&nbsp; {{_ "contactUs"}}
+      </a></li>
+    {{/if}}
     </ul>  
   </nav>
+
+  {{> messageModal modalId='contact-us-modal' contactUs=true }} 
+
 </template>

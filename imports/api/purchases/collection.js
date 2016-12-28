@@ -24,6 +24,7 @@ Purchases.attachSchema(new SimpleSchema({
         label: function(){
             return TAPi18n.__('notes')
         }, 
+        max: 100
     },
     item: {
         type: String

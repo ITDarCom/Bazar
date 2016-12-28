@@ -24,7 +24,7 @@
 			<div class="media ">
 			<div class="media-right" style="padding-right:0px;">
 				<a href="{{pathFor 'inbox.thread' thread=_id}}">
-				  <img class="media-object" src="{{avatar}}" width="50px" alt="...">
+				  <img class="media-object" style="margin-left:10px;" src="{{avatar}}" width="50px" alt="...">
 				</a>
 			</div>			
 			<div class="media-body">
@@ -32,7 +32,7 @@
 				<a href="{{pathFor 'inbox.thread' thread=_id}}">
 				<b>
 				{{#unless recipientIsShopOwner}}
-					{{_"member"}} {{recipient.username}}
+					{{#unless recipient.isAdmin}}{{_"member"}}{{/unless}} {{recipient.username}}
 				{{else}}
 					{{_"shop"}} {{recipient.title}}	
 				{{/unless}}

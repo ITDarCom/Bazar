@@ -83,7 +83,7 @@ Template.itemsShowPage.events({
 				item: instance.itemId })
 
 			if (previous){			
-
+				$('.snackbar').hide() //hide all previous messages
 				var snack = $.snackbar({
 					content: TAPi18n.__('itemAlreadyInCart'), 
 					timeout: 0
@@ -94,8 +94,10 @@ Template.itemsShowPage.events({
 				Meteor.call('cart.addItem', instance.itemId, function(err, data){
 					var snack
 					if (err){
+						$('.snackbar').hide() //hide all previous messages
 						snack = $.snackbar({content: TAPi18n.__('somethingWrong'), timeout: 0});
 					} else {
+						$('.snackbar').hide() //hide all previous messages
 						snack = $.snackbar({
 							content: TAPi18n.__('itemAddedToCartSuccessfully'),
 							timeout: 0

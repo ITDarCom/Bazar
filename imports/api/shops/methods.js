@@ -85,15 +85,17 @@ Meteor.methods({
 
 	},
 
-	'shops.remove'(){
+	'shops.remove'(customUserId){
 
 		// Make sure the user is logged in before inserting a task
 		if (! this.userId) {
 			throw new Meteor.Error('not-authorized');
 		}
 
-		const hasShop = Meteor.users.findOne(this.userId).hasShop
-		const shop = Meteor.users.findOne(this.userId).shop
+		const userId = customUserId ? customUserId : this.userId
+
+		const hasShop = Meteor.users.findOne(userId).hasShop
+		const shop = Meteor.users.findOne(userId).shop
 		const shopObj = Shops.findOne(shop)
 
 		if (hasShop){
@@ -106,7 +108,7 @@ Meteor.methods({
 			const inboxDecrement = Threads.find({ 
 				'participants': { $elemMatch: { type:'shop', id:shop, unread: true}} 
 			}).count() * (-1)
-			Meteor.users.update(this.userId, { $inc: { 'unreadInbox': inboxDecrement }})
+			Meteor.users.update(userId, { $inc: { 'unreadInbox': inboxDecrement }})
 			Threads.update({ 
 				'participants': { $elemMatch: { type:'shop', id:shop}} 
 			},{ $set: { isRemoved: true }}, { multi: true })
@@ -118,7 +120,7 @@ Meteor.methods({
 				Meteor.call('orders.process', purchaseItem._id, 'rejected')
 			})
 
-			Meteor.users.update({ _id: this.userId}, 
+			Meteor.users.update({ _id: userId}, 
 				{ $set: { 'hasShop': false, 'shop': null } 
 			})	
 
@@ -126,14 +128,15 @@ Meteor.methods({
 
 
 	},
-	'shop.hide'(status){
+	'shop.hide'(status, customUserId){
 
 		// Make sure the user is logged in before inserting a task
 		if (! this.userId) {
 			throw new Meteor.Error('not-authorized');
 		}
 
-		var user = Meteor.users.findOne(this.userId)
+		const userId = customUserId ? customUserId : this.userId
+		const user = Meteor.users.findOne(userId)
 
 		if (user.hasShop) {
 			Shops.update({_id: user.shop},{$set: {isHidden: status}});

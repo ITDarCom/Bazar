@@ -19,6 +19,7 @@ Template.login.onRendered(function(){
 		if ($('.at-error p').get(0)){
 			const msg = $('.at-error p').get(0).innerHTML
 			$('.at-error').get(0).remove()
+			$('.snackbar').hide() //hide all previous messages
 			snack = $.snackbar({
 				content: msg,
 				timeout: 0
