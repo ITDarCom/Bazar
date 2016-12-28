@@ -88,12 +88,16 @@
 	      <div class="modal-header">
 	        <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true">×</button>
 	        {{#unless isFlag}}
-	        <h4 class="modal-title">{{_ "sendMessage"}}</h4>
+	        <h4 class="modal-title">
+	        	{{#unless isContactUs}}{{_ "sendMessage"}}{{else}}
+				{{{_ "contactUs"}}}
+	        	{{/unless}}</h4>
 	        {{else}}
 	        <h4 class="modal-title">{{_ "flag"}}</h4>
 	        {{/unless}}
 	      </div>
 	      <div class="modal-body" style="padding:10px;">
+	      			{{#if isContactUs}}<p>شكرا لك على مراسلتنا. سنجيب على رسالتك بأقرب وقت إن شاء الله.</p>{{/if}}
 					<textarea class="form-control" rows="5" style="display: inline-block; width:100%;" name="message">{{#if isFlag}}بخصوص المنتج "{{item.title}}" رقم #{{item._id}}{{/if}}</textarea>	      
 					<center>
 					<button class="btn btn-raised btn-primary send-message-btn" >

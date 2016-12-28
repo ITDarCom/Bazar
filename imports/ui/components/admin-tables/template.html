@@ -28,9 +28,7 @@
             <tr id= {{identifier}}>
                 <td style="vertical-align: middle" class="col-md-3">{{label}}</td>
                 <td style="vertical-align: middle" class="col-md-3">{{identifier}}</td>
-                {{#if isActiveRoute 'admin.categories'}}
-                    <td class="col-md-3">{{> categotyOrder data=this}}</td>
-                {{/if}}
+                <td class="col-md-3">{{> categotyOrder data=this}}</td>
                 <td style="vertical-align: middle" class="col-md-2">
                     <button class="btn btn-warning btn-sm btn-raised btn-delete">{{_ "delete"}}</button>
                     {{#if isCategory}}

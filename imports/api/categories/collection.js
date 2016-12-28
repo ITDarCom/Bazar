@@ -36,7 +36,7 @@ Categories.attachSchema(new SimpleSchema({
 	order: {
 		type: Number,
 		label: function(){
-			return TAPi18n.__('categoryOrder')
+			return TAPi18n.__('order')
 		},
 		autoValue: function () {
 			if (this.isInsert) {

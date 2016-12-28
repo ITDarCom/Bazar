@@ -42,5 +42,16 @@ Cities.attachSchema(new SimpleSchema({
                 this.unset(); // we should unset every change to this field
             }
         }
-    }
+    },
+    order: {
+        type: Number,
+        label: function(){
+            return TAPi18n.__('order')
+        },
+        autoValue: function () {
+            if (this.isInsert) {
+                return Cities.find().count()+1;
+            }
+        }
+    }    
 }));

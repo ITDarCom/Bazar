@@ -22,7 +22,7 @@ Template.itemsFilter.helpers({
 		return SelectCity
 	},
 	options: function () {
-		return Cities.find().fetch().map(function(city){
+		return Cities.find({}, { sort: {order:1}}).fetch().map(function(city){
 			return {label:city.label, value:city.identifier}
 		})
 	}

@@ -216,6 +216,9 @@ Template.messageModal.helpers({
 	isFlag(){
 		return Template.instance().data.flag
 	},
+	isContactUs(){
+		return Template.instance().data.contactUs
+	},
 	item(){
 		return Template.instance().data.item
 	}
