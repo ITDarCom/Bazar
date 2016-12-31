@@ -18,9 +18,9 @@ Template.itemsFilter.helpers({
 	selectedCityStyle(){
 		const city = Cities.findOne({identifier: Session.get('selectedCity')})
 		if (city && city.label.length > 8)
-		return "width:80px; font-size:10px;"
+		return "width:120px;"
 		else 
-			return "width:80px;"
+			return "wiidth:80px;"
 	},
 	searchText(){
 		return Session.get('searchText')
