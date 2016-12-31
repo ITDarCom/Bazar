@@ -8,6 +8,8 @@ App.info({
   version: "1.0.1"
 });
 
+App.setPreference('android-versionCode', '9009');
+
 // Set up resources such as icons and launch screens.
 App.icons({
 	"iphone_2x": "images/Orange/Icons/120 x 120.png",
