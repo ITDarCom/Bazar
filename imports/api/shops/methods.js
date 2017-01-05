@@ -42,7 +42,7 @@ Meteor.methods({
 			}, (err, shopId) => {
 				if (!err) {
 					Meteor.users.update({ _id: this.userId}, 
-						{ $set: { 'hasShop': true, 'shop': shopId, 'tmpShopLogo.url': null, 'tmpShopLogo.url': null } 
+						{ $set: { 'hasShop': true, 'shop': shopId, 'shopTitle': doc.title,'tmpShopLogo.url': null, 'tmpShopLogo.url': null } 
 					})			
 				} else {
 					throw err
@@ -76,11 +76,14 @@ Meteor.methods({
 		Shops.update({ _id: documentId }, modifier, function(err, count){
 
 			//if the user edits the city of the shop, modify his old items
-			const newCity = Shops.findOne(documentId).city
+			const shop = Shops.findOne(documentId)
+			const newCity = shop.city
 
 			if (oldCity != newCity){
 				Items.update({shop: documentId}, { $set: { city: newCity} }, { multi: true })
 			}
+
+			Meteor.users.update({shop: documentId}, {$set: {'shopTitle': shop.title} })
 		})
 
 	},

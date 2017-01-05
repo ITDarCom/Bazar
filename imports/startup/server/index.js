@@ -48,6 +48,12 @@ Meteor.startup(() => {
 	Threads.remove({})
 	*/
 
+	const shops = Shops.find({}).fetch()
+
+	shops.forEach(function(shop){
+		Meteor.users.update({shop:shop._id}, {$set: {shopTitle: shop.title }})
+	})
+
 	Accounts.emailTemplates.siteName = "ebazaar.online";
 
 	Accounts.emailTemplates.resetPassword.from = function () {

@@ -6,6 +6,9 @@
     'shop' : {
         type: String
     },
+    'shopTitle' : {
+        type: String, optional:true
+    },    
     'avatar':{
         type: String,
     },

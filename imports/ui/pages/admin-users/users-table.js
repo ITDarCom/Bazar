@@ -22,13 +22,14 @@ TabularTables.users = new Tabular.Table({
         }
     },     
     "info": false,
-    extraFields: ['blocked','isAdmin','lastSignIn','registerdAt'],
+    extraFields: ['blocked','isAdmin','lastSignIn','registerdAt', 'shopTitle'],
     allow: function (userId) {
         return (Meteor.users.findOne({_id:userId}) && Meteor.users.findOne({_id:userId}).isAdmin);
     },
     columns: [
 
         {data: "username", title: function(){return TAPi18n.__('users')},class: "col-md-2"},
+        {data: "shopTitle", title: function(){return TAPi18n.__('shop')},class: "col-md-2"},
         {
             tmpl: Meteor.isClient && Template.userAdministrativeActions,
             "searchable": false, title: '',
