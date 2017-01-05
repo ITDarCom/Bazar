@@ -13,9 +13,16 @@
     font-family: 'Glyphicons Halflings', serif !important;
 }
 
+.red a,
+.red a:hover {
+    background-color: orange !important;
+    margin-left:5px;
+    margin-bottom:5px;
+}
+
 .red .active a,
 .red .active a:hover {
-    background-color: orange !important;
+    background-color: #FF8D00 !important;
 }
 
 #main-nav{
