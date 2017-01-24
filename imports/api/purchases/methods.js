@@ -70,10 +70,10 @@ Meteor.methods({
 
 		cartItems.forEach(function(item){
 			//notify shop owner
-			var shopId = Shops.update(item.shop, { 
+			Shops.update(item.shop, { 
 				$inc: { 'unreadOrders': 1, 'totalOrders': 1 }
 			})
-			const shop = Shops.findOne(shopId)
+			const shop = Shops.findOne(item.shop)
 			Meteor.call('pushNotifications.newOrder', shop.user)
 
 		})
