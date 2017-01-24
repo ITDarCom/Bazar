@@ -100,11 +100,11 @@ Meteor.startup(() => {
 	    apiKey: 'AAAAN5JUkAM:APA91bHKe49nfXkKlWzBhoAzSJetlgbrSCShY78OxjUYEe5M4JsggU39tIXsUeYr4flHd-wCz4_1eISSCZM9I-ZBiGR4GXasKUNmDXyFnW5B-AwJcccOgevWkvolzCGwUgIE8jcp5s7C',
 	    projectNumber: 238678216707
 	  }
-	  // production: true,
-	  // 'sound' true,
-	  // 'badge' true,
-	  // 'alert' true,
-	  // 'vibrate' true,
+	  production: true,
+	  'sound' true,
+	  'badge' true,
+	  'alert' true,
+	  'vibrate' true,
 	  // 'sendInterval': 15000, Configurable interval between sending
 	  // 'sendBatchSize': 1, Configurable number of notifications to send per batch
 	  // 'keepNotifications': false,

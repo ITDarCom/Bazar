@@ -15,13 +15,12 @@ Meteor.methods({
 		Push.send({
             from: 'push',
             title: 'رسالة جديدة لك في بازار',
-            text: 'اضغط لتقد بريدك',
-            //badge: badge,
+            text: 'اضغط لتفقد بريدك',
+            badge: 1,
             //sound: 'airhorn.caf',
-            /*payload: {
-                title: title,
-                historyId: result
-            },*/
+            payload: {
+            	route: 'inbox'
+            },
             query: {
                 userId: userId //this will send to a specific Meteor.user()._id
             }
@@ -32,13 +31,12 @@ Meteor.methods({
 		Push.send({
             from: 'push',
             title: 'طلب جديد على متجرك في بازار',
-            text: 'اضغط لتقد طلباتك',
-            //badge: badge,
+            text: 'اضغط لتفقد طلباتك',
+            badge: 1,
             //sound: 'airhorn.caf',
-            /*payload: {
-                title: title,
-                historyId: result
-            },*/
+            payload: {
+            	route: 'settings.orders'
+            },
             query: {
                 userId: userId //this will send to a specific Meteor.user()._id
             }
@@ -50,13 +48,12 @@ Meteor.methods({
 		Push.send({
             from: 'push',
             title: 'تم معالجة طلبك على بازار',
-            text: 'اضغط لتقد مشترياتك',
-            //badge: badge,
+            text: 'اضغط لتفقد مشترياتك',
+            badge: 1,
             //sound: 'airhorn.caf',
-            /*payload: {
-                title: title,
-                historyId: result
-            },*/
+            payload: {
+            	route: 'settings.purchases'
+            },
             query: {
                 userId: userId //this will send to a specific Meteor.user()._id
             }
@@ -67,13 +64,12 @@ Meteor.methods({
 		Push.send({
             from: 'push',
             title: 'تم توصيل طلبك على بازار',
-            text: 'اضغط لتقد مشترياتك',
-            //badge: badge,
+            text: 'اضغط لتفقد مشترياتك',
+            badge: 1,
             //sound: 'airhorn.caf',
-            /*payload: {
-                title: title,
-                historyId: result
-            },*/
+            payload: {
+            	route: 'settings.purchases'
+            },
             query: {
                 userId: userId //this will send to a specific Meteor.user()._id
             }
