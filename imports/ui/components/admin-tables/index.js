@@ -45,7 +45,7 @@ Template.adminTables.events({
                 } else if (!result){
                     alert(TAPi18n.__('cannotDeleteCategory'))
                 }
-            })            
+            }.bind(this))            
         }
         else {
             Meteor.call("city.canDelete",this._id, function(err, result){
@@ -58,7 +58,7 @@ Template.adminTables.events({
                 } else if (!result){
                     alert(TAPi18n.__('cannotDeleteCity'))
                 }
-            })
+            }.bind(this))
         }
     }
 });

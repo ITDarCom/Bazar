@@ -172,6 +172,11 @@ Template.registerHelper('currentShop', function(){
     return Shops.findOne(Meteor.user().shop);
 })
 
+Template.registerHelper('currentShopLogoAbsolute', function(){
+    const shop = Shops.findOne(Meteor.user().shop);
+    return Meteor.absoluteUrl().replace(/\/$/,"") +shop.logo.url
+})
+
 Template.registerHelper('isShopOwner', function(){
 	//returns if currentUser is shop owner of this shop
 	if (Meteor.user() && Meteor.user().hasShop){

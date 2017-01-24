@@ -12,8 +12,22 @@ Template.mainNav.helpers({
 		var sortedCategArr = _.sortBy(categArr, function(categ){ return categ.order; });
 		return sortedCategArr.map(function(category){
 			return _.extend(category, { 
+				isTall: category.label.indexOf(' ') >= 0,
 				path: Router.path('categories.show', { category: category.identifier })})
 		})
+	},
+	icons(identifier){
+
+		switch (identifier){
+			case 'deserts': return 'flaticon-food-12'; break;
+			case 'Main-course': return 'flaticon-food'; break;
+			case 'pateseries': return 'flaticon-cooking'; break;
+			case 'Appetizer': return 'flaticon-food-5'; break;
+			case 'Frozen-food': return 'flaticon-snowflake'; break;
+			case 'Other': return 'flaticon-food-7'; break;
+		}
+
+		return 'flaticon-chef'
 	}
 });
 

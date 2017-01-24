@@ -91,7 +91,36 @@ Template.orderItem.events ({
 		if (confirm(TAPi18n.__('deliverOrderConfirmation'))){
 			Meteor.call('orders.process', purchaseId, 'delivered');
 		}		
-	}
+	},
+    "click .location-share-btn": function(event, instance){
+
+		const location = instance.data.deliveryInfo.location
+
+		console.log("http://maps.google.com/maps?z=16&t=m&q=loc:"+location.lat+"+"+location.lng)
+
+        event.preventDefault();
+        
+        // this is the complete list of currently supported params you can pass to the plugin (all optional)
+        var options = {
+          message: "http://maps.google.com/maps?z=16&t=m&q=loc:"+location.lat+"+"+location.lng, // not supported on some apps (Facebook, Instagram)
+          subject: 'موقع الطلبية', // fi. for email
+          files: ['', ''], // an array of filenames either locally or remotely
+          url: "http://maps.google.com/maps?z=16&t=m&q=loc:"+location.lat+"+"+location.lng,
+          chooserTitle: 'اختر تطبيقا' // Android only, you can override the default share sheet title
+        }
+
+        var onSuccess = function(result) {
+          console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+          console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+        }
+
+        var onError = function(msg) {
+          console.log("Sharing failed with message: " + msg);
+        }
+
+        window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+
+    },	
 });
 
 function getItem(itemId){

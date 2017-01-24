@@ -40,10 +40,16 @@
                     {{#if hasLocation}}
                     <a class="btn btn-fab btn-success location-modal-btn"
                        data-toggle="modal" data-target="#{{mapModalId}}">
-                        <i class="material-icons">&#xE0C8;</i></a>
+                        <i class="material-icons">&#xE0C8;</i></a>                     
                     {{/if}}
                 </div>                
             </li>
+            <li class="list-group-item" style="padding-right:5px;">
+                {{#if hasLocation}}                
+                <a class="btn btn-raised btn-xm btn-info location-share-btn">مشاركة الخريطة</a>                      
+                {{/if}}
+            
+            </li>            
             <li class="list-group-item">{{_ "member"}}: {{member}}</li>
             <li class="list-group-item">{{_ "quantity"}}: {{quantity}}</li>
             <li class="list-group-item">{{_ "orderSentDate"}}: {{moment sentAt "MM-DD-YYYY hh:mm a"}}</li>

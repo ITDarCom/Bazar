@@ -56,7 +56,7 @@ Template.threadListItem.helpers({
 		if (recipient.type == 'user'){
 			return Meteor.users.findOne(recipient.id).avatar
 		} else {
-			return Shops.findOne(recipient.id).logo.url
+			return Meteor.absoluteUrl().replace(/\/$/,"") + Shops.findOne(recipient.id).logo.url
 		}
 	}			
 })

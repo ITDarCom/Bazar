@@ -50,3 +50,7 @@ App.launchScreens({
 });
 
 App.accessRule('*');
+
+App.configurePlugin('phonegap-plugin-push', {
+  SENDER_ID: 238678216707
+});

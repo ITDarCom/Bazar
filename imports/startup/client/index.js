@@ -84,4 +84,26 @@ Meteor.startup(function () {
   			}
   		}	
 	});
+
+
+	Push.Configure({
+	  android: {
+	    senderID: 238678216707,
+	    alert: true,
+	    badge: true,
+	    sound: true,
+	    vibrate: true,
+	    clearNotifications: true
+	    // icon: '',
+	    // iconColor: ''
+	  },
+	  ios: {
+	    alert: true,
+	    badge: true,
+	    sound: true
+	  }
+	});
+
+	Push.debug = true;
+	
 })

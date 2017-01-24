@@ -13,23 +13,85 @@
     font-family: 'Glyphicons Halflings', serif !important;
 }
 
-.red a,
-.red a:hover {
-    background-color: orange !important;
-    margin-left:5px;
-    margin-bottom:5px;
-}
 
-.red .active a,
-.red .active a:hover {
-    background-color: #FF8D00 !important;
+.order-item .btn-fab{
+  margin:2px;
+
 }
 
 #main-nav{
   width: 100%;
   z-index: 9999 !important;
   padding:5px;
+  color: white;
   background-color: rgba(249, 158, 56, 0.69);
+}
+
+.horizontal {
+    width: 100%;
+    height: 70px;
+    overflow-y: hidden;
+}
+
+.table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.article {
+    width: 125px;
+    height: 65px;
+    display: table-cell;    
+    vertical-align: middle;
+    text-align: center;
+}
+
+.red .item {
+    background-color: orange !important;
+    color:white;
+    font-size: 17px;
+    font-weight: bold;   
+    width:94%;
+    height:60px;
+    border-radius: 4px;
+    text-align: center;    
+    padding-top:2px;
+}
+
+.red .item.tall {
+    padding-top:2px;
+}
+/* 
+.red .item.tall .nav-icon{
+    position:relative;
+    top:10px;
+} */
+
+
+.red .item a {
+  vertical-align: middle;  
+  color:white;
+  text-decoration: none;
+}
+
+.red td {
+  padding:5px;
+    height:60px;
+}
+
+.red .item.active {
+    background-color: #FF8D00 !important;
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.nav-icon {
+  display: inline;
+  white-space: nowrap;
 }
 
 .back-btn .glyphicon {
