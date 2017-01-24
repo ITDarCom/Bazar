@@ -10,6 +10,76 @@ import {recipientIsShopOwner} from './../../ui/pages/inbox-thread/helpers'
 
 Meteor.methods({
 
+
+	'pushNotifications.newMessage'(userId){
+		Push.send({
+            from: 'push',
+            title: 'رسالة جديدة لك في بازار',
+            text: 'اضغط لتقد بريدك',
+            //badge: badge,
+            //sound: 'airhorn.caf',
+            /*payload: {
+                title: title,
+                historyId: result
+            },*/
+            query: {
+                userId: userId //this will send to a specific Meteor.user()._id
+            }
+        });
+	},
+
+	'pushNotifications.newOrder'(userId){
+		Push.send({
+            from: 'push',
+            title: 'طلب جديد على متجرك في بازار',
+            text: 'اضغط لتقد طلباتك',
+            //badge: badge,
+            //sound: 'airhorn.caf',
+            /*payload: {
+                title: title,
+                historyId: result
+            },*/
+            query: {
+                userId: userId //this will send to a specific Meteor.user()._id
+            }
+        });
+	},	
+
+
+	'pushNotifications.orderProcessed'(userId){
+		Push.send({
+            from: 'push',
+            title: 'تم معالجة طلبك على بازار',
+            text: 'اضغط لتقد مشترياتك',
+            //badge: badge,
+            //sound: 'airhorn.caf',
+            /*payload: {
+                title: title,
+                historyId: result
+            },*/
+            query: {
+                userId: userId //this will send to a specific Meteor.user()._id
+            }
+        });
+	},	
+
+	'pushNotifications.orderDelivered'(userId){
+		Push.send({
+            from: 'push',
+            title: 'تم توصيل طلبك على بازار',
+            text: 'اضغط لتقد مشترياتك',
+            //badge: badge,
+            //sound: 'airhorn.caf',
+            /*payload: {
+                title: title,
+                historyId: result
+            },*/
+            query: {
+                userId: userId //this will send to a specific Meteor.user()._id
+            }
+        });
+	},			
+
 	'threads.markAsUnread'(unread, threadId, forRecipient){	
 
 		check(unread, Boolean);
@@ -36,6 +106,9 @@ Meteor.methods({
 					}, false, false);
 
 					Meteor.users.update(userId, { $inc: { 'unreadInbox': increment }})
+					if (unread){
+						Meteor.call('pushNotifications.newMessage', userId)
+					}
 
 				} else if (recipient.type == 'shop'){
 
@@ -50,6 +123,9 @@ Meteor.methods({
 					}, false, false)
 
 					Meteor.users.update(userId, { $inc: { 'unreadInbox': increment }})
+					if (unread){
+						Meteor.call('pushNotifications.newMessage', userId)
+					}
 				}				
 			}
 
@@ -74,6 +150,9 @@ Meteor.methods({
 			        }, false, false);
 		        	
 		        	Meteor.users.update(userId, { $inc: { 'unreadInbox': increment }})
+		        	if (unread){
+						Meteor.call('pushNotifications.newMessage', userId)
+					}
 
 				} else if (currentUser.type == 'shop'){
 
@@ -87,6 +166,9 @@ Meteor.methods({
 					}, false, false)
 
 					Meteor.users.update(userId, { $inc: { 'unreadInbox': increment }})
+					if (unread){
+						Meteor.call('pushNotifications.newMessage', userId)
+					}
 				}
 
 			}

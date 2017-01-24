@@ -73,6 +73,9 @@ Meteor.methods({
 			var shopId = Shops.update(item.shop, { 
 				$inc: { 'unreadOrders': 1, 'totalOrders': 1 }
 			})
+			const shop = Shops.findOne(shopId)
+			Meteor.call('pushNotifications.newOrder', shop.user)
+
 		})
 		Meteor.users.update(this.userId, { 
 			$inc: { 'pendingPurchases': cartItems.length, 'totalPurchases': cartItems.length },
@@ -114,6 +117,7 @@ Meteor.methods({
 
 			//notifying purchase owner
 			Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }});
+			Meteor.call('pushNotifications.orderProcessed', userId);
 
 			//marking order as processed for shop owner
 			Shops.update(shopId, { $inc: { 'unreadOrders': -1 }})
@@ -128,6 +132,7 @@ Meteor.methods({
 			if (status.match(/delivered/)){				
 				//notifying purchase owner
 				Meteor.users.update(userId, { $inc: { 'unreadPurchases': 1 }}); 
+				Meteor.call('pushNotifications.orderDelivered', userId);
 				Shops.update(shopId, { $inc: { totalSales: 1}})
 			}
 
