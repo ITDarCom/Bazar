@@ -12,11 +12,18 @@ Meteor.methods({
 
 
 	'pushNotifications.newMessage'(userId){
+
+
+		const user = Meteor.users.findOne(this.userId)
+		const shop = Shops.findOne({ user: this.userId() })
+		const unreadOrders = shop ? shop.unreadOrders : 0
+		const unreadInbox = Meteor.user().unreadInbox
+
 		Push.send({
             from: 'push',
             title: 'رسالة جديدة لك في بازار',
             text: 'اضغط لتفقد بريدك',
-            badge: 1,
+            badge: unreadOrders + unreadInbox,
             //sound: 'airhorn.caf',
             payload: {
             	route: 'inbox'
@@ -28,11 +35,17 @@ Meteor.methods({
 	},
 
 	'pushNotifications.newOrder'(userId){
+
+		const user = Meteor.users.findOne(this.userId)
+		const shop = Shops.findOne({ user: this.userId() })
+		const unreadOrders = shop ? shop.unreadOrders : 0
+		const unreadInbox = Meteor.user().unreadInbox
+
 		Push.send({
             from: 'push',
             title: 'طلب جديد على متجرك في بازار',
             text: 'اضغط لتفقد طلباتك',
-            badge: 1,
+            badge: unreadOrders + unreadInbox,
             //sound: 'airhorn.caf',
             payload: {
             	route: 'settings.orders'
@@ -45,11 +58,17 @@ Meteor.methods({
 
 
 	'pushNotifications.orderProcessed'(userId){
+
+		const user = Meteor.users.findOne(this.userId)
+		const shop = Shops.findOne({ user: this.userId() })
+		const unreadOrders = shop ? shop.unreadOrders : 0
+		const unreadInbox = Meteor.user().unreadInbox
+
 		Push.send({
             from: 'push',
             title: 'تم معالجة طلبك على بازار',
             text: 'اضغط لتفقد مشترياتك',
-            badge: 1,
+            badge: unreadOrders + unreadInbox,
             //sound: 'airhorn.caf',
             payload: {
             	route: 'settings.purchases'
@@ -61,11 +80,17 @@ Meteor.methods({
 	},	
 
 	'pushNotifications.orderDelivered'(userId){
+
+		const user = Meteor.users.findOne(this.userId)
+		const shop = Shops.findOne({ user: this.userId() })
+		const unreadOrders = shop ? shop.unreadOrders : 0
+		const unreadInbox = Meteor.user().unreadInbox
+				
 		Push.send({
             from: 'push',
             title: 'تم توصيل طلبك على بازار',
             text: 'اضغط لتفقد مشترياتك',
-            badge: 1,
+            badge: unreadOrders + unreadInbox,
             //sound: 'airhorn.caf',
             payload: {
             	route: 'settings.purchases'

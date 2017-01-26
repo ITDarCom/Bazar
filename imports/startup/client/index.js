@@ -105,12 +105,21 @@ Meteor.startup(function () {
 	});
 
 	Push.debug = true;
-	
-	Push.addListener('message', function(notification) {
-        if (notification.payload.route){
-        	const route = notification.payload.route
-        	const params = notification.payload.params || {}
-        	Router.go(route, params)
-        }
-    });
+
+    Push.push.on('notification', function(notification){
+
+    	if (!notification.foreground){
+			if (notification.payload.route){
+	        	const route = notification.payload.route
+	        	const params = notification.payload.params || {}
+
+	        	setTimeout(function(){
+	        		Router.go(route)        		
+	        	},0)
+        	}      		
+
+    	}
+
+    })
+        
 })
