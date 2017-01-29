@@ -35,6 +35,7 @@ import "./../../ui/pages/favorites-show"
 import "./../../ui/pages/inbox"
 import "./../../ui/pages/inbox-thread"
 
+import "./../../ui/pages/admin-announcements"
 import "./../../ui/pages/admin-categories"
 import "./../../ui/pages/admin-categories-edit"
 import "./../../ui/pages/admin-cities"

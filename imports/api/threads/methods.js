@@ -11,9 +11,7 @@ import {recipientIsShopOwner} from './../../ui/pages/inbox-thread/helpers'
 
 Meteor.methods({
 
-
 	'pushNotifications.newMessage'(userId){
-
 
 		const user = Meteor.users.findOne(userId)
 		const shop = Shops.findOne({ user: userId })
@@ -136,6 +134,7 @@ Meteor.methods({
 
 					//finding the user who owns this shop inbox
 					const shopId = recipient.id
+					console.log(recipient)
 					const userId = Meteor.users.findOne({ 'shop': shopId })._id
 
 					Threads.update({ 
@@ -306,6 +305,116 @@ Meteor.methods({
 
 		}
 	},
+
+	'threads.sendAnnouncement'(announcementType, body){
+
+		// Make sure the user is logged in before inserting a task
+		if (! this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+
+		const admin = Meteor.users.findOne(this.userId);
+		if (!admin.isAdmin) {
+			throw new Meteor.Error('not-authorized');
+		}		
+
+		check(announcementType, String);
+		check(body, String);
+
+		var author = {
+            type: 'user', id: this.userId, isAnnouncer: true, unread: false
+        }
+
+		var message = {
+			author: author,
+            body: body
+		}
+
+		const announcementId = Date.now().toString()
+
+		if (announcementType.match(/shop/)){
+
+			const shops = Shops.find({}).fetch()
+			shops.forEach(function(shop){
+
+				var recepient = {
+					type: 'shop',
+					id: shop._id,
+					unread: false,
+				}
+
+			    const thread = { 
+			        messages: [message], 
+			        participants: [
+			            _.extend(_.clone(author), { unread: false }), 
+			            recepient
+			        ],
+			        updatedAt: new Date(),
+			        isAnnouncement: true,
+			        announcementId : announcementId,
+			        announcementType: announcementType
+			    }
+
+			    const threadId = Threads.insert(thread)	
+
+				Meteor.call('threads.markAsUnread', true, threadId, true);	
+
+			})
+
+		} else {
+
+			const users = Meteor.users.find({}).fetch()
+			users.forEach(function(user){
+
+				if (user._id == admin._id) return;
+
+				var recepient = {
+					type: 'user',
+					id: user._id,
+					unread: false,
+				}
+
+			    const thread = { 
+			        messages: [message], 
+			        participants: [
+			            _.extend(_.clone(author), { unread: false }), 
+			            recepient
+			        ],
+			        updatedAt: new Date(),
+			        isAnnouncement: true,
+			        announcementId : announcementId,
+			        announcementType: announcementType
+			    }
+
+			    const threadId = Threads.insert(thread)	
+
+				Meteor.call('threads.markAsUnread', true, threadId, true);	
+
+			})
+		}
+		
+
+	    const thread = { 
+	        messages: [message], 
+	        participants: [
+	            _.extend(_.clone(author), { unread: false }), 
+	            _.extend(_.clone(author), { unread: false })
+	        ],
+	        updatedAt: new Date(),
+	        isAnnouncement: true,
+	        isRootAnnouncement: true,
+	        announcementId : announcementId,
+	        announcementType: announcementType
+	    }
+
+	    const threadId = Threads.insert(thread)	
+
+
+
+
+
+
+	}
 
 	/*'threads.isActive'(userId, threadId){
 

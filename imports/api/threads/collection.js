@@ -42,7 +42,19 @@ Threads.attachSchema(new SimpleSchema({
     },
     isRemoved: {
         type:Boolean, defaultValue:false, optional:true
-    }    
+    },
+    isAnnouncement: {
+        type:Boolean, defaultValue:false, optional:true
+    },
+    isRootAnnouncement: {
+      type:Boolean, defaultValue:false, optional:true  
+    },
+    announcementId : {
+        type: String, optional: true
+    }, 
+    announcementType : {
+       type: String, optional: true 
+    }         
 }));
 
 Threads.before.update(function (userId, doc, fieldNames, modifier, options) {

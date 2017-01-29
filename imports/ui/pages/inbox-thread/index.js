@@ -250,6 +250,10 @@ Template.messageModal.events({
 			} else if (data.contactUs) {
 				const admin = Meteor.users.findOne({isAdmin:true})
 				Meteor.call('threads.sendMessage', 'user', admin._id, 'flag', body)
+			} else if (data.userAnnouncement) {
+				Meteor.call('threads.sendAnnouncement', 'user', body)
+			} else if (data.shopAnnouncement) {
+				Meteor.call('threads.sendAnnouncement', 'shop', body)
 			} else {
 		    	Meteor.call('threads.sendMessage', data.recpientType, data.recpientId, data.inboxType, body)				
 			}

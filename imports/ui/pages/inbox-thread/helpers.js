@@ -3,7 +3,7 @@ import { Shops } from './../../../api/shops/collection'
 function getRecipient(thread){
 
 	const author = thread.participants.find(p => {
-		return ((p.id == Meteor.userId()) && (p.type == 'user')) ||
+		return p.isAnnouncer || ((p.id == Meteor.userId()) && (p.type == 'user')) ||
 			((p.id == Meteor.user().shop) && (p.type == 'shop'))
 	})
 

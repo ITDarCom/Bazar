@@ -15,14 +15,33 @@ import './template.html'
 Template.threadsList.onCreated(function(){
 
 	//subscribing to the appropriate channel on server
+
+	const route = Router.current().route.getName();
+
 	this.autorun(()=>{
-		this.subscribe('inbox')
+
+		if (route.match(/admin/)){
+			this.subscribe('announcements')
+		} else {
+			this.subscribe('inbox')			
+		}
 	})
 })
 
 Template.threadsList.helpers({
 	threads(){
-		return Threads.find()
+
+		const route = Router.current().route.getName();
+
+		if (route.match(/admin/)){
+			const type = Router.current().params.type
+			return Threads.find({ 
+				isRootAnnouncement: true
+			}, {sort: { updatedAt: -1 }})
+		} else {
+			return Threads.find({}, {sort: { updatedAt: -1 }})
+		}
+
 	}
 })
 

@@ -174,20 +174,22 @@
     {{#if isAdmin}}
       <li class={{isActiveRoute 'admin.users'}}><a href="{{pathFor 'admin.users'}}">
         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; {{_ "admin"}}
-      </a></li>
+      </a></li>    
     {{/if}}   
       <li class={{isActiveRoute 'about'}}><a href="{{pathFor 'about'}}">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; {{_ "about"}}
       </a></li>
-
     {{#if currentUser}}
+      {{#unless isAdmin}}
       <li><a href="#" data-toggle="modal" data-target="#contact-us-modal">
         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "contactUs"}}
       </a></li>
+      {{/unless}}
     {{/if}}
     </ul>  
   </nav>
 
   {{> messageModal modalId='contact-us-modal' contactUs=true }} 
+
 
 </template>

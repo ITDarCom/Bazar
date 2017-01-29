@@ -74,7 +74,6 @@ Template.applicationLayout.onCreated(function(){
 
 Template.applicationLayout.helpers({
 	networkErrorMessage(){
-		console.log(Meteor.status().retryTime, Session.get('time'))
 		const remaining = Math.floor((Meteor.status().retryTime - Session.get('time'))/1000)
 
 		var remainingMessage = ""

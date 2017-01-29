@@ -4,9 +4,10 @@ import {Shops} from './../shops/collection'
 const children = [
 	{
 		find(thread){
-			const user = thread.participants.find(p => p.type == 'user')
-			if (user){
-				return Meteor.users.find({ _id: user.id })
+			const users = thread.participants.filter(p => p.type == 'user')
+			if (users){
+				const userIds = users.map(u => u.id)
+				return Meteor.users.find({ _id: {$in: userIds } })
 			}
 		}
 	},
@@ -20,11 +21,27 @@ const children = [
 	}
 ]
 
+
+
+Meteor.publish('announcements', function singleShopPublication(shopId) {
+	//Meteor._sleepForMs(200);
+	return Threads.find({
+		isRootAnnouncement: true
+	});	
+});
+
+
 Meteor.publishComposite('inbox', function inboxPublication(opts, limit){
 	return {
 		find(){
 			//Meteor._sleepForMs(200);
-			const shopId = Meteor.users.findOne(this.userId).shop
+
+			const current = Meteor.users.findOne(this.userId)
+			const shopId = current.shop
+
+			const isAdmin = current.isAdmin
+
+			const adminConditions = !isAdmin? {} : { isAnnouncement: false }
 
 			return Threads.find({
 				$and: [
@@ -34,8 +51,8 @@ Meteor.publishComposite('inbox', function inboxPublication(opts, limit){
 							{'participants.type': "shop",'participants.id': shopId}
 						]
 					},
-					{ isRemoved: false}
-				]				
+					{ isRemoved: false }, adminConditions
+				], 
 			}, { limit: limit, sort: { createdAt: -1 } });
 			
 		}, 

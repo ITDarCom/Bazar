@@ -40,20 +40,20 @@ Meteor.startup(() => {
 	/* MIGRATION CODE  */
 	/*
 	Items.update({}, { $set: { isRemoved: false } }, {multi:true})
-	Shops.update({}, { $set: { isRemoved: false, unreadOrders:0, totalOrders:0, totalSales:0 } }, {multi:true})
-	Meteor.users.update({}, {$set: { unreadInbox:0, pendingPurchases:0, unreadInbox:0, totalPurchases:0, cartItems:0}}, {multi:true})
-	Purchases.remove({})
 	Meteor.users.remove({})
 	Items.remove({})
 	Shops.remove({})
 	Threads.update({}, { $set: { isRemoved: false } }, {multi:true})
-	Threads.remove({})
 
 	const shops = Shops.find({}).fetch()
 	shops.forEach(function(shop){
 		Meteor.users.update({shop:shop._id}, {$set: {shopTitle: shop.title }})
 	})
 	*/
+	Shops.update({}, { $set: { isRemoved: false, unreadOrders:0, totalOrders:0, totalSales:0 } }, {multi:true})
+	Purchases.remove({})
+	Meteor.users.update({}, {$set: { unreadInbox:0, pendingPurchases:0, unreadInbox:0, totalPurchases:0, cartItems:0}}, {multi:true})
+	Threads.remove({})
 
 	Accounts.emailTemplates.siteName = "ebazaar.online";
 

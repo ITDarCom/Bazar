@@ -20,7 +20,7 @@ Template.itemsFilter.helpers({
 		if (city && city.label.length > 8)
 		return "width:120px;"
 		else 
-			return "wiidth:80px;"
+			return "wiidth:70px;"
 	},
 	searchText(){
 		return Session.get('searchText')

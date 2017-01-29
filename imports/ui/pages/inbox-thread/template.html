@@ -7,9 +7,16 @@
 
 			<div class="thread-nav">
 				<p>
-		  		<a href="#" class="back-btn" style="float:right;">
-            		<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
-		  		</a>
+					{{#unless isAdmin}}
+				  		<a href="#" class="back-btn" style="float:right;">
+		            		<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
+				  		</a>
+					{{else}}
+						<a href="/admin/announcements" style="float:right;">
+		            		<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>	
+				  		</a>
+					{{/unless}}
+
 				<center>
 					{{#unless recipientIsShopOwner}}
 						{{#unless recipient.isAdmin}}{{_"member"}}{{/unless}} <span class="recipient">{{recipient.username}}</span>
@@ -28,6 +35,7 @@
 
 		</div>
 
+		{{#unless thread.isAnnouncement}}
 		<div class="thread-form">
 		<div class="form-group" style="margin-bottom:0px;">
 			<div class="input-group">    
@@ -40,6 +48,7 @@
 			</div>
 		</div>
 		</div>	
+		{{/unless}}
 
 	</div>
 
@@ -90,20 +99,24 @@
 	        {{#unless isFlag}}
 	        <h4 class="modal-title">
 	        	{{#unless isContactUs}}{{_ "sendMessage"}}{{else}}
-				{{{_ "contactUs"}}}
+				{{{_ "contactUs"}}}				
 	        	{{/unless}}</h4>
 	        {{else}}
 	        <h4 class="modal-title">{{_ "flag"}}</h4>
 	        {{/unless}}
 	      </div>
 	      <div class="modal-body" style="padding:10px;">
-					<textarea class="form-control" rows="5" style="display: inline-block; width:100%;" name="message" placeholder="{{#if isContactUs}}اكتب رسالتك و ملاحظاتك و استفساراتك لإدارة بازار{{/if}}">{{#if isFlag}}بخصوص المنتج "{{item.title}}" رقم #{{item._id}}{{/if}}</textarea>	      
-					<center>
-					<button class="btn btn-raised btn-primary send-message-btn" >
-						<i class="material-icons">send</i>
-					</button>
-					</center>
-				</div>
+	      	{{#if userAnnouncement}}
+				<p>أرسل رسالة لجميع المستخدمين (لا يمكن التراجع)</p>{{/if}}
+			{{#if shopAnnouncement}}
+				<p>أرسل رسالة لجميع أصحاب المتاجر (لا يمكن التراجع)</p>{{/if}}	
+			<textarea class="form-control" rows="5" style="display: inline-block; width:100%;" name="message" placeholder="{{#if isContactUs}}اكتب رسالتك و ملاحظاتك و استفساراتك لإدارة بازار{{/if}}">{{#if isFlag}}بخصوص المنتج "{{item.title}}" رقم #{{item._id}}{{/if}}</textarea>	      
+			<center>
+			<button class="btn btn-raised btn-primary send-message-btn" >
+				<i class="material-icons">send</i>
+			</button>
+			</center>
+		</div>
 	    </div>
 	  </div>
 	</div>

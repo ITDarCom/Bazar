@@ -362,6 +362,12 @@ Router.route('/contact', function () {
 
 
 //admin routes
+Router.route('/admin/announcements', function () {
+    this.render('adminNav', {to: 'nav'});
+    this.render('announcementsPage');
+}, {
+    name: 'admin.announcements'
+});
 
 Router.route('/admin/categories', function () {
     this.render('adminNav', {to: 'nav'});

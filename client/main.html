@@ -60,7 +60,6 @@
 <template name="mainNav">
   <div class="horizontal">
   <ul id="main-nav" class="red table"> 
-
     <div class="article">
     <div class="item {{isActiveRoute 'home'}}" role="presentation">
         <table><tr>
@@ -139,6 +138,11 @@
               {{_ "cities"}}
           </a>
       </li>
+      <li class={{isActiveRoute 'admin.announcements'}} role="presentation">
+          <a href="{{pathFor 'admin.announcements'}}">
+              إعلانات
+          </a>
+      </li>      
   </ul>
   <hr style="margin-top:5px"/>
 </template>
