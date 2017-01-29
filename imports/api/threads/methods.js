@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import { Threads } from './collection'
+import { Shops } from './../shops/collection'
 
 import {getRecipient} from './../../ui/pages/inbox-thread/helpers'
 import {bothAreUsers} from './../../ui/pages/inbox-thread/helpers'
@@ -14,10 +15,10 @@ Meteor.methods({
 	'pushNotifications.newMessage'(userId){
 
 
-		const user = Meteor.users.findOne(this.userId)
-		const shop = Shops.findOne({ user: this.userId() })
+		const user = Meteor.users.findOne(userId)
+		const shop = Shops.findOne({ user: userId })
 		const unreadOrders = shop ? shop.unreadOrders : 0
-		const unreadInbox = Meteor.user().unreadInbox
+		const unreadInbox = user.unreadInbox
 
 		Push.send({
             from: 'push',
@@ -36,10 +37,10 @@ Meteor.methods({
 
 	'pushNotifications.newOrder'(userId){
 
-		const user = Meteor.users.findOne(this.userId)
-		const shop = Shops.findOne({ user: this.userId() })
+		const user = Meteor.users.findOne(userId)
+		const shop = Shops.findOne({ user: userId })
 		const unreadOrders = shop ? shop.unreadOrders : 0
-		const unreadInbox = Meteor.user().unreadInbox
+		const unreadInbox = user.unreadInbox
 
 		Push.send({
             from: 'push',
@@ -59,10 +60,10 @@ Meteor.methods({
 
 	'pushNotifications.orderProcessed'(userId){
 
-		const user = Meteor.users.findOne(this.userId)
-		const shop = Shops.findOne({ user: this.userId() })
+		const user = Meteor.users.findOne(userId)
+		const shop = Shops.findOne({ user: userId })
 		const unreadOrders = shop ? shop.unreadOrders : 0
-		const unreadInbox = Meteor.user().unreadInbox
+		const unreadInbox = user.unreadInbox
 
 		Push.send({
             from: 'push',
@@ -81,10 +82,10 @@ Meteor.methods({
 
 	'pushNotifications.orderDelivered'(userId){
 
-		const user = Meteor.users.findOne(this.userId)
-		const shop = Shops.findOne({ user: this.userId() })
+		const user = Meteor.users.findOne(userId)
+		const shop = Shops.findOne({ user: userId })
 		const unreadOrders = shop ? shop.unreadOrders : 0
-		const unreadInbox = Meteor.user().unreadInbox
+		const unreadInbox = user.unreadInbox
 				
 		Push.send({
             from: 'push',

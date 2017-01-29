@@ -34,7 +34,6 @@
     },           
     'phone':{
         type: String,
-        optional:true
     },
     'favorites' : {
         type :[String],

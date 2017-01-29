@@ -18,8 +18,6 @@ Template.cartPage.onCreated(function(){
 AutoForm.addHooks('deliveryInformationForm', {
     onError : function(){
 
-    	console.log(this.validationContext._invalidKeys)
-
         if (this.validationContext._invalidKeys.find(key => key.name.match(/location/) )){
             $('.location-on-map .form-group').addClass('is-focused')
 

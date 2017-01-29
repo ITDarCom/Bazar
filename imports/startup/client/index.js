@@ -5,6 +5,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import {TAPi18n} from "meteor/tap:i18n";
 import {moment} from 'meteor/momentjs:moment';
 
+import {Push} from "meteor/raix:push"
+
 import "./simple-schema-messages"
 import "./accounts-config"
 
@@ -106,20 +108,24 @@ Meteor.startup(function () {
 
 	Push.debug = true;
 
-    Push.push.on('notification', function(notification){
+	if (Push.push){
+		
+	    Push.push.on('notification', function(notification){
 
-    	if (!notification.foreground){
-			if (notification.payload.route){
-	        	const route = notification.payload.route
-	        	const params = notification.payload.params || {}
+	    	if (!notification.foreground){
+				if (notification.payload.route){
+		        	const route = notification.payload.route
+		        	const params = notification.payload.params || {}
 
-	        	setTimeout(function(){
-	        		Router.go(route)        		
-	        	},0)
-        	}      		
+		        	setTimeout(function(){
+		        		Router.go(route)        		
+		        	},0)
+	        	}      		
 
-    	}
+	    	}
 
-    })
+	    })
+	}
+
         
 })

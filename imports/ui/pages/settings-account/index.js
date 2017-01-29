@@ -33,7 +33,6 @@ Template.accountInfoForm.onCreated(function(){
 		    label: function(){
 		        return TAPi18n.__('mobile')
 		    }, 
-		    optional:true
 		}
 	});
 })

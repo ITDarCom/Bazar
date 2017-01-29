@@ -82,6 +82,14 @@ AccountsTemplates.addFields([
       displayName: "اسم المستخدم أو البريد الإلكتروني",
       trim: true
   },  
+  { 
+      _id: 'phone',
+      required: true,
+      type: 'text',
+      re: SimpleSchema.RegEx.SaudiMobile,
+      displayName: "جوال", 
+      errStr: 'رقم الجوال الذي أدخلته غير صالح',
+  },  
   {
       _id: 'password',
       type: 'password',
@@ -89,7 +97,7 @@ AccountsTemplates.addFields([
       displayName: "كلمة السر",
       func: function(value){ return (value.length < 6); },
       errStr: 'كلمة السر يجب أن تكون 6 خانات على الأقل',
-  }
+  },
 ]);
 
 Accounts.resetPassword.text = function(user, url) {

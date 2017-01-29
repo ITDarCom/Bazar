@@ -97,8 +97,7 @@
 	        {{/unless}}
 	      </div>
 	      <div class="modal-body" style="padding:10px;">
-	      			{{#if isContactUs}}<p>شكرا لك على مراسلتنا. سنجيب على رسالتك بأقرب وقت إن شاء الله.</p>{{/if}}
-					<textarea class="form-control" rows="5" style="display: inline-block; width:100%;" name="message">{{#if isFlag}}بخصوص المنتج "{{item.title}}" رقم #{{item._id}}{{/if}}</textarea>	      
+					<textarea class="form-control" rows="5" style="display: inline-block; width:100%;" name="message" placeholder="{{#if isContactUs}}اكتب رسالتك و ملاحظاتك و استفساراتك لإدارة بازار{{/if}}">{{#if isFlag}}بخصوص المنتج "{{item.title}}" رقم #{{item._id}}{{/if}}</textarea>	      
 					<center>
 					<button class="btn btn-raised btn-primary send-message-btn" >
 						<i class="material-icons">send</i>

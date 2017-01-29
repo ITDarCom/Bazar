@@ -86,9 +86,9 @@ Meteor.methods({
 			{ $set: { status: 'pending', deliveryInfo: deliveryInfo, sentAt: new Date() }},
 			{ multi: true })
 
-		if (!currentUser.phone){
+		/*if (!currentUser.phone){
 			Meteor.users.update(this.userId, { $set: { 'phone': deliveryInfo.phone }})
-		}
+		}*/
 
 	},
 

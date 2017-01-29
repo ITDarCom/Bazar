@@ -8,6 +8,8 @@ import { Categories } from './../../api/categories/collection.js'
 import { Threads } from './../../api/threads/collection.js'
 import {TAPi18n} from "meteor/tap:i18n";
 
+import {Push} from "meteor/raix:push"
+
 import './../../api/images'
 
 //SimpleSchema.debug = true
@@ -46,13 +48,12 @@ Meteor.startup(() => {
 	Shops.remove({})
 	Threads.update({}, { $set: { isRemoved: false } }, {multi:true})
 	Threads.remove({})
-	*/
 
 	const shops = Shops.find({}).fetch()
-
 	shops.forEach(function(shop){
 		Meteor.users.update({shop:shop._id}, {$set: {shopTitle: shop.title }})
 	})
+	*/
 
 	Accounts.emailTemplates.siteName = "ebazaar.online";
 
@@ -77,6 +78,8 @@ Meteor.startup(() => {
 		user.avatar = '/default-avatar.png';
 		user.hasShop = false;
     	user.registerdAt = new Date();
+
+    	user.phone = options.profile.phone
 
 		if (options.profile)
 			user.profile = options.profile;
