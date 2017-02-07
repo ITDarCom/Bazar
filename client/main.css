@@ -15,38 +15,54 @@
 
 .order-item .btn-fab{
   margin:2px;
-
 }
 
 #main-nav{
   padding:5px;
   color: white;
-  background-color: rgba(249, 158, 56, 0.69);
 }
 
 .wrapper {
   overflow-y:hidden;
-    width:100%;
-    -webkit-overflow-scrolling: touch;;
-    height: 70px;
+  overflow-x:scroll;
+  width:100%;
+  -webkit-overflow-scrolling: touch;;
+  height: 92px;
+  background-color: rgba(249, 158, 56, 0.69);
 }
 
 .horizontal {
   float: right;
-  width:1010px;
-  height:70px; 
+  width:820px;
+  height:90px; 
 }
 
 .mytable {
-  height: 72px;
+  height: 90px;
 }
 
 .article {
   float:right;  
-    width: 125px;
-    height: 65px;
+    height: 80px;
     text-align: center;
     display: inline-block;
+}
+
+.red table {
+  height: 100%;
+  width:100%;
+}
+
+.red .text-td {
+  text-align: center;
+  padding:10px;
+  min-width: 40px;
+  max-width: 100px;
+}
+
+.red .icon-td{
+  padding:0px;
+  padding-right: 7px;
 }
 
 .red .item {
@@ -55,15 +71,15 @@
     font-size: 17px;
     font-weight: bold;   
     width:94%;
-    height:60px;
+    height:80px;
     border-radius: 4px;
     text-align: center;    
     padding-top:2px;
 }
 
-.red .item.tall {
-    padding-top:2px;
-}
+/* .red .item.tall {
+  width:100px;
+}  */
 /* 
 .red .item.tall .nav-icon{
     position:relative;
@@ -77,18 +93,14 @@
   text-decoration: none;
 }
 
-.red td {
-  padding:5px;
-    height:60px;
-}
 
 .red .item.active {
     background-color: #FF8D00 !important;
 }
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
-    margin-left:5px;
-    margin-right:5px;
+    
+  margin-left:0px;
 }
 
 .nav-icon {
@@ -124,7 +136,7 @@ html, body {
 
 body {
   background-color: white;
-  padding-top: 65px;
+  padding-top: 70px;
 }
 
 html {
@@ -215,6 +227,7 @@ body {
    position:fixed;
    left:0px;
    top:65px;
+   padding-top:5px;
    height: 50px;
    width:100%;
    background:#FAF2CC;
@@ -225,6 +238,7 @@ body {
    position:fixed;
    left:0px;
    top:65px;
+   padding-top:5px;
    height: 70px;
    width:100%;
    background: #f44336;

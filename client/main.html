@@ -64,16 +64,16 @@
     <div class="article">
     <div class="item {{isActiveRoute 'home'}}" role="presentation">
         <table><tr>
-          <td><div class="nav-icon flaticon-food-7"></div></td>
-          <td><a href="{{pathFor 'home'}}">{{_ "all"}}</a></td>
+          <td class="icon-td"><div class="nav-icon flaticon-food-7"></div></td>
+          <td class="text-td"><a href="{{pathFor 'home'}}">{{_ "all"}}</a></td>
         </tr></table>      
     </div></div>
 
     <div class="article">
       <div class="item {{isActiveRoute 'shops.index'}}" role="presentation">
         <table><tr>
-          <td><div class="nav-icon flaticon-food-3"></div></td>
-          <td><a href="{{pathFor 'shops.index'}}">{{_ "shops"}}</a></td>
+          <td class="icon-td"><div class="nav-icon flaticon-food-3"></div></td>
+          <td class="text-td"><a href="{{pathFor 'shops.index'}}">{{_ "shops"}}</a></td>
         </tr></table>
       </div></div>
 
@@ -81,8 +81,8 @@
       <div class="article">
         <div class="item category {{isActivePath path}} {{#if isTall}}tall{{/if}}" role="presentation">
         <table><tr>
-          <td><div class="nav-icon {{icons identifier}}"></div></td>
-          <td width="80px"><a href="{{path}}">{{label}}</a></td>
+          <td class="icon-td"><div class="nav-icon {{icons identifier}}"></div></td>
+          <td class="text-td"><a href="{{path}}">{{label}}</a></td>
         </tr></table>
         </div></div>
     {{/each}}

@@ -5,6 +5,9 @@ import {moment} from 'meteor/momentjs:moment';
 import {TAPi18n} from "meteor/tap:i18n";
 
 
+import { Categories } from './../../../api/categories/collection.js'
+
+
 import './template.html'
 
 import { Shops } from './../../../api/shops/collection.js'
@@ -103,6 +106,8 @@ Template.applicationLayout.events({
 
 Template.applicationLayout.onRendered(function(){
 
+	const instance = this
+
 	function toggleMenu(){
 		menuOpen = !menuOpen
 	    $('.row-offcanvas').toggleClass('active')
@@ -131,6 +136,32 @@ Template.applicationLayout.onRendered(function(){
 		$('[data-toggle="offcanvas"]').click(function () {
 			toggleMenu()
 		});
+
+
+		instance.autorun(()=>{
+			const count = Categories.find({}).fetch().length
+			if (count > 6){
+				setTimeout(function(){
+					console.log($('.horizontal').width())
+					const width = 
+						$('.horizontal').width() + (100*(count-6))
+
+
+					$('.horizontal').width(width)
+					
+				},0)
+
+
+			}
+			
+		})
+
+		if(!Blaze._globalHelpers.isIOS()){
+			$('body').css('padding-top', '65px')
+			$('.navbar-fixed-top').css('padding-top', '10px')
+			$('.thread-nav').css('top', '60px')
+			$('.network-error-nav').css('top', '65px')
+		}
 
 	});
 
@@ -223,9 +254,16 @@ Template.registerHelper('i18n', function(key){
 Template.registerHelper('cityLabel', function(identifier){
 	var city = Cities.findOne({identifier:identifier});
 	return city.label;
-})
+});
+
 Template.registerHelper('isAdmin', function(){
-
 	return (Meteor.user() && Meteor.user().isAdmin);
+});
 
-})
+Template.registerHelper('isIOS',function(){
+  return ( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false );
+});
+
+Template.registerHelper('isAndroid',function(){
+  return navigator.userAgent.toLowerCase().indexOf("android") > -1;
+});
