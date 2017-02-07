@@ -92,13 +92,13 @@ Meteor.startup(() => {
 	}
 
 	Push.Configure({
-	  /*apn: {
-	    certData: Assets.getText('apnDevCert.pem'),
-	    keyData: Assets.getText('apnDevKey.pem'),
-	    passphrase: 'xxxxxxxxx',
+	  apn: {
+	    certData: Assets.getText('Push.pem'),
+	    keyData: Assets.getText('PushKey.pem'),
+	    passphrase: 'Kebazaar2016',
 	    production: true,
 	    //gateway: 'gateway.push.apple.com',
-	  },*/
+	  },
 	  gcm: {
 	    apiKey: 'AAAAN5JUkAM:APA91bHKe49nfXkKlWzBhoAzSJetlgbrSCShY78OxjUYEe5M4JsggU39tIXsUeYr4flHd-wCz4_1eISSCZM9I-ZBiGR4GXasKUNmDXyFnW5B-AwJcccOgevWkvolzCGwUgIE8jcp5s7C',
 	    projectNumber: 238678216707
