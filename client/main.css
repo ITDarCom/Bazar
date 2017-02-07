@@ -19,29 +19,34 @@
 }
 
 #main-nav{
-  width: 100%;
-  z-index: 9999 !important;
   padding:5px;
   color: white;
   background-color: rgba(249, 158, 56, 0.69);
 }
 
+.wrapper {
+  overflow:auto;
+    width:100%;
+    -webkit-overflow-scrolling: touch;;
+    height: 70px;
+}
+
 .horizontal {
-  width:100%;
+  float: right;
+  width:1010px;
   height:70px; 
 }
 
-.table {
-  width:100%;
-  overflow-x: scroll;  height: 72px;
+.mytable {
+  height: 72px;
 }
 
 .article {
+  float:right;  
     width: 125px;
     height: 65px;
-    display: inline-block;    
-    vertical-align: middle;
     text-align: center;
+    display: inline-block;
 }
 
 .red .item {
@@ -119,7 +124,7 @@ html, body {
 
 body {
   background-color: white;
-  padding-top: 50px;
+  padding-top: 65px;
 }
 
 html {
@@ -209,7 +214,7 @@ body {
 .thread-nav {
    position:fixed;
    left:0px;
-   top:50px;
+   top:65px;
    height: 50px;
    width:100%;
    background:#FAF2CC;
@@ -219,7 +224,7 @@ body {
 .network-error-nav {
    position:fixed;
    left:0px;
-   top:50px;
+   top:65px;
    height: 70px;
    width:100%;
    background: #f44336;

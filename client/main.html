@@ -58,8 +58,9 @@
 </template>
 
 <template name="mainNav">
+  <div class="wrapper">
   <div class="horizontal">
-  <ul id="main-nav" class="red table"> 
+  <div id="main-nav" class="red mytable"> 
     <div class="article">
     <div class="item {{isActiveRoute 'home'}}" role="presentation">
         <table><tr>
@@ -85,8 +86,9 @@
         </tr></table>
         </div></div>
     {{/each}}
-  </ul>
   </div>
+  </div>
+</div>
   <hr style="margin-top:5px"/>
 </template>
 
