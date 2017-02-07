@@ -276,23 +276,23 @@ Meteor.methods({
         //resetDatabase();
 
         const accounts = [
-            { username: 'username', email: 'user@gmail.com', password: 'password'},
-            { username: 'username1', email: 'user1@gmail.com', password: 'password' },
-            { username: 'username2', email: 'user2@gmail.com', password: 'password' },
-            { username: 'username3', email: 'user3@gmail.com', password: 'password' },
-            { username: 'username4', email: 'user4@gmail.com', password: 'password' },
-            { username: 'username5', email: 'user5@gmail.com', password: 'password' },
-            { username: 'username6', email: 'user6@gmail.com', password: 'password' },
-            { username: 'username7', email: 'user7@gmail.com', password: 'password' },
-            { username: 'username8', email: 'user8@gmail.com', password: 'password'},
-            { username: 'username9', email: 'user9@gmail.com', password: 'password'},
-            { username: 'username10', email: 'user10@gmail.com', password: 'password'},
-            { username: 'username11', email: 'user11@gmail.com', password: 'password'},
-            { username: 'username12', email: 'user12@gmail.com', password: 'password'},
-            { username: 'username13', email: 'user13@gmail.com', password: 'password'},
-            { username: 'username14', email: 'user14@gmail.com', password: 'password'},
-            { username: 'username15', email: 'user15@gmail.com', password: 'password'},
-            { username: 'الإدارة', email: 'bazar@gmail.com', password: '123456' }
+            { username: 'username', email: 'user@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'username1', email: 'user1@gmail.com', password: 'password', profile: { phone: '0505330609'} },
+            { username: 'username2', email: 'user2@gmail.com', password: 'password', profile: { phone: '0505330609'} },
+            { username: 'username3', email: 'user3@gmail.com', password: 'password', profile: { phone: '0505330609'} },
+            { username: 'username4', email: 'user4@gmail.com', password: 'password', profile: { phone: '0505330609'} },
+            { username: 'username5', email: 'user5@gmail.com', password: 'password', profile: { phone: '0505330609'} },
+            { username: 'username6', email: 'user6@gmail.com', password: 'password', profile: { phone: '0505330609'} },
+            { username: 'username7', email: 'user7@gmail.com', password: 'password', profile: { phone: '0505330609'} },
+            { username: 'username8', email: 'user8@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'username9', email: 'user9@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'username10', email: 'user10@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'username11', email: 'user11@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'username12', email: 'user12@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'username13', email: 'user13@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'username14', email: 'user14@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'username15', email: 'user15@gmail.com', password: 'password', profile: { phone: '0505330609'}},
+            { username: 'الإدارة', email: 'bazar@gmail.com', password: '123456', profile: { phone: '0505330609'} }
         ];
         
         var accountsIds = accounts.map(function(account){
