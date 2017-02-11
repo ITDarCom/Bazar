@@ -5,6 +5,10 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './template.html'
 import './users-table.js'
 
+Template.adminUsersPage.onRendered(function(){
+    $('.dataTables_wrapper').css('overflow-y', 'hidden')
+})
+
 Template.lastSignInTemplate.helpers({
     getlastSignIn: function () {
         var id = this._id;
