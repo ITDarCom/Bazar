@@ -137,23 +137,20 @@ Template.applicationLayout.onRendered(function(){
 			toggleMenu()
 		});
 
+		instance.autorun(()=>{			
 
-		instance.autorun(()=>{
 			const count = Categories.find({}).fetch().length
+
 			if (count > 6){
 				setTimeout(function(){
-					console.log($('.horizontal').width())
 					const width = 
-						$('.horizontal').width() + (100*(count-6))
+						document.getElementsByClassName('horizontal')[0].offsetWidth +
+						(130*(count-6))
 
-
-					$('.horizontal').width(width)
+					document.getElementsByClassName('horizontal')[0].style.width = (width + 'px')
 					
-				},0)
-
-
+				},1000)
 			}
-			
 		})
 
 		if(!Blaze._globalHelpers.isIOS()){
