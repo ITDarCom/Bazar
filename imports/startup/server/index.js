@@ -59,7 +59,7 @@ Meteor.startup(() => {
 
 	Accounts.emailTemplates.resetPassword.from = function () {
 	   // Overrides value set in Accounts.emailTemplates.from when resetting passwords
-	   return "eBazaar Reset <no-reply@ebazaar.online>";
+	   return "eBazaar Support <support@ebazaar.online>";
 	};	
 
 	Accounts.emailTemplates.resetPassword.text = function(user, url) {

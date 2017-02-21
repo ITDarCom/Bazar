@@ -78,6 +78,7 @@ Meteor.startup(function () {
 
 	T9n.map('ar', {
   		email: 'بريد إلكتروني',
+  		emailResetLink: "أرسل",
   		error: {
   			pwdsDontMatch: "كلمتي السر لا تتطابقان",
   			accounts: {

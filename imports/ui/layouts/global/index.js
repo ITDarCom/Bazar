@@ -13,6 +13,19 @@ import './template.html'
 import { Shops } from './../../../api/shops/collection.js'
 import { Cities } from './../../../api/cities/collection.js'
 
+Template.navbar.events({
+	'click a.brand ' : function(e){
+
+		if (Router.current().route.getName().match(/shops.index|home|categories.show/) &&
+			$(window).scrollTop() > 150){
+
+			e.preventDefault();
+			window.scrollTo(0,0);
+
+		} 
+
+	}
+});
 
 Template.login.onRendered(function(){
 	$('.btn').addClass('btn-raised btn-warning')
