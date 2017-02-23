@@ -220,8 +220,14 @@ Template.messageModal.helpers({
 	isContactUs(){
 		return Template.instance().data.contactUs
 	},
+	isWhatsApp(){
+		return Template.instance().data.whatsapp
+	},
 	item(){
 		return Template.instance().data.item
+	},
+	whatsAppNo(){
+		return Meteor.users.findOne({isAdmin:true}).phone
 	}
 })
 

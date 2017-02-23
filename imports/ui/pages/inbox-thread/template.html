@@ -96,26 +96,38 @@
 	    <div class="modal-content well" style="padding:10px;">
 	      <div class="modal-header">
 	        <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true">×</button>
-	        {{#unless isFlag}}
-	        <h4 class="modal-title">
-	        	{{#unless isContactUs}}{{_ "sendMessage"}}{{else}}
-				{{{_ "contactUs"}}}				
-	        	{{/unless}}</h4>
+	        {{#if isWhatsApp}}
+	        مراسلتنا عبر الواتس أب
 	        {{else}}
-	        <h4 class="modal-title">{{_ "flag"}}</h4>
-	        {{/unless}}
+		        {{#unless isFlag}}
+		        <h4 class="modal-title">
+		        	{{#unless isContactUs}}{{_ "sendMessage"}}{{else}}
+					{{{_ "contactUs"}}}				
+		        	{{/unless}}</h4>
+		        {{else}}
+		        <h4 class="modal-title">{{_ "flag"}}</h4>
+		        {{/unless}}
+	        {{/if}}
 	      </div>
 	      <div class="modal-body" style="padding:10px;">
-	      	{{#if userAnnouncement}}
-				<p>أرسل رسالة لجميع المستخدمين (لا يمكن التراجع)</p>{{/if}}
-			{{#if shopAnnouncement}}
-				<p>أرسل رسالة لجميع أصحاب المتاجر (لا يمكن التراجع)</p>{{/if}}	
-			<textarea class="form-control" rows="5" style="display: inline-block; width:100%;" name="message" placeholder="{{#if isContactUs}}اكتب رسالتك و ملاحظاتك و استفساراتك لإدارة بازار{{/if}}">{{#if isFlag}}بخصوص المنتج "{{item.title}}" رقم #{{item._id}}{{/if}}</textarea>	      
-			<center>
-			<button class="btn btn-raised btn-primary send-message-btn" >
-				<i class="material-icons">send</i>
-			</button>
-			</center>
+	        {{#if isWhatsApp}}
+
+	        	<p>يمكنكم مراسلتنا عبر الرقم {{whatsAppNo}}</p>
+
+	        {{else}}
+
+		      	{{#if userAnnouncement}}
+					<p>أرسل رسالة لجميع المستخدمين (لا يمكن التراجع)</p>{{/if}}
+				{{#if shopAnnouncement}}
+					<p>أرسل رسالة لجميع أصحاب المتاجر (لا يمكن التراجع)</p>{{/if}}	
+				<textarea class="form-control" rows="5" style="display: inline-block; width:100%;" name="message" placeholder="{{#if isContactUs}}اكتب رسالتك و ملاحظاتك و استفساراتك لإدارة بازار{{/if}}">{{#if isFlag}}بخصوص المنتج "{{item.title}}" رقم #{{item._id}}{{/if}}</textarea>	      
+				<center>
+				<button class="btn btn-raised btn-primary send-message-btn" >
+					<i class="material-icons">send</i>
+				</button>
+				</center>
+
+			{{/if}}
 		</div>
 	    </div>
 	  </div>
