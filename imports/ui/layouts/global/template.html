@@ -164,11 +164,7 @@
         <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>&nbsp; {{_ "createShop"}}
       </a></li>
       {{/unless}}
-    {{else}}
-      <li><a href="#" data-toggle="modal" data-target="#whatsapp-modal">
-        <i class="fa fa-whatsapp" aria-hidden="true"></i>
-        {{_ "contactUsWhatsapp"}}
-      </a></li>    
+    {{else}}    
       <li class={{isActiveRoute 'accounts.signin'}}><a href="{{pathFor 'accounts.signin'}}">
         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; {{_ "signIn"}}
       </a></li>
@@ -184,14 +180,14 @@
       <li class={{isActiveRoute 'about'}}><a href="{{pathFor 'about'}}">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; {{_ "about"}}
       </a></li>
+      <li><a href="#" data-toggle="modal" data-target="#whatsapp-modal">
+        <i class="fa fa-whatsapp" aria-hidden="true"></i>
+        {{_ "contactUsWhatsapp"}}
+      </a></li>      
     {{#if currentUser}}
       {{#unless isAdmin}}
       <li><a href="#" data-toggle="modal" data-target="#contact-us-modal">
         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; {{_ "contactUs"}}
-      </a></li>
-      <li><a href="#" data-toggle="modal" data-target="#whatsapp-modal">
-        <i class="fa fa-whatsapp" aria-hidden="true"></i>
-        {{_ "contactUsWhatsapp"}}
       </a></li>
       {{/unless}}
     {{/if}}
