@@ -153,6 +153,7 @@ Template.applicationLayout.onRendered(function(){
 		instance.autorun(()=>{			
 
 			const count = Categories.find({}).fetch().length
+			const route = Router.current().route.getName()
 
 			if (count > 6){
 				setTimeout(function(){

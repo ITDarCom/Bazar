@@ -5,7 +5,7 @@ App.info({
   author: 'ITDar',
   email: 'contact@example.com',
   website: 'http://www.ebazaar.online',
-  version: "1.0.3"
+  version: "1.0.4"
 });
 
 App.setPreference('android-versionCode', '9009');
