@@ -20,7 +20,7 @@ Meteor.methods({
 
 		Push.send({
             from: 'push',
-            title: 'رسالة جديدة لك في بازار',
+            title: 'رسالة جديدة لك في بازار الالكتروني',
             text: 'اضغط لتفقد بريدك',
             badge: unreadOrders + unreadInbox,
             //sound: 'airhorn.caf',
@@ -42,7 +42,7 @@ Meteor.methods({
 
 		Push.send({
             from: 'push',
-            title: 'طلب جديد على متجرك في بازار',
+            title: 'طلب جديد على متجرك في بازار الالكتروني',
             text: 'اضغط لتفقد طلباتك',
             badge: unreadOrders + unreadInbox,
             //sound: 'airhorn.caf',
@@ -65,7 +65,7 @@ Meteor.methods({
 
 		Push.send({
             from: 'push',
-            title: 'تم معالجة طلبك على بازار',
+            title: 'تم معالجة طلبك على بازار الالكتروني',
             text: 'اضغط لتفقد مشترياتك',
             badge: unreadOrders + unreadInbox,
             //sound: 'airhorn.caf',
@@ -87,7 +87,7 @@ Meteor.methods({
 				
 		Push.send({
             from: 'push',
-            title: 'تم توصيل طلبك على بازار',
+            title: 'تم توصيل طلبك على بازار الالكتروني',
             text: 'اضغط لتفقد مشترياتك',
             badge: unreadOrders + unreadInbox,
             //sound: 'airhorn.caf',

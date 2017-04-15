@@ -183,8 +183,8 @@ Template.itemCarousel.events({
         
         // this is the complete list of currently supported params you can pass to the plugin (all optional)
         var options = {
-          message: 'تفقد هذا المنتج على بازار!', // not supported on some apps (Facebook, Instagram)
-          subject: 'تفقد هذا المنتج على بازار!', // fi. for email
+          message: 'تفقد هذا المنتج على بازار الالكتروني!', // not supported on some apps (Facebook, Instagram)
+          subject: 'تفقد هذا المنتج على بازار الالكتروني!', // fi. for email
           files: ['', ''], // an array of filenames either locally or remotely
           url: Meteor.absoluteUrl().replace(/\/$/,"") + Router.path('items.show', {
             shop: Template.instance().data.shop,

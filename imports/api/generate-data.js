@@ -292,7 +292,7 @@ Meteor.methods({
             { username: 'username13', email: 'user13@gmail.com', password: 'password', profile: { phone: '0505330609'}},
             { username: 'username14', email: 'user14@gmail.com', password: 'password', profile: { phone: '0505330609'}},
             { username: 'username15', email: 'user15@gmail.com', password: 'password', profile: { phone: '0505330609'}},
-            { username: 'الإدارة', email: 'bazar@gmail.com', password: '123456', profile: { phone: '0505330609'} }
+            { username: 'الإدارة', email: 'ebazaar@gmail.com', password: '123456', profile: { phone: '0505330609'} }
         ];
         
         var accountsIds = accounts.map(function(account){

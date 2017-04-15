@@ -1,5 +1,5 @@
 {
-	"bazar": "بازار",
+	"ebazaar": "بازار الالكتروني",
 	"all": "الكل",
 	"shops": "متاجر",
 	"myShop": "متجري",
@@ -10,7 +10,7 @@
 	"myShopMessages":"رسائل متجري",
 	"settings":"الإعدادات",
 	"announcements": "إعلانات",
-	"about":"عن بازار",
+	"about":"عن بازار الالكتروني",
 	"contactUs":"مراسلتنا",
 	"contactUsWhatsapp":"مراسلتنا عبر الواتس أب",
 	"createShop":"أنشئ متجرا",
