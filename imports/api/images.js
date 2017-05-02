@@ -5,11 +5,13 @@ var resize = function(fileObj, readStream, writeStream) {
   gm(readStream, fileObj.name()).resize(null, '200', '>').stream().pipe(writeStream);
 };
 
+FS.Debug = true
+
 var imageStore = new FS.Store.S3("images", {
     accessKeyId: "AKIAJJKU2FNCCJPBGYMA", //required if environment variables are not set
     secretAccessKey: "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", //required if environment variables are not set
     bucket: "ebazaaronline", //required
-    maxTries: 1, //optional, default 5
+    maxTries: 3, //optional, default 5
     folder: 'images',
     transformWrite: resize
 });
@@ -23,7 +25,7 @@ var thumbStore = new FS.Store.S3("thumbnails", {
     accessKeyId: "AKIAJJKU2FNCCJPBGYMA", //required if environment variables are not set
     secretAccessKey: "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", //required if environment variables are not set
     bucket: "ebazaaronline", //required
-    maxTries: 1, //optional, default 5
+    maxTries: 3, //optional, default 5
     folder: 'thumbnails',
     transformWrite: createThumb
 });
@@ -37,7 +39,7 @@ var microthumbStore = new FS.Store.S3("microthumbnails", {
     accessKeyId: "AKIAJJKU2FNCCJPBGYMA", //required if environment variables are not set
     secretAccessKey: "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", //required if environment variables are not set
     bucket: "ebazaaronline", //required
-    maxTries: 1, //optional, default 5
+    maxTries: 3, //optional, default 5
     folder: 'microthumbnails',
     transformWrite: createMicroThumb
 });

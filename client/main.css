@@ -22,6 +22,16 @@
   color: white;
 }
 
+.footer {
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   text-align:center;
+   direction: ltr;
+}
+
+
 .wrapper {
   overflow-y:hidden;
   overflow-x:scroll;

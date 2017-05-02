@@ -290,6 +290,7 @@ Template.shopThumbnail.onCreated(function(){
     };
 
     this.image.src = Meteor.absoluteUrl().replace(/\/$/,"") + Template.instance().data.logo.url
+    //console.log(Template.instance().data.title, this.image.src)
 })
 
 Template.shopThumbnail.helpers({
