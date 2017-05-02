@@ -27,6 +27,12 @@
 
   </div><!--/.container-->
 
+	<footer class="footer">
+		<div class="container">
+		<p class="text-muted">© 2017 Khaled Aldossari. All Rights Reserved</p>
+		</div>
+	</footer>  
+
   <script type="text/javascript" src="/slick.min.js"></script>
   <script type="text/javascript" src="/snackbar.min.js"></script>
     
@@ -180,7 +186,7 @@
       <li class={{isActiveRoute 'about'}}><a href="{{pathFor 'about'}}">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; {{_ "about"}}
       </a></li>
-      <li><a href="#" data-toggle="modal" data-target="#whatsapp-modal">
+      <li><a href="whatsapp://send?phone={{whatsAppNo}}">
         <i class="fa fa-whatsapp" aria-hidden="true"></i>
         {{_ "contactUsWhatsapp"}}
       </a></li>      
