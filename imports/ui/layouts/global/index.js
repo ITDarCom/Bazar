@@ -154,18 +154,22 @@ Template.applicationLayout.onRendered(function(){
 			toggleMenu()
 		});
 
+		instance.transformedWidth = false
+
 		instance.autorun(()=>{			
 
 			const count = Categories.find({}).fetch().length
 			const route = Router.current().route.getName()
 
-			if (count > 6){
+			if (count > 6 && !instance.transformedWidth){
 				setTimeout(function(){
 					const width = 
 						document.getElementsByClassName('horizontal')[0].offsetWidth +
 						(130*(count-6))
 
 					document.getElementsByClassName('horizontal')[0].style.width = (width + 'px')
+
+					instance.transformedWidth = true
 					
 				},1000)
 			}
