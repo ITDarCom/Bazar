@@ -27,11 +27,15 @@
 
   </div><!--/.container-->
 
+  	{{#unless Meteor.isCordova}}
+
 	<footer class="footer">
 		<div class="container">
 		<p class="text-muted">© 2017 Khaled Aldossari. All Rights Reserved</p>
 		</div>
 	</footer>  
+
+	{{/unless}}
 
   <script type="text/javascript" src="/slick.min.js"></script>
   <script type="text/javascript" src="/snackbar.min.js"></script>
