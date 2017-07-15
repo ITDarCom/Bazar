@@ -11,7 +11,7 @@ import { Categories } from './../../../api/categories/collection'
 
 import { Images } from './../../../api/images'
 
-import {CfsAutoForm} from "meteor/cfs:autoform"
+// import {CfsAutoForm} from "meteor/cfs:autoform"
 
 import { FilesCollection } from 'meteor/ostrio:files';
 

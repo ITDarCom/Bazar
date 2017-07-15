@@ -13,7 +13,7 @@ import {Push} from "meteor/raix:push"
 import './../../api/images'
 
 
-
+import ServiceConfiguration from 'meteor/service-configuration'
 
 //SimpleSchema.debug = true
 

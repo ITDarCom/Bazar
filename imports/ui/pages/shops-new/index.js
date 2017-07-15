@@ -9,7 +9,7 @@ import { Shops } from './../../../api/shops/collection'
 import { Cities } from './../../../api/cities/collection.js'
 import { Images } from './../../../api/images'
 
-import {CfsAutoForm} from "meteor/cfs:autoform"
+// import {CfsAutoForm} from "meteor/cfs:autoform"
 
 var isUploading = new ReactiveVar(false)
 

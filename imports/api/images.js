@@ -44,7 +44,7 @@ if (s3Conf && s3Conf.key && s3Conf.secret && s3Conf.bucket){
 
   // Declare the Meteor file collection on the Server
   export const Images = new FilesCollection({
-    debug: true, // Change to `true` for debugging
+    // debug: true, // Change to `true` for debugging
     // storagePath: 'assets/app/uploads/uploadedFiles',
     collectionName: 'Images_v2',
     // Disallow Client to execute remove, use the Meteor.method
