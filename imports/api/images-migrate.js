@@ -119,7 +119,7 @@ Docs.find().forEach(function (fileObj) {
         Images.update({_id: fileRef._id}, {$set: {userId: userId}});
       }
     },
-    false,
+    true,
 );
   });
 
