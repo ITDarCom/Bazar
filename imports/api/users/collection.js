@@ -72,6 +72,15 @@
     },
     'tmpShopLogo.fileId': {
         type: String, optional: true               
-    }
+    },
+    
+    'tmpItemImages.$.url': {
+        type: String, optional:true
+    },
+    'tmpItemImages.$.imageId': {
+        type: String,
+        optional:true,
+
+    },
 
 }));

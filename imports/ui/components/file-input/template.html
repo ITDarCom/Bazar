@@ -1,14 +1,33 @@
 <template name="fileInput">
-	{{#if isUploading}}{{> spinner }}{{/if}}
 	<div class="form-group" style="padding-top:15px;">
 		<label for="">{{_ "addItemImage"}}</label>
-	    {{#if isUploading}}
-		    <input type="file" name="default" class="form-control" disabled>
-	    {{else}}
-	    	<input type="file" name="default" class="btn btn-primary" accept="image/*">
-	    {{/if}}
+
+			
+	    	{{#with isUploading}}
+		    	<div class="progress">
+				  <div class="progress-bar" role="progressbar" aria-valuenow="{{progress.get}}"
+				  aria-valuemin="0" aria-valuemax="100" style="width:{{progress.get}}%">
+				    {{progress.get}}%
+				  </div>
+				</div>
+	    	   <!-- <span id="progress">{{progress.get}}%</span> -->
+	        {{else}}
+	        	{{#if uploaded}}
+		        	<div class="progress">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="100"
+					  aria-valuemin="0" aria-valuemax="100" style="width:100%">
+					    100%
+					  </div>
+					</div>
+	        	{{/if}}
+
+				{{#if multipleImages }}
+					<input type="file"  id="fileInput"  name="default" class="btn btn-primary" accept="image/*" multiple >
+				{{else}}
+				<input type="file"  id="fileInput"  name="default" class="btn btn-primary" accept="image/*" >
+				{{/if}}
+
+	    	
+	    {{/with}}
 	</div>
-	{{#with fileObj}} 
-        {{> FS.UploadProgressBar bootstrap=true}} 
-	{{/with}}
 </template>

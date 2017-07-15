@@ -18,10 +18,15 @@ Template.itemsShowPage.onCreated(function(){
 	this.itemId = Router.current().params.itemId
 
 	this.autorun(()=>{
-		var subscription = itemsCache.subscribe('singleItem', this.itemId)
+		//this.ready.set(true);
+		// var subscription = itemsCache.subscribe('singleItem', this.itemId)
 
-	    if (subscription.ready()){
-	    	this.ready.set(subscription.ready())
+	 //    if (subscription.ready()){
+	 //    	this.ready.set(subscription.ready())
+	 //    }
+		this.subscribe('singleItem', this.itemId);
+		if (Template.instance().subscriptionsReady()){
+	    	this.ready.set(true)
 	    }
 	})
 })
@@ -35,16 +40,21 @@ Template.itemsShowPage.helpers({
 	},
 	item(){
 		const item = Items.findOne(Template.instance().itemId)
+		console.log(item);
+		console.log('i:ddd');
 		if (!item){
+			alert('dd');
 			Router.go('home'); return;			
 		}
 		//if this item is hidden and does not belong to the current user, redirect to home
 		if (item.isHidden){
 			if (!Meteor.user() || Meteor.user().shop != item.shop){
+				alert('ddd');
 				Router.go('home')				
 			}
 		}
-		return Items.findOne(Template.instance().itemId)
+		return item;
+		//return Items.findOne(Template.instance().itemId)
 	},
 	shop(){
 		const item = Items.findOne(Template.instance().itemId)
@@ -145,7 +155,9 @@ Template.itemCarousel.helpers({
                 return 1
             } else return 0
         })
-
+        // console.log(thumbnails);
+        // console.log('thum order')
+         //return thumbnails;
         return thumbnails.map(function(thumb){
         	return Images.findOne(thumb.imageId)
         })

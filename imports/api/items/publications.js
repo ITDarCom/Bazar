@@ -41,13 +41,22 @@ Meteor.publishComposite('singleItem', function singleItemPublication(itemId){
 		children : [
 			{
 				find(item){
+					//console.log('ssssshop')
+					//console.log(Shops.find({ _id: item.shop}));
 					return Shops.find({ _id: item.shop})
 				}
-			}, 
+			}
+			, 
 			{
 				find(item){
 					const imageIds = _.pluck(item.thumbnails, 'imageId')
-					return Images.find({_id: { $in: imageIds }})
+					//console.log(imageIds);
+					// console.log('dd'); 
+					//return Images.find({_id: { $in: imageIds }})
+					//console.log('imagesssssssssssss')
+					//console.log(Images.find({_id: { $in: imageIds }}));
+					return Images.find({_id: { $in: imageIds }}).cursor
+					//return Images.find({_id: imageIds}).cursor;
 				}
 			}
 

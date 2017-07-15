@@ -26,6 +26,12 @@ Template.shopHeader.helpers({
 	shopLogoUrl(){
 		const shop = Shops.findOne(Router.current().params.shop)		
         return (Meteor.absoluteUrl().replace(/\/$/,"")) + shop.logo.url
+        // console.log('mhd');
+        // console.log(Meteor.absoluteUrl());
+        // console.log((Meteor.absoluteUrl().replace(/\/$/,"")) )
+        // logourl=shop.logo.url.replace(Meteor.absoluteUrl().replace(/\/$/,"") , '');
+        // console.log(logourl);
+        // return  shop.logo.url
 	}
 })
 

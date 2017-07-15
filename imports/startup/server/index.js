@@ -12,6 +12,9 @@ import {Push} from "meteor/raix:push"
 
 import './../../api/images'
 
+
+
+
 //SimpleSchema.debug = true
 
 import './../../api/shops/methods.js'
@@ -54,6 +57,9 @@ Meteor.startup(() => {
 	Meteor.users.update({}, {$set: { unreadInbox:0, pendingPurchases:0, unreadInbox:0, totalPurchases:0, cartItems:0}}, {multi:true})
 	Threads.remove({})
 	*/
+
+	// for migrate from collectionFS (CFS)
+	// import './../../api/images-migrate'
 
 	Accounts.emailTemplates.siteName = "ebazaar.online";
 

@@ -78,18 +78,25 @@ Items.attachSchema(new SimpleSchema({
             return TAPi18n.__('category')
         },	
 	},
-    'imageIds': {
+    // 'imageIds': {
+    //     type: [String],
+    //     autoform: {
+    //         afFieldInput: {
+    //             type: "cfs-files",
+    //             collection: "images"
+    //         }
+    //     }, min:1,
+    //     label: function(){
+    //         return TAPi18n.__('itemImages')
+    //     },        
+    // },    
+        'imageIds': {
         type: [String],
-        autoform: {
-            afFieldInput: {
-                type: "cfs-files",
-                collection: "images"
-            }
-        }, min:1,
         label: function(){
             return TAPi18n.__('itemImages')
-        },        
-    },      
+        }, 
+         min:1
+     },  
     'thumbnails.$.url': {
         type: String, optional:true
     },

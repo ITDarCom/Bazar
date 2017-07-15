@@ -27,11 +27,19 @@ Meteor.methods({
 		if (doc.imageIds){
 			doc.imageIds.forEach(function(imageId, index){
 				const image = Images.findOne(imageId)
-				url = `/cfs/files/images/${image._id}/${image.original.name}`
+				//url = `/cfs/files/images/${image._id}/${image.original.name}`
+				url=image.link().replace(Meteor.absoluteUrl().replace(/\/$/,"") , '');
 				thumbnails.push({ url: url, imageId: imageId, order: index + 1})
 				imageIds.push(imageId)
 			})
 		}
+		// if (doc.images){
+		// 	doc.images.forEach(function(image, index){
+		// 		//const image = Images.findOne(image.imageId)
+		// 		thumbnails.push({ url: image.url, imageId: image.imageId, order: index + 1})
+		// 		imageIds.push(image.imageId)
+		// 	})
+		// }
 
 		if (!imageIds.length){ imageIds.push('dummyId')}
 
@@ -49,6 +57,8 @@ Meteor.methods({
 			}, (err, shopId) => {
 				if (err) {
 					throw err
+				}else{
+					Meteor.users.update(this.userId, { $set: {'tmpItemImages': [] } });
 				}
 			});
 		} 
@@ -168,5 +178,27 @@ Meteor.methods({
             Items.update({ _id: itemId, 'thumbnails.order': newOrder }, {$set: {'thumbnails.$.order': oldOrder }})
             Items.update({ _id: itemId, 'thumbnails.imageId': imageId }, {$set: {'thumbnails.$.order': newOrder }})
         }
+	},
+	'items.setTmpImages'(url, fileId){
+
+		check(url, String);
+		check(fileId, String);
+
+		if (!Meteor.user().hasShop){
+			
+		} else {
+			Meteor.users.update(this.userId, { $push: {'tmpItemImages': {url:url,imageId:fileId} } });
+		}
+
+	},
+	'items.removeTmpImage'(fileId){
+		check(fileId, String);
+
+		if (!Meteor.user().hasShop){
+			
+		} else {
+			Meteor.users.update(this.userId, { $pull: {'tmpItemImages': {imageId:fileId} } });
+		}
+
 	}
 })

@@ -47,6 +47,7 @@ AutoForm.addHooks('insertShopForm', {
 				}				
 			},100)
 
+			//console.log(Meteor.user());
 			if (!Meteor.user().tmpShopLogo.fileId){
 
 				this.addStickyValidationError('logo.imageId', 'required')
@@ -139,6 +140,13 @@ Template.insertShopForm.helpers({
 	resetOnSuccess(){
 		var route = Router.current().route.getName()
 		if (route.match(/edit/)){ return true } else { return false }
+	},
+	tmpShopLogo(){
+		if(Meteor.user().tmpShopLogo){
+			return   Meteor.absoluteUrl().replace(/\/$/,"") + Meteor.user().tmpShopLogo.url;
+		}else{
+			return false;
+		}
 	}
 })
 

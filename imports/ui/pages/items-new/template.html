@@ -23,8 +23,19 @@
             options=categories}}
 
         {{#if isNew}}
+
+           {{#if tmpItemImages}}
+                {{#each tmpItemImages}}
+                    {{> tmpItemImageControl }}
+                {{/each}}
+            {{/if}}
+        <div style="clear:both;"></div>
         <div class="imageIds">
-            {{> afQuickField name="imageIds" type="cfs-files" collection="images"}}
+
+            <!-- {{> afQuickField name="imageIds" collection="images"}} -->
+
+                <!-- <input id="fileInput" type="file" multiple="" /> -->
+                  {{> fileInput mode="itemImages" }}
         </div>
         {{#each fileObjs}} 
             {{> FS.UploadProgressBar bootstrap=true}} 
@@ -44,4 +55,32 @@
     {{/autoForm}}
 
 
+</template>
+
+
+
+<!-- MHDProgr -->
+
+<!-- <template name="tmpItemImageControl">
+    <div class="item-thumbnail col-xs-12 col-md-3">
+        <div class="thumbnail">
+            <a href="#"><img src="{{url}}" alt="..."></a>
+            <div class="caption" style="direction:ltr;">
+                    <a href="#" class="remove-thumbnail-btn">
+                        <i class="material-icons">&#xE872;</i></a>
+            </div>      
+        </div>
+    </div>
+</template> -->
+
+<template name="tmpItemImageControl">
+    <div class="item-thumbnail col-xs-12 col-md-3">
+        <div class="thumbnail" style="position:relative;">
+            <a href="#"><img src="{{url}}" alt="..."></a>
+            <div class="caption" style="direction:ltr;">
+                    <a href="#" class="remove-thumbnail-btn">
+                        <i class="material-icons">delete</i></a> 
+            </div>      
+        </div>
+    </div>
 </template>

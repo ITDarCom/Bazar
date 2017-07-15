@@ -55,3 +55,7 @@ tap:i18n-bundler
 shell-server@0.2.3
 raix:push
 crosswalk@1.7.1
+yogiben:autoform-file
+ostrio:files
+ostrio:meteor-root
+ostrio:autoform-files

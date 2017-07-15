@@ -107,6 +107,7 @@ Template.navmenu.helpers({
 	currentShopLogoUrl(){
 		const shop = Shops.findOne(Meteor.user().shop);
 		return (Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url );
+		//return (shop.logo.url );
 	},
 	whatsAppNo(){
 		const phone = Meteor.users.findOne({isAdmin:true}).phone

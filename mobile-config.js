@@ -50,7 +50,12 @@ App.launchScreens({
 });
 
 App.accessRule('*');
+//App.accessRule("blob:*");
 
 App.configurePlugin('phonegap-plugin-push', {
   SENDER_ID: 238678216707
 });
+
+//NEW CONFIG
+App.setPreference("WebAppStartupTimeout", "60000");
+App.setPreference('LoadUrlTimeoutValue', 120000, 'android');

@@ -22,9 +22,15 @@ Meteor.methods({
 
 		var url, imageId = 'dumpId'
 		if (doc.logo && doc.logo.imageId){
+			//console.log('in insert fun');
 			imageId = doc.logo.imageId
 			const image = Images.findOne(imageId)
-			url = `/cfs/files/images/${imageId}/${image.original.name}`
+			//url = `/cfs/files/images/${imageId}/${image.original.name}`
+			// url='assets/app/uploads/Images/${imageId}';
+			// console.log(image.link());
+			//url='/downloads/'+image._id+image.extensionWithDot;
+			url=image.link().replace(Meteor.absoluteUrl().replace(/\/$/,"") , '');
+			// url=image.link();
 		}
 
 		const hasShop = Meteor.users.findOne(this.userId).hasShop
@@ -42,7 +48,7 @@ Meteor.methods({
 			}, (err, shopId) => {
 				if (!err) {
 					Meteor.users.update({ _id: this.userId}, 
-						{ $set: { 'hasShop': true, 'shop': shopId, 'shopTitle': doc.title,'tmpShopLogo.url': null, 'tmpShopLogo.url': null } 
+						{ $set: { 'hasShop': true, 'shop': shopId, 'shopTitle': doc.title,'tmpShopLogo.url': null, 'tmpShopLogo.fileId': null } 
 					})			
 				} else {
 					throw err

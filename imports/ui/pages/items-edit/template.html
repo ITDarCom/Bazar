@@ -1,5 +1,5 @@
 <template name="itemsEditPage">
-	{{#if Template.subscriptionsReady}}
+	{{#if ready }}
 		<h1 class="page-header">
 	  		<a href="{{pathFor 'items.show' itemId=item._id shop=item.shop}}" 
 		  			alt="{{_ 'back'}}" class="back-btn">

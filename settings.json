@@ -3,6 +3,11 @@
     "env": {
       "MONGO_URL": "mongodb://ebazaar:ebazaarPassword@ds129028.mlab.com:29028/ebazaar"
     }
+  },
+   "s3": {
+    "key": "spjJN1Mbl5Fh5GFisUguP3/04BIuwqLCywTFlXzm",
+    "secret": "AKIAJJKU2FNCCJPBGYMA",
+    "bucket": "ebazaaronline"
   }
 }
 
