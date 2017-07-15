@@ -59,7 +59,7 @@ Meteor.startup(() => {
 	*/
 
 	// for migrate from collectionFS (CFS)
-	// import './../../api/images-migrate'
+	import './../../api/images-migrate'
 
 	Accounts.emailTemplates.siteName = "ebazaar.online";
 
