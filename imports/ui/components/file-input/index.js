@@ -97,7 +97,8 @@ Template.fileInput.helpers({
         return Images.findOne(id)
     },
     multipleImages(){
-     return Template.instance().mode =='itemImages';
+     //return Template.instance().mode =='itemImages';
+     return false;
     }
 })
 

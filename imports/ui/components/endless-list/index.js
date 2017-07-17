@@ -46,6 +46,7 @@ Template.endlessList.onCreated(function () {
     window.addEventListener('scroll', instance.listener)
 
     instance.cursor = ()=> {
+
         const route = Router.current().route.getName()
         const query = this.query.get()
 
@@ -290,6 +291,7 @@ Template.shopThumbnail.onCreated(function(){
     };
 
     this.image.src = Meteor.absoluteUrl().replace(/\/$/,"") + Template.instance().data.logo.url
+    
     //console.log(Template.instance().data.title, this.image.src)
 })
 
@@ -300,7 +302,7 @@ Template.shopThumbnail.helpers({
     backgroundImage(){
         if (!Template.instance().loaded.get()){
             return '/ajax-loader.gif'
-        } else {            
+        } else {          
             return (Meteor.absoluteUrl().replace(/\/$/,"")) + Template.instance().data.logo.url
         }
     },

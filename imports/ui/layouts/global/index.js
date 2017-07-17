@@ -104,11 +104,11 @@ Template.applicationLayout.helpers({
 })
 
 Template.navmenu.helpers({
-	currentShopLogoUrl(){
-		const shop = Shops.findOne(Meteor.user().shop);
-		return (Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url );
-		//return (shop.logo.url );
-	},
+	// currentShopLogoUrl(){
+	// 	const shop = Shops.findOne(Meteor.user().shop);
+	// 	return (Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url );
+	// 	//return (shop.logo.url );
+	// },
 	whatsAppNo(){
 		const phone = Meteor.users.findOne({isAdmin:true}).phone
 		return "+966" + phone.slice(1, phone.length)
@@ -225,6 +225,11 @@ Template.registerHelper('currentShop', function(){
 Template.registerHelper('currentShopLogoAbsolute', function(){
     const shop = Shops.findOne(Meteor.user().shop);
     return Meteor.absoluteUrl().replace(/\/$/,"") +shop.logo.url
+})
+
+Template.registerHelper('currentShopLogoUrl', function(){
+	const shop = Shops.findOne(Meteor.user().shop);
+	return (Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url ); 
 })
 
 Template.registerHelper('isShopOwner', function(){

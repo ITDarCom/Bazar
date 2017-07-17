@@ -20,8 +20,11 @@ Template.itemThumbnail.onCreated(function(){
     };
 
     const thumb = Template.instance().data.thumbnails.find(thumb => (thumb.order == 1))
-    this.image.src = Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url
-
+    if(thumb){
+        this.image.src = Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url
+    }else{
+        this.image.src ='/default-thumbnail.png';
+    }
     this.autorun(()=>{
         const shop = Shops.findOne(Template.instance().data.shop) 
         if (shop) this.shopLogo.src = Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url         
@@ -41,11 +44,17 @@ Template.itemThumbnail.helpers({
         if (!Template.instance().loaded.get()){
             return '/ajax-loader.gif'
         } else {
-            return (Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url)            
+             if(thumb){
+                     return (Meteor.absoluteUrl().replace(/\/$/,"") + thumb.url) 
+                }else{
+                    return '/default-thumbnail.png';
+                }
+                      
         }
     },
     shopLogoAbsolute(){
         const shop = Shops.findOne(Template.instance().data.shop) 
+
         if (shop) return Meteor.absoluteUrl().replace(/\/$/,"") + shop.logo.url
     },    
     backgroundSize(){
